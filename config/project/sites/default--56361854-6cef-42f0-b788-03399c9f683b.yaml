@@ -1,0 +1,9 @@
+baseUrl: '@web'
+enabled: true
+handle: default
+hasUrls: true
+language: en-US
+name: 'Dave Guitar'
+primary: true
+siteGroup: 6b2b62f0-3eb1-45ad-b397-559af7de174b
+sortOrder: 1

@@ -1,0 +1,170 @@
+field: e819b4cf-0c03-4d0e-a011-c3af102e306f # Footer Links
+fieldLayouts:
+  d4fbb790-2f5b-4f3e-831d-0ec39f425177:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: cc9e1d44-ae7d-4964-a1ae-0d975ad7c4d0 # Social URL
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2ab5fa8f-9ff5-4aa3-8de4-9a388af9e6b8
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            elementCondition: null
+            fieldUid: a82b3d53-a056-44a7-a39c-690a787847bb # Social Icon
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: afb2f565-980d-4c55-ae0a-3bdbf999e35d
+            userCondition: null
+            warning: null
+            width: 25
+        name: Content
+        uid: f5567da0-532e-4e9b-88f1-af4848d5e28d
+        userCondition: null
+fields:
+  a82b3d53-a056-44a7-a39c-690a787847bb: # Social Icon
+    columnSuffix: ffbhjhrc
+    contentColumnType: string
+    fieldGroup: null
+    handle: socialIcon
+    instructions: 'Please select the Icon of the social media outlet'
+    name: 'Social Icon'
+    searchable: false
+    settings:
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Twitter
+            -
+              - value
+              - 'fab fa-twitter'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Youtube
+            -
+              - value
+              - 'fab fa-youtube'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Facebook
+            -
+              - value
+              - 'fab fa-facebook-f'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Instagram
+            -
+              - value
+              - 'fab fa-instagram'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - iTunes
+            -
+              - value
+              - 'fab fa-itunes-note'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Tik Tok'
+            -
+              - value
+              - 'fab fa-tiktok'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Amazon
+            -
+              - value
+              - 'fab fa-amazon'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Bandcamp
+            -
+              - value
+              - 'fab fa-bandcamp'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Deezer
+            -
+              - value
+              - 'fab fa-deezer'
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  cc9e1d44-ae7d-4964-a1ae-0d975ad7c4d0: # Social URL
+    columnSuffix: pejafvoa
+    contentColumnType: text
+    fieldGroup: null
+    handle: socialUrl
+    instructions: 'Please paste the URL of the social Media you would like users to redirect to'
+    name: 'Social URL'
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: null
+      initialRows: 4
+      multiline: false
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: footerLink
+name: 'Footer Link'
+sortOrder: 1

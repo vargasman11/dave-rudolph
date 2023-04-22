@@ -1,0 +1,14 @@
+{% extends"_layout.twig" %}
+{% block content %}
+    <div id="about"
+         class="container flex flex-col justify-center items-center mx-auto mt-5 h-[200px] md:h-[300px] xl:h-[500px] bg-cover bg-center"
+         style="background-image:url('{{ entry.headerImage.one().getUrl() ?? "/img/crowd-stock.jpeg" }}')">
+        <p class="text-white text-3xl md:text-6xl xl:text-8xl">{{ entry.pageTitle ?? "ABOUT" }}</p>
+    </div>
+    <div class="container mx-auto mt-5 py-5">
+        <div class="w-full lg:w-2/3 mx-auto">
+            {{ entry.customContent }}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+defaultPlacement: end
+enableVersioning: true
+handle: blog
+name: Blog
+propagationMethod: all
+siteSettings:
+  56361854-6cef-42f0-b788-03399c9f683b: # Dave Guitar
+    enabledByDefault: true
+    hasUrls: true
+    template: blog-entry
+    uriFormat: 'blog/{slug}'
+type: channel

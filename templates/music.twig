@@ -1,0 +1,35 @@
+{% extends "_layout" %}
+{% block content %}
+
+    <div class="container flex flex-col justify-center items-center mx-auto mt-5 h-[200px] md:h-[300px] xl:h-[500px] bg-cover bg-center"
+         id="music"
+         style="background-image:url('{{ entry.headerImage.one().getUrl() ?? "/img/crowd-stock.jpeg" }}')">
+        <p class="text-white text-3xl md:text-6xl xl:text-8xl">{{ entry.pageTitle ?? "MUISC" }}</p>
+    </div>
+
+
+    <div class="container mx-auto">
+        <p class="text-3xl md:text-6xl xl:text-8xl text-center py-6 md:py-12 xl:py-16">{{ entry.albumCta ?? "ALBUM OUT NOW" }}</p>
+        <div class="flex flex-wrap">
+            <div class="w-full md:w-1/2">
+                <div class="flex flex-col items-center justify-center h-full">
+                    <img class="max-h-[500px]" src="{{ entry.albumCover.one().getUrl() ?? "/img/album.jpg" }}"
+                         alt="{{ entry.headerImageAlt }}">
+                </div>
+            </div>
+            <div class="w-full mt-8 md:w-1/2 md:mt-0">
+                <ul class="mx-auto flex flex-col items-center">
+                    {% set blocks = entry.spotifyiframes.all() %}
+                    {% if blocks|length %}
+                        {% for block in blocks %}
+                            <li class="">
+                                <iframe src="{{ block.iframe }}" width="300" height="100" frameborder="0"
+                                        allowtransparency="true" allow="encrypted-media"></iframe>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

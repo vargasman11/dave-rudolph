@@ -1,0 +1,16 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 723b72fc-4bbd-49d4-96e2-145c4390c3f0 # Navigation
+handle: navItem
+instructions: 'This is the nav item where you will set the page link, and link title in your website''s menu'
+name: 'Nav Item'
+searchable: false
+settings:
+  contentTable: '{{%matrixcontent_navitem}}'
+  maxBlocks: null
+  minBlocks: null
+  propagationKeyFormat: null
+  propagationMethod: all
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

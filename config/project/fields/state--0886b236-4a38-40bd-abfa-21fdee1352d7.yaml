@@ -1,0 +1,18 @@
+contentColumnType: string(8)
+fieldGroup: 9c72894b-5f1f-4387-8507-22e9af77722d
+handle: state
+instructions: 'This will be shown as the  The 2 letters state abbreviations: e.g. NY, FL, GA ...'
+name: State
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: 2
+  code: ''
+  columnType: null
+  initialRows: '4'
+  multiline: ''
+  placeholder: ''
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

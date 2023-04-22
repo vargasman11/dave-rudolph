@@ -1,0 +1,139 @@
+dateModified: 1681583647
+elementSources:
+  craft\elements\Entry:
+    -
+      key: '*'
+      type: native
+    -
+      key: singles
+      type: native
+    -
+      heading: Channels
+      type: heading
+    -
+      key: 'section:e3fc1639-4370-4ebc-96b1-93d75e1d6e0d' # Blog
+      type: native
+    -
+      key: 'section:d2436398-f3e3-4b75-9115-13f2fa0afe1a' # Link Page
+      type: native
+    -
+      defaultSort:
+        - postDate
+        - desc
+      disabled: false
+      key: 'section:4eb33154-2538-4037-9a27-198bbb7cfcfa'
+      tableAttributes:
+        - postDate
+        - expiryDate
+        - link
+        - 'field:458ab821-4880-4299-8232-f99733310016'
+        - 'field:d55cabd7-d990-4dac-9ea9-cc3941a1421f'
+        - 'field:5fb9f1f8-c038-4593-b349-8cda166cb8fb'
+        - 'field:0886b236-4a38-40bd-abfa-21fdee1352d7'
+      type: native
+email:
+  fromEmail: contact@daverudolphmusic.com
+  fromName: 'Dave Rudolph'
+  replyToEmail: daverudolphguitar@gmail.com
+  template: null
+  transportSettings:
+    password: 'Dajr*2448'
+    timeout: '10'
+    username: daverudolphguitar
+  transportType: craft\mail\transportadapters\Gmail
+fs:
+  uploads:
+    hasUrls: true
+    name: Uploads
+    settings:
+      path: '@webroot/uploads'
+    type: craft\fs\Local
+    url: /uploads/
+meta:
+  __names__:
+    1e6e3839-9a1e-4d98-a6f8-13b7cd0097d7: Default # Default
+    1e92d7ca-8270-41cf-aa77-85f7de45a55f: 'Footer Link' # Footer Link
+    3a7a59c6-a8f1-4c6a-84f9-4815b49830b7: 'Nav Link Title' # Nav Link Title
+    3ba03f7c-87d0-45e6-aab0-f9b8eb0520e6: 'URL to source' # URL to source
+    3c12875b-36b2-4feb-b8c3-8525959af403: 'Link Title' # Link Title
+    4a571784-9016-4b75-a548-b490b4697364: 'link logo' # link logo
+    5e9ff26e-2257-4ead-9f41-4ebf176eda38: 'Nav External Link' # Nav External Link
+    6eace8d6-d19b-4fe8-888f-6549afb1a3b3: 'Link Page' # Link Page
+    9ebd9394-4f97-4694-bb2a-f43e11014f3c: 'Song List' # Song List
+    10e41f88-75c4-478b-9f90-590df63cdfda: Default # Default
+    023b0d58-4838-416e-b816-2b62b1461f32: 'Nav Item' # Nav Item
+    491fb42e-73d4-4de3-96ef-731a9c4081ad: 'Footer Links' # Footer Links
+    723b72fc-4bbd-49d4-96e2-145c4390c3f0: Navigation # Navigation
+    3304aae1-f09c-4687-bbe6-e0903dad9f0d: 'Nav Item' # Nav Item
+    885183e7-a46e-417d-888c-fca4f7e1734d: Uploads # Uploads
+    56361854-6cef-42f0-b788-03399c9f683b: 'Dave Guitar' # Dave Guitar
+    a82b3d53-a056-44a7-a39c-690a787847bb: 'Social Icon' # Social Icon
+    a2058849-7eb6-49c3-9d32-a1a3a06e6908: 'Nav Page Link' # Nav Page Link
+    b43bae05-d6b6-4b8a-84bc-f01097e47529: Navigation # Navigation
+    b242a145-18ec-45dd-a31a-28e9e48279c0: TOUR # TOUR
+    b2342e5b-b45b-48c9-ac11-267011a80bc5: 'Blog Content' # Blog Content
+    ca562c02-fd2a-410a-9be0-d9ccb0654e50: Blog # Blog
+    cc9e1d44-ae7d-4964-a1ae-0d975ad7c4d0: 'Social URL' # Social URL
+    cd2fbe89-ae24-4f97-a4e1-77aaf39f0a88: 'Footer Link' # Footer Link
+    d2436398-f3e3-4b75-9115-13f2fa0afe1a: 'Link Page' # Link Page
+    e3fc1639-4370-4ebc-96b1-93d75e1d6e0d: Blog # Blog
+    e819b4cf-0c03-4d0e-a011-c3af102e306f: 'Footer Links' # Footer Links
+plugins:
+  contact-form:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+    settings:
+      allowAttachments: ''
+      prependSender: 'On behalf of You website'
+      prependSubject: 'New message from daverudolphmusic.com'
+      successFlashMessage: 'Your message has been sent.'
+      toEmail: daverudolphguitar@gmail.com
+  date-range:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  redactor:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.3.0
+  sprout-forms:
+    enabled: false
+    schemaVersion: 3.11.8
+    settings:
+      captchaSettings:
+        barrelstrength\sproutforms\captchas\DuplicateCaptcha:
+          enabled: 0
+        barrelstrength\sproutforms\captchas\HoneypotCaptcha:
+          enabled: 0
+          honeypotFieldName: sprout-forms-hc
+          honeypotScreenReaderMessage: 'Leave this field blank'
+        barrelstrength\sproutforms\captchas\JavascriptCaptcha:
+          enabled: 1
+      cleanupProbability: 1000
+      defaultSection: entries
+      enableEditFormEntryViaFrontEnd: false
+      enableSaveData: true
+      enableSaveDataDefaultValue: true
+      formTemplateId: barrelstrength\sproutforms\formtemplates\AccessibleTemplates
+      pluginNameOverride: ''
+      saveSpamToDatabase: false
+      showNotificationsTab: true
+      showReportsTab: true
+      spamLimit: 500
+      spamRedirectBehavior: redirectAsNormal
+      trackRemoteIp: false
+system:
+  edition: solo
+  live: true
+  name: 'Dave Guitar'
+  retryDuration: null
+  schemaVersion: 4.4.0.4
+  timeZone: America/Chicago
+users:
+  allowPublicRegistration: false
+  deactivateByDefault: false
+  defaultGroup: null
+  photoSubpath: null
+  photoVolumeUid: null
+  requireEmailVerification: true

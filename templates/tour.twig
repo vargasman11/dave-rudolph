@@ -1,0 +1,88 @@
+{% extends"_layout.twig" %}
+{% block content %}
+    {# Fetch entries posted this month #}
+    {% set todayTime = "now"|date("Y/m/d")|replace('/', '-') %}
+    {# Fetch entries with a selected date in the next month #}
+    {% set start = now|atom %}
+    {#        url('/img/crowd-stock.jpeg') #}
+    <div class="container flex flex-col justify-center items-center mx-auto mt-5 h-[200px] md:h-[300px] xl:h-[500px] bg-cover bg-center"
+         id="tour"
+         style="background-image:url('{{ entry.headerImage.one().getUrl() }}')">
+        <p class="text-white text-3xl md:text-6xl xl:text-8xl">{{ entry.pageTitle ?? "TOUR" }}</p>
+    </div>
+
+    <div class="container mx-auto">
+        <h1 class="text-3xl text-center my-5">Upcoming Dates:</h1>
+        <table class="table-auto mx-auto">
+            <thead>
+            <tr>
+                <th class="px-5 py-2">Date</th>
+                <th class="px-5 py-2">Venue</th>
+                <th class="px-5 py-2">Location</th>
+                <th class="px-5 py-2"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set entries = craft.entries().section('tourDates').date(['and', ">= today"]).all()|multisort('date', direction=SORT_ASC) %}
+            {% if entries|length %}
+                {% for entry in entries %}
+                    <tr class="border-b-2 border-b-gray-400">
+                        <td class="py-2 px-5">{{ entry.date|date('medium') }}</td>
+                        <td class="py-2 px-5">{{ entry.title }} &#64; {{ entry.time|time('short') }}</td>
+                        <td class="py-2 px-5">{{ entry.city }}, {{ entry.state }}</td>
+                        <td class="py-2 px-5"><a
+                                    class="m-1 bg-teal-600 hover:bg-teal-400 text-white px-5 py-1 rounded-sm"
+                                    href="{{ entry.infoUrl }}">info</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="container mx-auto">
+        <p class="text-3xl text-center my-5">Past Dates:</p>
+        {% set pastQuery = craft.entries()
+            .section('tourDates')
+            .dateCreated('< today')
+            .limit(10) %}
+        {% paginate pastQuery as pageInfo, pageEntries %}
+        <table class="table-auto mx-auto">
+            <thead>
+            <tr>
+                <th class="px-5 py-2">Date</th>
+                <th class="px-5 py-2">Venue</th>
+                <th class="px-5 py-2">Location</th>
+                <th class="px-5 py-2"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for entry in pageEntries %}
+                <tr class="border-b-2 border-b-gray-400">
+                    <td class="py-2 px-5">{{ entry.date|date('medium') }}</td>
+                    <td class="py-2 px-5">{{ entry.title }} &#64; {{ entry.time|time('short') }}</td>
+                    <td class="py-2 px-5">{{ entry.city }}, {{ entry.state }}</td>
+                    <td class="py-2 px-5"><a class="m-1 bg-teal-600 hover:bg-teal-400 text-white px-5 py-1 rounded-sm"
+                                             href="{{ entry.infoUrl }}">info</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="flex justify-center">
+            {% if pageInfo.prevUrl %}
+                <a class="bg-teal-600 hover:bg-teal-400 text-white px-5 py-2 rounded-sm m-3"
+                   href="{{ pageInfo.prevUrl }}">
+                    Previous Page</a>
+            {% endif %}
+            {% if pageInfo.nextUrl %}
+                <a class="bg-teal-600 hover:bg-teal-400 text-white px-5 py-2 rounded-sm m-3"
+                   href="{{ pageInfo.nextUrl }}">
+                    More Dates</a>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

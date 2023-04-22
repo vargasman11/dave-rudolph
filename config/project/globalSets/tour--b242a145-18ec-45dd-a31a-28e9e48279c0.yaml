@@ -1,0 +1,19 @@
+fieldLayouts:
+  94c75f9b-66dc-46ec-a2db-fc3c4419d674:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: daaeae58-7e1f-4ad5-b1e5-18ac93440c24
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: 'Tab 1'
+        sortOrder: 1
+handle: tour
+name: TOUR
+sortOrder: 1
