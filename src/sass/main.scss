@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: russo;
+  src: url("../fonts/russo_one.ttf");
+}
+
+@font-face {
+  font-family: xball;
+  src: url("../fonts/XBall_Italic.ttf");
+}
+
+//Font Utility
+.russo {
+  font-family: russo;
+}
+
+.xball {
+  font-family: xball;
+}
+
+.text-shadow {
+  text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.78);
+}
