@@ -2,6 +2,7 @@ fieldLayouts:
   2a92bd16-f26e-4f57-9b79-c622375ebba9:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,6 +10,7 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
             instructions: null
             label: null
@@ -24,32 +26,41 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 5276b373-4b71-4d8f-a32f-5363467b7e8e
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: 2d05a2b8-fa1f-4237-9abc-77880f943975
+            elementCondition: null
+            fieldUid: 2d05a2b8-fa1f-4237-9abc-77880f943975 # Page Title
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 9e2cf796-a9df-47a7-92bb-b9d7c466f2f3
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: ef74887a-7a07-4977-84c2-c7793e0529a5
+            elementCondition: null
+            fieldUid: ef74887a-7a07-4977-84c2-c7793e0529a5 # Header Image
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 8a3295bd-e126-4243-b438-01a3973f1f6d
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: fd79aa1a-78da-4d76-ae0c-9b20008e8621
+        userCondition: null
 handle: tour
 hasTitleField: false
 name: Tour
-section: eeaff83a-803a-4ddd-bcc6-a1563a735cd6
+section: eeaff83a-803a-4ddd-bcc6-a1563a735cd6 # Tour
 sortOrder: 1
 titleFormat: '{section.name|raw}'
 titleTranslationKeyFormat: null

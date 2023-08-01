@@ -1,31 +1,35 @@
-<nav class="container-fluid py-8 xball">
-    <div class="container mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-center">
-            <a class="text-teal-600 text-3xl " href="#">Dave Rudolph</a>
-            <ul class="flex flex-wrap justify-center mt-4 md:mt-0">
-                {% set navItems = navigation.navItem.all() %}
-                {% for navItem in navItems %}
-                    <li class="m-1">
-                        <a
-{#                                {% if navItem.navPageLink is not null %}#}
-                                {% if navItem.navPageLink %}
-                                    {% for link in navItem.navPageLink %}
-                                        href="{{ link.getUrl() }}"
-                                    {% endfor %}
-                                {% endif %}
+<nav class="navbar navbar-expand-lg p-5">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Dave Rudolph</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDrop"
+                aria-controls="navbarDrop" aria-expanded="false" aria-label="Toggle navigation">
+            {# <span class="navbar-toggler-icon"></span> #}
+            <i class="fas fa-bars"></i>
+        </button>
 
-
-{#                                {% if navItem.navExternalLink is not null  %}#}
-                                {% if navItem.navExternalLink  %}
-                                    href="{{ navItem.navExternalLink }}" target="_blank"
-                                {% endif %}
-                                class="text-teal-600 hover:text-teal-300">
-                            {{ navItem.navLinkTitle }}
-
-
-                        </a>
-                    </li>
-                {% endfor %}
+        <div class="collapse navbar-collapse" id="navbarDrop">
+            <ul class="navbar-nav ml-auto">
+                {# <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>                #}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/tour">Tour <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/music">Music</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/media">Media</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://daverudolphmusic.bandcamp.com/community" target="_blank">BUY</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
             </ul>
         </div>
     </div>

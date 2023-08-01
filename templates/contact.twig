@@ -1,64 +1,118 @@
-{% extends"_layout.twig" %}
-{% block content %}
-    <div id="about"
-         class="container flex flex-col justify-center items-center mx-auto mt-5 h-[200px] md:h-[300px] xl:h-[500px] bg-cover bg-center"
-         style="background-image:url('{{ entry.headerImage.one().getUrl() ?? "/img/crowd-stock.jpeg" }}')">
-        <p class="xball tracking-widest text-shadow text-white text-3xl md:text-6xl xl:text-8xl">{{ entry.pageTitle ?? "CONTACT" }}</p>
+{% include "partials/header" %}
+{% include "partials/nav" %}
+
+{% if entry.headerImage|length  %}
+<div class="container-fluid mt-5" id="contact" style="background-image:url('{{entry.headerImage.one().getUrl()}}')">
+    {% else %}
+    <div class="container-fluid mt-5" id="contact">
+        {% endif %}
+        <div class="row">
+            <div class="col-sm-12">
+                <p class="display-4 text-center page-header-title" id="contact-title">CONTACT</p>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-10 col-md-9 mx-auto">
+
+                {# Macro for Field Errors #}
+                {% macro renderErrors(field) %}
+                    {% if field.hasErrors and field.errors|length %}
+                        <ul class="errors">
+                            {% for error in field.errors %}
+                                <li>{{ error|t }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endmacro %}
+                {% import _self as forms %}
+
+                {% set form = craft.expressforms.form("contact") %}
+
+                {# Flash Success #}
+                {% if form.submittedSuccessfully %}
+                    <div class="success">
+                        {{ "Form has been submitted successfully!"|t }}
+                    </div>
+                {% endif %}
+
+                {# General Error Handling #}
+                {% if not form.valid %}
+                    <div class="errors">
+                        {{ "Error! Please review the form and try submitting again."|t }}
+                        {% if form.errors|length %}
+                            <ul>
+                                {% for error in form.errors %}
+                                    <li>{{ error|t }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                {# Automatically set Form tags with Return, CSRF and Honeypot (if enabled) #}
+                {{ form.openTag({ return: 'contact-thanks' }) }}
+
+                {# Automation of Field Rendering #}
+                {% for field in form.fields %}
+                    {% if field.type == "hidden" %}
+                        <input id="{{ field.handle }}" type="hidden" name="{{ field.handle }}" value="{{ field.value }}">
+                    {% elseif field.type == "textarea" %}
+                        <div class="mb-3">
+                            <label for="{{ field.handle }}" class="form-label{{ field.isRequired ? ' required' }}">{{ field.label }}</label>
+                            <textarea class="form-control" id="{{ field.handle }}" name="{{ field.handle }}" rows="5">{{ field.value }}</textarea>
+                            {{ forms.renderErrors(field) }}
+                        </div>
+                    {% elseif field.type == "file" %}
+                        <div class="mb-3">
+                            <label for="{{ field.handle }}" class="form-label{{ field.isRequired ? ' required' }}">{{ field.label }}</label>
+                            <input type="{{ field.type }}" name="{{ field.handle }}[]" class="form-control" multiple>
+                            {{ forms.renderErrors(field) }}
+                        </div>
+                    {% elseif field.type == "checkbox" %}
+                        <div class="form-check mb-3">
+                            <input type="checkbox" name="{{ field.handle }}" value="1" class="form-check-input"{{ "1" in field.value ? " checked" }}>
+                            <label class="form-check-label">{{ field.label }}</label>
+                            {{ forms.renderErrors(field) }}
+                        </div>
+                    {% else %}
+                        {# Check on a Field Handle for Exception to Markup #}
+                        {% if field.handle == "howHeard" %}
+                            <div class="mb-3">
+                                <label class="form-label{{ field.isRequired ? ' required' }}">{{ field.label }}</label>
+                                <div class="checkbox">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="howHeard[]" value="newspaper"{{ "newspaper" in form.fields.howHeard.value ? " checked" }}>
+                                        Newspaper
+                                    </label>
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="howHeard[]" value="radio"{{ "radio" in form.fields.howHeard.value ? " checked" }}>
+                                        Radio
+                                    </label>
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="howHeard[]" value="friend"{{ "friend" in form.fields.howHeard.value ? " checked" }}>
+                                        Friend
+                                    </label>
+                                </div>
+                                {{ forms.renderErrors(field) }}
+                            </div>
+                        {% else %}
+                            <div class="mb-3">
+                                <label for="{{ field.handle }}" class="form-label{{ field.isRequired ? ' required' }}">{{ field.label }}</label>
+                                <input id="{{ field.handle }}" type="{{ field.type }}" name="{{ field.handle }}" value="{{ field.value }}" class="form-control">
+                                {{ forms.renderErrors(field) }}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+                <input type="submit" value="Submit">
+                {{ form.closeTag }}
+
+
+            </div>
+        </div>
     </div>
 
-    <div class="container mx-auto mt-5">
-        {% macro errorList(errors) %}
-            {% if errors %}
-                <ul class="errors">
-                    {% for error in errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endmacro %}
-
-        {% from _self import errorList %}
-
-
-        <form method="post" action="" accept-charset="UTF-8" class="max-w-xl mx-auto">
-            {{ csrfInput() }}
-            <input type="hidden" name="action" value="contact-form/send">
-            {{ redirectInput('contact-thanks') }}
-
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="from-name">Your Name</label>
-                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="from-name" type="text" name="fromName"
-                       value="{{ message.fromName ?? '' }}">
-                {{ message is defined and message ? errorList(message.getErrors('fromName')) }}
-            </div>
-
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="from-email">Your Email</label>
-                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="from-email" type="email" name="fromEmail"
-                       value="{{ message.fromEmail ?? '' }}">
-                {{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}
-            </div>
-
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="subject">Subject</label>
-                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="subject" type="text" name="subject"
-                       value="{{ message.subject ?? '' }}">
-                {{ message is defined and message ? errorList(message.getErrors('subject')) }}
-            </div>
-
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="message">Message</label>
-                <textarea class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" rows="10" cols="40" id="message"
-                          name="message">{{ message.message ?? '' }}</textarea>
-                {{ message is defined and message ? errorList(message.getErrors('message')) }}
-            </div>
-
-            <div class="flex justify-center">
-                <input class="bg-teal-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" value="Send">
-            </div>
-        </form>
-
-    </div>
-
-
-{% endblock %}
+{% include "partials/footer" %}

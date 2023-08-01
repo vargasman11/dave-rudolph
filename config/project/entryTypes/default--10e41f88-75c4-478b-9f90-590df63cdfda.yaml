@@ -2,6 +2,7 @@ fieldLayouts:
   36a1e4f5-0841-46ef-b0da-9f44d16c37af:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,6 +10,7 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
             instructions: null
             label: null
@@ -24,37 +26,49 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 1dabb59c-293b-40a7-b6bb-1eb1cc24d845
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 4a571784-9016-4b75-a548-b490b4697364 # link logo
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: ab7e23c9-f3d0-4286-9227-e2fb1709dd31
+            userCondition: null
             warning: null
             width: 25
           -
+            elementCondition: null
             fieldUid: 3c12875b-36b2-4feb-b8c3-8525959af403 # Link Title
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 49d00eba-86a5-4638-af2c-274869e19537
+            userCondition: null
             warning: null
             width: 25
           -
+            elementCondition: null
             fieldUid: 3ba03f7c-87d0-45e6-aab0-f9b8eb0520e6 # URL to source
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 485ac354-b4eb-47f1-bbdb-a46d68baad27
+            userCondition: null
             warning: null
             width: 50
         name: Content
-        sortOrder: 1
+        uid: f6537b7b-ec15-438d-a0cd-17d1203c4cf4
+        userCondition: null
 handle: default
 hasTitleField: true
 name: Default

@@ -1,31 +1,40 @@
-field: 0faa9768-b53e-4216-a53d-7812596fdc94
+field: 0faa9768-b53e-4216-a53d-7812596fdc94 # Videos
 fieldLayouts:
   04496278-f029-4eaa-a0d2-038bfa7a2220:
     tabs:
       -
+        elementCondition: null
         elements:
           -
-            fieldUid: 00776b8b-b9b2-49e0-b7d9-26ec3aaef7c1
+            elementCondition: null
+            fieldUid: 00776b8b-b9b2-49e0-b7d9-26ec3aaef7c1 # Video Title
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 6d047e2e-b40f-4eb8-85ee-ff36e117cb2c
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: 6ea3ecd7-bbe8-4d4a-b5e6-b83fcf7e96c5
+            elementCondition: null
+            fieldUid: 6ea3ecd7-bbe8-4d4a-b5e6-b83fcf7e96c5 # Video embed
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 51965309-28aa-41d0-be5a-72799672d831
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: c86cb3ad-ba64-4b70-81fb-88bdd7db202a
+        userCondition: null
 fields:
-  6ea3ecd7-bbe8-4d4a-b5e6-b83fcf7e96c5:
+  6ea3ecd7-bbe8-4d4a-b5e6-b83fcf7e96c5: # Video embed
+    columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: videoEmbed
@@ -35,16 +44,17 @@ fields:
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: null
-      initialRows: '4'
-      multiline: ''
-      placeholder: ''
+      initialRows: 4
+      multiline: false
+      placeholder: null
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
-  00776b8b-b9b2-49e0-b7d9-26ec3aaef7c1:
+  00776b8b-b9b2-49e0-b7d9-26ec3aaef7c1: # Video Title
+    columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: videoTitle
@@ -54,11 +64,11 @@ fields:
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: null
-      initialRows: '4'
-      multiline: ''
-      placeholder: ''
+      initialRows: 4
+      multiline: false
+      placeholder: null
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none

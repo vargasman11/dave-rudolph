@@ -2,6 +2,7 @@ fieldLayouts:
   02c6344e-b5e8-4637-8413-e5d525e95a8d:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,6 +10,7 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
             instructions: null
             label: null
@@ -24,41 +26,53 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 61a57041-8cbe-4b31-b35c-e7ac091ed22c
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: ef74887a-7a07-4977-84c2-c7793e0529a5
+            elementCondition: null
+            fieldUid: ef74887a-7a07-4977-84c2-c7793e0529a5 # Header Image
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: bf6b38a7-0aaa-47ef-bf4f-dbf2658cb21c
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: ed2878ee-102f-406d-b62d-3d231fd7460b
+            elementCondition: null
+            fieldUid: ed2878ee-102f-406d-b62d-3d231fd7460b # Header Image Alt
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: ec80b533-84e2-46d8-99e4-11517aee7e97
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: 1e7716dd-da4e-4a82-9a4a-f4eb04970454
+            elementCondition: null
+            fieldUid: 1e7716dd-da4e-4a82-9a4a-f4eb04970454 # ListenCTA
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: b85cdc26-643e-45fa-8a7d-6f6169201fc2
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 898a379a-1f6d-4421-8ad2-046e82f4bbfb
+        userCondition: null
 handle: home
 hasTitleField: false
 name: Home
-section: c2111dd9-d621-4db5-9121-04eba429d67a
+section: c2111dd9-d621-4db5-9121-04eba429d67a # Home
 sortOrder: 1
 titleFormat: '{section.name|raw}'
 titleTranslationKeyFormat: null

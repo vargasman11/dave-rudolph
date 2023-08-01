@@ -1,9 +1,9 @@
-baseUrl: '@web'
+baseUrl: null
 enabled: true
 handle: default
-hasUrls: true
+hasUrls: false
 language: en-US
 name: 'Dave Guitar'
 primary: true
-siteGroup: 6b2b62f0-3eb1-45ad-b397-559af7de174b
+siteGroup: 6b2b62f0-3eb1-45ad-b397-559af7de174b # Dave Guitar
 sortOrder: 1

@@ -1,13 +1,15 @@
+columnSuffix: null
 contentColumnType: string
-fieldGroup: 9c72894b-5f1f-4387-8507-22e9af77722d
+fieldGroup: 9c72894b-5f1f-4387-8507-22e9af77722d # Page Fields
 handle: videos
-instructions: ''
+instructions: null
 name: Videos
 searchable: false
 settings:
   contentTable: '{{%matrixcontent_videos}}'
-  maxBlocks: ''
-  minBlocks: ''
+  maxBlocks: null
+  minBlocks: null
+  propagationKeyFormat: null
   propagationMethod: all
 translationKeyFormat: null
 translationMethod: site

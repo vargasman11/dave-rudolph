@@ -1,57 +1,69 @@
-{% extends "_layout" %}
-{% block content %}
+{% include "partials/header" %}
+{% include "partials/nav" %}
 
-    <div class="container-fluid">
-        <div class="container mx-auto">
-            <img class="img-fluid" src="/img/jumbo-1.jpg" alt="">
+<div class="container-fluid pb-5 pt-3">
+    <div class="row pt-5">
+        <div class="col-sm-12">
+            {% if entry.headerImage|length  %}
+                <img class="img-fluid" src="{{entry.headerImage.one().getUrl()}}" alt="{{ entry.headerImageAlt }}">
+                {# <p>Juicer</p> #}
+            {% else %}
+                <img class="img-fluid" src="/img/jumbo-1.jpg" alt="">
+            {% endif %}
+
         </div>
     </div>
+</div>
 
-    <div class="container mx-auto py-5 flex flex-col sm:flex-row justify-center">
-        {% set blocks = entry.listencta.all() %}
-        {% if blocks|length %}
-            {% for block in blocks %}
-                <a href="{{ block.platformUrl|raw }}" target="_blank"
-                   class="russo bg-teal-600 hover:bg-teal-400 text-white text-center py-2 px-5 m-2 rounded-sm">{{ block.platformName }}</a>
-            {% endfor %}
-        {% endif %}
-    </div>
-
-
-    {# Fetch entries posted this month #}
-    {% set today = "now"|date("m/d/Y") %}
-    {# Fetch entries with a selected date in the next month #}
-    {% set start = now|atom %}
-    {% set entries = craft.entries().date(['and', ">= #{start}"]).all() %}
-    {% set entries = entries|multisort('date', direction=SORT_ASC) %}
-    {# TABLE#}
-    <div class="container mx-auto py-5">
-        <table class="table-fixed mx-auto">
-            <thead>
-            <tr>
-                <th>Song</th>
-                <th>Artist</th>
-                <th>Year</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% if entries|length %}
-                {% for entry in entries %}
-                    <tr class="py-1  border-b-2">
-                        <td class="py-2 px-6"><span class="font-bold">{{ entry.date|date('medium') }}</span>
-                        </td>
-                        <td class="py-2 px-6">{{ entry.title }} @ {{ entry.time|time('short') }} </td>
-                        <td><span class="font-bold">Location:</span> {{ entry.city }}
-                            , {{ entry.state }}</td>
-                        <td class="py-2 px-6">
-                            <a href="{{ entry.infoUrl }}" class="text-white bg-teal-600 hover:bg-teal-400 py-1 px-3 rounded-sm russo" target="_blank">info</a>
-                        </td>
-                    </tr>
+<div class="container-fluid p-5">
+    <div class="row">
+        <div class="col-sm-12 d-flex justify-content-center flex-wrap">
+            {% set blocks = entry.listencta.all() %}
+            {% if blocks|length %}
+                {% for block in blocks %}
+                    <a href="{{block.platformUrl|raw}}" target="_blank" class="btn btn-lg btn-info m-3">{{block.platformName}}</a>
                 {% endfor %}
             {% endif %}
-            </tbody>
-        </table>
+        </div>
     </div>
+</div>
 
-{% endblock %}
 
+<div class="container-fluid p-5">
+    <div class="row">
+        <div class="col-sm-10 col-md-8 mx-auto">
+            <table class="table">
+                <tbody>
+                {#            {% set entries = craft.entries().section('tourDates').all() %}#}
+                {#            {% set entries = entries|multisort('date', direction=SORT_ASC)  %}#}
+                {# Fetch the entries #}
+                {# Fetch entries posted this month #}
+                {% set today = "now"|date("m/d/Y") %}
+
+                {# Fetch entries with a selected date in the next month #}
+                {% set start = now|atom %}
+
+                {% set entries = craft.entries()
+                    .date(['and', ">= #{start}"])
+                    .all() %}
+
+                {% set entries = entries|multisort('date', direction=SORT_ASC) %}
+
+                {% if entries|length %}
+                    {% for entry in entries %}
+                        <tr>
+                            <td><span class="text-muted font-weight-bold">{{entry.date|date('medium') }}</span></td>
+                            <td>{{entry.title}} @ {{entry.time|time('short')}} </td>
+                            <td><span class="text-muted font-weight-bold">Location:</span> {{entry.city}}, {{entry.state}}</td>
+                            <td><a href={{entry.infoUrl}} class="btn btn-md btn-info" target="_blank">info</a></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+{% include "partials/footer" %}

@@ -1,31 +1,40 @@
-field: 8f3db685-39df-478c-adc2-5cfb83c2861b
+field: 8f3db685-39df-478c-adc2-5cfb83c2861b # CTA Buttons
 fieldLayouts:
   eb2d5238-98d8-4e33-822a-cddfe85e6977:
     tabs:
       -
+        elementCondition: null
         elements:
           -
-            fieldUid: 3729fe64-ff51-4b75-972a-9ca5c405ba4e
+            elementCondition: null
+            fieldUid: 3729fe64-ff51-4b75-972a-9ca5c405ba4e # Button Text
             instructions: null
             label: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 9b802af2-5589-42a1-9f72-cb9fa9115479
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: d06cd7cc-5d64-40d9-a4ad-126501bec771
+            elementCondition: null
+            fieldUid: d06cd7cc-5d64-40d9-a4ad-126501bec771 # Button Link
             instructions: null
             label: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 934882b1-c501-49dc-875e-87cef2dc3d51
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 7361b9fa-8876-43b1-ba4c-26275473cca6
+        userCondition: null
 fields:
-  3729fe64-ff51-4b75-972a-9ca5c405ba4e:
+  3729fe64-ff51-4b75-972a-9ca5c405ba4e: # Button Text
+    columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: buttonText
@@ -35,16 +44,17 @@ fields:
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: null
-      initialRows: '4'
-      multiline: ''
-      placeholder: ''
+      initialRows: 4
+      multiline: false
+      placeholder: null
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
-  d06cd7cc-5d64-40d9-a4ad-126501bec771:
+  d06cd7cc-5d64-40d9-a4ad-126501bec771: # Button Link
+    columnSuffix: null
     contentColumnType: string(255)
     fieldGroup: null
     handle: buttonLink
@@ -52,8 +62,9 @@ fields:
     name: 'Button Link'
     searchable: true
     settings:
-      maxLength: '255'
-      placeholder: ''
+      maxLength: 255
+      types:
+        - url
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\Url
