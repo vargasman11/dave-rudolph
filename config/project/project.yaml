@@ -1,13 +1,14 @@
-dateModified: 1690857289
+dateModified: 1690775417
 email:
-  fromEmail: vargas.j.jerry@gmail.com
+  fromEmail: contact@daverudolphmusic.com
   fromName: 'Dave Rudolph'
   replyToEmail: daverudolphguitar@gmail.com
   template: null
   transportSettings:
-    apiKey: $SENDGRID_API_KEY
-    categories: ''
-  transportType: putyourlightson\sendgrid\mail\SendgridAdapter
+    password: 'Dajr*2448'
+    timeout: '10'
+    username: daverudolphguitar@gmail.com
+  transportType: craft\mail\transportadapters\Gmail
 graphql:
   publicToken:
     enabled: false
@@ -104,7 +105,7 @@ plugins:
     schemaVersion: 1.0.2
     settings:
       duplicatePreventionEnabled: true
-      emailNotificationsDirectoryPath: form-notifications
+      emailNotificationsDirectoryPath: null
       enhancedUI: true
       honeypotBehaviour: simulate_success
       honeypotEnabled: false
@@ -120,10 +121,6 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: 2.3.0
-  sendgrid:
-    edition: standard
-    enabled: true
-    schemaVersion: 1.0.0
   sprout-forms:
     enabled: false
     schemaVersion: 3.11.8
