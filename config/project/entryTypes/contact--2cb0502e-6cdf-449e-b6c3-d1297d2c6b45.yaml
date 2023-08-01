@@ -2,6 +2,7 @@ fieldLayouts:
   f115f22c-568e-4d0d-bc47-4412b974a0fd:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,6 +10,7 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
             instructions: null
             label: null
@@ -24,23 +26,29 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 5488d922-c8ee-47d6-ad96-8527e435ff47
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: ef74887a-7a07-4977-84c2-c7793e0529a5
+            elementCondition: null
+            fieldUid: ef74887a-7a07-4977-84c2-c7793e0529a5 # Header Image
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: e166dc8e-ae8f-488c-a732-3f53240caec3
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 7dc841ef-739c-40b6-9dac-f377276d8a77
+        userCondition: null
 handle: contact
 hasTitleField: false
 name: Contact
-section: 9d11247f-9656-4204-8973-026dfdcb2f2f
+section: 9d11247f-9656-4204-8973-026dfdcb2f2f # Contact
 sortOrder: 1
 titleFormat: '{section.name|raw}'
 titleTranslationKeyFormat: null

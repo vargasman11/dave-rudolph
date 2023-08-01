@@ -1,35 +1,51 @@
-{% extends "_layout" %}
-{% block content %}
+{% include "partials/header" %}
+{% include "partials/nav" %}
 
-    <div class="container flex flex-col justify-center items-center mx-auto mt-5 h-[200px] md:h-[300px] xl:h-[500px] bg-cover bg-center"
-         id="music"
-         style="background-image:url('{{ entry.headerImage.one().getUrl() ?? "/img/crowd-stock.jpeg" }}')">
-        <p class="xball tracking-widest text-shadow text-white text-3xl md:text-6xl xl:text-8xl">{{ entry.pageTitle ?? "MUSIC" }}</p>
-    </div>
-
-
-    <div class="container mx-auto">
-        <p class="text-3xl md:text-6xl xl:text-8xl text-center py-6 md:py-12 xl:py-16">{{ entry.albumCta ?? "ALBUM OUT NOW" }}</p>
-        <div class="flex flex-wrap">
-            <div class="w-full md:w-1/2">
-                <div class="flex flex-col items-center justify-center h-full">
-                    <img class="max-h-[500px]" src="{{ entry.albumCover.one().getUrl() ?? "/img/album.jpg" }}"
-                         alt="{{ entry.headerImageAlt }}">
+<div class="container-fluid mt-5" id="music">
+    {% if entry.headerImage|length  %}
+    <div class="container-fluid mt-5" id="music" style="background-image:url('{{entry.headerImage.one().getUrl()}}')">
+        {% else %}
+        <div class="container-fluid mt-5" id="music" style="background-image: url('/img/crowd-stock.jpeg');">
+            {% endif %}
+            <div class="row">
+                <div class="col-sm-12">
+                    {% if entry.pageTitle %}
+                        <p class="display-4 text-center page-header-title">{{entry.pageTitle}}</p>
+                    {% else %}
+                        <p class="display-4 text-center page-header-title">MUISC</p>
+                    {% endif %}
                 </div>
             </div>
-            <div class="w-full mt-8 md:w-1/2 md:mt-0">
-                <ul class="mx-auto flex flex-col items-center">
-                    {% set blocks = entry.spotifyiframes.all() %}
-                    {% if blocks|length %}
-                        {% for block in blocks %}
-                            <li class="">
-                                <iframe src="{{ block.iframe }}" width="300" height="100" frameborder="0"
-                                        allowtransparency="true" allow="encrypted-media"></iframe>
-                            </li>
-                        {% endfor %}
+        </div>
+
+
+        <div class="container py-5">
+            <div class="row py-5">
+                <div class="col-sm-12 col-md-6 d-flex flex-column justify-content-start">
+                    {% if entry.albumCta|length %}
+                        <p class="display-4 text-center xball">{{entry.albumCta}}</p>
+                    {% else %}
+                        <p class="display-4 text-center xball">ALBUM OUT NOW</p>
                     {% endif %}
-                </ul>
+
+                    {% if entry.albumCover|length %}
+                        <img class="img-fluid" src="{{entry.albumCover.one().getUrl()}}" alt="{{ entry.headerImageAlt }}">
+                    {% else %}
+                        <img class="img-fluid" src="/img/album.jpg" alt="{{ entry.headerImageAlt }}">
+                    {% endif %}
+                </div>
+                <div class="col-sm-12 col-md-6 d-flex justify-content-center">
+
+                    <ul class="list-unstyled">
+                        {% set blocks = entry.spotifyiframes.all() %}
+                        {% if blocks|length %}
+                            {% for block in blocks %}
+                                <li class="mt-5"><iframe src="{{block.iframe}}" width="300" height="100" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-{% endblock %}
+
+{% include "partials/footer" %}

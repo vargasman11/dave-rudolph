@@ -1,67 +1,88 @@
-field: daaeae58-7e1f-4ad5-b1e5-18ac93440c24
+field: daaeae58-7e1f-4ad5-b1e5-18ac93440c24 # Tour Dates
 fieldLayouts:
   2b94555b-b4a9-471a-ba92-1d2664dbc51c:
     tabs:
       -
+        elementCondition: null
         elements:
           -
-            fieldUid: a5f13344-7df6-4d61-bc56-ff72e9f7a0bf
+            elementCondition: null
+            fieldUid: a5f13344-7df6-4d61-bc56-ff72e9f7a0bf # date
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: a63fe1ab-4e21-4a32-b945-8da698279932
+            userCondition: null
             warning: null
             width: 25
           -
-            fieldUid: 1a2a94c2-a18f-4c14-ae13-bff389ad0c04
+            elementCondition: null
+            fieldUid: 1a2a94c2-a18f-4c14-ae13-bff389ad0c04 # time
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 2c564b17-ba0d-481b-bf4f-00ce82640409
+            userCondition: null
             warning: null
             width: 25
           -
-            fieldUid: a6368d7b-66bc-481d-bdc7-8115ac30626f
+            elementCondition: null
+            fieldUid: a6368d7b-66bc-481d-bdc7-8115ac30626f # State
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 3d3651d3-4725-4dc7-bc4e-ab1a6c4b8327
+            userCondition: null
             warning: null
             width: 25
           -
-            fieldUid: 458c94f6-44fb-497c-bf73-59e053894675
+            elementCondition: null
+            fieldUid: 458c94f6-44fb-497c-bf73-59e053894675 # City
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: ba816078-6715-4777-99e7-835efe70e016
+            userCondition: null
             warning: null
             width: 25
           -
-            fieldUid: dd1af556-4340-4c92-91ad-228e54780c45
+            elementCondition: null
+            fieldUid: dd1af556-4340-4c92-91ad-228e54780c45 # Venue 
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 552c9c45-fce4-4cf1-84d7-996d577d9639
+            userCondition: null
             warning: null
             width: 50
           -
-            fieldUid: 61168750-51cd-4179-aedb-4efc42146742
+            elementCondition: null
+            fieldUid: 61168750-51cd-4179-aedb-4efc42146742 # info url
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 4cf50949-8346-49f4-878a-a60d9f4361fe
+            userCondition: null
             warning: null
             width: 50
         name: Content
-        sortOrder: 1
+        uid: 4ec81d41-4f4d-4a4f-b88d-64ec32248a10
+        userCondition: null
 fields:
-  1a2a94c2-a18f-4c14-ae13-bff389ad0c04:
+  1a2a94c2-a18f-4c14-ae13-bff389ad0c04: # time
+    columnSuffix: null
     contentColumnType: time
     fieldGroup: null
     handle: time
@@ -75,7 +96,8 @@ fields:
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\Time
-  458c94f6-44fb-497c-bf73-59e053894675:
+  458c94f6-44fb-497c-bf73-59e053894675: # City
+    columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: city
@@ -85,16 +107,17 @@ fields:
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: null
-      initialRows: '4'
-      multiline: ''
-      placeholder: ''
+      initialRows: 4
+      multiline: false
+      placeholder: null
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
-  61168750-51cd-4179-aedb-4efc42146742:
+  61168750-51cd-4179-aedb-4efc42146742: # info url
+    columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: infoUrl
@@ -104,16 +127,17 @@ fields:
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: null
-      initialRows: '4'
-      multiline: ''
-      placeholder: ''
+      initialRows: 4
+      multiline: false
+      placeholder: null
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
-  a5f13344-7df6-4d61-bc56-ff72e9f7a0bf:
+  a5f13344-7df6-4d61-bc56-ff72e9f7a0bf: # date
+    columnSuffix: null
     contentColumnType: datetime
     fieldGroup: null
     handle: date
@@ -123,13 +147,15 @@ fields:
     settings:
       max: null
       min: null
-      minuteIncrement: '30'
+      minuteIncrement: 30
       showDate: true
       showTime: false
+      showTimeZone: false
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\Date
-  a6368d7b-66bc-481d-bdc7-8115ac30626f:
+  a6368d7b-66bc-481d-bdc7-8115ac30626f: # State
+    columnSuffix: null
     contentColumnType: string(8)
     fieldGroup: null
     handle: state
@@ -139,16 +165,17 @@ fields:
     settings:
       byteLimit: null
       charLimit: 2
-      code: ''
+      code: false
       columnType: null
-      initialRows: '4'
-      multiline: ''
-      placeholder: ''
+      initialRows: 4
+      multiline: false
+      placeholder: null
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
-  dd1af556-4340-4c92-91ad-228e54780c45:
+  dd1af556-4340-4c92-91ad-228e54780c45: # Venue 
+    columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: venue
@@ -158,11 +185,11 @@ fields:
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: null
-      initialRows: '4'
-      multiline: ''
-      placeholder: ''
+      initialRows: 4
+      multiline: false
+      placeholder: null
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none

@@ -1,14 +1,53 @@
-{% extends"_layout.twig" %}
-{% block content %}
-    <div id="about"
-         class="container flex flex-col justify-center items-center mx-auto mt-5 h-[200px] md:h-[300px] xl:h-[500px] bg-cover bg-center"
-         style="background-image:url('{{ entry.headerImage.one().getUrl() ?? "/img/crowd-stock.jpeg" }}')">
-        <p class="xball tracking-widest text-shadow text-white text-3xl md:text-6xl xl:text-8xl">{{ entry.pageTitle ?? "ABOUT" }}</p>
+{% include "partials/header" %}
+{% include "partials/nav" %}
+
+{% if entry.headerImage|length %}
+<div class="container-fluid mt-5" id="about" style="background-image:url('{{ entry.headerImage.one().getUrl() }}')">
+    {% else %}
+    <div class="container-fluid mt-5" id="about">
+        {% endif %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                {% if entry.pageTitle %}
+                    <p class="display-4 text-center page-header-title" id="about-title">{{ entry.pageTitle }}</p>
+                {% else %}
+                    <p class="display-4 text-center page-header-title" id="about-title">ABOUT</p>
+                {% endif %}
+            </div>
+        </div>
     </div>
-    <div class="container mx-auto mt-5 py-5">
-        <div class="w-full lg:w-2/3 mx-auto">
-            {{ entry.customContent }}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-10 col-md-8 mx-auto py-5">
+                {% if entry.customContent %}
+                    {{ entry.customContent }}
+                {% else %}
+                    <h1 class="xball">Dave Rudolph is:</h1>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius id temporibus doloremque magni,
+                        voluptatum
+                        repellendus beatae, perferendis ullam minus asperiores placeat dolore sed ea inventore quos
+                        facere
+                        suscipit quo consequatur ad. Magnam, distinctio, soluta porro nostrum maxime nobis obcaecati
+                        repellat
+                        natus, provident harum nihil dicta!</p>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius id temporibus doloremque magni,
+                        voluptatum
+                        repellendus beatae, perferendis ullam minus asperiores placeat dolore sed ea inventore quos
+                        facere
+                        suscipit quo consequatur ad. Magnam, distinctio, soluta porro nostrum maxime nobis obcaecati
+                        repellat
+                        natus, provident harum nihil dicta!</p>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius id temporibus doloremque magni,
+                        voluptatum
+                        repellendus beatae, perferendis ullam minus asperiores placeat dolore sed ea inventore quos
+                        facere
+                        suscipit quo consequatur ad. Magnam, distinctio, soluta porro nostrum maxime nobis obcaecati
+                        repellat
+                        natus, provident harum nihil dicta!</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 
-{% endblock %}
+{% include "partials/footer" %}

@@ -1,5 +1,6 @@
+columnSuffix: null
 contentColumnType: text
-fieldGroup: 9c72894b-5f1f-4387-8507-22e9af77722d
+fieldGroup: 9c72894b-5f1f-4387-8507-22e9af77722d # Page Fields
 handle: customContent
 instructions: 'This could be any text content you''d like. This can be a bio section or an about field or a simple announcement.'
 name: 'Custom Content'
@@ -7,18 +8,17 @@ searchable: false
 settings:
   availableTransforms: '*'
   availableVolumes: '*'
-  cleanupHtml: true
   columnType: text
   configSelectionMode: choose
   defaultTransform: ''
   manualConfig: ''
-  purifierConfig: ''
-  purifyHtml: '1'
-  redactorConfig: ''
-  removeEmptyTags: '1'
-  removeInlineStyles: '1'
-  removeNbsp: '1'
-  showHtmlButtonForNonAdmins: ''
+  purifierConfig: null
+  purifyHtml: true
+  redactorConfig: null
+  removeEmptyTags: true
+  removeInlineStyles: true
+  removeNbsp: true
+  showHtmlButtonForNonAdmins: false
   showUnpermittedFiles: false
   showUnpermittedVolumes: false
   uiMode: enlarged
