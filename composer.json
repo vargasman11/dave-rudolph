@@ -2,6 +2,7 @@
   "require": {
     "craftcms/cms": "^4.4.0",
     "craftcms/redactor": "3.0.4",
+    "putyourlightson/craft-sendgrid": "2.0.1",
     "solspace/craft-express-forms": "2.0.2",
     "vlucas/phpdotenv": "^5.4.0"
   },
