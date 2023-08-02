@@ -1,14 +1,13 @@
-dateModified: 1690775417
+dateModified: 1690859626
 email:
-  fromEmail: contact@daverudolphmusic.com
+  fromEmail: vargas.j.jerry@gmail.com
   fromName: 'Dave Rudolph'
   replyToEmail: daverudolphguitar@gmail.com
   template: null
   transportSettings:
-    password: 'Dajr*2448'
-    timeout: '10'
-    username: daverudolphguitar@gmail.com
-  transportType: craft\mail\transportadapters\Gmail
+    apiKey: $SENDGRID_API_KEY
+    categories: ''
+  transportType: putyourlightson\sendgrid\mail\SendgridAdapter
 graphql:
   publicToken:
     enabled: false
@@ -56,6 +55,7 @@ meta:
     024543db-feed-428a-922b-5c42d8374aaa: 'Album CTA' # Album CTA
     885183e7-a46e-417d-888c-fca4f7e1734d: Uploads # Uploads
     5432599a-25c2-480c-92ba-3dcbf18b1d20: 'Platform Url' # Platform Url
+    6850274a-8d46-4a45-af19-c5bdb4b8bdf3: 'Public Schema'
     56361854-6cef-42f0-b788-03399c9f683b: 'Dave Guitar' # Dave Guitar
     61168750-51cd-4179-aedb-4efc42146742: 'info url' # info url
     a5f13344-7df6-4d61-bc56-ff72e9f7a0bf: date # date
@@ -105,7 +105,7 @@ plugins:
     schemaVersion: 1.0.2
     settings:
       duplicatePreventionEnabled: true
-      emailNotificationsDirectoryPath: null
+      emailNotificationsDirectoryPath: form-notifications
       enhancedUI: true
       honeypotBehaviour: simulate_success
       honeypotEnabled: false
@@ -121,6 +121,10 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: 2.3.0
+  sendgrid:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
   sprout-forms:
     enabled: false
     schemaVersion: 3.11.8
