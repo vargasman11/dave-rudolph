@@ -37,6 +37,47 @@
 {#    <link rel="stylesheet" href="/dist/main.css">#}
 
     <title>Dave Rudolph Music</title>
+
+    <style>
+        /* Custom styling for the lightswitch */
+        .lightswitch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+            background-color: #ddd;
+            border-radius: 13px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .lightswitch-slider {
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            width: 24px;
+            height: 24px;
+            background-color: #fff;
+            border-radius: 50%;
+            transition: left 0.4s, background-color 0.4s;
+        }
+
+        /* Update the slider color when in "dark-mode" */
+        .dark-mode .lightswitch-slider {
+            background-color: #68a79e;
+        }
+        /* Slide animation */
+        .slide-right {
+            left: 27px;
+        }
+        /* Dark mode styling */
+        body.dark-mode,
+        body.dark-mode .table {
+            background-color: #000;
+            color: #fff;
+        }
+
+    </style>
 </head>
 
 <body>

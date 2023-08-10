@@ -34,6 +34,7 @@ h1 {
     color: #68a79e;
     font-size: 60px; }
 
+.navbar #navbarDrop ul li span,
 .navbar #navbarDrop ul li a {
     font-family: xball;
     font-size: 20px;
