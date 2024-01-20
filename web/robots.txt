@@ -10,3 +10,6 @@ Disallow: /vendor/
 Disallow: /.env
 Disallow: /docs/3.x/fr/
 Disallow: /index.php/actions/
+
+# Allow indexing for a specific directory or page
+Allow: /
