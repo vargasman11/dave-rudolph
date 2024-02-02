@@ -1,4 +1,4 @@
-dateModified: 1690859626
+dateModified: 1706766663
 email:
   fromEmail: vargas.j.jerry@gmail.com
   fromName: 'Dave Rudolph'
@@ -8,14 +8,31 @@ email:
     apiKey: $SENDGRID_API_KEY
     categories: ''
   transportType: putyourlightson\sendgrid\mail\SendgridAdapter
-graphql:
-  publicToken:
-    enabled: false
-    expiryDate: null
+fs:
+  amazonS3:
+    hasUrls: true
+    name: 'amazon s3'
+    settings:
+      addSubfolderToRootUrl: true
+      autoFocalPoint: false
+      bucket: daverudolph
+      bucketSelectionMode: choose
+      cfDistributionId: ''
+      cfPrefix: ''
+      expires: ''
+      keyId: $ACCESS_KEY_ID
+      makeUploadsPublic: true
+      region: us-east-2
+      secret: $SECRET_ACCESS_KEY
+      storageClass: ''
+      subfolder: ''
+    type: craft\awss3\Fs
+    url: 'https://daverudolph.s3.amazonaws.com/'
 meta:
   __names__:
     0faa9768-b53e-4216-a53d-7812596fdc94: Videos # Videos
     1a2a94c2-a18f-4c14-ae13-bff389ad0c04: time # time
+    1b6eb0ce-7376-49b1-bd51-2333d1ae3b0c: 'Homepage Large' # Homepage Large
     1b725997-1c52-4c85-aaa8-7bb113ff338e: About # About
     1e6e3839-9a1e-4d98-a6f8-13b7cd0097d7: Default # Default
     1e7716dd-da4e-4a82-9a4a-f4eb04970454: ListenCTA # ListenCTA
@@ -40,6 +57,7 @@ meta:
     10e41f88-75c4-478b-9f90-590df63cdfda: Default # Default
     33fc222b-d308-432c-b70c-c128f4df6783: button # button
     66bdc090-1029-4da8-a10f-8e0bc54176bb: spotifyIframes # spotifyIframes
+    68a80a71-81e5-4fdb-a5ca-a4f5e85d55e3: 'Homepage Small' # Homepage Small
     93f4fd03-7ec3-4149-b30e-3d6a701d64a4: Platform # Platform
     95e3be53-2293-4333-904c-5f7a07242a54: 'Social Links' # Social Links
     0408c66a-7daf-4481-afc7-2ac098e1e927: Dates # Dates
@@ -47,15 +65,17 @@ meta:
     458c94f6-44fb-497c-bf73-59e053894675: City # City
     502b621a-4cc7-4a26-a910-042f30dca048: Home # Home
     569d7efe-e957-4fa0-a49a-c4b1b8fba23b: 'Album Cover' # Album Cover
+    681b6776-7192-457f-81fc-ae308dabb2f3: 'Public Schema' # Public Schema
     00776b8b-b9b2-49e0-b7d9-26ec3aaef7c1: 'Video Title' # Video Title
+    808bd24f-fa63-4e8e-8b6e-e5f9e3202cf6: 'Homepage Medium' # Homepage Medium
     0886b236-4a38-40bd-abfa-21fdee1352d7: State # State
     1362be94-49c6-41a7-8c6e-5613f8983bbc: 'Social Media URl' # Social Media URl
     3729fe64-ff51-4b75-972a-9ca5c405ba4e: 'Button Text' # Button Text
     8972e6e4-7db5-4a0a-85b9-11be3f170a55: 'Custom Content' # Custom Content
     024543db-feed-428a-922b-5c42d8374aaa: 'Album CTA' # Album CTA
     885183e7-a46e-417d-888c-fca4f7e1734d: Uploads # Uploads
+    932760c1-448c-4acb-850a-c553820f122b: 'Public Schema' # Public Schema
     5432599a-25c2-480c-92ba-3dcbf18b1d20: 'Platform Url' # Platform Url
-    6850274a-8d46-4a45-af19-c5bdb4b8bdf3: 'Public Schema'
     56361854-6cef-42f0-b788-03399c9f683b: 'Dave Guitar' # Dave Guitar
     61168750-51cd-4179-aedb-4efc42146742: 'info url' # info url
     a5f13344-7df6-4d61-bc56-ff72e9f7a0bf: date # date
@@ -70,12 +90,12 @@ meta:
     cbc56c31-9669-4305-8581-335621349eec: 'Social Media Icon' # Social Media Icon
     d06cd7cc-5d64-40d9-a4ad-126501bec771: 'Button Link' # Button Link
     d55cabd7-d990-4dac-9ea9-cc3941a1421f: time # time
-    d3642e8e-67a6-4642-b4a7-a27c5724423c: 'Public Schema' # Public Schema
     d2436398-f3e3-4b75-9115-13f2fa0afe1a: 'Link Page' # Link Page
     daaeae58-7e1f-4ad5-b1e5-18ac93440c24: 'Tour Dates' # Tour Dates
     dd1af556-4340-4c92-91ad-228e54780c45: 'Venue ' # Venue 
     e025fb83-6598-430d-9ab8-5d4ced49979a: 'info url' # info url
     e3fc1639-4370-4ebc-96b1-93d75e1d6e0d: Blog # Blog
+    e21e97e7-3800-4f4b-ae6a-c2c65491e914: 'Homepage XXL' # Homepage XXL
     e28be8c5-7bcd-4e2b-9189-1f72f75ec7b4: Tour # Tour
     e46c4b23-d422-4dec-8758-ef4e9016d1fe: iframe # iframe
     e4343257-eacd-41fb-b2d1-0ac429892afc: Media # Media
@@ -84,7 +104,12 @@ meta:
     eeaff83a-803a-4ddd-bcc6-a1563a735cd6: Tour # Tour
     ef74887a-7a07-4977-84c2-c7793e0529a5: 'Header Image' # Header Image
     fa196411-87a8-410a-9288-9036a802a194: Music # Music
+    fe1181fe-4d76-4ad3-88cb-192aa28d2799: 'Homepage Xl' # Homepage Xl
 plugins:
+  aws-s3:
+    edition: standard
+    enabled: true
+    schemaVersion: '2.0'
   contact-form:
     edition: standard
     enabled: true
@@ -105,10 +130,10 @@ plugins:
     schemaVersion: 1.0.2
     settings:
       duplicatePreventionEnabled: true
-      emailNotificationsDirectoryPath: form-notifications
+      emailNotificationsDirectoryPath: null
       enhancedUI: true
       honeypotBehaviour: simulate_success
-      honeypotEnabled: false
+      honeypotEnabled: true
       honeypotInputName: form_handler
       name: null
       recaptchaEnabled: false
@@ -125,6 +150,10 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: 1.0.0
+  sprig:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.1
   sprout-forms:
     enabled: false
     schemaVersion: 3.11.8
@@ -156,7 +185,7 @@ system:
   live: true
   name: 'Dave Guitar'
   retryDuration: null
-  schemaVersion: 4.4.0.4
+  schemaVersion: 4.5.3.0
   timeZone: America/Chicago
 users:
   allowPublicRegistration: false

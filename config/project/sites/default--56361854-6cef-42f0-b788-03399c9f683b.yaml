@@ -1,7 +1,7 @@
-baseUrl: null
+baseUrl: '@web'
 enabled: true
 handle: default
-hasUrls: false
+hasUrls: true
 language: en-US
 name: 'Dave Guitar'
 primary: true

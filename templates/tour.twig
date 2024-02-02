@@ -1,10 +1,14 @@
+{% set today = "now"|date("m/d/Y") %}
+{# Fetch entries with a selected date in the next month #}
+{% set start = now|atom %}
+{% set end = now|atom %}
+
 {% include "partials/header" %}
 {% include "partials/nav" %}
 
 {% if entry.headerImage|length %}
 <div class="container-fluid mt-5" id="tour" style="background-image:url('{{ entry.headerImage.one().getUrl() }}')">
     {% else %}
-{#    <div class="container-fluid mt-5" id="tour" style="background-image: url('/img/crowd-stock.jpeg');">#}
     <div class="container-fluid mt-5" id="tour" style="background-image: url('/crowd-stock.jpeg');">
         {% endif %}
         <div class="row">
@@ -24,9 +28,6 @@
                 <table class="table">
                     <tbody>
                     {# Fetch entries posted this month #}
-                    {% set today = "now"|date("m/d/Y") %}
-                    {# Fetch entries with a selected date in the next month #}
-                    {% set start = now|atom %}
                     {% set entries = craft.entries()
                         .date(['and', ">= #{start}"])
                         .all() %}
@@ -54,42 +55,13 @@
     </div>
 
 
-    <div class="container-fluid py-5 mt-5">
-        <div class="row">
-            <div class="col-sm-12 col-md-8 mx-auto">
-                <h1 class="pb-5 xball">Past Dates:</h1>
-                <table class="table">
-                    <tbody>
-                    {# Fetch entries posted this month #}
-                    {% set today = "now"|date("m/d/Y") %}
-                    {# Fetch entries with a selected date in the next month #}
-                    {% set end = now|atom %}
-                    {% set entries = craft.entries()
-                        .date(['and', "<= #{start}"])
-                        .all() %}
-                    {% set entriesPast = entries|multisort('date', direction=SORT_DESC) %}
-                    {% if entriesPast|length %}
-                        {% for entry in entriesPast %}
-                            {% if  entry.date > '2021-04-01' %}
-                                <tr>
-                                    <td><span class="text-muted font-weight-bold">{{ entry.date|date('medium') }}</span>
-                                    </td>
-                                    <td>{{ entry.title }} @ {{ entry.time|time('short') }} </td>
-                                    <td><span class="text-muted font-weight-bold">Location:</span> {{ entry.city }}
-                                        , {{ entry.state }}
-                                    </td>
-                                    <td><a href={{ entry.infoUrl }} class="btn btn-md btn-info" target="_blank">info</a>
-                                    </td>
-                                </tr>
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
+    {# Passes a variable called `limit` into the component #}
+    {{ sprig('_components/pagination', {
+        'title':'Past Dates',
+        'limit': 12,
+        'start':start,
+        'end':end
+    }) }}
 
 
 {% include "partials/footer" %}
