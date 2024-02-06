@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'russo'; /* Name your font */
+  src: url('../fonts/russo_one.ttf') format('truetype'); /* Path to your font file */
+}
+
+@font-face {
+  font-family: 'xball'; /* Name your font */
+  src: url('../fonts/XBall_Italic.ttf') format('truetype'); /* Path to your font file */
+}
+
+
+// Breakpoints
+$xs: 0;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400px;
+
+$russo: 'russo';
+$xball: 'xball';
+$theme-color: #68a79e;
+$theme-color-hover: #23685e;
+
+//Transition
+$btn-transition: all .5s ease-in-out;
+$btn-transform: translateY(-2px) scale(1.1);

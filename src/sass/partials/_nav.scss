@@ -1,0 +1,36 @@
+#nav {
+  @media screen and (min-width: $md) {
+    padding: 1rem 2rem;
+  }
+  @media screen and (min-width: $xl) {
+    padding: 2rem 4rem;
+  }
+
+  .navbar-brand {
+    color: $theme-color;
+    font-family: $xball;
+    font-size: 2rem;
+    @media screen and (min-width: $md) {
+      font-size: 3rem;
+    }
+    @media screen and (min-width: $lg) {
+      font-size: 4rem;
+    }
+  }
+
+  #navbarDrop {
+    .navbar-nav {
+      .nav-link {
+        color: $theme-color;
+        font-family: $xball;
+        transition: $btn-transition;
+      }
+
+      .nav-link:hover {
+        color: $theme-color-hover;
+        transition: $btn-transition;
+        transform: $btn-transform;
+      }
+    }
+  }
+}

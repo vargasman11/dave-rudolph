@@ -1,0 +1,35 @@
+// HOME PAGE
+.homepage-image {
+  padding: 1rem;
+}
+
+.homepage-buttons {
+  padding: 2rem 0;
+  @media screen and (min-width: $sm) {
+    padding: 2rem;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    @media screen and (min-width: $sm) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    a {
+      margin: .5rem;
+      width: 75%;
+      @media screen and (min-width: $sm) {
+        width: auto;
+      }
+    }
+  }
+}
+
+.homepage-shows{
+
+}

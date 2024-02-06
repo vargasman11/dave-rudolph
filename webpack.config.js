@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const autoprefixer = require('autoprefixer')
 
 const { extendDefaultPlugins } = require("svgo");
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
@@ -29,7 +30,7 @@ module.exports = (env) => {
                 // ./public directory is being served
                 host: 'localhost',
                 port: 3000,
-                files:['./templates/**/*.twig', './web/webpack/**/*.css', ],
+                files:['./templates/**/*.twig', './web/dist/*.css', ],
                 // server: { baseDir: ['public'] }
                 proxy: process.env.SITE_BASEURL
             })
@@ -44,9 +45,22 @@ module.exports = (env) => {
                         // Translates CSS into CommonJS
                         "css-loader",
                         // Compiles Sass to CSS
-                        "sass-loader",
+                        // "sass-loader",
                         //Post CSS
-                        "postcss-loader"
+                        // "postcss-loader",
+                        {
+                            // Loader for webpack to process CSS with PostCSS
+                            loader: 'postcss-loader',
+                            options: {
+                                postcssOptions: {
+                                    plugins: [
+                                        autoprefixer
+                                    ]
+                                }
+                            }
+                        },
+                        // Compiles Sass to CSS
+                        "sass-loader",
                     ],
                 },
                 {

@@ -1,0 +1,17 @@
+//Bootstrap overides
+.btn {
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background-color: #68a79e;
+  border: #68a79e;
+  color: #ffffff;
+  transition: $btn-transition;
+}
+
+.btn-primary:hover {
+  background-color: #23685e;
+  transition: $btn-transition;
+  transform: $btn-transform;
+}

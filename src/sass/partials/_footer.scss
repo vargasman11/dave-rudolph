@@ -1,0 +1,16 @@
+#footer {
+  ul {
+    margin-bottom: 0 !important;
+    li {
+      a {
+        i:before{
+          color: #68a79e;
+          border: solid 1px #68a79e;
+          border-radius: 50%;
+          padding: 1rem;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
