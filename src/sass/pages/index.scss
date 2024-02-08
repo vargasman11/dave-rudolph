@@ -5,8 +5,9 @@
 
 .homepage-buttons {
   padding: 2rem 0;
+  margin: 0 auto;
   @media screen and (min-width: $sm) {
-    padding: 2rem;
+    //padding: 2rem;
   }
 
   .buttons {
@@ -30,6 +31,96 @@
   }
 }
 
-.homepage-shows{
+.homepage-shows {
+  margin: 3rem auto 0;
 
+  h1 {
+    font-family: $russo;
+    color: $theme-color;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    @media screen and (min-width: $md) {
+      text-align: start;
+      margin-left: 10%;
+    }
+  }
+
+  .shows {
+    display: flex;
+    flex-direction: column;
+
+    .show {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      margin: 1rem 0;
+      padding: 1rem;
+      @media screen and (min-width: $md) {
+        display: flex;
+        align-items: center;
+        padding: 0 0 1rem;
+      }
+
+      .title {
+        text-align: center;
+        font-family: $xball;
+        overflow-wrap: break-word;
+        grid-column: 1/5;
+        grid-row: 1/2;
+        @media screen and (min-width: $md) {
+          width: 30%;
+          margin-bottom: 0;
+          text-align: left;
+        }
+      }
+
+      .date {
+        text-align: center;
+        font-family: $russo;
+        grid-column: 1/3;
+        grid-row: 2/3;
+        @media screen and (min-width: $md) {
+          padding: 0 .5rem;
+          width: 15%;
+          margin-bottom: 0;
+        }
+      }
+
+      .time {
+        text-align: center;
+        grid-column: 3/5;
+        grid-row: 2/3;
+        font-style: italic;
+        @media screen and (min-width: $md) {
+          padding: 0 .5rem;
+          width: 15%;
+          margin-bottom: 0;
+        }
+      }
+
+      .location {
+        font-family: $russo;
+        text-align: center;
+        grid-column: 1/5;
+        grid-row: 3/4;
+        @media screen and (min-width: $md) {
+          width: 25%;
+          margin-bottom: 0;
+        }
+
+        i {
+          color: $theme-color;
+        }
+      }
+
+      .info {
+        grid-column: 1/5;
+        grid-row: 4/5;
+        @media screen and (min-width: $md) {
+          width: 15%;
+          margin-bottom: 0;
+          height: fit-content;
+        }
+      }
+    }
+  }
 }

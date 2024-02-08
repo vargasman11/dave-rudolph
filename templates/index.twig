@@ -2,9 +2,9 @@
 {% set today = "now"|date("m/d/Y") %}
 {# Fetch entries with a selected date in the next month #}
 {% set start = now|atom %}
-{#{% set entries = craft.entries().date(['and', ">= #{start}"]).all() %}#}
-{% set entries = craft.entries().limit(10) %}
-{#{% set entries = entries|multisort('date', direction=SORT_ASC).limit(20) %}#}
+{# {% set entries = craft.entries().date(['and', ">= #{start}"]).all() %} #}
+{% set entries = craft.entries().limit(5) %}
+{# {% set entries = entries|multisort('date', direction=SORT_ASC).limit(20) %} #}
 {# setting imag SRC sets #}
 {% set srcSet = ['576w','768w','992w','1200w','1400w'] %}
 
@@ -40,29 +40,24 @@
 </div>
 
 {% if entries|length %}
-<div class="container-xl homepage-shows">
-    <div class="row">
-        <div class="col-12 col-sm-10 col-md-8 mx-auto">
-            <div class="table-responsive">
-                <table class="table">
-                    <tbody>
-                        {% for entry in entries %}
-                            <tr>
-                                <td><span class="text-muted font-weight-bold">{{ entry.date|date('n/j/y') }}</span>
-                                </td>
-                                <td> {{ entry.title }} @ {{ entry.time|time('short') }} </td>
-                                <td><span class="text-muted font-weight-bold">Location:</span> {{ entry.city }}
-                                    , {{ entry.state }}</td>
-                                <td><a href="{{ entry.infoUrl }}" class="btn btn-md btn-info" target="_blank">info</a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+    <div class="container-xl homepage-shows">
+        <div class="row">
+            <div class="col-12">
+                <h1>Upcoming Shows</h1>
+                <div class="shows">
+                    {% for entry in entries %}
+                        <div class="show">
+                            <p class="title">{{ entry.title }}</p>
+                            <p class="date">{{ entry.date|date('n/j/y') }}</p>
+                            <p class="time">@ {{ entry.time|time('short') }}</p>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> &nbsp; {{ entry.city }}, {{ entry.state }}</p>
+                            <a class="info btn btn-primary" href="{{ entry.infoUrl }}" target="_blank">info</a>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endif %}
 
 {% include "partials/footer" %}
