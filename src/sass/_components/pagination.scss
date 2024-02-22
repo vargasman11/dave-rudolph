@@ -1,0 +1,23 @@
+.pagination{
+  margin: 1rem 0;
+  //background-color: red;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  .page-item{
+    //flex-grow: 1;
+    .page-link{
+      text-decoration: none;
+      color: $theme-color;
+      font-family: $russo;
+    }
+  }
+}
+
+.pagination-info{
+  display: flex;
+  justify-content: space-between;
+  font-family: xball;
+}

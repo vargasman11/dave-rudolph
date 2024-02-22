@@ -1,5 +1,5 @@
-{% include "partials/header" %}
-{% include "partials/nav" %}
+{% extends "_layout" %}
+{% block content %}
 
 <div class="container-fluid mt-5" id="music">
     {% if entry.headerImage|length  %}
@@ -22,12 +22,7 @@
         <div class="container py-5">
             <div class="row py-5">
                 <div class="col-sm-12 col-md-6 d-flex flex-column justify-content-start">
-                    {% if entry.albumCta|length %}
-                        <p class="display-4 text-center xball">{{entry.albumCta}}</p>
-                    {% else %}
-                        <p class="display-4 text-center xball">ALBUM OUT NOW</p>
-                    {% endif %}
-
+                        <p class="display-4 text-center xball">{{entry.albumCta ?? 'ALBUM OUT NOW'}}</p>
                     {% if entry.albumCover|length %}
                         <img class="img-fluid" src="{{entry.albumCover.one().getUrl()}}" alt="{{ entry.headerImageAlt }}">
                     {% else %}
@@ -48,4 +43,4 @@
             </div>
         </div>
 
-{% include "partials/footer" %}
+        {% endblock %}

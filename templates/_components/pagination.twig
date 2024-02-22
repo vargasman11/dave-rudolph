@@ -11,42 +11,41 @@
 {% set pageInfo = sprig.paginate(entryQuery, page) %}
 {% set entries = pageInfo.pageResults %}
 
-<div class="container-fluid py-5 mt-5">
+<div class="container-xl mx-auto container-shows">
     <div class="row">
-        <div class="col-sm-12 col-md-8 mx-auto">
-            <h1 class="pb-5 xball">{{ title }}</h1>
-            <table class="table">
-                <tbody>
+        <div class="col-12">
+            <h1>{{ title }}</h1>
+            <div class="shows">
                 {% for entry in entries %}
-                    <tr>
-                        <td><span class="text-muted font-weight-bold">{{ entry.date|date('medium') }}</span>
-                        </td>
-                        <td>{{ entry.title }} @ {{ entry.time|time('short') }} </td>
-                        <td><span class="text-muted font-weight-bold">Location:</span> {{ entry.city }}
-                            , {{ entry.state }}
-                        </td>
-                        <td><a href={{ entry.infoUrl }} class="btn btn-md btn-info" target="_blank">info</a>
-                        </td>
-                    </tr>
+                    {% include "_components/_shows" with {
+                        title:entry.title,
+                        date:entry.date|date('n/j/y'),
+                        time:entry.time|time('short'),
+                        location: "#{entry.city}, #{entry.state}",
+                        infoUrl:entry.infoUrl
+                    } %}
                 {% endfor %}
-                </tbody>
-            </table>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2 mb-4">
+        <div class="col-12 col-sm-10 col-md-9 col-lg-7 col-xl-6 ms-auto">
             {# Pagination #}
             {% if entries %}
-                {% set totalPagesToShow = 5 %}
+                {% set totalPagesToShow = 3 %}
                 {% set halfTotalPagesToShow = (totalPagesToShow / 2)|round %}
                 {% set startPage = max(1, pageInfo.currentPage - halfTotalPagesToShow) %}
                 {% set endPage = min(pageInfo.totalPages, startPage + totalPagesToShow - 1) %}
                 <nav aria-label="Pagination" class="pagination-container">
-                    <ul class="pagination justify-content-center">
+                    <ul class="pagination p-0">
 
                         <li class="page-item{% if page == 1 %} disabled{% endif %}">
-                            <a class="page-link" href="#" sprig s-val:page="{{ page - 1 }}"
+                            <a class="page-link " href="#" sprig s-val:page="{{ page - 1 }}"
                                s-push-url="?page={{ page - 1 }}">Previous</a>
                         </li>
                         {% if startPage > 1 %}
                             <li class="page-item">
-                                <a class="page-link" sprig s-val:page="1" s-push-url="?page=1">1</a>
+                                <a class="page-link " sprig s-val:page="1" s-push-url="?page=1">1</a>
                             </li>
                             {% if startPage > 2 %}
                                 <li class="page-item disabled"><span class="page-link">...</span></li>
@@ -55,7 +54,7 @@
 
                         {% for i in startPage..endPage %}
                             <li class="page-item{% if i == page %} active{% endif %}">
-                                <a class="page-link" sprig s-val:page="{{ i }}" s-push-url="?page={{ i }}">{{ i }}</a>
+                                <a class="page-link " sprig s-val:page="{{ i }}" s-push-url="?page={{ i }}">{{ i }}</a>
                             </li>
                         {% endfor %}
 
@@ -64,30 +63,30 @@
                                 <li class="page-item disabled"><span class="page-link">...</span></li>
                             {% endif %}
                             <li class="page-item">
-                                <a class="page-link" sprig s-val:page="{{ pageInfo.totalPages }}"
+                                <a class="page-link " sprig s-val:page="{{ pageInfo.totalPages }}"
                                    s-push-url="?page={{ pageInfo.totalPages }}">{{ pageInfo.totalPages }}</a>
                             </li>
                         {% endif %}
 
 
                         <li class="page-item{% if page == pageInfo.totalPages %} disabled{% endif %}">
-                            <a class="page-link" href="#" sprig s-val:page="{{ page + 1 }}"
+                            <a class="page-link " href="#" sprig s-val:page="{{ page + 1 }}"
                                s-push-url="?page={{ page + 1 }}">Next</a>
                         </li>
 
                     </ul>
                 </nav>
 
-                <p>
-                    <em>
+                <div class="pagination-info">
+                    <p>
                         Showing {{ pageInfo.first }}-{{ pageInfo.last }}
                         of {{ pageInfo.total }} entries.
-                    </em><br>
-                    <em>Page {{ pageInfo.currentPage }} of {{ pageInfo.totalPages }} pages.</em><br>
-                </p>
+                    </p>
+                    <p>Page {{ pageInfo.currentPage }} of {{ pageInfo.totalPages }} pages.</p>
+                </div>
             {% endif %}
-
 
         </div>
     </div>
+
 </div>

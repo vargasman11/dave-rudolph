@@ -3,53 +3,34 @@
 {% set start = now|atom %}
 {% set end = now|atom %}
 
-{% include "partials/header" %}
-{% include "partials/nav" %}
+{% extends "_layout" %}
+{% block content %}
 
-{% if entry.headerImage|length %}
-<div class="container-fluid mt-5" id="tour" style="background-image:url('{{ entry.headerImage.one().getUrl() }}')">
-    {% else %}
-    <div class="container-fluid mt-5" id="tour" style="background-image: url('/crowd-stock.jpeg');">
-        {% endif %}
+<div class="container-fluid mt-5" id="tour" style="background-image:url('{{ entry.headerImage.one().getUrl() ?? '/crowd-stock.jpeg' }}')">
         <div class="row">
             <div class="col-sm-12">
-                {% if entry.pageTitle %}
-                    <p class="display-4 text-center page-header-title" id="about-title">{{ entry.pageTitle }}</p>
-                {% else %}
-                    <p class="display-4 text-center page-header-title" id="tour-title">TOUR</p>
-                {% endif %}
+                <p class="display-4 text-center page-header-title" id="about-title">{{ entry.pageTitle ?? "TOUR" }}</p>
             </div>
         </div>
     </div>
-    <div class="container-fluid py-5 mt-5">
+    <div class="container-xl container-shows">
         <div class="row">
-            <div class="col-sm-12 col-md-8 mx-auto">
-                <h1 class="pb-5 xball">Upcoming Dates:</h1>
-                <table class="table">
-                    <tbody>
-                    {# Fetch entries posted this month #}
-                    {% set entries = craft.entries()
-                        .date(['and', ">= #{start}"])
-                        .all() %}
-                    {% set entries = entries|multisort('date', direction=SORT_ASC) %}
-                    {% if entries|length %}
-                        {% for entry in entries %}
-                            {% if  entry.date > '2021-04-01' %}
-                                <tr>
-                                    <td><span class="text-muted font-weight-bold">{{ entry.date|date('medium') }}</span>
-                                    </td>
-                                    <td>{{ entry.title }} @ {{ entry.time|time('short') }} </td>
-                                    <td><span class="text-muted font-weight-bold">Location:</span> {{ entry.city }}
-                                        , {{ entry.state }}
-                                    </td>
-                                    <td><a href={{ entry.infoUrl }} class="btn btn-md btn-info" target="_blank">info</a>
-                                    </td>
-                                </tr>
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                    </tbody>
-                </table>
+            <div class="col-12">
+                <h1>Upcoming Shows</h1>
+                {# Fetch entries posted this month #}
+                {% set entries = craft.entries()
+                    .date(['and', ">= #{start}"])
+                    .all() %}
+                {% set entries = entries|multisort('date', direction=SORT_ASC) %}
+                {% if entries|length %}
+                    {% include "_components/_shows" with {
+                        title:entry.title,
+                        date:entry.date|date('n/j/y'),
+                        time:entry.time|time('short'),
+                        location: "#{entry.city}, #{entry.state}",
+                        infoUrl:entry.infoUrl
+                    } %}
+                {% endif %}
             </div>
         </div>
     </div>
@@ -64,4 +45,4 @@
     }) }}
 
 
-{% include "partials/footer" %}
+    {% endblock %}

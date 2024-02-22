@@ -1,5 +1,5 @@
-{% include "partials/header" %}
-{% include "partials/nav" %}
+{% extends "_layout" %}
+{% block content %}
 
 {% if entry.headerImage|length  %}
 <div class="container-fluid mt-5" id="music" style="background-image:url('{{entry.headerImage.one().getUrl()}}')">
@@ -34,4 +34,4 @@
         </div>
     </div>
 
-{% include "partials/footer" %}
+{% endblock %}

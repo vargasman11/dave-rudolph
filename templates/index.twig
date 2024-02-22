@@ -9,8 +9,8 @@
 {% set srcSet = ['576w','768w','992w','1200w','1400w'] %}
 
 
-{% include "partials/header" %}
-{% include "partials/nav" %}
+{% extends "_layout" %}
+{% block content %}
 
 <div class="container-xl homepage-image">
     <div class="row">
@@ -40,24 +40,23 @@
 </div>
 
 {% if entries|length %}
-    <div class="container-xl homepage-shows">
+    <div class="container-xl mx-auto container-shows">
         <div class="row">
             <div class="col-12">
                 <h1>Upcoming Shows</h1>
                 <div class="shows">
                     {% for entry in entries %}
-                        <div class="show">
-                            <p class="title">{{ entry.title }}</p>
-                            <p class="date">{{ entry.date|date('n/j/y') }}</p>
-                            <p class="time">@ {{ entry.time|time('short') }}</p>
-                            <p class="location"><i class="fas fa-map-marker-alt"></i> &nbsp; {{ entry.city }}, {{ entry.state }}</p>
-                            <a class="info btn btn-primary" href="{{ entry.infoUrl }}" target="_blank">info</a>
-                        </div>
+                        {% include "_components/_shows" with {
+                            title:entry.title,
+                            date:entry.date|date('n/j/y'),
+                            time:entry.time|time('short'),
+                            location: "#{entry.city}, #{entry.state}",
+                            infoUrl:entry.infoUrl
+                        } %}
                     {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 {% endif %}
-
-{% include "partials/footer" %}
+{% endblock %}

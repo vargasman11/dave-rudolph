@@ -1,0 +1,14 @@
+{% set params ={
+    title,
+    date,
+    time,
+    location,
+    infoUrl
+} %}
+<div class="show">
+    <p class="title">{{ params.title }}</p>
+    <p class="date">{{ params.date }}</p>
+    <p class="time">&commat; {{ params.time }}</p>
+    <p class="location"><i class="fas fa-map-marker-alt"></i> &nbsp; {{ params.location }}</p>
+    <a class="info btn btn-primary" href="{{ params.infoUrl }}" target="_blank">info</a>
+</div>
