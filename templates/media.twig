@@ -1,21 +1,12 @@
 {% extends "_layout" %}
 {% block content %}
 
-{% if entry.headerImage|length  %}
-<div class="container-fluid mt-5" id="music" style="background-image:url('{{entry.headerImage.one().getUrl()}}')">
-    {% else %}
-    <div class="container-fluid mt-5" id="music" style="background-image: url('/img/crowd-stock.jpeg');">
-        {% endif %}
-        <div class="row">
-            <div class="col-sm-12">
-                {% if entry.pageTitle %}
-                    <p class="display-4 text-center page-header-title">{{entry.pageTitle}}</p>
-                {% else %}
-                    <p class="display-4 text-center page-header-title">MEDIA</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+    {#  HERO IMAGE #}
+    {% include '_components/_hero' with { params:{
+        image: entry.headerImage.one(),
+        title: entry.title ?? "MEDIA",
+        id:'media'
+    }}%}
 
     <div class="container mt-4 py-5">
         <div class="row py-5">

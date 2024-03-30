@@ -1,0 +1,16 @@
+{% set params = {
+    image: null,
+    headline: '',
+    id:''
+}|merge(params|default({})) %}
+{#Fallback#}
+{% set heroImage = params.image.url() ?? '/img/crowd-stock.jpeg' %}
+
+<div class="container-fluid mt-5 heroContainer" id="tour"  style="background-image:url({{ heroImage }})">
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="display-4 text-center page-header-title" id="{{ params.id }}-title">{{ params.title ?? "TOUR" }}</p>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,22 @@
+.heroContainer {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  .page-header-title {
+    font-family: $xball;
+    letter-spacing: 20px;
+    color: #ffffff;
+    text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.78);
+    padding: 1.5rem 0;
+    font-size: 3rem;
+
+    @media screen and (min-width: $md) {
+      padding: 2rem 0;
+      font-size: 3.5rem;
+    }
+    @media screen and (min-width: $lg) {
+      padding: 3rem 0;
+      font-size: 4.5rem;
+    }
+  }
+}

@@ -1,48 +1,28 @@
-{% set today = "now"|date("m/d/Y") %}
-{# Fetch entries with a selected date in the next month #}
-{% set start = now|atom %}
-{% set end = now|atom %}
-
 {% extends "_layout" %}
 {% block content %}
+    {#  HERO IMAGE #}
+    {% include '_components/_hero' with { params:{
+        image: entry.headerImage.one(),
+        title: entry.title ?? "TOUR",
+        id:'tour'
+    }}%}
 
-<div class="container-fluid mt-5" id="tour" style="background-image:url('{{ entry.headerImage.one().getUrl() ?? '/crowd-stock.jpeg' }}')">
-        <div class="row">
-            <div class="col-sm-12">
-                <p class="display-4 text-center page-header-title" id="about-title">{{ entry.pageTitle ?? "TOUR" }}</p>
-            </div>
-        </div>
-    </div>
     <div class="container-xl container-shows">
-        <div class="row">
-            <div class="col-12">
-                <h1>Upcoming Shows</h1>
-                {# Fetch entries posted this month #}
-                {% set entries = craft.entries()
-                    .date(['and', ">= #{start}"])
-                    .all() %}
-                {% set entries = entries|multisort('date', direction=SORT_ASC) %}
-                {% if entries|length %}
-                    {% include "_components/_shows" with {
-                        title:entry.title,
-                        date:entry.date|date('n/j/y'),
-                        time:entry.time|time('short'),
-                        location: "#{entry.city}, #{entry.state}",
-                        infoUrl:entry.infoUrl
-                    } %}
-                {% endif %}
-            </div>
-        </div>
+        {{ sprig('_components/pagination', {
+            'title':'Upcoming Dates',
+            'limit': 12,
+            'futureDates': true,
+            'order': 'date ASC'
+        }) }}
     </div>
 
+    <div class="container-xl container-shows">
+        {{ sprig('_components/pagination', {
+            'title':'Past Dates',
+            'limit': 12,
+            'futureDates': false,
+            'order': 'date DESC'
+        }) }}
+    </div>
 
-    {# Passes a variable called `limit` into the component #}
-    {{ sprig('_components/pagination', {
-        'title':'Past Dates',
-        'limit': 12,
-        'start':start,
-        'end':end
-    }) }}
-
-
-    {% endblock %}
+{% endblock %}

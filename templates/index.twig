@@ -12,51 +12,40 @@
 {% extends "_layout" %}
 {% block content %}
 
-<div class="container-xl homepage-image">
-    <div class="row">
-        <div class="col-sm-12">
-            {{ tag('img', {
-                class:"img-fluid",
-                src: headerImage.url,
-                srcset: headerImage.getSrcset(srcSet),
-                alt: headerImage.title,
-            }) }}
-        </div>
-    </div>
-</div>
-
-<div class="container-xl homepage-buttons">
-    <div class="row">
-        <div class="col-12 buttons">
-            {% set blocks = entry.listencta.all() %}
-            {% if blocks|length %}
-                {% for block in blocks %}
-                    <a href="{{ block.platformUrl|raw }}" target="_blank"
-                       class="btn btn-lg btn-primary">{{ block.platformName }}</a>
-                {% endfor %}
-            {% endif %}
-        </div>
-    </div>
-</div>
-
-{% if entries|length %}
-    <div class="container-xl mx-auto container-shows">
+    <div class="container-xl homepage-image">
         <div class="row">
-            <div class="col-12">
-                <h1>Upcoming Shows</h1>
-                <div class="shows">
-                    {% for entry in entries %}
-                        {% include "_components/_shows" with {
-                            title:entry.title,
-                            date:entry.date|date('n/j/y'),
-                            time:entry.time|time('short'),
-                            location: "#{entry.city}, #{entry.state}",
-                            infoUrl:entry.infoUrl
-                        } %}
-                    {% endfor %}
-                </div>
+            <div class="col-sm-12">
+                {{ tag('img', {
+                    class:"img-fluid",
+                    src: headerImage.url,
+                    srcset: headerImage.getSrcset(srcSet),
+                    alt: headerImage.title,
+                }) }}
             </div>
         </div>
     </div>
-{% endif %}
+
+    <div class="container-xl homepage-buttons">
+        <div class="row">
+            <div class="col-12 buttons">
+                {% set blocks = entry.listencta.all() %}
+                {% if blocks|length %}
+                    {% for block in blocks %}
+                        <a href="{{ block.platformUrl|raw }}" target="_blank"
+                           class="btn btn-lg btn-primary">{{ block.platformName }}</a>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="container-xl container-shows">
+        {{ sprig('_components/pagination', {
+            'title':'Upcoming Dates',
+            'limit': 12,
+            'futureDates': true,
+            'order': 'date ASC'
+        }) }}
+    </div>
+
 {% endblock %}
