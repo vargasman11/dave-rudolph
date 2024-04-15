@@ -1,3 +1,5 @@
+{% set pages = craft.entries.section('navigation').all() %}
+
 <nav class="navbar navbar-expand-lg p-5">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Dave Rudolph</a>
@@ -14,29 +16,18 @@
                         <span class="lightswitch-slider"></span>
                     </span>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/tour">Tour <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/music">Music</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/media">Media</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://daverudolphmusic.bandcamp.com/community" target="_blank">BUY</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://dave-rudolph.printify.me/products" target="_blank">Merch</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact</a>
-                </li>
-            </ul>
+                {% for page in pages %}
+                    {% set entry = page.navMatrix.one() %}
+                    {% set link = entry.internalLink.one().url() ?? entry.externalLink %}
+                    {% if link %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ link }}" {{ entry.newWindow ? 'target="_blank"': '' }}>{{ page.title }}
+                            </a>
+                        </li>
+                    {% endif %}
 
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </nav>
