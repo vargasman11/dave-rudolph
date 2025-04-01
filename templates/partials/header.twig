@@ -1,3 +1,4 @@
+{% set assetVersion = today|date|kebab %}
 <!doctype html>
 <html lang="en">
 
@@ -29,8 +30,7 @@
 {#    <link rel="stylesheet" href="./font.css">#}
 
     <!-- Custom CSS -->
-     <link rel="stylesheet" href="./main.css">
-    <link rel="stylesheet" href="/dist/main.css">
+    <link rel="stylesheet" href="/dist/main.css?assetversion={{ assetVersion }}">
     <!-- Google verification search console meta tag -->
     <meta name="google-site-verification" content="RAs97KAS_R5U95P59jIXknrtXYuUUdMEM3sszSzBMDk" />
     <title>Dave Rudolph Music</title>
