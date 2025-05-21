@@ -62,6 +62,7 @@ fields:
     name: 'Social Media Icon'
     searchable: false
     settings:
+      columnType: string
       options:
         -
           __assoc__:

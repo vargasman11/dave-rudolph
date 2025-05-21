@@ -1,12 +1,21 @@
-{% extends "_layout" %}
-{% block content %}
+{% include "partials/header" %}
+{% include "partials/nav" %}
 
-    {#  HERO IMAGE #}
-    {% include '_components/_hero' with { params:{
-        image: entry.headerImage.one(),
-        title: entry.title ?? "MEDIA",
-        id:'media'
-    }}%}
+{% if entry.headerImage|length %}
+<div class="container-fluid mt-5" id="music" style="background-image:url('{{ entry.headerImage.one().getUrl() }}')">
+    {% else %}
+    <div class="container-fluid mt-5" id="music" style="background-image: url('/img/crowd-stock.jpeg');">
+        {% endif %}
+        <div class="row">
+            <div class="col-sm-12">
+                {% if entry.pageTitle %}
+                    <p class="display-4 text-center page-header-title">{{ entry.pageTitle }}</p>
+                {% else %}
+                    <p class="display-4 text-center page-header-title">MEDIA</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
     <div class="container mt-4 py-5">
         <div class="row py-5">
@@ -14,9 +23,9 @@
             {% if blocks|length %}
                 {% for block in blocks %}
                     <div class="col-sm-12 col-md-6 col-lg-8 mx-auto my-4">
-                        <h1 class="text-center py-3 xball">{{block.videoTitle}}</h1>
+                        <h1 class="text-center py-3 xball">{{ block.videoTitle }}</h1>
                         <div class="embed-responsive embed-responsive-21by9">
-                            {{block.videoEmbed|raw}}
+                            {{ block.videoEmbed|raw }}
                         </div>
                     </div>
                 {% endfor %}
@@ -25,4 +34,4 @@
         </div>
     </div>
 
-{% endblock %}
+{% include "partials/footer" %}

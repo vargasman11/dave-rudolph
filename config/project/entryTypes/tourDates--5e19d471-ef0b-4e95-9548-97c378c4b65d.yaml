@@ -12,6 +12,7 @@ fieldLayouts:
             disabled: false
             elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -97,6 +98,9 @@ handle: tourDates
 hasTitleField: true
 name: 'Tour Dates'
 section: 4eb33154-2538-4037-9a27-198bbb7cfcfa # Tour Dates
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
 sortOrder: 1
 titleFormat: null
 titleTranslationKeyFormat: null

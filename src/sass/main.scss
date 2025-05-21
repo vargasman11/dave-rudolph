@@ -1,96 +1,140 @@
-// Override Bootstrap's Sass default variables
-//
-// Nearly all variables in Bootstrap are written with the `!default` flag.
-// This allows you to override the default values of those variables before
-// you import Bootstrap's source Sass files.
-//
-// Overriding the default variable values is the best way to customize your
-// CSS without writing _new_ styles. For example, you can either change
-// `$body-color` or write more CSS that override's Bootstrap's CSS like so:
-// `body { color: red; }`.
+@import "./_components/pagination";
 
+@font-face {
+  font-family: russo;
+  src: url("../fonts/russo_one.ttf");
+}
 
-//
-// Bring in Bootstrap
-//
+@font-face {
+  font-family: xball;
+  src: url("../fonts/XBall_Italic.ttf");
+}
 
-// Option 1
-//
-// Import all of Bootstrap's CSS
+.xball {
+  font-family: xball;
+}
 
-// @import "bootstrap/scss/bootstrap";
+.btn {
+  background-color: #68a79e;
+  font-family: russo;
+}
 
-// Option 2
-//
-// Place variable overrides first, then import just the styles you need. Note that some stylesheets are required no matter what.
+h1 {
+  color: #68a79e;
+}
 
-// Toggle global options
-$enable-gradients: true;
-$enable-shadows: true;
+.page-header-title {
+  font-family: xball;
+  letter-spacing: 20px;
+  font-size: 4.5em;
+  color: #ffffff;
+  text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.78);
+  padding: 3em 0;
+}
 
-$offcanvas-box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175);
+@media screen and (max-width: 450px) {
+  .page-header-title {
+    font-size: 3em;
+    letter-spacing: 10px;
+  }
+}
 
-// Include functions first
-@import "bootstrap/scss/functions";
+.navbar .navbar-brand {
+  font-family: xball;
+  color: #68a79e;
+  font-size: 60px;
+}
 
-// Customize some defaults
-$body-color: #333;
-$body-bg: #fff;
-$border-radius: .4rem;
-$success: #7952b3;
+.navbar #navbarDrop ul li span,
+.navbar #navbarDrop ul li a {
+  font-family: xball;
+  font-size: 20px;
+  color: #68a79e;
+  transition: all ease-in-out .5s;
+}
 
-// Required
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/variables-dark";
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/utilities";
-@import "bootstrap/scss/root";
-@import "bootstrap/scss/reboot";
+.navbar #navbarDrop ul li a:hover {
+  color: #2b5751;
+  transform: translateY(-2px);
+}
 
-@import "bootstrap/scss/type";
-@import "bootstrap/scss/images";
-@import "bootstrap/scss/containers";
-@import "bootstrap/scss/grid";
-// @import "bootstrap/scss/tables";
-// @import "bootstrap/scss/forms";
-@import "bootstrap/scss/buttons";
-@import "bootstrap/scss/transitions";
-@import "bootstrap/scss/dropdown";
-// @import "bootstrap/scss/button-group";
-@import "bootstrap/scss/nav";
-@import "bootstrap/scss/navbar"; // Requires nav
-// @import "bootstrap/scss/card";
-// @import "bootstrap/scss/breadcrumb";
-// @import "bootstrap/scss/accordion";
-// @import "bootstrap/scss/pagination";
-// @import "bootstrap/scss/badge";
-// @import "bootstrap/scss/alert";
-// @import "bootstrap/scss/progress";
-// @import "bootstrap/scss/list-group";
-@import "bootstrap/scss/close";
-// @import "bootstrap/scss/toasts";
-@import "bootstrap/scss/modal"; // Requires transitions
-// @import "bootstrap/scss/tooltip";
-@import "bootstrap/scss/popover";
-// @import "bootstrap/scss/carousel";
-// @import "bootstrap/scss/spinners";
-@import "bootstrap/scss/offcanvas"; // Requires transitions
-// @import "bootstrap/scss/placeholders";
+@media screen and (max-width: 518px) {
+  .navbar .navbar-brand {
+    font-size: 1.5em;
+  }
+}
 
-// Helpers
-// @import "bootstrap/scss/helpers";
+#footer ul li {
+  margin: 0 3px;
+}
 
-// Utilities
-@import "bootstrap/scss/utilities/api";
+#footer ul li a i {
+  border: solid 2px #68a79e;
+  border-radius: 50%;
+  padding: 7px 10px;
+  color: #68a79e;
+  transition: all ease-in-out .5s;
+}
 
+#footer ul li a:hover i {
+  border-color: #2b5751;
+  color: #2b5751;
+  transform: translateY(-5px);
+}
 
-//
-// Custom styles
-//
-@import "variables";
-@import "vendor/index";
-@import "_components/index";
-@import "partials/index";
-@import "pages/index";
+#about {
+  background-image: url("../img/jumbo-1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
 
+#about #about-title {
+  padding: 3em 0;
+}
+
+#tour {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+
+#tour #tour-title {
+  padding: 3em 0;
+  color: #ffffff;
+}
+
+#music {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 0;
+}
+
+#music #music-title {
+  padding: 3em 0;
+  color: #ffffff;
+}
+
+#contact {
+  background-image: url("../img/jumbo-1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+#contact #contact-title {
+  padding: 3em 0;
+  color: #ffffff;
+}
+
+#blog-main {
+  background-image: url("../img/blog.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+#blog-main #blog-main-title {
+  padding: 3em 0;
+}

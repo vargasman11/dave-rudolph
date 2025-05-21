@@ -1,4 +1,39 @@
-dateModified: 1706847621
+dateModified: 1747796248
+elementSources:
+  craft\elements\Entry:
+    -
+      key: '*'
+      type: native
+    -
+      key: singles
+      type: native
+    -
+      heading: Channels
+      type: heading
+    -
+      key: 'section:e3fc1639-4370-4ebc-96b1-93d75e1d6e0d' # Blog
+      type: native
+    -
+      key: 'section:d2436398-f3e3-4b75-9115-13f2fa0afe1a' # Link Page
+      type: native
+    -
+      defaultSort:
+        - postDate
+        - desc
+      disabled: false
+      key: 'section:4eb33154-2538-4037-9a27-198bbb7cfcfa' # Tour Dates
+      tableAttributes:
+        - postDate
+        - expiryDate
+        - link
+        - dateCreated
+      type: native
+    -
+      heading: Structures
+      type: heading
+    -
+      key: 'section:01f22741-5be0-4e6d-b671-4ec3c2af8464' # Navigation
+      type: native
 email:
   fromEmail: vargas.j.jerry@gmail.com
   fromName: 'Dave Rudolph'
@@ -32,10 +67,10 @@ meta:
   __names__:
     0faa9768-b53e-4216-a53d-7812596fdc94: Videos # Videos
     1a2a94c2-a18f-4c14-ae13-bff389ad0c04: time # time
-    1b6eb0ce-7376-49b1-bd51-2333d1ae3b0c: 'Homepage Large' # Homepage Large
     1b725997-1c52-4c85-aaa8-7bb113ff338e: About # About
     1e6e3839-9a1e-4d98-a6f8-13b7cd0097d7: Default # Default
     1e7716dd-da4e-4a82-9a4a-f4eb04970454: ListenCTA # ListenCTA
+    01f22741-5be0-4e6d-b671-4ec3c2af8464: Navigation # Navigation
     2cb0502e-6cdf-449e-b6c3-d1297d2c6b45: Contact # Contact
     2d05a2b8-fa1f-4237-9abc-77880f943975: 'Page Title' # Page Title
     3ba03f7c-87d0-45e6-aab0-f9b8eb0520e6: 'URL to source' # URL to source
@@ -54,27 +89,29 @@ meta:
     9c72894b-5f1f-4387-8507-22e9af77722d: 'Page Fields' # Page Fields
     9d11247f-9656-4204-8973-026dfdcb2f2f: Contact # Contact
     9ebd9394-4f97-4694-bb2a-f43e11014f3c: 'Song List' # Song List
+    9fb98c9b-114b-4d58-a74d-ae29c4ab27ee: 'Nav Block' # Nav Block
     10e41f88-75c4-478b-9f90-590df63cdfda: Default # Default
     33fc222b-d308-432c-b70c-c128f4df6783: button # button
     66bdc090-1029-4da8-a10f-8e0bc54176bb: spotifyIframes # spotifyIframes
-    68a80a71-81e5-4fdb-a5ca-a4f5e85d55e3: 'Homepage Small' # Homepage Small
     93f4fd03-7ec3-4149-b30e-3d6a701d64a4: Platform # Platform
     95e3be53-2293-4333-904c-5f7a07242a54: 'Social Links' # Social Links
+    188a400c-cbc3-4efe-9a4b-8d1c9fa9a0d5: Default # Default
+    402d6622-2ec3-4171-953b-aa350c4767fe: 'External Link' # External Link
     0408c66a-7daf-4481-afc7-2ac098e1e927: Dates # Dates
+    450b73b5-8b6d-4083-89ef-c04a318c1671: Navigation # Navigation
     458ab821-4880-4299-8232-f99733310016: date # date
     458c94f6-44fb-497c-bf73-59e053894675: City # City
+    462ceec0-6897-4ec4-9f80-10b8e1ab7308: 'Nav Matrix' # Nav Matrix
     502b621a-4cc7-4a26-a910-042f30dca048: Home # Home
     569d7efe-e957-4fa0-a49a-c4b1b8fba23b: 'Album Cover' # Album Cover
     681b6776-7192-457f-81fc-ae308dabb2f3: 'Public Schema' # Public Schema
     00776b8b-b9b2-49e0-b7d9-26ec3aaef7c1: 'Video Title' # Video Title
-    808bd24f-fa63-4e8e-8b6e-e5f9e3202cf6: 'Homepage Medium' # Homepage Medium
     0886b236-4a38-40bd-abfa-21fdee1352d7: State # State
     1362be94-49c6-41a7-8c6e-5613f8983bbc: 'Social Media URl' # Social Media URl
     3729fe64-ff51-4b75-972a-9ca5c405ba4e: 'Button Text' # Button Text
     8972e6e4-7db5-4a0a-85b9-11be3f170a55: 'Custom Content' # Custom Content
     024543db-feed-428a-922b-5c42d8374aaa: 'Album CTA' # Album CTA
     885183e7-a46e-417d-888c-fca4f7e1734d: Uploads # Uploads
-    932760c1-448c-4acb-850a-c553820f122b: 'Public Schema' # Public Schema
     5432599a-25c2-480c-92ba-3dcbf18b1d20: 'Platform Url' # Platform Url
     56361854-6cef-42f0-b788-03399c9f683b: 'Dave Guitar' # Dave Guitar
     61168750-51cd-4179-aedb-4efc42146742: 'info url' # info url
@@ -85,6 +122,7 @@ meta:
     b2342e5b-b45b-48c9-ac11-267011a80bc5: 'Blog Content' # Blog Content
     b6502537-1c47-451c-8402-2f8dcde9a941: spotifyIframe # spotifyIframe
     bb9de470-f257-45e2-803f-c1a93509afbf: Media # Media
+    bf73add2-e7d0-4ec6-a1e5-1b8904484990: 'New Window' # New Window
     c2111dd9-d621-4db5-9121-04eba429d67a: Home # Home
     ca562c02-fd2a-410a-9be0-d9ccb0654e50: Blog # Blog
     cbc56c31-9669-4305-8581-335621349eec: 'Social Media Icon' # Social Media Icon
@@ -95,7 +133,6 @@ meta:
     dd1af556-4340-4c92-91ad-228e54780c45: 'Venue ' # Venue 
     e025fb83-6598-430d-9ab8-5d4ced49979a: 'info url' # info url
     e3fc1639-4370-4ebc-96b1-93d75e1d6e0d: Blog # Blog
-    e21e97e7-3800-4f4b-ae6a-c2c65491e914: 'Homepage XXL' # Homepage XXL
     e28be8c5-7bcd-4e2b-9189-1f72f75ec7b4: Tour # Tour
     e46c4b23-d422-4dec-8758-ef4e9016d1fe: iframe # iframe
     e4343257-eacd-41fb-b2d1-0ac429892afc: Media # Media
@@ -103,8 +140,8 @@ meta:
     ed2878ee-102f-406d-b62d-3d231fd7460b: 'Header Image Alt' # Header Image Alt
     eeaff83a-803a-4ddd-bcc6-a1563a735cd6: Tour # Tour
     ef74887a-7a07-4977-84c2-c7793e0529a5: 'Header Image' # Header Image
+    f05f953a-b51a-4e07-82f7-1580bea9350d: 'Internal Link' # Internal Link
     fa196411-87a8-410a-9288-9036a802a194: Music # Music
-    fe1181fe-4d76-4ad3-88cb-192aa28d2799: 'Homepage Xl' # Homepage Xl
 plugins:
   aws-s3:
     edition: standard
@@ -185,7 +222,7 @@ system:
   live: true
   name: 'Dave Guitar'
   retryDuration: null
-  schemaVersion: 4.5.3.0
+  schemaVersion: 4.15.0.0
   timeZone: America/Chicago
 users:
   allowPublicRegistration: false
