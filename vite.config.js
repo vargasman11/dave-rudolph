@@ -1,5 +1,6 @@
 import {defineConfig} from "vite"
 import ViteRestart from 'vite-plugin-restart'
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig(({command}) => ({
     base: command === 'serve' ? '' : '/dist/',
@@ -17,7 +18,8 @@ export default defineConfig(({command}) => ({
             reload: [
                 './templates/**/*',
             ]
-        })
+        }),
+        tailwindcss()
     ],
     server: {
         allowedHosts: true,
