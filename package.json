@@ -8,6 +8,7 @@
     "up": "npm install && ddev config --project-type=craftcms && ddev start && ddev composer install && ddev auth ssh && npm run webpack-dev"
   },
   "devDependencies": {
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "vite-plugin-restart": "^0.4.2"
   }
 }

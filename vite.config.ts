@@ -1,4 +1,5 @@
 import {defineConfig} from "vite"
+import ViteRestart from 'vite-plugin-restart'
 
 export default defineConfig(({command}) => ({
     base: command === 'serve' ? '' : '/dist/',
@@ -11,6 +12,13 @@ export default defineConfig(({command}) => ({
             }
         },
     },
+    plugins: [
+        ViteRestart({
+            reload: [
+                './templates/**/*',
+            ]
+        })
+    ],
     server: {
         allowedHosts: true,
         cors: {
