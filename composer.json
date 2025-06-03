@@ -3,6 +3,7 @@
     "craftcms/aws-s3": "2.2.2",
     "craftcms/cms": "4.15.5",
     "craftcms/redactor": "3.1.0",
+    "nystudio107/craft-vite": "^4.0",
     "putyourlightson/craft-sprig": "2.14.1",
     "solspace/craft-express-forms": "2.0.3",
     "vlucas/phpdotenv": "^5.4.0"
