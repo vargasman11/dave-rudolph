@@ -23,18 +23,14 @@
     </div>
 </div>
 
-<div class="container-fluid p-5">
-    <div class="row">
-        <div class="col-12 d-flex justify-content-center flex-wrap">
-            {% set blocks = entry.listencta.all() %}
-            {% if blocks|length %}
-                {% for block in blocks %}
-                    <a href="{{ block.platformUrl|raw }}" target="_blank"
-                       class="btn btn-lg btn-info m-3">{{ block.platformName }}</a>
-                {% endfor %}
-            {% endif %}
-        </div>
-    </div>
+<div class="container-fluid p-4 flex flex-col">
+    {% set blocks = entry.listencta.all() %}
+    {% if blocks|length %}
+        {% for block in blocks %}
+            <a href="{{ block.platformUrl|raw }}" target="_blank"
+               class="bg-primary text-white py-2 px-1 text-center my-2">{{ block.platformName }}</a>
+        {% endfor %}
+    {% endif %}
 </div>
 
 {% if entries|length %}
