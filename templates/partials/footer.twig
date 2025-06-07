@@ -1,8 +1,16 @@
+{#<svg class="" height="23"><use xlink:href="#phone"></use></svg>#}
+
 <!-- Social icons row -->
 <nav class="container-fluid py-5" id="footer">
     <div class="row">
         <div class="col-12 text-center">
             <ul class="list-unstyled list-inline">
+                <p>
+                <svg class="" >
+                    <use xlink:href="#facebook-f"></use>
+                </svg>
+                    juice
+                </p>
                 <li class="list-inline-item m-1"><a href="https://www.facebook.com/DaveRudolphMusic" target="_blank"
                                                     rel="noopener noreferrer" aria-label="facebook-link"><i
                                 class="fab fa-facebook-f" aria-label="Facebook"></i></a></li>
@@ -103,6 +111,7 @@
         </div>
     {% endif %}
 </div>
-</body>
 
+{% include "_components/svg.twig" %}
+</body>
 </html>
