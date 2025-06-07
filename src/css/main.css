@@ -1,6 +1,21 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: "Russo One";
+    src: url("../fonts/russo_one.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "XBall";
+    src: url("../fonts/russo_one.ttf") format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}
 @theme{
     --color-primary:#68a79e;
     --color-secondary:#2b5751;
+    --font-russo: "Russo One";
+    --font-xball: "XBall";
 }

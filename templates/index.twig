@@ -23,12 +23,12 @@
     </div>
 </div>
 
-<div class="container-fluid p-4 flex flex-col">
+<div class="container-fluid p-4 flex flex-col sm:grid sm:grid-cols-2 md:grid-cols-4">
     {% set blocks = entry.listencta.all() %}
     {% if blocks|length %}
         {% for block in blocks %}
             <a href="{{ block.platformUrl|raw }}" target="_blank"
-               class="bg-primary text-white py-2 px-1 text-center my-2">{{ block.platformName }}</a>
+               class="bg-primary text-white py-2 px-1 text-center my-2 grow-1 sm:p-2 sm:mx-4 lg:mx-8 xl:mx-12 font-russo">{{ block.platformName }}</a>
         {% endfor %}
     {% endif %}
 </div>
