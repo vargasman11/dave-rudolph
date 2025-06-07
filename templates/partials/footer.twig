@@ -1,48 +1,25 @@
-{#<svg class="" height="23"><use xlink:href="#phone"></use></svg>#}
+{# <svg class="" height="23"><use xlink:href="#phone"></use></svg> #}
+{% set socialLinks = {
+    "facebook-f": "https://www.facebook.com/DaveRudolphMusic",
+    "instagram":"https://www.instagram.com/daverudolphmusic",
+    "x-twitter":"https://music.youtube.com/channel/UC6hkMDC5qOwwwZiitKFftTQ",
+    "youtube": "https://music.apple.com/us/artist/dave-rudolph/1537874270",
+    "applemusic":"https://music.apple.com/us/artist/dave-rudolph/1537874270",
+    "tiktok":"https://www.tiktok.com/@daverudolphmusic",
+    "amazon": "https://music.amazon.com/artists/B07FC6YDC2/dave-rud",
+    "bandcamp":"https://daverudolphmusic.bandcamp.com/releases",
+    "deezer": "https://deezer.page.link/n66HUgRhtmAd9yc58"
+} %}
 
 <!-- Social icons row -->
-<nav class="container-fluid py-5" id="footer">
-    <div class="row">
-        <div class="col-12 text-center">
-            <ul class="list-unstyled list-inline">
-                <p>
-                <svg class="" >
-                    <use xlink:href="#facebook-f"></use>
-                </svg>
-                </p>
-                <li class="list-inline-item m-1"><a href="https://www.facebook.com/DaveRudolphMusic" target="_blank"
-                                                    rel="noopener noreferrer" aria-label="facebook-link"><i
-                                class="fab fa-facebook-f" aria-label="Facebook"></i></a></li>
-                <li class="list-inline-item m-1"><a href="https://www.instagram.com/daverudolphmusic/" target="_blank"
-                                                    rel="noopener noreferrer" aria-label="instagram-link"><i
-                                class="fab fa-instagram" aria-label="Instagram"></i></a></li>
-                <li class="list-inline-item m-1"><a href="https://twitter.com/DaveRudolphGtr" target="_blank"
-                                                    rel="noopener noreferrer" aria-label="twitter-link"><i
-                                class="fab fa-twitter" aria-label="Twitter"></i></a></li>
-                <li class="list-inline-item m-1"><a href="https://music.youtube.com/channel/UC6hkMDC5qOwwwZiitKFftTQ"
-                                                    target="_blank" rel="noopener noreferrer" aria-label="youtube-link"><i
-                                class="fab fa-youtube" aria-label="YouTube"></i></a></li>
-                <li class="list-inline-item m-1"><a href="https://music.apple.com/us/artist/dave-rudolph/1537874270"
-                                                    target="_blank" rel="noopener noreferrer"
-                                                    aria-label="apple music-link"><i class="fab fa-itunes-note"
-                                                                                     aria-label="iTunes"></i></a></li>
-                <li class="list-inline-item m-1"><a href="https://www.tiktok.com/@daverudolphmusic" target="_blank"
-                                                    rel="noopener noreferrer" aria-label="tiktok-link"><i
-                                class="fab fa-tiktok" aria-label="TikTok"></i></a></li>
-                <li class="list-inline-item m-1"><a href="https://music.amazon.com/artists/B07FC6YDC2/dave-rud"
-                                                    target="_blank" rel="noopener noreferrer"
-                                                    aria-label="amazon-link"><i class="fab fa-amazon"
-                                                                                aria-label="Amazon"></i></a></li>
-                <li class="list-inline-item m-1"><a href="https://daverudolphmusic.bandcamp.com/releases"
-                                                    target="_blank" rel="noopener noreferrer"
-                                                    aria-label="bandcamp-link"><i class="fab fa-bandcamp"
-                                                                                  aria-label="Bandcamp"></i></a></li>
-                <li class="list-inline-item m-1"><a href="https://deezer.page.link/n66HUgRhtmAd9yc58" target="_blank"
-                                                    rel="noopener noreferrer" aria-label="deezer-link"><i
-                                class="fab fa-deezer" aria-label="Deezer"></i></a></li>
-            </ul>
-        </div>
-    </div>
+<nav class="container mx-auto flex justify-center" id="footer">
+    {% for icon, url in socialLinks %}
+        <a href="{{ url }}" class="m-2 rounded-full p-2 border-2 border-primary" target="_blank" rel="noopener">
+            <svg class="h-4 w-4 text-primary">
+                <use xlink:href="#{{ icon }}"></use>
+            </svg>
+        </a>
+    {% endfor %}
 </nav>
 
 
