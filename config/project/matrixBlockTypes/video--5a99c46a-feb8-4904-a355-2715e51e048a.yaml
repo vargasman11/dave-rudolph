@@ -1,40 +1,31 @@
-field: 0faa9768-b53e-4216-a53d-7812596fdc94 # Videos
+field: 0faa9768-b53e-4216-a53d-7812596fdc94
 fieldLayouts:
   04496278-f029-4eaa-a0d2-038bfa7a2220:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
-            fieldUid: 00776b8b-b9b2-49e0-b7d9-26ec3aaef7c1 # Video Title
+            fieldUid: 00776b8b-b9b2-49e0-b7d9-26ec3aaef7c1
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 3b5d2a77-3ed1-4b54-9fb6-cd3f1b3220aa
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
-            fieldUid: 6ea3ecd7-bbe8-4d4a-b5e6-b83fcf7e96c5 # Video embed
+            fieldUid: 6ea3ecd7-bbe8-4d4a-b5e6-b83fcf7e96c5
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: d84bf0d4-e4c5-44f6-bfcc-ed78ba01125e
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: c86cb3ad-ba64-4b70-81fb-88bdd7db202a
-        userCondition: null
+        sortOrder: 1
 fields:
-  6ea3ecd7-bbe8-4d4a-b5e6-b83fcf7e96c5: # Video embed
-    columnSuffix: null
+  6ea3ecd7-bbe8-4d4a-b5e6-b83fcf7e96c5:
     contentColumnType: text
     fieldGroup: null
     handle: videoEmbed
@@ -44,17 +35,16 @@ fields:
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
-      placeholder: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: ''
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
-  00776b8b-b9b2-49e0-b7d9-26ec3aaef7c1: # Video Title
-    columnSuffix: null
+  00776b8b-b9b2-49e0-b7d9-26ec3aaef7c1:
     contentColumnType: text
     fieldGroup: null
     handle: videoTitle
@@ -64,11 +54,11 @@ fields:
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
-      placeholder: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: ''
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none

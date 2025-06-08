@@ -1,6 +1,5 @@
-columnSuffix: null
 contentColumnType: text
-fieldGroup: 9c72894b-5f1f-4387-8507-22e9af77722d # Page Fields
+fieldGroup: 9c72894b-5f1f-4387-8507-22e9af77722d
 handle: infoUrl
 instructions: 'Link to more information about the show.'
 name: 'info url'
@@ -8,11 +7,11 @@ searchable: false
 settings:
   byteLimit: null
   charLimit: null
-  code: false
+  code: ''
   columnType: null
-  initialRows: 4
-  multiline: false
-  placeholder: null
+  initialRows: '4'
+  multiline: ''
+  placeholder: ''
   uiMode: normal
 translationKeyFormat: null
 translationMethod: none

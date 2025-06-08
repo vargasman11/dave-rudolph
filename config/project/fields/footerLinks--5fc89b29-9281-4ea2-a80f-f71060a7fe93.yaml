@@ -1,15 +1,13 @@
-columnSuffix: null
 contentColumnType: string
-fieldGroup: 9c72894b-5f1f-4387-8507-22e9af77722d # Page Fields
+fieldGroup: 9c72894b-5f1f-4387-8507-22e9af77722d
 handle: footerLinks
 instructions: 'This will be the bottom icons and links in your footer going out to facebook, youtube, insta etc etc'
 name: 'Footer Links'
 searchable: false
 settings:
   contentTable: '{{%matrixcontent_footerlinks}}'
-  maxBlocks: null
-  minBlocks: null
-  propagationKeyFormat: null
+  maxBlocks: ''
+  minBlocks: ''
   propagationMethod: all
 translationKeyFormat: null
 translationMethod: site

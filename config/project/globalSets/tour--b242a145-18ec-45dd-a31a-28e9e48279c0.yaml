@@ -2,23 +2,18 @@ fieldLayouts:
   94c75f9b-66dc-46ec-a2db-fc3c4419d674:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
-            fieldUid: daaeae58-7e1f-4ad5-b1e5-18ac93440c24 # Tour Dates
+            fieldUid: daaeae58-7e1f-4ad5-b1e5-18ac93440c24
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 6d006df7-e285-439b-8b2e-db3dc4e3ea11
-            userCondition: null
             warning: null
             width: 100
         name: 'Tab 1'
-        uid: e2a68ad1-b277-4280-92e6-6da1ec885021
-        userCondition: null
+        sortOrder: 1
 handle: tour
 name: TOUR
 sortOrder: 1

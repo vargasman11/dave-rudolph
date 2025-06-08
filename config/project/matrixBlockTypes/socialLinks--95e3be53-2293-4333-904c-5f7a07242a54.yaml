@@ -1,40 +1,31 @@
-field: 5fc89b29-9281-4ea2-a80f-f71060a7fe93 # Footer Links
+field: 5fc89b29-9281-4ea2-a80f-f71060a7fe93
 fieldLayouts:
   41ff8b34-170d-45a5-90f1-0220b77a4fcf:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
-            fieldUid: 1362be94-49c6-41a7-8c6e-5613f8983bbc # Social Media URl
+            fieldUid: 1362be94-49c6-41a7-8c6e-5613f8983bbc
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 93472cb9-4221-4d72-b1fd-0d7b721df59d
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
-            fieldUid: cbc56c31-9669-4305-8581-335621349eec # Social Media Icon
+            fieldUid: cbc56c31-9669-4305-8581-335621349eec
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: c8b64049-d924-4010-a98e-fb5194665159
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 0dbe43a2-2cfe-4c6d-a962-22604ac84ef8
-        userCondition: null
+        sortOrder: 1
 fields:
-  1362be94-49c6-41a7-8c6e-5613f8983bbc: # Social Media URl
-    columnSuffix: null
+  1362be94-49c6-41a7-8c6e-5613f8983bbc:
     contentColumnType: text
     fieldGroup: null
     handle: socialMediaUrl
@@ -44,17 +35,16 @@ fields:
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
-      placeholder: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: ''
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
-  cbc56c31-9669-4305-8581-335621349eec: # Social Media Icon
-    columnSuffix: null
+  cbc56c31-9669-4305-8581-335621349eec:
     contentColumnType: string
     fieldGroup: null
     handle: socialMediaIcon
@@ -62,7 +52,7 @@ fields:
     name: 'Social Media Icon'
     searchable: false
     settings:
-      columnType: string
+      optgroups: true
       options:
         -
           __assoc__:

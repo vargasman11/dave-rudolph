@@ -1,4 +1,3 @@
-defaultPlacement: end
 enableVersioning: true
 handle: tourDates
 name: 'Tour Dates'

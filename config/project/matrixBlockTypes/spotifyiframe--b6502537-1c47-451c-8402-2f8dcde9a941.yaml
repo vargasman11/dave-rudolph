@@ -1,28 +1,22 @@
-field: 66bdc090-1029-4da8-a10f-8e0bc54176bb # spotifyIframes
+field: 66bdc090-1029-4da8-a10f-8e0bc54176bb
 fieldLayouts:
   788144f7-b73f-40b3-a8dc-2ca5607cde73:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
-            fieldUid: e46c4b23-d422-4dec-8758-ef4e9016d1fe # iframe
+            fieldUid: e46c4b23-d422-4dec-8758-ef4e9016d1fe
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 69760abf-b2a6-4c91-91ac-b0fd3433f8e2
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: f43eef0e-796d-4600-9cb3-4c4578276a1e
-        userCondition: null
+        sortOrder: 1
 fields:
-  e46c4b23-d422-4dec-8758-ef4e9016d1fe: # iframe
-    columnSuffix: null
+  e46c4b23-d422-4dec-8758-ef4e9016d1fe:
     contentColumnType: text
     fieldGroup: null
     handle: iframe
@@ -32,11 +26,11 @@ fields:
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
-      placeholder: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: ''
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none
