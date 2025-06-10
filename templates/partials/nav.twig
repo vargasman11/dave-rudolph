@@ -1,33 +1,21 @@
-{% set pages = craft.entries.section('navigation').all() %}
+{% set navigationItems = craft.entries.section('navigation').all() %}
 
-<nav class="navbar navbar-expand-lg p-5">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">Dave Rudolph</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDrop"
-                aria-controls="navbarDrop" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
+<nav class="container mx-auto flex justify-between items-center p-4 md:py-8 xl:py-10">
+    <a href="/" class="text-primary font-xball text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-shadow-2xs">Dave Rudolph</a>
+    <button class="md:hidden">
+        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-gray-500">
+            <use xlink:href="#bars" />
+        </svg>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarDrop">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <span class="nav-link">Dark Mode</span>
-                    <span class="lightswitch" id="darkModeSwitch">
-                        <span class="lightswitch-slider"></span>
-                    </span>
-                </li>
-                {% for page in pages %}
-                    {% set entry = page.navMatrix.one() %}
-                    {% set link = entry.internalLink.one().url() ?? entry.externalLink %}
-                    {% if link %}
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ link }}" {{ entry.newWindow ? 'target="_blank"': '' }}>{{ page.title }}
-                            </a>
-                        </li>
-                    {% endif %}
-
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
+    <ul class="hidden md:flex font-xball text-primary text-shadow-2xs">
+        {% for item in navigationItems %}
+            {% set isExternal = item.internalOrExternal %}
+            {% set url = isExternal ? item.externalPage : item.entry.one().getUrl() %}
+            {% set targetAttr = item.openInNewTab ? 'target="_blank"' : '' %}
+            <li class="md:ml-2 lg:ml-4 lg:text-lg">
+                <a class="hover:text-secondary transition-all delay-150 ease-in-out" href="{{ url }}" {{ targetAttr }}>{{ item.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 </nav>
