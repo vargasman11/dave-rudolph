@@ -1,13 +1,12 @@
 {% set navigationItems = craft.entries.section('navigation').all() %}
 
-{#<nav class="container mx-auto relative">#}
 <nav class="container mx-auto">
     <div class="flex justify-between items-center p-4 md:py-8 xl:py-10">
         <a href="/"
            class="text-primary font-xball text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-shadow-2xs">Dave
             Rudolph</a>
-        <button class="md:hidden">
-            <svg class="w-6 h-6 sm:w-8 sm:h-8 text-gray-500">
+        <button class="md:hidden" id="mobileNavIcon">
+            <svg class="w-6 h-6 sm:w-8 sm:h-8 text-gray-500 icon-toggle">
                 <use xlink:href="#bars"/>
             </svg>
         </button>
@@ -24,7 +23,7 @@
             {% endfor %}
         </ul>
     </div>
-    <div class="bg-gray-50/90 absolute w-full left-0 h-full md:hidden flex justify-center">
+    <div class="bg-gray-50/90 absolute w-full left-0 h-full hidden md:hidden flex justify-center" id="mobileNav">
         <ul class="w-fit mt-16 sm:mt-24">
         {% for item in navigationItems %}
             {% set isExternal = item.internalOrExternal %}
