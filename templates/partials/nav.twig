@@ -23,7 +23,7 @@
             {% endfor %}
         </ul>
     </div>
-    <div class="bg-gray-50/90 absolute w-full left-0 h-full hidden md:hidden flex justify-center" id="mobileNav">
+    <div class="bg-gray-50/90 absolute h-full left-0 w-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden flex justify-center" id="mobileNav">
         <ul class="w-fit mt-16 sm:mt-24">
         {% for item in navigationItems %}
             {% set isExternal = item.internalOrExternal %}
