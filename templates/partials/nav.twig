@@ -16,7 +16,7 @@
                 {% set isExternal = item.internalOrExternal %}
                 {% set url = isExternal ? item.externalPage : item.entry.one().getUrl() %}
                 {% set targetAttr = item.openInNewTab ? 'target="_blank"' : '' %}
-                <li class="md:ml-2 lg:ml-4 lg:text-lg">
+                <li class="md:ml-2 lg:ml-4 xl:ml-6 lg:text-xl xl:text-2xl">
                     <a class="hover:text-secondary transition-all delay-150 ease-in-out"
                        href="{{ url }}" {{ targetAttr }}>{{ item.title }}</a>
                 </li>
