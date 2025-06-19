@@ -6,6 +6,11 @@
 {% include "partials/header" %}
 {% include "partials/nav" %}
 
+{% set image = entry.headerImage.one ?: false  %}
+{% include '_components/header.twig' with { params:{
+    image: image
+}} %}
+
 {% if entry.headerImage|length %}
 <div class="container-fluid mt-5" id="tour" style="background-image:url('{{ entry.headerImage.one().getUrl() }}')">
     {% else %}

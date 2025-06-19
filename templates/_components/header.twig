@@ -1,0 +1,5 @@
+{% set params = {
+    image:false
+}|merge(params|default({})) %}
+
+<img src="{{ params.image.getUrl() }}" alt="{{ params.image.getFileName }}">
