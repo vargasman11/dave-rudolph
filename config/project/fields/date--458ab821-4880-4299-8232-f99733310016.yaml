@@ -1,5 +1,5 @@
+columnSuffix: null
 contentColumnType: datetime
-fieldGroup: 9c72894b-5f1f-4387-8507-22e9af77722d
 handle: date
 instructions: 'Show Date e.g. feb 12 2021'
 name: date
@@ -7,9 +7,10 @@ searchable: false
 settings:
   max: null
   min: null
-  minuteIncrement: '30'
+  minuteIncrement: 30
   showDate: true
   showTime: false
+  showTimeZone: false
 translationKeyFormat: null
 translationMethod: none
 type: craft\fields\Date

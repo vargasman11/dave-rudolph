@@ -2,6 +2,7 @@ fieldLayouts:
   02c6344e-b5e8-4637-8413-e5d525e95a8d:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,7 +10,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -24,41 +27,55 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 4e702683-da9c-4176-be5a-d246b253c2a9
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: ef74887a-7a07-4977-84c2-c7793e0529a5
+            elementCondition: null
+            fieldUid: ef74887a-7a07-4977-84c2-c7793e0529a5 # Header Image
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 99d86c54-a555-4bd5-b2e7-c0b80c829452
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: ed2878ee-102f-406d-b62d-3d231fd7460b
+            elementCondition: null
+            fieldUid: ed2878ee-102f-406d-b62d-3d231fd7460b # Header Image Alt
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 88346f17-70f1-46da-aad5-301088b01d56
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: 1e7716dd-da4e-4a82-9a4a-f4eb04970454
+            elementCondition: null
+            fieldUid: 1e7716dd-da4e-4a82-9a4a-f4eb04970454 # ListenCTA
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 4738f4db-3646-4130-aeb3-27aa90a60169
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 8fccdca2-2a59-42e2-a7dc-14a49429c91a
+        userCondition: null
 handle: home
 hasTitleField: false
 name: Home
-section: c2111dd9-d621-4db5-9121-04eba429d67a
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
 sortOrder: 1
 titleFormat: '{section.name|raw}'
 titleTranslationKeyFormat: null

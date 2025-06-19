@@ -1,25 +1,23 @@
 columnSuffix: uqhpkvev
 contentColumnType: text
-fieldGroup: ca562c02-fd2a-410a-9be0-d9ccb0654e50 # Blog
 handle: blogContent
-instructions: ''
+instructions: null
 name: 'Blog Content'
 searchable: false
 settings:
   availableTransforms: '*'
   availableVolumes: '*'
-  cleanupHtml: true
   columnType: text
   configSelectionMode: choose
   defaultTransform: ''
   manualConfig: ''
-  purifierConfig: ''
-  purifyHtml: '1'
+  purifierConfig: null
+  purifyHtml: true
   redactorConfig: Simple.json
-  removeEmptyTags: ''
-  removeInlineStyles: ''
-  removeNbsp: ''
-  showHtmlButtonForNonAdmins: ''
+  removeEmptyTags: false
+  removeInlineStyles: false
+  removeNbsp: false
+  showHtmlButtonForNonAdmins: false
   showUnpermittedFiles: false
   showUnpermittedVolumes: false
   uiMode: enlarged

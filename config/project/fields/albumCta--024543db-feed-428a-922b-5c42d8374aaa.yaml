@@ -1,17 +1,17 @@
+columnSuffix: null
 contentColumnType: text
-fieldGroup: 9c72894b-5f1f-4387-8507-22e9af77722d
 handle: albumCta
-instructions: ''
+instructions: null
 name: 'Album CTA'
 searchable: false
 settings:
   byteLimit: null
   charLimit: null
-  code: ''
+  code: false
   columnType: null
-  initialRows: '4'
-  multiline: ''
-  placeholder: ''
+  initialRows: 4
+  multiline: false
+  placeholder: null
   uiMode: normal
 translationKeyFormat: null
 translationMethod: none

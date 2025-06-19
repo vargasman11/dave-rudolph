@@ -1,30 +1,33 @@
 columnSuffix: null
 contentColumnType: string
-fieldGroup: 6eace8d6-d19b-4fe8-888f-6549afb1a3b3 # Link Page
 handle: linkLogo
 instructions: 'This is the logo image you will upload e.g. venmo paypal etc etc'
 name: 'link logo'
 searchable: false
 settings:
   allowSelfRelations: false
+  allowSubfolders: false
   allowUploads: true
   allowedKinds: null
+  branchLimit: null
   defaultUploadLocationSource: 'volume:885183e7-a46e-417d-888c-fca4f7e1734d' # Uploads
-  defaultUploadLocationSubpath: ''
-  limit: '1'
+  defaultUploadLocationSubpath: null
   localizeRelations: false
+  maintainHierarchy: false
+  maxRelations: 1
+  minRelations: null
   previewMode: full
-  restrictFiles: ''
-  selectionLabel: ''
+  restrictFiles: false
+  restrictLocation: false
+  restrictedDefaultUploadSubpath: null
+  restrictedLocationSource: 'volume:885183e7-a46e-417d-888c-fca4f7e1734d' # Uploads
+  restrictedLocationSubpath: null
+  selectionLabel: null
   showSiteMenu: false
   showUnpermittedFiles: false
   showUnpermittedVolumes: false
-  singleUploadLocationSource: 'volume:885183e7-a46e-417d-888c-fca4f7e1734d' # Uploads
-  singleUploadLocationSubpath: ''
-  source: null
   sources: '*'
   targetSiteId: null
-  useSingleFolder: false
   validateRelatedElements: false
   viewMode: list
 translationKeyFormat: null

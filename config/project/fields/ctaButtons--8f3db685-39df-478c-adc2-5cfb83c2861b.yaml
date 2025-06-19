@@ -1,14 +1,18 @@
+columnSuffix: null
 contentColumnType: string
-fieldGroup: 9c72894b-5f1f-4387-8507-22e9af77722d
 handle: ctaButtons
 instructions: 'these are call to action buttons in the home page under the header title and image'
 name: 'CTA Buttons'
 searchable: false
 settings:
-  contentTable: '{{%matrixcontent_ctabuttons}}'
-  maxBlocks: '10'
-  minBlocks: '1'
+  entryTypes:
+    -
+      uid: 33fc222b-d308-432c-b70c-c128f4df6783
+  maxEntries: 10
+  minEntries: 1
+  propagationKeyFormat: null
   propagationMethod: all
+  viewMode: blocks
 translationKeyFormat: null
 translationMethod: site
 type: craft\fields\Matrix

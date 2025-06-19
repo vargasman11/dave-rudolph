@@ -2,6 +2,7 @@ fieldLayouts:
   2a92bd16-f26e-4f57-9b79-c622375ebba9:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,7 +10,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -24,32 +27,43 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: fa48dafe-74b9-453b-b830-4cf86fcfa73e
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: 2d05a2b8-fa1f-4237-9abc-77880f943975
+            elementCondition: null
+            fieldUid: 2d05a2b8-fa1f-4237-9abc-77880f943975 # Page Title
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 4814a600-495f-465f-898b-c572d5076839
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: ef74887a-7a07-4977-84c2-c7793e0529a5
+            elementCondition: null
+            fieldUid: ef74887a-7a07-4977-84c2-c7793e0529a5 # Header Image
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 37216979-c156-4015-94c7-0c32cf19ade6
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: f249e99b-fc21-497b-86cb-f08ba732897c
+        userCondition: null
 handle: tour
 hasTitleField: false
 name: Tour
-section: eeaff83a-803a-4ddd-bcc6-a1563a735cd6
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
 sortOrder: 1
 titleFormat: '{section.name|raw}'
 titleTranslationKeyFormat: null

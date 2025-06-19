@@ -2,6 +2,7 @@ fieldLayouts:
   9dd6ce5a-b224-4156-aab0-c2473601e876:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,9 +10,11 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: 'Use this as the venue location'
-            label: ''
+            label: null
             max: null
             min: null
             name: null
@@ -24,59 +27,79 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 30eccecd-7aff-4882-98d6-c8be9f15dfe3
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: 458ab821-4880-4299-8232-f99733310016
+            elementCondition: null
+            fieldUid: 458ab821-4880-4299-8232-f99733310016 # date
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: f18341a0-c7fc-4169-9d90-9d4045361082
+            userCondition: null
             warning: null
             width: 25
           -
-            fieldUid: d55cabd7-d990-4dac-9ea9-cc3941a1421f
+            elementCondition: null
+            fieldUid: d55cabd7-d990-4dac-9ea9-cc3941a1421f # time
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 36c5a89b-6941-497f-838a-315b61c6ce4b
+            userCondition: null
             warning: null
             width: 25
           -
-            fieldUid: 5fb9f1f8-c038-4593-b349-8cda166cb8fb
+            elementCondition: null
+            fieldUid: 5fb9f1f8-c038-4593-b349-8cda166cb8fb # City
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 558f685d-0b64-4de1-ad23-53b5463c40aa
+            userCondition: null
             warning: null
             width: 25
           -
-            fieldUid: 0886b236-4a38-40bd-abfa-21fdee1352d7
+            elementCondition: null
+            fieldUid: 0886b236-4a38-40bd-abfa-21fdee1352d7 # State
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: bd43f3e3-5513-4edc-a1f4-7931df164483
+            userCondition: null
             warning: null
             width: 25
           -
-            fieldUid: e025fb83-6598-430d-9ab8-5d4ced49979a
+            elementCondition: null
+            fieldUid: e025fb83-6598-430d-9ab8-5d4ced49979a # info url
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: fde43275-44fa-4322-a6e0-4b4abf3d3bba
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 7dedf6ba-9dcc-4a4f-be01-dd697f358783
+        userCondition: null
 handle: tourDates
 hasTitleField: true
 name: 'Tour Dates'
-section: 4eb33154-2538-4037-9a27-198bbb7cfcfa
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
 sortOrder: 1
 titleFormat: null
 titleTranslationKeyFormat: null

@@ -1,16 +1,16 @@
+columnSuffix: null
 contentColumnType: string(720)
-fieldGroup: 9c72894b-5f1f-4387-8507-22e9af77722d
 handle: headerImageAlt
-instructions: ''
+instructions: null
 name: 'Header Image Alt'
 searchable: false
 settings:
   byteLimit: null
   charLimit: 180
-  code: ''
+  code: false
   columnType: null
-  initialRows: '4'
-  multiline: ''
+  initialRows: 4
+  multiline: false
   placeholder: 'This is the tags for images for google search'
   uiMode: normal
 translationKeyFormat: null

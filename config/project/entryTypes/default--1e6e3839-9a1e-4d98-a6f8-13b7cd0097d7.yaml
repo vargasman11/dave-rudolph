@@ -2,6 +2,7 @@ fieldLayouts:
   3cacfcee-90e3-41d0-bdc1-a6e3b7f45aad:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,7 +10,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -24,23 +27,31 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 682ce478-c9f8-4007-bab8-7e7c9cbe85a9
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: b2342e5b-b45b-48c9-ac11-267011a80bc5 # Blog Content
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: afec2cc3-0cc0-4381-a7f1-15a5f7ce4808
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 86c16b8c-c624-468e-aa69-3e22d1b49fcc
+        userCondition: null
 handle: default
 hasTitleField: true
 name: Default
-section: e3fc1639-4370-4ebc-96b1-93d75e1d6e0d # Blog
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
 sortOrder: 1
 titleFormat: null
 titleTranslationKeyFormat: null

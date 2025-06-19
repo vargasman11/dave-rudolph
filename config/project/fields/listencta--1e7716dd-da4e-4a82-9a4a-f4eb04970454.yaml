@@ -1,14 +1,18 @@
+columnSuffix: null
 contentColumnType: string
-fieldGroup: 9c72894b-5f1f-4387-8507-22e9af77722d
 handle: listencta
 instructions: 'This is to create buttons on the home page e.g. "Listen on Spotify" etc...'
 name: ListenCTA
 searchable: false
 settings:
-  contentTable: '{{%matrixcontent_listencta}}'
-  maxBlocks: ''
-  minBlocks: ''
+  entryTypes:
+    -
+      uid: 93f4fd03-7ec3-4149-b30e-3d6a701d64a4
+  maxEntries: null
+  minEntries: null
+  propagationKeyFormat: null
   propagationMethod: all
+  viewMode: blocks
 translationKeyFormat: null
 translationMethod: site
 type: craft\fields\Matrix

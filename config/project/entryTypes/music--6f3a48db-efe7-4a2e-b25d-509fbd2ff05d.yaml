@@ -2,6 +2,7 @@ fieldLayouts:
   14b2cdef-050c-4adc-ae21-07365e4db67a:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,7 +10,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -24,68 +27,91 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 161bdf11-5dd5-4f4d-a875-e4b5a42efc22
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: 2d05a2b8-fa1f-4237-9abc-77880f943975
+            elementCondition: null
+            fieldUid: 2d05a2b8-fa1f-4237-9abc-77880f943975 # Page Title
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: de71390e-cbf6-4c6d-bf3a-d60320892928
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: ef74887a-7a07-4977-84c2-c7793e0529a5
+            elementCondition: null
+            fieldUid: ef74887a-7a07-4977-84c2-c7793e0529a5 # Header Image
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: f3d93288-b6c4-48ac-8199-da07ea5505ab
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: 024543db-feed-428a-922b-5c42d8374aaa
+            elementCondition: null
+            fieldUid: 024543db-feed-428a-922b-5c42d8374aaa # Album CTA
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 24b94d4e-46e6-4a86-8e29-75b05a9d8eeb
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: 569d7efe-e957-4fa0-a49a-c4b1b8fba23b
+            elementCondition: null
+            fieldUid: 569d7efe-e957-4fa0-a49a-c4b1b8fba23b # Album Cover
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 53b7f7d0-5f0e-489f-80a6-6eabc70932ca
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: ed2878ee-102f-406d-b62d-3d231fd7460b
+            elementCondition: null
+            fieldUid: ed2878ee-102f-406d-b62d-3d231fd7460b # Header Image Alt
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 251c9414-05ef-4cbf-89e7-1dcca356add1
+            userCondition: null
             warning: null
             width: 100
           -
-            fieldUid: 66bdc090-1029-4da8-a10f-8e0bc54176bb
+            elementCondition: null
+            fieldUid: 66bdc090-1029-4da8-a10f-8e0bc54176bb # spotifyIframes
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 3fbb8013-62c0-47e9-aae6-24ebf0b7dccd
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: d2f9bc03-9464-451a-806e-c7cf57836dd7
+        userCondition: null
 handle: music
 hasTitleField: false
 name: Music
-section: fa196411-87a8-410a-9288-9036a802a194
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
 sortOrder: 1
 titleFormat: '{section.name|raw}'
 titleTranslationKeyFormat: null
