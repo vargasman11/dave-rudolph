@@ -1,5 +1,10 @@
 {% set params = {
-    image:false
+    image:false,
+    title: false
 }|merge(params|default({})) %}
 
 <img src="{{ params.image.getUrl() }}" alt="{{ params.image.getFileName }}">
+
+{#{% if params.title %}#}
+    <h1>{{ params.title }}</h1>
+{#{% endif %}#}
