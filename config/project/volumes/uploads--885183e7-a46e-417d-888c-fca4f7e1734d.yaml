@@ -1,3 +1,5 @@
+altTranslationKeyFormat: null
+altTranslationMethod: site
 fieldLayouts:
   bed4b1dc-74a8-4dd7-bfef-3b0c6a1c3011:
     tabs:
@@ -9,9 +11,11 @@ fieldLayouts:
             autocomplete: false
             autocorrect: true
             class: null
+            dateAdded: null
             disabled: false
             elementCondition: null
             id: null
+            includeInCards: false
             inputType: null
             instructions: null
             label: null
@@ -20,6 +24,7 @@ fieldLayouts:
             name: null
             orientation: null
             placeholder: null
+            providesThumbs: false
             readonly: false
             requirable: false
             size: null
@@ -38,6 +43,7 @@ fs: uploads
 handle: uploads
 name: Uploads
 sortOrder: 1
+subpath: ''
 titleTranslationKeyFormat: null
 titleTranslationMethod: site
 transformFs: null

@@ -1,17 +1,25 @@
 columnSuffix: null
-contentColumnType: string
 handle: videos
 instructions: null
 name: Videos
 searchable: false
 settings:
+  createButtonLabel: null
+  defaultIndexViewMode: cards
+  enableVersioning: false
   entryTypes:
     -
-      uid: 5a99c46a-feb8-4904-a355-2715e51e048a
+      __assoc__:
+        -
+          - uid
+          - 5a99c46a-feb8-4904-a355-2715e51e048a # Video
+  includeTableView: false
   maxEntries: null
   minEntries: null
+  pageSize: null
   propagationKeyFormat: null
   propagationMethod: all
+  showCardsInGrid: false
   viewMode: blocks
 translationKeyFormat: null
 translationMethod: site

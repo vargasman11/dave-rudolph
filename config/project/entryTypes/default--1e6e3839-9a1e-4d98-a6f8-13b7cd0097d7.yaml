@@ -1,3 +1,4 @@
+color: null
 fieldLayouts:
   3cacfcee-90e3-41d0-bdc1-a6e3b7f45aad:
     tabs:
@@ -9,9 +10,11 @@ fieldLayouts:
             autocomplete: false
             autocorrect: true
             class: null
+            dateAdded: null
             disabled: false
             elementCondition: null
             id: null
+            includeInCards: false
             inputType: null
             instructions: null
             label: null
@@ -20,8 +23,9 @@ fieldLayouts:
             name: null
             orientation: null
             placeholder: null
+            providesThumbs: false
             readonly: false
-            requirable: false
+            required: true
             size: null
             step: null
             tip: null
@@ -32,10 +36,15 @@ fieldLayouts:
             warning: null
             width: 100
           -
+            dateAdded: null
+            editCondition: null
             elementCondition: null
             fieldUid: b2342e5b-b45b-48c9-ac11-267011a80bc5 # Blog Content
+            handle: null
+            includeInCards: false
             instructions: null
             label: null
+            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -48,11 +57,12 @@ fieldLayouts:
         userCondition: null
 handle: default
 hasTitleField: true
+icon: null
 name: Default
+showSlugField: true
 showStatusField: true
 slugTranslationKeyFormat: null
 slugTranslationMethod: site
-sortOrder: 1
 titleFormat: null
 titleTranslationKeyFormat: null
 titleTranslationMethod: site

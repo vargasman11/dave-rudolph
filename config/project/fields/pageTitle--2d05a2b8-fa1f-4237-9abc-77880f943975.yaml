@@ -1,5 +1,4 @@
 columnSuffix: null
-contentColumnType: text
 handle: pageTitle
 instructions: 'This will be the title of the page. on top of the picture if there is a picture.'
 name: 'Page Title'
@@ -8,7 +7,6 @@ settings:
   byteLimit: null
   charLimit: null
   code: false
-  columnType: null
   initialRows: 4
   multiline: false
   placeholder: null

@@ -1,3 +1,4 @@
+color: null
 fieldLayouts:
   9dd6ce5a-b224-4156-aab0-c2473601e876:
     tabs:
@@ -9,9 +10,11 @@ fieldLayouts:
             autocomplete: false
             autocorrect: true
             class: null
+            dateAdded: null
             disabled: false
             elementCondition: null
             id: null
+            includeInCards: false
             inputType: null
             instructions: 'Use this as the venue location'
             label: null
@@ -20,8 +23,9 @@ fieldLayouts:
             name: null
             orientation: null
             placeholder: null
+            providesThumbs: false
             readonly: false
-            requirable: false
+            required: true
             size: null
             step: null
             tip: null
@@ -32,10 +36,15 @@ fieldLayouts:
             warning: null
             width: 100
           -
+            dateAdded: null
+            editCondition: null
             elementCondition: null
             fieldUid: 458ab821-4880-4299-8232-f99733310016 # date
+            handle: null
+            includeInCards: false
             instructions: null
             label: null
+            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -44,10 +53,15 @@ fieldLayouts:
             warning: null
             width: 25
           -
+            dateAdded: null
+            editCondition: null
             elementCondition: null
             fieldUid: d55cabd7-d990-4dac-9ea9-cc3941a1421f # time
+            handle: null
+            includeInCards: false
             instructions: null
             label: null
+            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -56,10 +70,15 @@ fieldLayouts:
             warning: null
             width: 25
           -
+            dateAdded: null
+            editCondition: null
             elementCondition: null
             fieldUid: 5fb9f1f8-c038-4593-b349-8cda166cb8fb # City
+            handle: null
+            includeInCards: false
             instructions: null
             label: null
+            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -68,10 +87,15 @@ fieldLayouts:
             warning: null
             width: 25
           -
+            dateAdded: null
+            editCondition: null
             elementCondition: null
             fieldUid: 0886b236-4a38-40bd-abfa-21fdee1352d7 # State
+            handle: null
+            includeInCards: false
             instructions: null
             label: null
+            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -80,10 +104,15 @@ fieldLayouts:
             warning: null
             width: 25
           -
+            dateAdded: null
+            editCondition: null
             elementCondition: null
             fieldUid: e025fb83-6598-430d-9ab8-5d4ced49979a # info url
+            handle: null
+            includeInCards: false
             instructions: null
             label: null
+            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -96,11 +125,12 @@ fieldLayouts:
         userCondition: null
 handle: tourDates
 hasTitleField: true
+icon: null
 name: 'Tour Dates'
+showSlugField: true
 showStatusField: true
 slugTranslationKeyFormat: null
 slugTranslationMethod: site
-sortOrder: 1
 titleFormat: null
 titleTranslationKeyFormat: null
 titleTranslationMethod: site

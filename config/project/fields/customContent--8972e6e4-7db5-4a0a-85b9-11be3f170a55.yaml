@@ -1,5 +1,4 @@
 columnSuffix: null
-contentColumnType: text
 handle: customContent
 instructions: "This could be any text content you'd like. This can be a bio section or an about field or a simple announcement."
 name: 'Custom Content'
@@ -7,7 +6,6 @@ searchable: false
 settings:
   availableTransforms: '*'
   availableVolumes: '*'
-  columnType: text
   configSelectionMode: choose
   defaultTransform: ''
   manualConfig: ''

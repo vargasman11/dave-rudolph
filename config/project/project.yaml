@@ -1,4 +1,4 @@
-dateModified: 1750341529
+dateModified: 1750912178
 elementSources:
   craft\elements\Entry:
     -
@@ -56,53 +56,81 @@ graphql:
 meta:
   __names__:
     0faa9768-b53e-4216-a53d-7812596fdc94: Videos # Videos
+    1a2a94c2-a18f-4c14-ae13-bff389ad0c04: 'Tour Dates - Dates - time' # Tour Dates - Dates - time
     1b725997-1c52-4c85-aaa8-7bb113ff338e: About # About
     1e6e3839-9a1e-4d98-a6f8-13b7cd0097d7: Default # Default
+    1e92d7ca-8270-41cf-aa77-85f7de45a55f: 'Footer Link' # Footer Link
     1e7716dd-da4e-4a82-9a4a-f4eb04970454: ListenCTA # ListenCTA
     2cb0502e-6cdf-449e-b6c3-d1297d2c6b45: Contact # Contact
     2d05a2b8-fa1f-4237-9abc-77880f943975: 'Page Title' # Page Title
+    3a7a59c6-a8f1-4c6a-84f9-4815b49830b7: 'Nav Item - Nav Item - Nav Link Title' # Nav Item - Nav Item - Nav Link Title
     3ba03f7c-87d0-45e6-aab0-f9b8eb0520e6: 'URL to source' # URL to source
     3c12875b-36b2-4feb-b8c3-8525959af403: 'Link Title' # Link Title
     4a571784-9016-4b75-a548-b490b4697364: 'link logo' # link logo
     4eb33154-2538-4037-9a27-198bbb7cfcfa: 'Tour Dates' # Tour Dates
+    5a99c46a-feb8-4904-a355-2715e51e048a: Video # Video
+    5e9ff26e-2257-4ead-9f41-4ebf176eda38: 'Nav Item - Nav Item - Nav External Link' # Nav Item - Nav Item - Nav External Link
     5e19d471-ef0b-4e95-9548-97c378c4b65d: 'Tour Dates' # Tour Dates
     5fb9f1f8-c038-4593-b349-8cda166cb8fb: City # City
     5fc89b29-9281-4ea2-a80f-f71060a7fe93: 'Footer Links' # Footer Links
     6b2b62f0-3eb1-45ad-b397-559af7de174b: 'Dave Guitar' # Dave Guitar
+    6ea3ecd7-bbe8-4d4a-b5e6-b83fcf7e96c5: 'Videos - Video - Video embed' # Videos - Video - Video embed
     6f3a48db-efe7-4a2e-b25d-509fbd2ff05d: Music # Music
     8f3db685-39df-478c-adc2-5cfb83c2861b: 'CTA Buttons' # CTA Buttons
     9d11247f-9656-4204-8973-026dfdcb2f2f: Contact # Contact
     10e41f88-75c4-478b-9f90-590df63cdfda: Default # Default
     20cc593a-1deb-4cbb-b161-ee53c5a114d9: Entry # Entry
+    023b0d58-4838-416e-b816-2b62b1461f32: 'Nav Item' # Nav Item
+    33fc222b-d308-432c-b70c-c128f4df6783: button # button
     66bdc090-1029-4da8-a10f-8e0bc54176bb: spotifyIframes # spotifyIframes
     85eff002-8100-42c8-a7a8-4532563dfd23: Navigation # Navigation
+    93f4fd03-7ec3-4149-b30e-3d6a701d64a4: Platform # Platform
+    95e3be53-2293-4333-904c-5f7a07242a54: 'Social Links' # Social Links
+    0408c66a-7daf-4481-afc7-2ac098e1e927: Dates # Dates
     458ab821-4880-4299-8232-f99733310016: date # date
+    458c94f6-44fb-497c-bf73-59e053894675: 'Tour Dates - Dates - City' # Tour Dates - Dates - City
     502b621a-4cc7-4a26-a910-042f30dca048: Home # Home
     569d7efe-e957-4fa0-a49a-c4b1b8fba23b: 'Album Cover' # Album Cover
+    00776b8b-b9b2-49e0-b7d9-26ec3aaef7c1: 'Videos - Video - Video Title' # Videos - Video - Video Title
     0886b236-4a38-40bd-abfa-21fdee1352d7: State # State
+    1362be94-49c6-41a7-8c6e-5613f8983bbc: 'Footer Links - Social Links - Social Media URl' # Footer Links - Social Links - Social Media URl
     3304aae1-f09c-4687-bbe6-e0903dad9f0d: 'Nav Item' # Nav Item
+    3729fe64-ff51-4b75-972a-9ca5c405ba4e: 'CTA Buttons - button - Button Text' # CTA Buttons - button - Button Text
     8972e6e4-7db5-4a0a-85b9-11be3f170a55: 'Custom Content' # Custom Content
     024543db-feed-428a-922b-5c42d8374aaa: 'Album CTA' # Album CTA
     885183e7-a46e-417d-888c-fca4f7e1734d: Uploads # Uploads
+    5432599a-25c2-480c-92ba-3dcbf18b1d20: 'ListenCTA - Platform - Platform Url' # ListenCTA - Platform - Platform Url
     17303915-9872-43ed-9684-e3ae9e8d6099: 'Open In new Tab' # Open In new Tab
     56361854-6cef-42f0-b788-03399c9f683b: 'Dave Guitar' # Dave Guitar
+    61168750-51cd-4179-aedb-4efc42146742: 'Tour Dates - Dates - info url' # Tour Dates - Dates - info url
+    a5f13344-7df6-4d61-bc56-ff72e9f7a0bf: 'Tour Dates - Dates - date' # Tour Dates - Dates - date
+    a82b3d53-a056-44a7-a39c-690a787847bb: 'Footer Links - Footer Link - Social Icon' # Footer Links - Footer Link - Social Icon
     a88ef367-b120-4c2a-b952-d4c26c75cba5: About # About
+    a6368d7b-66bc-481d-bdc7-8115ac30626f: 'Tour Dates - Dates - State' # Tour Dates - Dates - State
+    a2058849-7eb6-49c3-9d32-a1a3a06e6908: 'Nav Item - Nav Item - Nav Page Link' # Nav Item - Nav Item - Nav Page Link
     b43bae05-d6b6-4b8a-84bc-f01097e47529: Navigation # Navigation
     b242a145-18ec-45dd-a31a-28e9e48279c0: TOUR # TOUR
     b2342e5b-b45b-48c9-ac11-267011a80bc5: 'Blog Content' # Blog Content
+    b6502537-1c47-451c-8402-2f8dcde9a941: spotifyIframe # spotifyIframe
     bb9de470-f257-45e2-803f-c1a93509afbf: Media # Media
     c2111dd9-d621-4db5-9121-04eba429d67a: Home # Home
+    cbc56c31-9669-4305-8581-335621349eec: 'Footer Links - Social Links - Social Media Icon' # Footer Links - Social Links - Social Media Icon
+    cc9e1d44-ae7d-4964-a1ae-0d975ad7c4d0: 'Footer Links - Footer Link - Social URL' # Footer Links - Footer Link - Social URL
     cd2fbe89-ae24-4f97-a4e1-77aaf39f0a88: 'Footer Link' # Footer Link
+    d06cd7cc-5d64-40d9-a4ad-126501bec771: 'CTA Buttons - button - Button Link' # CTA Buttons - button - Button Link
     d2d8c823-93e6-4574-a238-533954b4b8b9: Default # Default
     d55cabd7-d990-4dac-9ea9-cc3941a1421f: time # time
     d2436398-f3e3-4b75-9115-13f2fa0afe1a: 'Link Page' # Link Page
     daaeae58-7e1f-4ad5-b1e5-18ac93440c24: 'Tour Dates' # Tour Dates
+    dd1af556-4340-4c92-91ad-228e54780c45: 'Tour Dates - Dates - Venue ' # Tour Dates - Dates - Venue 
     df3eb26c-d215-44f0-a235-413cdb54c672: 'External Page' # External Page
     e025fb83-6598-430d-9ab8-5d4ced49979a: 'info url' # info url
     e3fc1639-4370-4ebc-96b1-93d75e1d6e0d: Blog # Blog
     e28be8c5-7bcd-4e2b-9189-1f72f75ec7b4: Tour # Tour
+    e46c4b23-d422-4dec-8758-ef4e9016d1fe: 'spotifyIframes - spotifyIframe - iframe' # spotifyIframes - spotifyIframe - iframe
     e819b4cf-0c03-4d0e-a011-c3af102e306f: 'Footer Links' # Footer Links
     e4343257-eacd-41fb-b2d1-0ac429892afc: Media # Media
+    ed10aba0-702e-4601-b1ef-a5e289b7ac04: 'ListenCTA - Platform - Platform Name' # ListenCTA - Platform - Platform Name
     ed2878ee-102f-406d-b62d-3d231fd7460b: 'Header Image Alt' # Header Image Alt
     eeaff83a-803a-4ddd-bcc6-a1563a735cd6: Tour # Tour
     eef00113-cbb0-4694-a0b5-70dbfd82c243: 'Internal or External' # Internal or External

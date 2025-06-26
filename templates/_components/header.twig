@@ -1,10 +1,27 @@
 {% set params = {
     image:false,
-    title: false
+    title: false,
+    imgClass:''
 }|merge(params|default({})) %}
 
-<img src="{{ params.image.getUrl() }}" alt="{{ params.image.getFileName }}">
+{% set transform = {
+    'sm': {
+        x1: { mode: 'letterbox', format: 'webp', width:1600},
+        x2: { mode: 'letterbox', format: 'webp', width:1600}
+    },
+    'md': {
+        x1: { mode: 'letterbox', format: 'webp', width:1600 },
+        x2: { mode: 'letterbox', format: 'webp', width:1600 }
+    }
+} %}
 
-{#{% if params.title %}#}
-    <h1>{{ params.title }}</h1>
-{#{% endif %}#}
+{% set bgImage = params.image.getUrl(transform.md.x2) %}
+{% set bgImageSm = params.image.getUrl(transform.sm.x2) %}
+
+<div class="container-fluid bg-cover bg-center {{ params.imgClass }}"
+     style="background-image: url('{{ bgImageSm }}');"
+     data-bg-md="{{ bgImage }}">
+    {% if params.title %}
+        <h1 class="text-white">{{ params.title }}</h1>
+    {% endif %}
+</div>

@@ -9,24 +9,10 @@
 {% set image = entry.headerImage.one ?: false  %}
 {% include '_components/header.twig' with { params:{
     image: image,
-    title: entry.pageTitle
+    title: entry.title
 }} %}
 
-{% if entry.headerImage|length %}
-<div class="container-fluid mt-5" id="tour" style="background-image:url('{{ entry.headerImage.one().getUrl() }}')">
-    {% else %}
-    <div class="container-fluid mt-5" id="tour" style="background-image: url('/crowd-stock.jpeg');">
-        {% endif %}
-        <div class="row">
-            <div class="col-sm-12">
-                {% if entry.pageTitle %}
-                    <p class="display-4 text-center page-header-title" id="about-title">{{ entry.pageTitle }}</p>
-                {% else %}
-                    <p class="display-4 text-center page-header-title" id="tour-title">TOUR</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+
     <div class="container-fluid py-5 mt-5">
         <div class="row">
             <div class="col-sm-12 col-md-8 mx-auto">

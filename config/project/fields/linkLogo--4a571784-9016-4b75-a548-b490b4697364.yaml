@@ -1,5 +1,4 @@
 columnSuffix: null
-contentColumnType: string
 handle: linkLogo
 instructions: 'This is the logo image you will upload e.g. venmo paypal etc etc'
 name: 'link logo'
@@ -10,9 +9,9 @@ settings:
   allowUploads: true
   allowedKinds: null
   branchLimit: null
+  defaultPlacement: end
   defaultUploadLocationSource: 'volume:885183e7-a46e-417d-888c-fca4f7e1734d' # Uploads
   defaultUploadLocationSubpath: null
-  localizeRelations: false
   maintainHierarchy: false
   maxRelations: 1
   minRelations: null
@@ -23,6 +22,7 @@ settings:
   restrictedLocationSource: 'volume:885183e7-a46e-417d-888c-fca4f7e1734d' # Uploads
   restrictedLocationSubpath: null
   selectionLabel: null
+  showCardsInGrid: false
   showSiteMenu: false
   showUnpermittedFiles: false
   showUnpermittedVolumes: false
@@ -31,5 +31,5 @@ settings:
   validateRelatedElements: false
   viewMode: list
 translationKeyFormat: null
-translationMethod: site
+translationMethod: none
 type: craft\fields\Assets
