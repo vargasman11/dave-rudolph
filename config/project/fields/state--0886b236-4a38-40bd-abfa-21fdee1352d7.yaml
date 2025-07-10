@@ -1,4 +1,5 @@
 columnSuffix: null
+contentColumnType: string(8)
 handle: state
 instructions: 'This will be shown as the  The 2 letters state abbreviations: e.g. NY, FL, GA ...'
 name: State
@@ -7,6 +8,7 @@ settings:
   byteLimit: null
   charLimit: 2
   code: false
+  columnType: null
   initialRows: 4
   multiline: false
   placeholder: null

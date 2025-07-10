@@ -1,25 +1,17 @@
 columnSuffix: null
+contentColumnType: string
 handle: listencta
 instructions: 'This is to create buttons on the home page e.g. "Listen on Spotify" etc...'
 name: ListenCTA
 searchable: false
 settings:
-  createButtonLabel: null
-  defaultIndexViewMode: cards
-  enableVersioning: false
   entryTypes:
     -
-      __assoc__:
-        -
-          - uid
-          - 93f4fd03-7ec3-4149-b30e-3d6a701d64a4 # Platform
-  includeTableView: false
+      uid: 93f4fd03-7ec3-4149-b30e-3d6a701d64a4
   maxEntries: null
   minEntries: null
-  pageSize: null
   propagationKeyFormat: null
   propagationMethod: all
-  showCardsInGrid: false
   viewMode: blocks
 translationKeyFormat: null
 translationMethod: site

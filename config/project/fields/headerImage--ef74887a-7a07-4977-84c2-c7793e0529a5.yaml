@@ -1,4 +1,5 @@
 columnSuffix: null
+contentColumnType: string
 handle: headerImage
 instructions: null
 name: 'Header Image'
@@ -9,9 +10,9 @@ settings:
   allowUploads: true
   allowedKinds: null
   branchLimit: null
-  defaultPlacement: end
   defaultUploadLocationSource: 'volume:885183e7-a46e-417d-888c-fca4f7e1734d' # Uploads
   defaultUploadLocationSubpath: /uploads
+  localizeRelations: false
   maintainHierarchy: false
   maxRelations: 1
   minRelations: null
@@ -22,7 +23,6 @@ settings:
   restrictedLocationSource: 'volume:885183e7-a46e-417d-888c-fca4f7e1734d' # Uploads
   restrictedLocationSubpath: null
   selectionLabel: null
-  showCardsInGrid: false
   showSiteMenu: true
   showUnpermittedFiles: false
   showUnpermittedVolumes: false
@@ -31,5 +31,5 @@ settings:
   validateRelatedElements: false
   viewMode: list
 translationKeyFormat: null
-translationMethod: none
+translationMethod: site
 type: craft\fields\Assets

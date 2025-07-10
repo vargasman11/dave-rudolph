@@ -5,15 +5,10 @@ fieldLayouts:
         elementCondition: null
         elements:
           -
-            dateAdded: null
-            editCondition: null
             elementCondition: null
             fieldUid: daaeae58-7e1f-4ad5-b1e5-18ac93440c24 # Tour Dates
-            handle: null
-            includeInCards: false
             instructions: null
             label: null
-            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField

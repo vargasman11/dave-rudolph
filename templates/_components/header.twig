@@ -14,14 +14,15 @@
         x2: { mode: 'letterbox', format: 'webp', width:1600 }
     }
 } %}
+{% set bgImage = params.image ? params.image.getUrl(transform.md.x2) %}
+{% set bgImageSm = params.image ? params.image.getUrl(transform.sm.x2) %}
 
-{% set bgImage = params.image.getUrl(transform.md.x2) %}
-{% set bgImageSm = params.image.getUrl(transform.sm.x2) %}
+{% set containerPadding = 'py-16 sm:py-24 md:py-28 lg:py-32 xl:py-38' %}
 
-<div class="container-fluid bg-cover bg-center {{ params.imgClass }}"
+<div class="container-fluid bg-cover bg-center {{ containerPadding}} {{ params.imgClass }}"
      style="background-image: url('{{ bgImageSm }}');"
      data-bg-md="{{ bgImage }}">
     {% if params.title %}
-        <h1 class="text-white">{{ params.title }}</h1>
+        <h1 class="text-white font-xball text-center tracking-wide text-4xl md:text-6xl lg:text-8xl text-shadow-lg text-shadow-black">{{ params.title }}</h1>
     {% endif %}
 </div>

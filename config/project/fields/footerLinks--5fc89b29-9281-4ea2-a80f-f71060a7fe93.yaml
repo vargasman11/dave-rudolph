@@ -1,25 +1,17 @@
 columnSuffix: null
+contentColumnType: string
 handle: footerLinks
 instructions: 'This will be the bottom icons and links in your footer going out to facebook, youtube, insta etc etc'
 name: 'Footer Links'
 searchable: false
 settings:
-  createButtonLabel: null
-  defaultIndexViewMode: cards
-  enableVersioning: false
   entryTypes:
     -
-      __assoc__:
-        -
-          - uid
-          - 95e3be53-2293-4333-904c-5f7a07242a54 # Social Links
-  includeTableView: false
+      uid: 95e3be53-2293-4333-904c-5f7a07242a54
   maxEntries: null
   minEntries: null
-  pageSize: null
   propagationKeyFormat: null
   propagationMethod: all
-  showCardsInGrid: false
   viewMode: blocks
 translationKeyFormat: null
 translationMethod: site

@@ -1,4 +1,5 @@
 columnSuffix: uqhpkvev
+contentColumnType: text
 handle: blogContent
 instructions: null
 name: 'Blog Content'
@@ -6,6 +7,7 @@ searchable: false
 settings:
   availableTransforms: '*'
   availableVolumes: '*'
+  columnType: text
   configSelectionMode: choose
   defaultTransform: ''
   manualConfig: ''

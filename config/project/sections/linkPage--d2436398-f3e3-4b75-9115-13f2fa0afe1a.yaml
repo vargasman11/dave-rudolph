@@ -2,7 +2,6 @@ defaultPlacement: end
 enableVersioning: true
 entryTypes:
   -
-    handle: default
     uid: 10e41f88-75c4-478b-9f90-590df63cdfda # Default
 handle: linkPage
 maxAuthors: 1

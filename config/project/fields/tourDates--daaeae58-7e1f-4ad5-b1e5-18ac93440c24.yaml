@@ -1,25 +1,17 @@
 columnSuffix: null
+contentColumnType: string
 handle: tourDates
 instructions: null
 name: 'Tour Dates'
 searchable: false
 settings:
-  createButtonLabel: null
-  defaultIndexViewMode: cards
-  enableVersioning: false
   entryTypes:
     -
-      __assoc__:
-        -
-          - uid
-          - 0408c66a-7daf-4481-afc7-2ac098e1e927 # Dates
-  includeTableView: false
+      uid: 0408c66a-7daf-4481-afc7-2ac098e1e927
   maxEntries: null
   minEntries: null
-  pageSize: null
   propagationKeyFormat: null
   propagationMethod: all
-  showCardsInGrid: false
   viewMode: blocks
 translationKeyFormat: null
 translationMethod: site

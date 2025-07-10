@@ -1,118 +1,14 @@
 {% include "partials/header" %}
 {% include "partials/nav" %}
 
-{% if entry.headerImage|length  %}
-<div class="container-fluid mt-5" id="contact" style="background-image:url('{{entry.headerImage.one().getUrl()}}')">
-    {% else %}
-    <div class="container-fluid mt-5" id="contact">
-        {% endif %}
-        <div class="row">
-            <div class="col-sm-12">
-                <p class="display-4 text-center page-header-title" id="contact-title">CONTACT</p>
-            </div>
-        </div>
-    </div>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-sm-10 col-md-9 mx-auto">
+{% set image = entry.headerImage.one ?: false  %}
+{% include '_components/header.twig' with { params:{
+    image: image,
+    title: entry.title
+}} %}
 
-                {# Macro for Field Errors #}
-                {% macro renderErrors(field) %}
-                    {% if field.hasErrors and field.errors|length %}
-                        <ul class="errors">
-                            {% for error in field.errors %}
-                                <li>{{ error|t }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                {% endmacro %}
-                {% import _self as forms %}
-
-                {% set form = craft.expressforms.form("contact") %}
-
-                {# Flash Success #}
-                {% if form.submittedSuccessfully %}
-                    <div class="success">
-                        {{ "Form has been submitted successfully!"|t }}
-                    </div>
-                {% endif %}
-
-                {# General Error Handling #}
-                {% if not form.valid %}
-                    <div class="errors">
-                        {{ "Error! Please review the form and try submitting again."|t }}
-                        {% if form.errors|length %}
-                            <ul>
-                                {% for error in form.errors %}
-                                    <li>{{ error|t }}</li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
-                    </div>
-                {% endif %}
-
-                {# Automatically set Form tags with Return, CSRF and Honeypot (if enabled) #}
-                {{ form.openTag({ return: 'contact-thanks' }) }}
-
-                {# Automation of Field Rendering #}
-                {% for field in form.fields %}
-                    {% if field.type == "hidden" %}
-                        <input id="{{ field.handle }}" type="hidden" name="{{ field.handle }}" value="{{ field.value }}">
-                    {% elseif field.type == "textarea" %}
-                        <div class="mb-3">
-                            <label for="{{ field.handle }}" class="form-label{{ field.isRequired ? ' required' }}">{{ field.label }}</label>
-                            <textarea class="form-control" id="{{ field.handle }}" name="{{ field.handle }}" rows="5">{{ field.value }}</textarea>
-                            {{ forms.renderErrors(field) }}
-                        </div>
-                    {% elseif field.type == "file" %}
-                        <div class="mb-3">
-                            <label for="{{ field.handle }}" class="form-label{{ field.isRequired ? ' required' }}">{{ field.label }}</label>
-                            <input type="{{ field.type }}" name="{{ field.handle }}[]" class="form-control" multiple>
-                            {{ forms.renderErrors(field) }}
-                        </div>
-                    {% elseif field.type == "checkbox" %}
-                        <div class="form-check mb-3">
-                            <input type="checkbox" name="{{ field.handle }}" value="1" class="form-check-input"{{ "1" in field.value ? " checked" }}>
-                            <label class="form-check-label">{{ field.label }}</label>
-                            {{ forms.renderErrors(field) }}
-                        </div>
-                    {% else %}
-                        {# Check on a Field Handle for Exception to Markup #}
-                        {% if field.handle == "howHeard" %}
-                            <div class="mb-3">
-                                <label class="form-label{{ field.isRequired ? ' required' }}">{{ field.label }}</label>
-                                <div class="checkbox">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" name="howHeard[]" value="newspaper"{{ "newspaper" in form.fields.howHeard.value ? " checked" }}>
-                                        Newspaper
-                                    </label>
-                                    <label class="form-check-label">
-                                        <input type="checkbox" name="howHeard[]" value="radio"{{ "radio" in form.fields.howHeard.value ? " checked" }}>
-                                        Radio
-                                    </label>
-                                    <label class="form-check-label">
-                                        <input type="checkbox" name="howHeard[]" value="friend"{{ "friend" in form.fields.howHeard.value ? " checked" }}>
-                                        Friend
-                                    </label>
-                                </div>
-                                {{ forms.renderErrors(field) }}
-                            </div>
-                        {% else %}
-                            <div class="mb-3">
-                                <label for="{{ field.handle }}" class="form-label{{ field.isRequired ? ' required' }}">{{ field.label }}</label>
-                                <input id="{{ field.handle }}" type="{{ field.type }}" name="{{ field.handle }}" value="{{ field.value }}" class="form-control">
-                                {{ forms.renderErrors(field) }}
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
-
-                <input type="submit" value="Submit">
-                {{ form.closeTag }}
-
-
-            </div>
-        </div>
-    </div>
+<div class="container mx-auto">
+    {{ freeform.form("contact").render() }}
+</div>
 
 {% include "partials/footer" %}

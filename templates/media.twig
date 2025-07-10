@@ -1,21 +1,11 @@
 {% include "partials/header" %}
 {% include "partials/nav" %}
 
-{% if entry.headerImage|length %}
-<div class="container-fluid mt-5" id="music" style="background-image:url('{{ entry.headerImage.one().getUrl() }}')">
-    {% else %}
-    <div class="container-fluid mt-5" id="music" style="background-image: url('/img/crowd-stock.jpeg');">
-        {% endif %}
-        <div class="row">
-            <div class="col-sm-12">
-                {% if entry.pageTitle %}
-                    <p class="display-4 text-center page-header-title">{{ entry.pageTitle }}</p>
-                {% else %}
-                    <p class="display-4 text-center page-header-title">MEDIA</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+{% set image = entry.headerImage.one ?: false  %}
+{% include '_components/header.twig' with { params:{
+    image: image,
+    title: entry.title
+}} %}
 
     <div class="container mt-4 py-5">
         <div class="row py-5">

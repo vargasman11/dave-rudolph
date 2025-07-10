@@ -1,4 +1,5 @@
 columnSuffix: null
+contentColumnType: string(720)
 handle: headerImageAlt
 instructions: null
 name: 'Header Image Alt'
@@ -7,6 +8,7 @@ settings:
   byteLimit: null
   charLimit: 180
   code: false
+  columnType: null
   initialRows: 4
   multiline: false
   placeholder: 'This is the tags for images for google search'

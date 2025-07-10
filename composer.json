@@ -1,10 +1,11 @@
 {
   "require": {
     "craftcms/aws-s3": "2.2.3",
-    "craftcms/cms": "^5.0.0",
+    "craftcms/cms": "5.8.5",
     "craftcms/redactor": "^4.2.0",
     "nystudio107/craft-vite": "^5.0",
     "putyourlightson/craft-sprig": "3.6.1",
+    "solspace/craft-freeform": "5.11.5",
     "vlucas/phpdotenv": "^5.4.0"
   },
   "require-dev": {
