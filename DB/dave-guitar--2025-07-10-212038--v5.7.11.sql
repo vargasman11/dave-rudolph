@@ -420,7 +420,7 @@ CREATE TABLE `drafts` (
   KEY `idx_rdqvlwnelrdjabqijkuydkjwelbnqrxfjitb` (`creatorId`,`provisional`),
   CONSTRAINT `drafts_creatorId_fk` FOREIGN KEY (`creatorId`) REFERENCES `users` (`id`) ON DELETE SET NULL,
   CONSTRAINT `drafts_sourceId_fk` FOREIGN KEY (`canonicalId`) REFERENCES `elements` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=680 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=682 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -486,7 +486,7 @@ CREATE TABLE `elements` (
   CONSTRAINT `elements_fieldLayoutId_fk` FOREIGN KEY (`fieldLayoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE SET NULL,
   CONSTRAINT `elements_revisionId_fk` FOREIGN KEY (`revisionId`) REFERENCES `revisions` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_hthufgbdkvbhkqftwyyicyeisyewmgdzzcax` FOREIGN KEY (`canonicalId`) REFERENCES `elements` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2229 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2241 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -551,7 +551,7 @@ CREATE TABLE `elements_sites` (
   KEY `idx_ejtiautccrpbhaytzqhemssdvgfgnrbamzao` (`title`,`siteId`),
   CONSTRAINT `elements_sites_elementId_fk` FOREIGN KEY (`elementId`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `elements_sites_siteId_fk` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2229 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2241 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -806,6 +806,1054 @@ CREATE TABLE `fields` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `freeform_crm_fields`
+--
+
+DROP TABLE IF EXISTS `freeform_crm_fields`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_crm_fields` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `integrationId` int(11) NOT NULL,
+  `label` text NOT NULL,
+  `handle` varchar(255) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `required` tinyint(1) DEFAULT 0,
+  `options` longtext DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_crm_fields_type_idx` (`type`),
+  KEY `freeform_crm_fields_integrationId_category_idx` (`integrationId`,`category`),
+  CONSTRAINT `freeform_crm_fields_integrationId_fk` FOREIGN KEY (`integrationId`) REFERENCES `freeform_integrations` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_email_marketing_fields`
+--
+
+DROP TABLE IF EXISTS `freeform_email_marketing_fields`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_email_marketing_fields` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mailingListId` int(11) NOT NULL,
+  `label` varchar(255) NOT NULL,
+  `handle` varchar(255) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `required` tinyint(1) DEFAULT 0,
+  `options` longtext DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_email_marketing_fields_type_idx` (`type`),
+  KEY `freeform_email_marketing_fields_mailingListId_category_idx` (`mailingListId`,`category`),
+  CONSTRAINT `freeform_email_marketing_fields_mailingListId_fk` FOREIGN KEY (`mailingListId`) REFERENCES `freeform_email_marketing_lists` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_email_marketing_lists`
+--
+
+DROP TABLE IF EXISTS `freeform_email_marketing_lists`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_email_marketing_lists` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `integrationId` int(11) NOT NULL,
+  `resourceId` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `memberCount` int(11) DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `freeform_email_marketing_lists_integrationId_resourceId_unq_idx` (`integrationId`,`resourceId`),
+  CONSTRAINT `freeform_email_marketing_lists_integrationId_fk` FOREIGN KEY (`integrationId`) REFERENCES `freeform_integrations` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_export_notifications`
+--
+
+DROP TABLE IF EXISTS `freeform_export_notifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_export_notifications` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `profileId` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `fileType` varchar(30) NOT NULL,
+  `fileName` varchar(255) DEFAULT NULL,
+  `frequency` varchar(20) NOT NULL,
+  `recipients` longtext NOT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `freeform_export_notifications_profileId_fk` (`profileId`),
+  CONSTRAINT `freeform_export_notifications_profileId_fk` FOREIGN KEY (`profileId`) REFERENCES `freeform_export_profiles` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_export_profiles`
+--
+
+DROP TABLE IF EXISTS `freeform_export_profiles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_export_profiles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `formId` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `limit` int(11) DEFAULT NULL,
+  `dateRange` varchar(255) DEFAULT NULL,
+  `rangeStart` varchar(255) DEFAULT NULL,
+  `rangeEnd` varchar(255) DEFAULT NULL,
+  `fields` longtext NOT NULL,
+  `filters` longtext DEFAULT NULL,
+  `statuses` text NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `freeform_export_profiles_formId_fk` (`formId`),
+  CONSTRAINT `freeform_export_profiles_formId_fk` FOREIGN KEY (`formId`) REFERENCES `freeform_forms` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_export_settings`
+--
+
+DROP TABLE IF EXISTS `freeform_export_settings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_export_settings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `setting` longtext DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_export_settings_userId_fk` (`userId`),
+  CONSTRAINT `freeform_export_settings_userId_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_favorite_fields`
+--
+
+DROP TABLE IF EXISTS `freeform_favorite_fields`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_favorite_fields` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) DEFAULT NULL,
+  `label` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `metadata` longtext DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_favorite_fields_userId_fk` (`userId`),
+  CONSTRAINT `freeform_favorite_fields_userId_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_feed_messages`
+--
+
+DROP TABLE IF EXISTS `freeform_feed_messages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_feed_messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `feedId` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `conditions` longtext NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `seen` tinyint(1) NOT NULL DEFAULT 0,
+  `issueDate` datetime NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_feed_messages_feedId_fk` (`feedId`),
+  CONSTRAINT `freeform_feed_messages_feedId_fk` FOREIGN KEY (`feedId`) REFERENCES `freeform_feeds` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_feeds`
+--
+
+DROP TABLE IF EXISTS `freeform_feeds`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_feeds` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `hash` varchar(255) NOT NULL,
+  `min` varchar(255) DEFAULT NULL,
+  `max` varchar(255) DEFAULT NULL,
+  `issueDate` datetime NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `freeform_feeds_hash_unq_idx` (`hash`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_fields_type_groups`
+--
+
+DROP TABLE IF EXISTS `freeform_fields_type_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_fields_type_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `color` varchar(10) DEFAULT NULL,
+  `label` varchar(255) DEFAULT NULL,
+  `types` longtext NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_forms`
+--
+
+DROP TABLE IF EXISTS `freeform_forms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_forms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(200) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `handle` varchar(100) NOT NULL,
+  `spamBlockCount` int(11) unsigned NOT NULL DEFAULT 0,
+  `metadata` longtext DEFAULT NULL,
+  `order` int(11) DEFAULT NULL,
+  `createdByUserId` int(11) DEFAULT NULL,
+  `updatedByUserId` int(11) DEFAULT NULL,
+  `dateArchived` datetime DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `handle` (`handle`),
+  KEY `freeform_forms_order_idx` (`order`),
+  KEY `freeform_forms_createdByUserId_fk` (`createdByUserId`),
+  KEY `freeform_forms_updatedByUserId_fk` (`updatedByUserId`),
+  CONSTRAINT `freeform_forms_createdByUserId_fk` FOREIGN KEY (`createdByUserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `freeform_forms_updatedByUserId_fk` FOREIGN KEY (`updatedByUserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_forms_fields`
+--
+
+DROP TABLE IF EXISTS `freeform_forms_fields`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_forms_fields` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `formId` int(11) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `metadata` longtext DEFAULT NULL,
+  `rowId` int(11) DEFAULT NULL,
+  `order` int(11) DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_forms_fields_rowId_order_idx` (`rowId`,`order`),
+  KEY `freeform_forms_fields_formId_fk` (`formId`),
+  CONSTRAINT `freeform_forms_fields_formId_fk` FOREIGN KEY (`formId`) REFERENCES `freeform_forms` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `freeform_forms_fields_rowId_fk` FOREIGN KEY (`rowId`) REFERENCES `freeform_forms_rows` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_forms_groups`
+--
+
+DROP TABLE IF EXISTS `freeform_forms_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_forms_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `siteId` int(11) NOT NULL,
+  `label` varchar(255) DEFAULT NULL,
+  `order` int(11) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_forms_groups_siteId_fk` (`siteId`),
+  CONSTRAINT `freeform_forms_groups_siteId_fk` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_forms_groups_entries`
+--
+
+DROP TABLE IF EXISTS `freeform_forms_groups_entries`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_forms_groups_entries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `groupId` int(11) NOT NULL,
+  `formId` int(11) NOT NULL,
+  `order` int(11) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_forms_groups_entries_groupId_fk` (`groupId`),
+  KEY `freeform_forms_groups_entries_formId_fk` (`formId`),
+  CONSTRAINT `freeform_forms_groups_entries_formId_fk` FOREIGN KEY (`formId`) REFERENCES `freeform_forms` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `freeform_forms_groups_entries_groupId_fk` FOREIGN KEY (`groupId`) REFERENCES `freeform_forms_groups` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_forms_integrations`
+--
+
+DROP TABLE IF EXISTS `freeform_forms_integrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_forms_integrations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `integrationId` int(11) NOT NULL,
+  `formId` int(11) NOT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT 1,
+  `metadata` longtext DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_forms_integrations_integrationId_fk` (`integrationId`),
+  KEY `freeform_forms_integrations_formId_fk` (`formId`),
+  CONSTRAINT `freeform_forms_integrations_formId_fk` FOREIGN KEY (`formId`) REFERENCES `freeform_forms` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `freeform_forms_integrations_integrationId_fk` FOREIGN KEY (`integrationId`) REFERENCES `freeform_integrations` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_forms_layouts`
+--
+
+DROP TABLE IF EXISTS `freeform_forms_layouts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_forms_layouts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `formId` int(11) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_forms_layouts_formId_idx` (`formId`),
+  CONSTRAINT `freeform_forms_layouts_formId_fk` FOREIGN KEY (`formId`) REFERENCES `freeform_forms` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_forms_notifications`
+--
+
+DROP TABLE IF EXISTS `freeform_forms_notifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_forms_notifications` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `class` varchar(255) NOT NULL,
+  `formId` int(11) NOT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT 1,
+  `metadata` longtext DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_forms_notifications_formId_fk` (`formId`),
+  CONSTRAINT `freeform_forms_notifications_formId_fk` FOREIGN KEY (`formId`) REFERENCES `freeform_forms` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_forms_pages`
+--
+
+DROP TABLE IF EXISTS `freeform_forms_pages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_forms_pages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `formId` int(11) NOT NULL,
+  `layoutId` int(11) NOT NULL,
+  `label` varchar(255) NOT NULL,
+  `order` int(11) DEFAULT NULL,
+  `metadata` longtext DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_forms_pages_formId_order_idx` (`formId`,`order`),
+  KEY `freeform_forms_pages_layoutId_fk` (`layoutId`),
+  CONSTRAINT `freeform_forms_pages_formId_fk` FOREIGN KEY (`formId`) REFERENCES `freeform_forms` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `freeform_forms_pages_layoutId_fk` FOREIGN KEY (`layoutId`) REFERENCES `freeform_forms_layouts` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_forms_rows`
+--
+
+DROP TABLE IF EXISTS `freeform_forms_rows`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_forms_rows` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `formId` int(11) NOT NULL,
+  `layoutId` int(11) NOT NULL,
+  `order` int(11) DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_forms_rows_formId_order_idx` (`formId`,`order`),
+  KEY `freeform_forms_rows_layoutId_fk` (`layoutId`),
+  CONSTRAINT `freeform_forms_rows_formId_fk` FOREIGN KEY (`formId`) REFERENCES `freeform_forms` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `freeform_forms_rows_layoutId_fk` FOREIGN KEY (`layoutId`) REFERENCES `freeform_forms_layouts` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_forms_sites`
+--
+
+DROP TABLE IF EXISTS `freeform_forms_sites`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_forms_sites` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `formId` int(11) NOT NULL,
+  `siteId` int(11) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `freeform_forms_sites_siteId_formId_unq_idx` (`siteId`,`formId`),
+  KEY `freeform_forms_sites_formId_fk` (`formId`),
+  CONSTRAINT `freeform_forms_sites_formId_fk` FOREIGN KEY (`formId`) REFERENCES `freeform_forms` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `freeform_forms_sites_siteId_fk` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_forms_translations`
+--
+
+DROP TABLE IF EXISTS `freeform_forms_translations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_forms_translations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `formId` int(11) NOT NULL,
+  `siteId` int(11) NOT NULL,
+  `translations` longtext NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `freeform_forms_translations_formId_siteId_unq_idx` (`formId`,`siteId`),
+  KEY `freeform_forms_translations_siteId_fk` (`siteId`),
+  CONSTRAINT `freeform_forms_translations_formId_fk` FOREIGN KEY (`formId`) REFERENCES `freeform_forms` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `freeform_forms_translations_siteId_fk` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_integrations`
+--
+
+DROP TABLE IF EXISTS `freeform_integrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_integrations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `enabled` tinyint(1) DEFAULT 1,
+  `name` varchar(255) NOT NULL,
+  `handle` varchar(255) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `class` varchar(255) DEFAULT NULL,
+  `metadata` longtext DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `handle` (`handle`),
+  KEY `freeform_integrations_type_idx` (`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_integrations_queue`
+--
+
+DROP TABLE IF EXISTS `freeform_integrations_queue`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_integrations_queue` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `submissionId` int(11) NOT NULL,
+  `integrationType` varchar(50) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `fieldHash` varchar(20) DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_integrations_queue_status_idx` (`status`),
+  KEY `freeform_integrations_queue_submissionId_fk` (`submissionId`),
+  CONSTRAINT `freeform_integrations_queue_submissionId_fk` FOREIGN KEY (`submissionId`) REFERENCES `freeform_submissions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_limited_users`
+--
+
+DROP TABLE IF EXISTS `freeform_limited_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_limited_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `settings` longtext NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_notification_log`
+--
+
+DROP TABLE IF EXISTS `freeform_notification_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_notification_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(30) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_notification_log_type_dateCreated_idx` (`type`,`dateCreated`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_notification_template_wrappers`
+--
+
+DROP TABLE IF EXISTS `freeform_notification_template_wrappers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_notification_template_wrappers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `handle` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `content` longtext NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `freeform_notification_template_wrappers_name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_notification_templates`
+--
+
+DROP TABLE IF EXISTS `freeform_notification_templates`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_notification_templates` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `formId` int(11) DEFAULT NULL,
+  `wrapperId` int(11) DEFAULT NULL,
+  `pdfTemplateIds` text DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `handle` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `fromName` varchar(255) NOT NULL,
+  `fromEmail` varchar(255) NOT NULL,
+  `replyToName` varchar(255) DEFAULT NULL,
+  `replyToEmail` varchar(255) DEFAULT NULL,
+  `cc` varchar(255) DEFAULT NULL,
+  `bcc` varchar(255) DEFAULT NULL,
+  `bodyHtml` mediumtext DEFAULT NULL,
+  `bodyText` mediumtext DEFAULT NULL,
+  `autoText` tinyint(1) NOT NULL DEFAULT 1,
+  `includeAttachments` tinyint(1) DEFAULT 1,
+  `presetAssets` varchar(255) DEFAULT NULL,
+  `sortOrder` int(11) DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `freeform_notification_templates_formId_handle` (`formId`,`handle`),
+  KEY `fk_wrapperId` (`wrapperId`),
+  CONSTRAINT `fk_wrapperId` FOREIGN KEY (`wrapperId`) REFERENCES `freeform_notification_template_wrappers` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `freeform_notification_templates_formId_fk` FOREIGN KEY (`formId`) REFERENCES `freeform_forms` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_payments`
+--
+
+DROP TABLE IF EXISTS `freeform_payments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_payments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `integrationId` int(11) NOT NULL,
+  `fieldId` int(11) NOT NULL,
+  `submissionId` int(11) NOT NULL,
+  `resourceId` varchar(50) DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  `amount` float DEFAULT NULL,
+  `currency` varchar(3) DEFAULT NULL,
+  `status` varchar(40) DEFAULT NULL,
+  `link` varchar(255) DEFAULT NULL,
+  `metadata` longtext DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `freeform_payments_integrationId_resourceId_unq_idx` (`integrationId`,`resourceId`),
+  KEY `freeform_payments_integrationId_type_idx` (`integrationId`,`type`),
+  KEY `freeform_payments_resourceId_idx` (`resourceId`),
+  KEY `freeform_payments_fieldId_fk` (`fieldId`),
+  KEY `freeform_payments_submissionId_fk` (`submissionId`),
+  CONSTRAINT `freeform_payments_fieldId_fk` FOREIGN KEY (`fieldId`) REFERENCES `freeform_forms_fields` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `freeform_payments_integrationId_fk` FOREIGN KEY (`integrationId`) REFERENCES `freeform_integrations` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `freeform_payments_submissionId_fk` FOREIGN KEY (`submissionId`) REFERENCES `freeform_submissions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_pdf_templates`
+--
+
+DROP TABLE IF EXISTS `freeform_pdf_templates`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_pdf_templates` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `fileName` text NOT NULL,
+  `body` longtext NOT NULL,
+  `sortOrder` int(11) NOT NULL DEFAULT 0,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_rules`
+--
+
+DROP TABLE IF EXISTS `freeform_rules`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_rules` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `combinator` varchar(20) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_rules_buttons`
+--
+
+DROP TABLE IF EXISTS `freeform_rules_buttons`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_rules_buttons` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pageId` int(11) NOT NULL,
+  `button` varchar(30) NOT NULL,
+  `display` varchar(10) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `fk_kbfdqsixhgxkuqmrzsuccbhdgsjnwhoasnzv` (`pageId`),
+  CONSTRAINT `fk_kbfdqsixhgxkuqmrzsuccbhdgsjnwhoasnzv` FOREIGN KEY (`pageId`) REFERENCES `freeform_forms_pages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_wulbmfawkwzklnptasmqthxzqeopigyvuycd` FOREIGN KEY (`id`) REFERENCES `freeform_rules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_rules_conditions`
+--
+
+DROP TABLE IF EXISTS `freeform_rules_conditions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_rules_conditions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ruleId` int(11) NOT NULL,
+  `fieldId` int(11) NOT NULL,
+  `operator` varchar(20) NOT NULL,
+  `value` text NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_rules_conditions_ruleId_fk` (`ruleId`),
+  KEY `fk_mzqbwjyzztinsmhgydmimwdqrmlzpofyqcae` (`fieldId`),
+  CONSTRAINT `fk_mzqbwjyzztinsmhgydmimwdqrmlzpofyqcae` FOREIGN KEY (`fieldId`) REFERENCES `freeform_forms_fields` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `freeform_rules_conditions_ruleId_fk` FOREIGN KEY (`ruleId`) REFERENCES `freeform_rules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_rules_fields`
+--
+
+DROP TABLE IF EXISTS `freeform_rules_fields`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_rules_fields` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fieldId` int(11) NOT NULL,
+  `display` varchar(10) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `fk_anoejfabjxbkvxpvrfcfitwsjdxvyhmlebfc` (`fieldId`),
+  CONSTRAINT `fk_anoejfabjxbkvxpvrfcfitwsjdxvyhmlebfc` FOREIGN KEY (`fieldId`) REFERENCES `freeform_forms_fields` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_qweidlhuuxwiahodrgkfgoayeqmukrpptdsb` FOREIGN KEY (`id`) REFERENCES `freeform_rules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_rules_notifications`
+--
+
+DROP TABLE IF EXISTS `freeform_rules_notifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_rules_notifications` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `notificationId` int(11) NOT NULL,
+  `send` tinyint(1) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `fk_ocwczrfkfmwffzydbplwavoedosyluwxlweg` (`notificationId`),
+  CONSTRAINT `fk_oaollvpwohdhwwanhzcgrocgsdjtgkwfizcw` FOREIGN KEY (`id`) REFERENCES `freeform_rules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_ocwczrfkfmwffzydbplwavoedosyluwxlweg` FOREIGN KEY (`notificationId`) REFERENCES `freeform_forms_notifications` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_rules_pages`
+--
+
+DROP TABLE IF EXISTS `freeform_rules_pages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_rules_pages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pageId` int(11) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `fk_vztrgncmdmdeovahkllqvcvsrpnunqqgltyy` (`pageId`),
+  CONSTRAINT `fk_vztrgncmdmdeovahkllqvcvsrpnunqqgltyy` FOREIGN KEY (`pageId`) REFERENCES `freeform_forms_pages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_zzoglswtdpcqsrxmfhxlxqfjobtyeqeymwcx` FOREIGN KEY (`id`) REFERENCES `freeform_rules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_rules_submit_form`
+--
+
+DROP TABLE IF EXISTS `freeform_rules_submit_form`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_rules_submit_form` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `formId` int(11) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `fk_odqhdvsezorkorhnejfnujrtoxvyfxlnvhac` (`formId`),
+  CONSTRAINT `fk_exnyxpugzeiiotsiwuqzduiotufomjlpgdsj` FOREIGN KEY (`id`) REFERENCES `freeform_rules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_odqhdvsezorkorhnejfnujrtoxvyfxlnvhac` FOREIGN KEY (`formId`) REFERENCES `freeform_forms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_saved_forms`
+--
+
+DROP TABLE IF EXISTS `freeform_saved_forms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_saved_forms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sessionId` varchar(100) DEFAULT NULL,
+  `formId` int(11) NOT NULL,
+  `token` varchar(100) NOT NULL,
+  `payload` longtext DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_saved_forms_token_idx` (`token`),
+  KEY `freeform_saved_forms_dateCreated_idx` (`dateCreated`),
+  KEY `freeform_saved_forms_sessionId_idx` (`sessionId`),
+  KEY `freeform_saved_forms_formId_fk` (`formId`),
+  CONSTRAINT `freeform_saved_forms_formId_fk` FOREIGN KEY (`formId`) REFERENCES `freeform_forms` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_session_context`
+--
+
+DROP TABLE IF EXISTS `freeform_session_context`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_session_context` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `contextKey` varchar(100) NOT NULL,
+  `sessionId` varchar(100) NOT NULL,
+  `formId` int(11) NOT NULL,
+  `propertyBag` longtext DEFAULT NULL,
+  `attributeBag` longtext DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_session_context_contextKey_formId_idx` (`contextKey`,`formId`),
+  KEY `freeform_session_context_sessionId_idx` (`sessionId`),
+  KEY `freeform_session_context_formId_fk` (`formId`),
+  CONSTRAINT `freeform_session_context_formId_fk` FOREIGN KEY (`formId`) REFERENCES `freeform_forms` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_spam_reason`
+--
+
+DROP TABLE IF EXISTS `freeform_spam_reason`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_spam_reason` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `submissionId` int(11) NOT NULL,
+  `reasonType` varchar(100) NOT NULL,
+  `reasonMessage` text DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_spam_reason_submissionId_reasonType_idx` (`submissionId`,`reasonType`),
+  CONSTRAINT `freeform_spam_reason_submissionId_fk` FOREIGN KEY (`submissionId`) REFERENCES `freeform_submissions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_statuses`
+--
+
+DROP TABLE IF EXISTS `freeform_statuses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_statuses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `handle` varchar(255) NOT NULL,
+  `color` varchar(30) DEFAULT NULL,
+  `sortOrder` int(11) DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `handle` (`handle`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_submission_notes`
+--
+
+DROP TABLE IF EXISTS `freeform_submission_notes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_submission_notes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `submissionId` int(11) NOT NULL,
+  `note` text DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_submission_notes_submissionId_fk` (`submissionId`),
+  CONSTRAINT `freeform_submission_notes_submissionId_fk` FOREIGN KEY (`submissionId`) REFERENCES `freeform_submissions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_submissions`
+--
+
+DROP TABLE IF EXISTS `freeform_submissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_submissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `incrementalId` int(11) NOT NULL,
+  `userId` int(11) DEFAULT NULL,
+  `statusId` int(11) DEFAULT NULL,
+  `formId` int(11) NOT NULL,
+  `token` varchar(100) NOT NULL,
+  `ip` varchar(46) DEFAULT NULL,
+  `isSpam` tinyint(1) DEFAULT 0,
+  `isHidden` tinyint(1) DEFAULT 0,
+  `requestId` varchar(255) DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `freeform_submissions_incrementalId_unq_idx` (`incrementalId`),
+  UNIQUE KEY `freeform_submissions_token_unq_idx` (`token`),
+  KEY `freeform_submissions_userId_fk` (`userId`),
+  KEY `freeform_submissions_formId_fk` (`formId`),
+  KEY `freeform_submissions_statusId_fk` (`statusId`),
+  CONSTRAINT `freeform_submissions_formId_fk` FOREIGN KEY (`formId`) REFERENCES `freeform_forms` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `freeform_submissions_id_fk` FOREIGN KEY (`id`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `freeform_submissions_statusId_fk` FOREIGN KEY (`statusId`) REFERENCES `freeform_statuses` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `freeform_submissions_userId_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_submissions_contact_1`
+--
+
+DROP TABLE IF EXISTS `freeform_submissions_contact_1`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_submissions_contact_1` (
+  `id` int(11) NOT NULL,
+  `first_name_1` text DEFAULT NULL,
+  `last_name_2` text DEFAULT NULL,
+  `email_3` text DEFAULT NULL,
+  `subject_4` text DEFAULT NULL,
+  `message_5` text DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_huuhivzrlllplzskcmippbnikyplyzpzpxpd` FOREIGN KEY (`id`) REFERENCES `freeform_submissions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_survey_preferences`
+--
+
+DROP TABLE IF EXISTS `freeform_survey_preferences`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_survey_preferences` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `fieldId` int(11) NOT NULL,
+  `chartType` varchar(200) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_survey_preferences_userId_fk` (`userId`),
+  KEY `fk_unhavnarxwljtnvhgkaugyduxmapcsfnxdhw` (`fieldId`),
+  CONSTRAINT `fk_unhavnarxwljtnvhgkaugyduxmapcsfnxdhw` FOREIGN KEY (`fieldId`) REFERENCES `freeform_forms_fields` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `freeform_survey_preferences_userId_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `freeform_unfinalized_files`
+--
+
+DROP TABLE IF EXISTS `freeform_unfinalized_files`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freeform_unfinalized_files` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `assetId` int(11) NOT NULL,
+  `fieldHandle` varchar(255) DEFAULT NULL,
+  `formToken` varchar(255) DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `freeform_unfinalized_files_fieldHandle_formToken_idx` (`fieldHandle`,`formToken`),
+  KEY `freeform_unfinalized_files_assetId_fk` (`assetId`),
+  CONSTRAINT `freeform_unfinalized_files_assetId_fk` FOREIGN KEY (`assetId`) REFERENCES `assets` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `globalsets`
 --
 
@@ -899,7 +1947,7 @@ CREATE TABLE `imagetransformindex` (
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `idx_vzpmedsfmiuipzpwbawggylnxtdzibqxtzzj` (`assetId`,`transformString`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -970,7 +2018,7 @@ CREATE TABLE `migrations` (
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `migrations_track_name_unq_idx` (`track`,`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=367 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=483 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -991,7 +2039,7 @@ CREATE TABLE `plugins` (
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `plugins_handle_unq_idx` (`handle`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1035,7 +2083,7 @@ CREATE TABLE `queue` (
   PRIMARY KEY (`id`),
   KEY `queue_channel_fail_timeUpdated_timePushed_idx` (`channel`,`fail`,`timeUpdated`,`timePushed`),
   KEY `queue_channel_fail_timeUpdated_delay_idx` (`channel`,`fail`,`timeUpdated`,`delay`)
-) ENGINE=InnoDB AUTO_INCREMENT=8315 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8389 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1082,7 +2130,7 @@ CREATE TABLE `relations` (
   CONSTRAINT `relations_fieldId_fk` FOREIGN KEY (`fieldId`) REFERENCES `fields` (`id`) ON DELETE CASCADE,
   CONSTRAINT `relations_sourceId_fk` FOREIGN KEY (`sourceId`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `relations_sourceSiteId_fk` FOREIGN KEY (`sourceSiteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1117,7 +2165,7 @@ CREATE TABLE `revisions` (
   KEY `revisions_creatorId_fk` (`creatorId`),
   CONSTRAINT `revisions_creatorId_fk` FOREIGN KEY (`creatorId`) REFERENCES `users` (`id`) ON DELETE SET NULL,
   CONSTRAINT `revisions_sourceId_fk` FOREIGN KEY (`canonicalId`) REFERENCES `elements` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=808 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=816 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1153,7 +2201,7 @@ CREATE TABLE `searchindexqueue` (
   PRIMARY KEY (`id`),
   KEY `idx_oxgaliebzeejwggwylcfeceibjcutedbzzah` (`elementId`,`siteId`,`reserved`),
   CONSTRAINT `fk_cfcpdquqqgihcwkzhgtvrrppwbiwzujydgtj` FOREIGN KEY (`elementId`) REFERENCES `elements` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1283,7 +2331,7 @@ CREATE TABLE `sessions` (
   KEY `sessions_dateUpdated_idx` (`dateUpdated`),
   KEY `sessions_userId_idx` (`userId`),
   CONSTRAINT `sessions_userId_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2188,7 +3236,7 @@ CREATE TABLE `widgets` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-25 22:48:47
+-- Dump completed on 2025-07-10 16:20:38
 /*M!999999\- enable the sandbox mode */ 
 -- MariaDB dump 10.19  Distrib 10.11.10-MariaDB, for debian-linux-gnu (aarch64)
 --
@@ -2266,7 +3314,9 @@ INSERT INTO `assets` VALUES
 (1321,1,1,NULL,'Cash-App-Dollar-Full_2021-09-18-232323_fqma.png','image',NULL,833,216,17299,NULL,NULL,NULL,'2021-09-18 23:23:23','2021-09-18 23:23:23','2021-09-19 00:21:17'),
 (1324,1,1,1,'6002f8fa51c2ec00048c6c6b.png','image',NULL,400,238,12250,NULL,NULL,NULL,'2021-09-18 23:27:13','2021-09-18 23:27:13','2021-09-19 00:21:15'),
 (1326,1,1,1,'DSC_9682.jpg','image',NULL,3600,2400,3506210,NULL,NULL,NULL,'2021-09-19 00:02:45','2021-09-19 00:02:45','2021-09-19 00:21:18'),
-(1977,1,1,1,'5y4a1550-4.png','image',NULL,2171,3257,5473583,NULL,NULL,NULL,'2022-11-03 00:27:09','2022-11-03 00:27:10','2022-11-03 00:27:10');
+(1977,1,1,1,'5y4a1550-4.png','image',NULL,2171,3257,5473583,NULL,NULL,NULL,'2022-11-03 00:27:09','2022-11-03 00:27:10','2022-11-03 00:27:10'),
+(2229,1,1,1,'crowd-stock.jpeg','image',NULL,1880,1245,211478,NULL,NULL,NULL,'2025-07-01 17:52:33','2025-07-01 17:52:33','2025-07-01 17:52:33'),
+(2238,1,1,1,'jumbo-1.jpg','image',NULL,2048,1367,437247,NULL,NULL,NULL,'2025-07-01 17:54:43','2025-07-01 17:54:43','2025-07-01 17:54:43');
 /*!40000 ALTER TABLE `assets` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -2278,6 +3328,9 @@ commit;
 LOCK TABLES `assets_sites` WRITE;
 /*!40000 ALTER TABLE `assets_sites` DISABLE KEYS */;
 set autocommit=0;
+INSERT INTO `assets_sites` VALUES
+(2229,1,NULL),
+(2238,1,NULL);
 /*!40000 ALTER TABLE `assets_sites` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -3216,6 +4269,7 @@ INSERT INTO `changedfields` VALUES
 (7,1,7,'0','2020-12-03 04:37:12',0,1),
 (7,1,29,'0','2020-12-22 00:37:47',0,1),
 (10,1,3,'d9a8969c-8032-4c8e-a8ab-f64b7f12845e','2022-05-05 01:13:13',0,1),
+(10,1,29,'6d3371dc-c533-4929-9795-94eb1a9e6fc0','2025-07-01 17:54:46',0,1),
 (25,1,1,'442e76f1-c862-42ae-b872-e0f64580dc76','2020-12-02 02:32:31',0,1),
 (25,1,3,'d9a8969c-8032-4c8e-a8ab-f64b7f12845e','2020-12-02 02:32:27',0,1),
 (44,1,15,'f18341a0-c7fc-4169-9d90-9d4045361082','2020-12-14 22:44:54',0,1),
@@ -3225,6 +4279,7 @@ INSERT INTO `changedfields` VALUES
 (44,1,19,'fde43275-44fa-4322-a6e0-4b4abf3d3bba','2020-12-14 22:42:37',0,1),
 (140,1,1,'17f4074b-df91-4b14-a093-a61dcdea1cd8','2020-12-07 01:46:48',0,1),
 (140,1,29,'0','2020-12-22 00:37:58',0,1),
+(140,1,29,'4ec92d0e-0089-40aa-a6a7-4598926c8b5e','2025-07-01 17:52:37',0,1),
 (140,1,30,'0','2020-12-29 04:41:08',0,1),
 (212,1,15,'f18341a0-c7fc-4169-9d90-9d4045361082','2020-12-10 17:26:45',0,1),
 (212,1,19,'fde43275-44fa-4322-a6e0-4b4abf3d3bba','2020-12-10 17:26:45',0,1),
@@ -5296,6 +6351,10 @@ LOCK TABLES `elementactivity` WRITE;
 /*!40000 ALTER TABLE `elementactivity` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `elementactivity` VALUES
+(10,1,1,NULL,'edit','2025-07-01 17:54:45'),
+(10,1,1,NULL,'save','2025-07-01 17:54:46'),
+(140,1,1,NULL,'edit','2025-07-01 17:52:35'),
+(140,1,1,NULL,'save','2025-07-01 17:53:57'),
 (2193,1,1,NULL,'save','2025-06-08 03:31:19'),
 (2195,1,1,NULL,'save','2025-06-08 03:31:28'),
 (2197,1,1,NULL,'save','2025-06-08 03:34:23'),
@@ -5331,7 +6390,7 @@ INSERT INTO `elements` VALUES
 (7,NULL,NULL,NULL,3,'craft\\elements\\Entry',1,0,'2020-11-21 19:28:45','2021-02-17 17:03:08',NULL,NULL,NULL,'2b7cb821-abac-4beb-8c85-750cc42a7d9e'),
 (8,7,NULL,4,3,'craft\\elements\\Entry',1,0,'2020-11-21 19:28:45','2020-11-21 19:28:45',NULL,NULL,NULL,'c955864c-31dd-484a-b6de-e225208a0a66'),
 (9,7,NULL,5,3,'craft\\elements\\Entry',1,0,'2020-11-21 19:28:46','2020-11-21 19:28:46',NULL,NULL,NULL,'a06860d9-bb15-4d97-99e0-f6e3bf1a97f8'),
-(10,NULL,NULL,NULL,4,'craft\\elements\\Entry',1,0,'2020-11-21 19:49:03','2022-05-05 01:13:13',NULL,NULL,NULL,'c869dc1f-407c-42b0-a3c3-519b6f377ade'),
+(10,NULL,NULL,NULL,4,'craft\\elements\\Entry',1,0,'2020-11-21 19:49:03','2025-07-01 17:54:46',NULL,NULL,NULL,'c869dc1f-407c-42b0-a3c3-519b6f377ade'),
 (11,10,NULL,6,4,'craft\\elements\\Entry',1,0,'2020-11-21 19:49:03','2020-11-21 19:49:03',NULL,NULL,NULL,'7b575bb8-9c3e-465b-8dc6-540a18fc9a42'),
 (12,NULL,NULL,NULL,5,'craft\\elements\\Entry',1,0,'2020-11-21 19:49:26','2021-02-17 16:55:15',NULL,NULL,NULL,'8a7dac34-99f7-4754-bb93-fbe156c863bd'),
 (13,12,NULL,7,5,'craft\\elements\\Entry',1,0,'2020-11-21 19:49:26','2020-11-21 19:49:26',NULL,NULL,NULL,'93996b2f-6aea-466d-acb9-3ef76d4b460e'),
@@ -5420,7 +6479,7 @@ INSERT INTO `elements` VALUES
 (137,7,NULL,50,3,'craft\\elements\\Entry',1,0,'2020-12-07 01:26:34','2020-12-07 01:26:34',NULL,NULL,NULL,'eadaab16-a700-40bd-b63f-2c960c4e7903'),
 (138,7,NULL,51,3,'craft\\elements\\Entry',1,0,'2020-12-07 01:30:32','2020-12-07 01:30:32',NULL,NULL,NULL,'b17f796f-c6c0-4edf-8e8a-441dc971663d'),
 (139,7,NULL,52,3,'craft\\elements\\Entry',1,0,'2020-12-07 01:39:56','2020-12-07 01:39:56',NULL,NULL,NULL,'c539a7dd-2541-480f-8ea0-43144e7c53b6'),
-(140,NULL,NULL,NULL,13,'craft\\elements\\Entry',1,0,'2020-12-07 01:41:39','2020-12-29 04:41:07',NULL,NULL,NULL,'4586288b-e57f-4180-aac9-3da7051c9d3d'),
+(140,NULL,NULL,NULL,13,'craft\\elements\\Entry',1,0,'2020-12-07 01:41:39','2025-07-01 17:53:57',NULL,NULL,NULL,'4586288b-e57f-4180-aac9-3da7051c9d3d'),
 (141,140,NULL,53,13,'craft\\elements\\Entry',1,0,'2020-12-07 01:41:39','2020-12-07 01:41:39',NULL,NULL,NULL,'23ac07dc-22d5-41e2-a71f-fb538ee1793f'),
 (142,140,NULL,54,13,'craft\\elements\\Entry',1,0,'2020-12-07 01:44:24','2020-12-07 01:44:24',NULL,NULL,NULL,'48546568-cd1f-4669-9db6-d467989ea107'),
 (143,140,NULL,55,13,'craft\\elements\\Entry',1,0,'2020-12-07 01:46:22','2020-12-07 01:46:22',NULL,NULL,NULL,'a2b8ef13-d9b7-4887-a1c8-fd89c8063d58'),
@@ -7094,7 +8153,17 @@ INSERT INTO `elements` VALUES
 (2223,NULL,NULL,NULL,25,'craft\\elements\\Entry',1,0,'2025-06-08 04:05:35','2025-06-08 04:05:42',NULL,NULL,NULL,'1e77cf8d-fd5e-4ff3-81b5-2bf92f95af03'),
 (2224,2223,NULL,805,25,'craft\\elements\\Entry',1,0,'2025-06-08 04:05:42','2025-06-08 04:05:42',NULL,NULL,NULL,'8cad0124-8277-447b-ae7e-339eb91b6cc5'),
 (2226,2209,NULL,806,25,'craft\\elements\\Entry',1,0,'2025-06-09 13:01:44','2025-06-09 13:01:44',NULL,NULL,NULL,'7a175b19-4367-4a75-b4c0-8e244fcfa7b6'),
-(2228,2209,NULL,807,25,'craft\\elements\\Entry',1,0,'2025-06-19 13:36:25','2025-06-19 13:36:25',NULL,NULL,NULL,'a349b0b3-7311-42cb-82ff-bd76288a14a8');
+(2228,2209,NULL,807,25,'craft\\elements\\Entry',1,0,'2025-06-19 13:36:25','2025-06-19 13:36:25',NULL,NULL,NULL,'a349b0b3-7311-42cb-82ff-bd76288a14a8'),
+(2229,NULL,NULL,NULL,12,'craft\\elements\\Asset',1,0,'2025-07-01 17:52:33','2025-07-01 17:52:33',NULL,NULL,NULL,'197e1fea-bda0-416a-93d4-6a65b1336be4'),
+(2231,140,NULL,808,13,'craft\\elements\\Entry',1,0,'2025-07-01 17:52:37','2025-07-01 17:52:37',NULL,NULL,NULL,'a945da2b-6be5-4980-858c-197186eeb8ec'),
+(2232,637,NULL,809,14,'craft\\elements\\Entry',1,0,'2020-12-29 04:41:07','2025-07-01 17:52:37',NULL,NULL,NULL,'215eac5c-f008-4324-a968-050989a19af5'),
+(2233,600,NULL,810,14,'craft\\elements\\Entry',1,0,'2020-12-29 04:41:07','2025-07-01 17:52:37',NULL,NULL,NULL,'d794f081-384a-418f-b049-eb76e1f3273f'),
+(2234,601,NULL,811,14,'craft\\elements\\Entry',1,0,'2020-12-29 04:41:07','2025-07-01 17:52:37',NULL,NULL,NULL,'bb18e7d3-6f19-44d5-ac3a-239c125bb3ac'),
+(2235,602,NULL,812,14,'craft\\elements\\Entry',1,0,'2020-12-29 04:41:07','2025-07-01 17:52:37',NULL,NULL,NULL,'2897bc7b-2223-4af0-b4be-e94bc492e9e1'),
+(2236,603,NULL,813,14,'craft\\elements\\Entry',1,0,'2020-12-29 04:41:07','2025-07-01 17:52:37',NULL,NULL,NULL,'ab639ca1-493d-47ef-a5ca-7f1b0cb1e4a4'),
+(2237,140,NULL,814,13,'craft\\elements\\Entry',1,0,'2025-07-01 17:53:57','2025-07-01 17:53:57',NULL,NULL,NULL,'145695a0-b3aa-4026-934e-6d3b9eb16e9d'),
+(2238,NULL,NULL,NULL,12,'craft\\elements\\Asset',1,0,'2025-07-01 17:54:43','2025-07-01 17:54:43',NULL,NULL,NULL,'5958f9f3-1fc3-4bfe-bbe2-5ea25da8f9c1'),
+(2240,10,NULL,815,4,'craft\\elements\\Entry',1,0,'2025-07-01 17:54:46','2025-07-01 17:54:46',NULL,NULL,NULL,'d291d75c-965a-4e65-b85c-7b9a843839d9');
 /*!40000 ALTER TABLE `elements` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -7471,7 +8540,17 @@ INSERT INTO `elements_owners` VALUES
 (2201,2197,1),
 (2202,2197,2),
 (2203,2197,3),
-(2206,2205,1);
+(2206,2205,1),
+(2232,2231,1),
+(2232,2237,1),
+(2233,2231,2),
+(2233,2237,2),
+(2234,2231,3),
+(2234,2237,3),
+(2235,2231,4),
+(2235,2237,4),
+(2236,2231,5),
+(2236,2237,5);
 /*!40000 ALTER TABLE `elements_owners` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -7493,7 +8572,7 @@ INSERT INTO `elements_sites` VALUES
 (7,7,1,'Tour','tour','tour',NULL,1,'2020-11-21 19:28:45','2020-11-21 19:28:45','cf825395-264b-4c2d-b56a-4d316c239362'),
 (8,8,1,'Tour','tour','tour',NULL,1,'2020-11-21 19:28:45','2020-11-21 19:28:45','f00cc952-4fb6-44ff-8a40-6742b13c0a9a'),
 (9,9,1,'Tour','tour','tour',NULL,1,'2020-11-21 19:28:46','2020-11-21 19:28:46','cb403ec7-df2c-403d-8277-0aa8b90e7d49'),
-(10,10,1,'About','about','about','{\"d9a8969c-8032-4c8e-a8ab-f64b7f12845e\":\"<h4>When Dave Rudolph first picked up a guitar at just 3 years old, few could\'ve predicted the journey it would lead him on. The love and pursuit of music has taken him across the country and made him lifelong fans and friends alike.</h4>\\n<h4><br /></h4>\\n<h4>A veteran performer from Akron, Ohio, Dave has performed over 1000 live shows with a wide variety of bands, both live and in the studio. Dave has opened for major acts, such as Jake Owen, Chris Janson, Tracy Byrd, Tyler Farr, Saving Abel, Josh Thompson, and Craig Campbell. </h4>\\n<h4><br /></h4>\\n<h4>Dave has performed at events ranging from the NFL Hall of Fame Induction Ceremony, WGAR Country Jam, CMA Fest, Bus Call, Piqua Bike Fest, and Hamler Country Fest, to the shows at Tootsies Orchid Lounge, Honky Tonk Central, Kid Rock\'s Big Ass Honky Tonk, Dierks Bentley\'s Whiskey Row, Thirsty Cowboy, The Little Red Rooster, The Dusty Armadillo, and the world famous traveling Jaegermeister Stage. Tours have laid rubber from Cleveland to Nashville, Oklahoma City to Seattle, Bemidji to Woodruff, and many places between. </h4>\\n<h4><br /></h4>\\n<h4>While currently residing in Nashville, be sure to catch Dave performing with his band on Lower Broadway.</h4>\\n<h4><br /></h4>\\n<h4>Currently available for gigs as a frontman, sideman (vocal harmonies/lead guitar), co-writing, session work, and guitar lessons - send me a message through the contact page.</h4>\\n<figure><img class=\\\"img-fluid\\\" src=\\\"{asset:621:url||/uploads/DSC_9613.jpg}\\\" alt=\\\"Dave Rudolph Fender Tele Telecaster Black Leather Jacket Ripped Jeans Rustic Brooding Intense Serious Musician Promo Picture Photo Guitar Sexy Man Guitarist Singer American Country Rock Outlaw\\\" /><figcaption>Dave Rudolph with his Telecaster - Photo by Anna Bey Photography</figcaption></figure>\"}',1,'2020-11-21 19:49:03','2020-11-21 19:49:03','e6acbfa1-27ac-4c35-8c9e-70f2f3cef3d3'),
+(10,10,1,'About','about','about','{\"6d3371dc-c533-4929-9795-94eb1a9e6fc0\":[2238],\"d9a8969c-8032-4c8e-a8ab-f64b7f12845e\":\"<h4>When Dave Rudolph first picked up a guitar at just 3 years old, few could\'ve predicted the journey it would lead him on. The love and pursuit of music has taken him across the country and made him lifelong fans and friends alike.</h4>\\n<h4><br /></h4>\\n<h4>A veteran performer from Akron, Ohio, Dave has performed over 1000 live shows with a wide variety of bands, both live and in the studio. Dave has opened for major acts, such as Jake Owen, Chris Janson, Tracy Byrd, Tyler Farr, Saving Abel, Josh Thompson, and Craig Campbell. </h4>\\n<h4><br /></h4>\\n<h4>Dave has performed at events ranging from the NFL Hall of Fame Induction Ceremony, WGAR Country Jam, CMA Fest, Bus Call, Piqua Bike Fest, and Hamler Country Fest, to the shows at Tootsies Orchid Lounge, Honky Tonk Central, Kid Rock\'s Big Ass Honky Tonk, Dierks Bentley\'s Whiskey Row, Thirsty Cowboy, The Little Red Rooster, The Dusty Armadillo, and the world famous traveling Jaegermeister Stage. Tours have laid rubber from Cleveland to Nashville, Oklahoma City to Seattle, Bemidji to Woodruff, and many places between. </h4>\\n<h4><br /></h4>\\n<h4>While currently residing in Nashville, be sure to catch Dave performing with his band on Lower Broadway.</h4>\\n<h4><br /></h4>\\n<h4>Currently available for gigs as a frontman, sideman (vocal harmonies/lead guitar), co-writing, session work, and guitar lessons - send me a message through the contact page.</h4>\\n<figure><img class=\\\"img-fluid\\\" src=\\\"{asset:621:url||/uploads/DSC_9613.jpg}\\\" alt=\\\"Dave Rudolph Fender Tele Telecaster Black Leather Jacket Ripped Jeans Rustic Brooding Intense Serious Musician Promo Picture Photo Guitar Sexy Man Guitarist Singer American Country Rock Outlaw\\\" /><figcaption>Dave Rudolph with his Telecaster - Photo by Anna Bey Photography</figcaption></figure>\"}',1,'2020-11-21 19:49:03','2025-07-01 17:54:46','e6acbfa1-27ac-4c35-8c9e-70f2f3cef3d3'),
 (11,11,1,'About','about','about',NULL,1,'2020-11-21 19:49:03','2020-11-21 19:49:03','02a35f97-f31b-4df0-996d-9fe7fd529588'),
 (12,12,1,'Contact','contact','contact',NULL,1,'2020-11-21 19:49:26','2020-11-21 19:49:26','9d2f865f-9380-43dd-819e-892fbdf5896f'),
 (13,13,1,'Contact','contact','contact',NULL,1,'2020-11-21 19:49:26','2020-11-21 19:49:26','6b81eb0c-7cde-4269-ae92-38b31a2eeb15'),
@@ -7582,7 +8661,7 @@ INSERT INTO `elements_sites` VALUES
 (137,137,1,'Tour','tour','tour',NULL,1,'2020-12-07 01:26:34','2020-12-07 01:26:34','26b7d0c4-6734-48a7-b73c-26a17dc41f57'),
 (138,138,1,'Tour','tour','tour','{\"4814a600-495f-465f-898b-c572d5076839\":\"FUCK SHIT\"}',1,'2020-12-07 01:30:32','2020-12-07 01:30:32','24323999-809a-4ba6-adf6-97397cb617a8'),
 (139,139,1,'Tour','tour','tour',NULL,1,'2020-12-07 01:39:56','2020-12-07 01:39:56','a63cfad2-96bc-44f0-87e1-b4e58f871267'),
-(140,140,1,'Media','media','media',NULL,1,'2020-12-07 01:41:39','2020-12-07 01:41:39','53a81277-81f5-4056-8193-1680e7340529'),
+(140,140,1,'Media','media','media','{\"4ec92d0e-0089-40aa-a6a7-4598926c8b5e\":[2229]}',1,'2020-12-07 01:41:39','2025-07-01 17:52:37','53a81277-81f5-4056-8193-1680e7340529'),
 (141,141,1,'Media','media','media',NULL,1,'2020-12-07 01:41:39','2020-12-07 01:41:39','1bcedbad-9b90-45b2-9c61-b5311b5242a1'),
 (142,142,1,'Media','media','media',NULL,1,'2020-12-07 01:44:24','2020-12-07 01:44:24','89c412a7-7d2d-49e0-ad75-cccd6b2cb2e5'),
 (143,143,1,'Media','media','media','{\"17f4074b-df91-4b14-a093-a61dcdea1cd8\":\"TESTING !@#\"}',1,'2020-12-07 01:46:22','2020-12-07 01:46:22','6abd721e-3fd2-402f-b338-8012d38411ec'),
@@ -9256,7 +10335,17 @@ INSERT INTO `elements_sites` VALUES
 (2223,2223,1,'Contact','contact','navigation/contact','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":false,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":false,\"84dc8940-8450-44e8-bd29-a12af88c7e8d\":[12]}',1,'2025-06-08 04:05:35','2025-06-19 13:59:01','28ac131a-89cc-4e93-ae34-c21eee0ae73a'),
 (2224,2224,1,'Contact','contact','navigation/contact','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":false,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":false}',1,'2025-06-08 04:05:42','2025-06-08 04:05:42','1303ca2a-d386-4daa-903f-7bba28361a06'),
 (2226,2226,1,'Tour','tour','navigation/tour','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":true,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":false}',1,'2025-06-09 13:01:44','2025-06-09 13:01:44','76a48416-47b5-4772-886e-27dc7dd03bc7'),
-(2228,2228,1,'Tour','tour','navigation/tour','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":false,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":false}',1,'2025-06-19 13:36:25','2025-06-19 13:36:25','edc2c42d-3c96-450c-a50a-8753c9d8904a');
+(2228,2228,1,'Tour','tour','navigation/tour','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":false,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":false}',1,'2025-06-19 13:36:25','2025-06-19 13:36:25','edc2c42d-3c96-450c-a50a-8753c9d8904a'),
+(2229,2229,1,'Crowd stock',NULL,NULL,NULL,1,'2025-07-01 17:52:33','2025-07-01 17:52:33','9fc662d2-116a-4068-8016-18c191eacf79'),
+(2231,2231,1,'Media','media','media','{\"4ec92d0e-0089-40aa-a6a7-4598926c8b5e\":[2229]}',1,'2025-07-01 17:52:37','2025-07-01 17:52:37','0a466d0b-744e-41b6-b40e-0883a2bad970'),
+(2232,2232,1,NULL,NULL,NULL,'{\"947990e2-e3eb-4698-84ef-3ea12d55a508\":\"\\\"Ride or Die\\\" Lyric Video\",\"38d3463d-b8fa-4cae-84e1-ee183a8745e4\":\"<iframe src=\\\"https://www.youtube.com/embed/Lixuqctx_48\\\" frameborder=\\\"0\\\" allow=\\\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\\\" allowfullscreen></iframe>\"}',1,'2025-07-01 17:52:37','2025-07-01 17:52:37','4b21f4cd-f20d-41c2-810d-f9f11aa02d81'),
+(2233,2233,1,NULL,NULL,NULL,'{\"947990e2-e3eb-4698-84ef-3ea12d55a508\":\"\\\"Better Place\\\" Lyric Video\",\"38d3463d-b8fa-4cae-84e1-ee183a8745e4\":\"<iframe src=\\\"https://www.youtube.com/embed/WTLPXpiiZ1U\\\" frameborder=\\\"0\\\" allow=\\\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\\\" allowfullscreen></iframe>\"}',1,'2025-07-01 17:52:37','2025-07-01 17:52:37','b6d10822-0851-423f-aa1b-8a0a27cc9e7d'),
+(2234,2234,1,NULL,NULL,NULL,'{\"947990e2-e3eb-4698-84ef-3ea12d55a508\":\"\\\"Missing You Morning\\\" Lyric Video\",\"38d3463d-b8fa-4cae-84e1-ee183a8745e4\":\"<iframe src=\\\"https://www.youtube.com/embed/vG5_KFNb93Y\\\" frameborder=\\\"0\\\" allow=\\\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\\\" allowfullscreen></iframe>\"}',1,'2025-07-01 17:52:37','2025-07-01 17:52:37','d254e84f-ef66-4707-ab52-500dbc8cc502'),
+(2235,2235,1,NULL,NULL,NULL,'{\"947990e2-e3eb-4698-84ef-3ea12d55a508\":\"God\'s Country Studio Cover\",\"38d3463d-b8fa-4cae-84e1-ee183a8745e4\":\"<iframe src=\\\"https://www.youtube.com/embed/rf7eO2Yqaj8\\\" frameborder=\\\"0\\\" allow=\\\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\\\" allowfullscreen></iframe>\"}',1,'2025-07-01 17:52:37','2025-07-01 17:52:37','195b4f84-6f7a-4ec8-9b8a-f6e681d43b14'),
+(2236,2236,1,NULL,NULL,NULL,'{\"947990e2-e3eb-4698-84ef-3ea12d55a508\":\"Live Performance Cellphone Videos\",\"38d3463d-b8fa-4cae-84e1-ee183a8745e4\":\"<iframe src=\\\"https://www.youtube.com/embed/VhfBG6IFoB4\\\" frameborder=\\\"0\\\" allow=\\\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\\\" allowfullscreen></iframe>\"}',1,'2025-07-01 17:52:37','2025-07-01 17:52:37','e7f77e26-db24-4d3f-a738-4046f929e9f2'),
+(2237,2237,1,'Media','media','media','{\"4ec92d0e-0089-40aa-a6a7-4598926c8b5e\":[2229]}',1,'2025-07-01 17:53:57','2025-07-01 17:53:57','d26698a3-01b9-4156-ab9f-c4d4e795ad4d'),
+(2238,2238,1,'Jumbo 1',NULL,NULL,NULL,1,'2025-07-01 17:54:43','2025-07-01 17:54:43','9f0371d0-149d-44c6-850a-99edfdfd1778'),
+(2240,2240,1,'About','about','about','{\"6d3371dc-c533-4929-9795-94eb1a9e6fc0\":[2238],\"d9a8969c-8032-4c8e-a8ab-f64b7f12845e\":\"<h4>When Dave Rudolph first picked up a guitar at just 3 years old, few could\'ve predicted the journey it would lead him on. The love and pursuit of music has taken him across the country and made him lifelong fans and friends alike.</h4>\\n<h4><br /></h4>\\n<h4>A veteran performer from Akron, Ohio, Dave has performed over 1000 live shows with a wide variety of bands, both live and in the studio. Dave has opened for major acts, such as Jake Owen, Chris Janson, Tracy Byrd, Tyler Farr, Saving Abel, Josh Thompson, and Craig Campbell. </h4>\\n<h4><br /></h4>\\n<h4>Dave has performed at events ranging from the NFL Hall of Fame Induction Ceremony, WGAR Country Jam, CMA Fest, Bus Call, Piqua Bike Fest, and Hamler Country Fest, to the shows at Tootsies Orchid Lounge, Honky Tonk Central, Kid Rock\'s Big Ass Honky Tonk, Dierks Bentley\'s Whiskey Row, Thirsty Cowboy, The Little Red Rooster, The Dusty Armadillo, and the world famous traveling Jaegermeister Stage. Tours have laid rubber from Cleveland to Nashville, Oklahoma City to Seattle, Bemidji to Woodruff, and many places between. </h4>\\n<h4><br /></h4>\\n<h4>While currently residing in Nashville, be sure to catch Dave performing with his band on Lower Broadway.</h4>\\n<h4><br /></h4>\\n<h4>Currently available for gigs as a frontman, sideman (vocal harmonies/lead guitar), co-writing, session work, and guitar lessons - send me a message through the contact page.</h4>\\n<figure><img class=\\\"img-fluid\\\" src=\\\"{asset:621:url||/uploads/DSC_9613.jpg}\\\" alt=\\\"Dave Rudolph Fender Tele Telecaster Black Leather Jacket Ripped Jeans Rustic Brooding Intense Serious Musician Promo Picture Photo Guitar Sexy Man Guitarist Singer American Country Rock Outlaw\\\" /><figcaption>Dave Rudolph with his Telecaster - Photo by Anna Bey Photography</figcaption></figure>\"}',1,'2025-07-01 17:54:46','2025-07-01 17:54:46','3cfd91b9-f2a3-42d2-a743-2cc2b4a3860b');
 /*!40000 ALTER TABLE `elements_sites` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -11019,7 +12108,15 @@ INSERT INTO `entries` VALUES
 (2223,11,NULL,NULL,NULL,11,'2025-06-08 04:05:00',NULL,'live',NULL,NULL,'2025-06-08 04:05:35','2025-06-08 04:05:42'),
 (2224,11,NULL,NULL,NULL,11,'2025-06-08 04:05:00',NULL,'live',NULL,NULL,'2025-06-08 04:05:42','2025-06-08 04:05:42'),
 (2226,11,NULL,NULL,NULL,11,'2025-06-08 04:03:00',NULL,'live',NULL,NULL,'2025-06-09 13:01:44','2025-06-09 13:01:44'),
-(2228,11,NULL,NULL,NULL,11,'2025-06-08 04:03:00',NULL,'live',NULL,NULL,'2025-06-19 13:36:25','2025-06-19 13:36:25');
+(2228,11,NULL,NULL,NULL,11,'2025-06-08 04:03:00',NULL,'live',NULL,NULL,'2025-06-19 13:36:25','2025-06-19 13:36:25'),
+(2231,7,NULL,NULL,NULL,7,'2020-12-07 01:41:00',NULL,'live',NULL,NULL,'2025-07-01 17:52:37','2025-07-01 17:52:37'),
+(2232,NULL,NULL,2231,30,12,'2020-12-29 04:41:07',NULL,'live',NULL,NULL,'2025-07-01 17:52:37','2025-07-01 17:52:37'),
+(2233,NULL,NULL,2231,30,12,'2020-12-22 00:26:48',NULL,'live',NULL,NULL,'2025-07-01 17:52:37','2025-07-01 17:52:37'),
+(2234,NULL,NULL,2231,30,12,'2020-12-22 00:26:48',NULL,'live',NULL,NULL,'2025-07-01 17:52:37','2025-07-01 17:52:37'),
+(2235,NULL,NULL,2231,30,12,'2020-12-22 00:26:48',NULL,'live',NULL,NULL,'2025-07-01 17:52:37','2025-07-01 17:52:37'),
+(2236,NULL,NULL,2231,30,12,'2020-12-22 00:26:48',NULL,'live',NULL,NULL,'2025-07-01 17:52:37','2025-07-01 17:52:37'),
+(2237,7,NULL,NULL,NULL,7,'2020-12-07 01:41:00',NULL,'live',NULL,NULL,'2025-07-01 17:53:57','2025-07-01 17:53:57'),
+(2240,4,NULL,NULL,NULL,4,'2020-11-21 19:49:00',NULL,'live',NULL,NULL,'2025-07-01 17:54:46','2025-07-01 17:54:46');
 /*!40000 ALTER TABLE `entries` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -12451,6 +13548,532 @@ UNLOCK TABLES;
 commit;
 
 --
+-- Dumping data for table `freeform_crm_fields`
+--
+
+LOCK TABLES `freeform_crm_fields` WRITE;
+/*!40000 ALTER TABLE `freeform_crm_fields` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_crm_fields` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_email_marketing_fields`
+--
+
+LOCK TABLES `freeform_email_marketing_fields` WRITE;
+/*!40000 ALTER TABLE `freeform_email_marketing_fields` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_email_marketing_fields` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_email_marketing_lists`
+--
+
+LOCK TABLES `freeform_email_marketing_lists` WRITE;
+/*!40000 ALTER TABLE `freeform_email_marketing_lists` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_email_marketing_lists` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_export_notifications`
+--
+
+LOCK TABLES `freeform_export_notifications` WRITE;
+/*!40000 ALTER TABLE `freeform_export_notifications` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_export_notifications` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_export_profiles`
+--
+
+LOCK TABLES `freeform_export_profiles` WRITE;
+/*!40000 ALTER TABLE `freeform_export_profiles` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_export_profiles` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_export_settings`
+--
+
+LOCK TABLES `freeform_export_settings` WRITE;
+/*!40000 ALTER TABLE `freeform_export_settings` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_export_settings` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_favorite_fields`
+--
+
+LOCK TABLES `freeform_favorite_fields` WRITE;
+/*!40000 ALTER TABLE `freeform_favorite_fields` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_favorite_fields` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_feed_messages`
+--
+
+LOCK TABLES `freeform_feed_messages` WRITE;
+/*!40000 ALTER TABLE `freeform_feed_messages` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_feed_messages` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_feeds`
+--
+
+LOCK TABLES `freeform_feeds` WRITE;
+/*!40000 ALTER TABLE `freeform_feeds` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_feeds` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_fields_type_groups`
+--
+
+LOCK TABLES `freeform_fields_type_groups` WRITE;
+/*!40000 ALTER TABLE `freeform_fields_type_groups` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `freeform_fields_type_groups` VALUES
+(1,'#007add','Text','[\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\TextField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\TextareaField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\EmailField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\NumberField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\Pro\\\\PhoneField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\Pro\\\\DatetimeField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\Pro\\\\WebsiteField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\Pro\\\\RegexField\"]','2025-07-01 17:58:24','2025-07-01 17:58:24','bae7244f-6f0a-44fd-affd-a89b9456a4d2'),
+(2,'#9013fe','Options','[\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\DropdownField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\MultipleSelectField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\CheckboxField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\CheckboxesField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\RadiosField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\Pro\\\\OpinionScaleField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\Pro\\\\RatingField\"]','2025-07-01 17:58:24','2025-07-01 17:58:24','cba9f6c4-0c63-4342-b214-3c14752067ef'),
+(3,'#f5a623','Files','[\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\FileUploadField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\Pro\\\\FileDragAndDropField\"]','2025-07-01 17:58:24','2025-07-01 17:58:24','ee700d8e-11a9-4049-a72d-b8646ff3eabb'),
+(4,'#5d9901','Special','[\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\Pro\\\\GroupField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\Pro\\\\TableField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\Pro\\\\ConfirmationField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\Pro\\\\PasswordField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\Pro\\\\CalculationField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\Pro\\\\SignatureField\"]','2025-07-01 17:58:24','2025-07-01 17:58:24','354e17c2-fab6-440e-9582-4a82326acbe9'),
+(5,'#000000','Content','[\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\HtmlField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\Pro\\\\RichTextField\"]','2025-07-01 17:58:24','2025-07-01 17:58:24','2a8a4154-8f28-46f8-a80b-f4426f795f0f'),
+(6,'#9b9b9b','Hidden','[\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\HiddenField\",\"Solspace\\\\Freeform\\\\Fields\\\\Implementations\\\\Pro\\\\InvisibleField\"]','2025-07-01 17:58:24','2025-07-01 17:58:24','7ae7b325-82c9-424a-b7c5-703bd7bd8b0e');
+/*!40000 ALTER TABLE `freeform_fields_type_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_forms`
+--
+
+LOCK TABLES `freeform_forms` WRITE;
+/*!40000 ALTER TABLE `freeform_forms` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `freeform_forms` VALUES
+(1,'Solspace\\Freeform\\Form\\Types\\Regular','Contact','contact',0,'{\"behavior\":{\"ajax\":true,\"successBehavior\":\"reload\",\"duplicateCheck\":\"no_limit\",\"showProcessingSpinner\":true,\"successTemplate\":null,\"stopSubmissionsAfter\":null,\"showProcessingText\":true,\"returnUrl\":\"\",\"processingText\":\"Processing...\",\"successMessage\":\"Form has been submitted successfully!\",\"errorMessage\":\"Sorry, there was an error submitting the form. Please try again.\"},\"general\":{\"name\":\"Contact\",\"storeData\":true,\"handle\":\"contact\",\"defaultStatus\":2,\"type\":\"Solspace\\\\Freeform\\\\Form\\\\Types\\\\Regular\",\"collectIpAddresses\":true,\"sites\":[\"1\"],\"allowUsersToOptIn\":false,\"translations\":false,\"optInCheckbox\":null,\"submissionTitle\":\"{{ dateCreated|date(\\\"Y-m-d H:i:s\\\") }}\",\"formattingTemplate\":\"tailwind-3\\/index.twig\",\"description\":\"\",\"color\":\"#940F56\",\"attributes\":{\"form\":{},\"row\":{},\"success\":{},\"errors\":{}}}}',NULL,1,1,NULL,'2025-07-01 18:02:41','2025-07-01 18:14:21','6ff80b50-5d94-4457-a63b-0a0ef9fe2e01');
+/*!40000 ALTER TABLE `freeform_forms` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_forms_fields`
+--
+
+LOCK TABLES `freeform_forms_fields` WRITE;
+/*!40000 ALTER TABLE `freeform_forms_fields` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `freeform_forms_fields` VALUES
+(1,1,'Solspace\\Freeform\\Fields\\Implementations\\TextField','{\"label\":\"First Name\",\"encrypted\":false,\"handle\":\"firstName\",\"fieldType\":null,\"instructions\":\"\",\"attributes\":{\"input\":{},\"label\":{},\"instructions\":{},\"container\":{},\"error\":{},\"option\":{},\"optionLabel\":{}},\"placeholder\":\"\",\"required\":true,\"requiredMessage\":\"\",\"defaultValue\":\"\",\"maxLength\":null}',1,0,'2025-07-01 18:11:48','2025-07-01 18:13:56','98401b4f-b30f-4533-bf98-5167c43fcbdd'),
+(2,1,'Solspace\\Freeform\\Fields\\Implementations\\TextField','{\"label\":\"Last Name\",\"encrypted\":false,\"handle\":\"lastName\",\"fieldType\":null,\"instructions\":\"\",\"attributes\":{\"input\":{},\"label\":{},\"instructions\":{},\"container\":{},\"error\":{},\"option\":{},\"optionLabel\":{}},\"placeholder\":\"\",\"required\":true,\"requiredMessage\":\"\",\"defaultValue\":\"\",\"maxLength\":null}',2,0,'2025-07-01 18:12:03','2025-07-01 18:13:56','5069071a-94da-46d8-80d7-481f739427ca'),
+(3,1,'Solspace\\Freeform\\Fields\\Implementations\\EmailField','{\"label\":\"Email\",\"encrypted\":false,\"handle\":\"email\",\"fieldType\":null,\"instructions\":\"\",\"attributes\":{\"input\":{},\"label\":{},\"instructions\":{},\"container\":{},\"error\":{},\"option\":{},\"optionLabel\":{}},\"placeholder\":\"\",\"required\":true,\"requiredMessage\":\"\",\"defaultValue\":\"\",\"maxLength\":null}',3,0,'2025-07-01 18:12:29','2025-07-01 18:12:29','80887942-327e-450e-a198-1f0b84366282'),
+(4,1,'Solspace\\Freeform\\Fields\\Implementations\\TextField','{\"label\":\"Subject\",\"encrypted\":false,\"handle\":\"subject\",\"fieldType\":null,\"instructions\":\"\",\"attributes\":{\"input\":{},\"label\":{},\"instructions\":{},\"container\":{},\"error\":{},\"option\":{},\"optionLabel\":{}},\"placeholder\":\"\",\"required\":true,\"requiredMessage\":\"\",\"defaultValue\":\"\",\"maxLength\":null}',4,0,'2025-07-01 18:12:43','2025-07-01 18:13:56','6a9cc343-6059-48a9-ba77-e1dbe694dd73'),
+(5,1,'Solspace\\Freeform\\Fields\\Implementations\\TextareaField','{\"defaultValue\":\"\",\"label\":\"Message\",\"encrypted\":false,\"rows\":6,\"handle\":\"message\",\"fieldType\":null,\"instructions\":\"\",\"attributes\":{\"input\":{},\"label\":{},\"instructions\":{},\"container\":{},\"error\":{},\"option\":{},\"optionLabel\":{}},\"placeholder\":\"\",\"required\":false,\"requiredMessage\":\"\",\"maxLength\":null}',5,0,'2025-07-01 18:13:56','2025-07-01 18:13:56','861aebba-eb73-4116-a23d-b53a8f0eca48');
+/*!40000 ALTER TABLE `freeform_forms_fields` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_forms_groups`
+--
+
+LOCK TABLES `freeform_forms_groups` WRITE;
+/*!40000 ALTER TABLE `freeform_forms_groups` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_forms_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_forms_groups_entries`
+--
+
+LOCK TABLES `freeform_forms_groups_entries` WRITE;
+/*!40000 ALTER TABLE `freeform_forms_groups_entries` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_forms_groups_entries` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_forms_integrations`
+--
+
+LOCK TABLES `freeform_forms_integrations` WRITE;
+/*!40000 ALTER TABLE `freeform_forms_integrations` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_forms_integrations` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_forms_layouts`
+--
+
+LOCK TABLES `freeform_forms_layouts` WRITE;
+/*!40000 ALTER TABLE `freeform_forms_layouts` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `freeform_forms_layouts` VALUES
+(1,1,'2025-07-01 18:11:48','2025-07-01 18:11:48','e0f9264e-468e-4a41-811c-fbb2c3078184');
+/*!40000 ALTER TABLE `freeform_forms_layouts` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_forms_notifications`
+--
+
+LOCK TABLES `freeform_forms_notifications` WRITE;
+/*!40000 ALTER TABLE `freeform_forms_notifications` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_forms_notifications` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_forms_pages`
+--
+
+LOCK TABLES `freeform_forms_pages` WRITE;
+/*!40000 ALTER TABLE `freeform_forms_pages` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `freeform_forms_pages` VALUES
+(1,1,1,'Page 1',0,'{\"buttons\":{\"layout\":\"save back|submit\",\"attributes\":{\"container\":{},\"column\":{},\"submit\":{},\"back\":{},\"save\":{}},\"submitLabel\":\"Submit\",\"back\":true,\"backLabel\":\"Back\",\"save\":false,\"saveLabel\":\"Save\"}}','2025-07-01 18:11:48','2025-07-01 18:11:48','182d6c0e-0da5-4190-b4f3-77f3bc60a2bb');
+/*!40000 ALTER TABLE `freeform_forms_pages` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_forms_rows`
+--
+
+LOCK TABLES `freeform_forms_rows` WRITE;
+/*!40000 ALTER TABLE `freeform_forms_rows` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `freeform_forms_rows` VALUES
+(1,1,1,0,'2025-07-01 18:11:48','2025-07-01 18:11:48','8faec2e0-9b1e-450b-befe-a32813183853'),
+(2,1,1,1,'2025-07-01 18:12:03','2025-07-01 18:12:03','3d013872-d519-452a-be7f-6518c9ab3d89'),
+(3,1,1,2,'2025-07-01 18:12:29','2025-07-01 18:12:29','6a082633-f0fa-4903-ae77-012a7fd560cc'),
+(4,1,1,3,'2025-07-01 18:12:43','2025-07-01 18:12:43','4e5a75aa-5a92-411d-b2be-74d46b6245df'),
+(5,1,1,4,'2025-07-01 18:13:56','2025-07-01 18:13:56','31a77060-1aa0-43f7-9c11-e9ee751827b8');
+/*!40000 ALTER TABLE `freeform_forms_rows` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_forms_sites`
+--
+
+LOCK TABLES `freeform_forms_sites` WRITE;
+/*!40000 ALTER TABLE `freeform_forms_sites` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `freeform_forms_sites` VALUES
+(1,1,1,'2025-07-01 18:02:41','2025-07-01 18:02:41','29591f27-d948-4cce-ac95-ae0084294867');
+/*!40000 ALTER TABLE `freeform_forms_sites` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_forms_translations`
+--
+
+LOCK TABLES `freeform_forms_translations` WRITE;
+/*!40000 ALTER TABLE `freeform_forms_translations` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_forms_translations` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_integrations`
+--
+
+LOCK TABLES `freeform_integrations` WRITE;
+/*!40000 ALTER TABLE `freeform_integrations` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_integrations` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_integrations_queue`
+--
+
+LOCK TABLES `freeform_integrations_queue` WRITE;
+/*!40000 ALTER TABLE `freeform_integrations_queue` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_integrations_queue` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_limited_users`
+--
+
+LOCK TABLES `freeform_limited_users` WRITE;
+/*!40000 ALTER TABLE `freeform_limited_users` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_limited_users` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_notification_log`
+--
+
+LOCK TABLES `freeform_notification_log` WRITE;
+/*!40000 ALTER TABLE `freeform_notification_log` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_notification_log` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_notification_template_wrappers`
+--
+
+LOCK TABLES `freeform_notification_template_wrappers` WRITE;
+/*!40000 ALTER TABLE `freeform_notification_template_wrappers` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_notification_template_wrappers` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_notification_templates`
+--
+
+LOCK TABLES `freeform_notification_templates` WRITE;
+/*!40000 ALTER TABLE `freeform_notification_templates` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_notification_templates` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_payments`
+--
+
+LOCK TABLES `freeform_payments` WRITE;
+/*!40000 ALTER TABLE `freeform_payments` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_payments` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_pdf_templates`
+--
+
+LOCK TABLES `freeform_pdf_templates` WRITE;
+/*!40000 ALTER TABLE `freeform_pdf_templates` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_pdf_templates` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_rules`
+--
+
+LOCK TABLES `freeform_rules` WRITE;
+/*!40000 ALTER TABLE `freeform_rules` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_rules` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_rules_buttons`
+--
+
+LOCK TABLES `freeform_rules_buttons` WRITE;
+/*!40000 ALTER TABLE `freeform_rules_buttons` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_rules_buttons` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_rules_conditions`
+--
+
+LOCK TABLES `freeform_rules_conditions` WRITE;
+/*!40000 ALTER TABLE `freeform_rules_conditions` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_rules_conditions` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_rules_fields`
+--
+
+LOCK TABLES `freeform_rules_fields` WRITE;
+/*!40000 ALTER TABLE `freeform_rules_fields` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_rules_fields` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_rules_notifications`
+--
+
+LOCK TABLES `freeform_rules_notifications` WRITE;
+/*!40000 ALTER TABLE `freeform_rules_notifications` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_rules_notifications` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_rules_pages`
+--
+
+LOCK TABLES `freeform_rules_pages` WRITE;
+/*!40000 ALTER TABLE `freeform_rules_pages` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_rules_pages` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_rules_submit_form`
+--
+
+LOCK TABLES `freeform_rules_submit_form` WRITE;
+/*!40000 ALTER TABLE `freeform_rules_submit_form` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_rules_submit_form` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_saved_forms`
+--
+
+LOCK TABLES `freeform_saved_forms` WRITE;
+/*!40000 ALTER TABLE `freeform_saved_forms` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_saved_forms` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_session_context`
+--
+
+LOCK TABLES `freeform_session_context` WRITE;
+/*!40000 ALTER TABLE `freeform_session_context` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_session_context` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_spam_reason`
+--
+
+LOCK TABLES `freeform_spam_reason` WRITE;
+/*!40000 ALTER TABLE `freeform_spam_reason` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_spam_reason` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_statuses`
+--
+
+LOCK TABLES `freeform_statuses` WRITE;
+/*!40000 ALTER TABLE `freeform_statuses` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `freeform_statuses` VALUES
+(1,'Pending','pending','orange',1,'2025-07-01 17:58:24','2025-07-01 17:58:24','ee385a68-4a96-4b60-8661-59c2183f41ec'),
+(2,'Open','open','teal',2,'2025-07-01 17:58:24','2025-07-01 17:58:24','0f4e78f3-67cc-4fe6-9453-17b7fbe6d323'),
+(3,'Closed','closed','red',3,'2025-07-01 17:58:24','2025-07-01 17:58:24','4b1d03be-f38d-4d92-b351-c9bbfb33d5e6');
+/*!40000 ALTER TABLE `freeform_statuses` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_submission_notes`
+--
+
+LOCK TABLES `freeform_submission_notes` WRITE;
+/*!40000 ALTER TABLE `freeform_submission_notes` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_submission_notes` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_submissions`
+--
+
+LOCK TABLES `freeform_submissions` WRITE;
+/*!40000 ALTER TABLE `freeform_submissions` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_submissions` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_submissions_contact_1`
+--
+
+LOCK TABLES `freeform_submissions_contact_1` WRITE;
+/*!40000 ALTER TABLE `freeform_submissions_contact_1` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_submissions_contact_1` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_survey_preferences`
+--
+
+LOCK TABLES `freeform_survey_preferences` WRITE;
+/*!40000 ALTER TABLE `freeform_survey_preferences` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_survey_preferences` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Dumping data for table `freeform_unfinalized_files`
+--
+
+LOCK TABLES `freeform_unfinalized_files` WRITE;
+/*!40000 ALTER TABLE `freeform_unfinalized_files` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `freeform_unfinalized_files` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
 -- Dumping data for table `globalsets`
 --
 
@@ -12506,7 +14129,7 @@ LOCK TABLES `info` WRITE;
 /*!40000 ALTER TABLE `info` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `info` VALUES
-(1,'5.7.10','5.7.0.3',0,'rbsvfghtwiaf','3@lnmlsyquwe','2020-11-18 04:39:52','2025-06-19 13:58:51','1151ab4b-b451-4ad6-b0ee-b4ef6b428c4e');
+(1,'5.7.11','5.7.0.3',1,'ourxpanpwatw','3@lnmlsyquwe','2020-11-18 04:39:52','2025-07-10 21:20:14','1151ab4b-b451-4ad6-b0ee-b4ef6b428c4e');
 /*!40000 ALTER TABLE `info` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -12884,7 +14507,123 @@ INSERT INTO `migrations` VALUES
 (363,'craft','m250119_135304_entry_type_overrides','2025-06-19 13:58:51','2025-06-19 13:58:51','2025-06-19 13:58:51','09bdb800-bb50-442c-96d8-4310e7257057'),
 (364,'craft','m250207_172349_bulkop_events','2025-06-19 13:58:51','2025-06-19 13:58:51','2025-06-19 13:58:51','6016d2e7-0bef-4ed4-955c-8aba55825084'),
 (365,'craft','m250315_131608_unlimited_authors','2025-06-19 13:58:51','2025-06-19 13:58:51','2025-06-19 13:58:51','4710f05a-6135-4a73-a97d-756c9fff0838'),
-(366,'craft','m250403_171253_static_statuses','2025-06-19 13:58:51','2025-06-19 13:58:51','2025-06-19 13:58:51','5ae8130d-7439-4526-abef-759f34804f11');
+(366,'craft','m250403_171253_static_statuses','2025-06-19 13:58:51','2025-06-19 13:58:51','2025-06-19 13:58:51','5ae8130d-7439-4526-abef-759f34804f11'),
+(367,'plugin:freeform','Install','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','e9281939-7d73-45da-a14e-cf22ea2aa15f'),
+(368,'plugin:freeform','m180120_140521_CraftUpgrade','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','63a0f3ed-b0d9-425a-9091-0ea2973fe5e4'),
+(369,'plugin:freeform','m180125_124339_UpdateForeignKeyNames','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','728b586c-1dae-4ffa-8deb-7d252689700d'),
+(370,'plugin:freeform','m180214_094247_AddUniqueTokenToSubmissionsAndForms','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','00b73a5f-86e0-4ea0-a5c5-e3a14cccdc4a'),
+(371,'plugin:freeform','m180220_072652_ChangeFileUploadFieldColumnType','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','91fa9497-5034-4999-b999-1c25c1dab662'),
+(372,'plugin:freeform','m180326_094124_AddIsSpamToSubmissions','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','0439d695-5885-4911-b2b4-63f63958b5aa'),
+(373,'plugin:freeform','m180405_101920_AddIpAddressToSubmissions','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','560829c5-b79b-4b9e-be40-49383bd7c1c8'),
+(374,'plugin:freeform','m180410_131206_CreateIntegrationsQueue','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','95548229-149d-4504-9a27-88373c09d7b6'),
+(375,'plugin:freeform','m180417_134527_AddMultipleSelectTypeToFields','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','b561f4cb-a980-484d-9c4f-53073b82ea58'),
+(376,'plugin:freeform','m180430_151626_PaymentGateways','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','067408a2-ef91-478f-9c56-e080b29e9601'),
+(377,'plugin:freeform','m180508_095131_CreatePaymentGatewayFieldsTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','f442e418-83f4-4c2b-bbad-bca7de7355eb'),
+(378,'plugin:freeform','m180606_141402_AddConnectionsToFormProperties','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','0182cb72-08ac-46f7-9c7f-f9a3e1a57e66'),
+(379,'plugin:freeform','m180730_171628_AddCcDetailsFieldType','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','d9a16cda-2054-460e-a9b1-ec7646613bd5'),
+(380,'plugin:freeform','m180817_091801_AddRulesToFormProperties','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','3db8086a-b376-454e-b043-ce4cfff74911'),
+(381,'plugin:freeform','m181112_152751_ChangeTypeEnumColumnsToIndexedText','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','2b45856b-365b-4877-88c4-ba5fac4adef8'),
+(382,'plugin:freeform','m181129_083939_ChangeIntegrationFieldTypeColumnTypeToString','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','d496d01d-2d15-4fbf-a7a9-6c0679195db0'),
+(383,'plugin:freeform','m190501_124050_MergingEditionsMigration','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','a9d5fdad-040d-41bd-88ce-fb5200987b14'),
+(384,'plugin:freeform','m190502_155557_AddCCAndBCCToEmailNotifications','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','13cf77ed-5265-4ca4-950b-d6387a86dc60'),
+(385,'plugin:freeform','m190516_085150_AddPresetAssetsToNotifications','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','26a8d5d3-4a10-4219-9dbe-a257ab90bf25'),
+(386,'plugin:freeform','m190529_135307_AddWebhookTables','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','a88bb797-c5b3-4eab-8d25-b15fbdf952d3'),
+(387,'plugin:freeform','m190604_125112_AddFormLimitSubmissionProperty','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','f3fe520e-08bb-4b09-889d-5b42ae5c83ef'),
+(388,'plugin:freeform','m190610_074840_MigrateScriptInsertLocation','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','906ad7ff-9300-40c1-abdf-a54010f9782d'),
+(389,'plugin:freeform','m190614_103420_AddMissingMetaColumnsToProAndPaymentTables','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','ede3dd2e-59e1-4c6f-83c2-9c99752c1a93'),
+(390,'plugin:freeform','m190617_122427_RemoveBrokenForeignKeys','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','48db8df6-f4ad-4551-a0c7-208bc62a822c'),
+(391,'plugin:freeform','m190618_142759_AddFixedForeignKeys','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','31ea8b9e-9d8b-4335-ac29-0148828d1a09'),
+(392,'plugin:freeform','m190812_125059_AddNotesTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','c1fd0512-5249-4921-89c7-e159993b3306'),
+(393,'plugin:freeform','m190905_113428_FixIntervalCountNotNullColumn','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','5f3944ae-6618-4e96-a4fa-e0a92bff922e'),
+(394,'plugin:freeform','m191214_093453_AddExtraPostUrlColumnToForm','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','ad4edf06-cedc-4d2f-b5c8-866d6cbdde16'),
+(395,'plugin:freeform','m200203_180318_AddSpamReasonTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','d76770dc-66fb-409a-8147-e6da609c35a9'),
+(396,'plugin:freeform','m200214_083115_FixIntegrationQueueIndex','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','9e7cbfce-5a01-4f49-9eb0-986823749be8'),
+(397,'plugin:freeform','m200616_143808_FormPermissionsUpdate','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','2cd3a87d-1a26-4cee-a2b5-8c4df652e41b'),
+(398,'plugin:freeform','m200630_103347_IncreaseExportProfileSettingSize','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','984527b7-8d57-4fa6-871b-3c13a14c8d6a'),
+(399,'plugin:freeform','m200825_124009_SplitPipedriveIntegrationIntoDealsAndLeads','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','702283c5-3894-4e2e-a153-c3c73d8bc3b0'),
+(400,'plugin:freeform','m200907_081059_AddValidationToFormProperties','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','ecb6041f-c0d6-4f9e-a6fa-ae7297f760ad'),
+(401,'plugin:freeform','m200911_130215_AddReplyToNameToNotifications','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','b5252407-53cf-41b9-b5aa-fafe7a2b7fea'),
+(402,'plugin:freeform','m201006_065315_AddFeedTables','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','0e444eab-508f-4872-8ced-82beb73c5adf'),
+(403,'plugin:freeform','m201014_161213_AddFormSortOrder','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','36ffc7a9-e8db-4940-b4d2-4be4c92ce28c'),
+(404,'plugin:freeform','m201027_103933_AddExportProfileDateRanges','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','d3805d07-f2c7-4eab-8140-88815f8bb04d'),
+(405,'plugin:freeform','m201209_162655_AddAutoTextColumnToNotifications','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','14ad298e-54a9-4fde-bcda-786d881ca15c'),
+(406,'plugin:freeform','m210105_145259_AddGoogleTagManagerColumnsToForms','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','f378c243-4123-41f8-b9c3-4a77ed361863'),
+(407,'plugin:freeform','m210527_071651_AddDbSessionStorage','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','c2667543-3c45-41d0-8248-c28fa65a94f7'),
+(408,'plugin:freeform','m210609_183655_AddContextToUnfinalizedFiles','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','7f80d408-6c13-4d62-b653-f4a8a623340c'),
+(409,'plugin:freeform','m210629_172132_AddDateIndexToLockTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','642d2870-9bd0-4efb-b697-fabb853df777'),
+(410,'plugin:freeform','m210923_110033_AddSavedFormsTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','67990ec4-cf85-4610-8ac9-891fa7b35467'),
+(411,'plugin:freeform','m211109_144235_RemoveContextFromUnfinalizedAssets','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','081f9f4f-31ae-497b-ace8-c10b98a9d220'),
+(412,'plugin:freeform','m211227_140312_AddFormTypes','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','4ceb886a-8e08-43d1-b669-1be5be36c22f'),
+(413,'plugin:freeform','m220121_091429_AddUserIdToSubmissions','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','40f7925a-21fb-4188-ad44-c5581b3661f4'),
+(414,'plugin:freeform','m220304_101448_ChangeAccessTokenColumnType','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','32228f05-9693-4cd8-9fe8-37fdf8069c92'),
+(415,'plugin:freeform','m220316_060248_SwitchFormSuccessBehaviourToRedirectReturnUrl','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','30f9937b-9756-4be2-b72b-342b95d46e6f'),
+(416,'plugin:freeform','m220322_070819_RenameFormattingTemplates','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','bd4c4dfa-6460-47a4-9432-2a406d3828e7'),
+(417,'plugin:freeform','m220323_113852_MigrateEmailValuesToString','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','ea20ea15-7c64-4d72-8fc6-90a13a2b23ae'),
+(418,'plugin:freeform','m220330_111857_SplitSubmissionsTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','59b595ba-d407-4be4-9213-8dff74d74026'),
+(419,'plugin:freeform','m220422_065929_AddExportNotificationsTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','67a6e33f-7a56-4a52-bbf7-4bba869f1c68'),
+(420,'plugin:freeform','m220527_055207_ExpandIntegrationAccessTokenSize','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','45e52701-be26-4bc9-bf1b-1a90f2c042f5'),
+(421,'plugin:freeform','m220530_052327_MigrateFormContentTableNamesToSnakeCase','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','ca01dbb9-6b3b-4e5f-8f8e-a16b7cb05daf'),
+(422,'plugin:freeform','m230101_100000_ConvertJsonToLongTextColumns','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','99c95c30-3e94-4317-af43-582280dbe849'),
+(423,'plugin:freeform','m230101_100010_FF4to5_MigrateForms','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','d3b05366-9445-4054-8c4e-1f932d1f2937'),
+(424,'plugin:freeform','m230101_100020_FF4to5_MigrateLayout','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','34391388-4dcb-4911-b25d-97bf8166d961'),
+(425,'plugin:freeform','m230101_100030_FF4to5_MigrateNotifications','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','8924e6c0-93a6-4f63-be31-048c37d640a3'),
+(426,'plugin:freeform','m230101_100050_FF4to5_MigrateIntegrations','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','36ba0b23-5a7d-4a2a-acb7-9f4b0f9bcb19'),
+(427,'plugin:freeform','m230101_100060_FF4to5_MigrateConditionalRules','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','22416bd6-275a-4ca3-b071-9086d7d14d53'),
+(428,'plugin:freeform','m230101_200000_FF4to5_MigrateData','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','731425b1-7d0e-4011-aff7-f3aa9112bb26'),
+(429,'plugin:freeform','m230101_300100_FF4RemoveOldTables','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','ccd8b37c-eeb0-428e-9b23-3bd7900d31fd'),
+(430,'plugin:freeform','m230224_141036_RemoveRedundantFieldsFromIntegrationsTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','8bb7b76c-42a7-4a60-a104-1e9ddf808df2'),
+(431,'plugin:freeform','m230224_141037_RenameIntegrationTableColumns','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','41c2050b-912d-423f-b738-880d42511f32'),
+(432,'plugin:freeform','m230227_102619_MoveCRMIntegrationClasses','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','88fe3e7d-4eb8-41c8-b1db-1e4c80b8564b'),
+(433,'plugin:freeform','m230301_124411_MoveMailingListIntegrationClasses','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','fc799a37-ec81-4bdd-b309-4c37e4c7bfa5'),
+(434,'plugin:freeform','m230424_010101_announcement_4_0_23','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','e169305a-a63d-436a-b942-2e6193996e0f'),
+(435,'plugin:freeform','m230516_010101_announcement_4_0_24','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','b7f8f63b-8af3-4ff9-b786-0b58f536fbee'),
+(436,'plugin:freeform','m230613_010101_announcement_4_1_0','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','0895071e-2b39-4897-96bc-ca285c67b1f5'),
+(437,'plugin:freeform','m230712_120518_RemoveIntegrationsQueueMailingListFieldIndex','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','89c50028-74ba-47bf-b8d8-c398da021e25'),
+(438,'plugin:freeform','m230725_124256_AddCategoryToCrmFields','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','14d4a454-a0f6-45fb-9735-881a2f300073'),
+(439,'plugin:freeform','m230809_081815_AddCategoryToMailingListFields','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','50411e4c-1f16-48cb-b6e2-3af70e07075a'),
+(440,'plugin:freeform','m230824_111101_ChangeMailingListsToEmailMarketing','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','71ed7a0a-397e-4364-8151-eb35f7306347'),
+(441,'plugin:freeform','m230824_163145_RemoveWebhooksTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','092bb65c-d6eb-4869-9da7-262856c407a1'),
+(442,'plugin:freeform','m230901_143430_ChangeLabelFieldColumnType','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','428fd36f-8a5f-48cd-8507-03fae337254d'),
+(443,'plugin:freeform','m230920_103014_RemoveLastUpdateFromIntegrations','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','9972cf74-642d-41d9-8bcd-497d2dc1c2d8'),
+(444,'plugin:freeform','m230925_162351_AddEnabledToIntegrations','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','dba3de51-4503-4117-a301-e9d16cc0f563'),
+(445,'plugin:freeform','m231020_115409_MigrateIntegrationNamespaces','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','d245e926-3a3e-4710-8613-016a97898152'),
+(446,'plugin:freeform','m231116_104621_AlterPaymentTables','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','eac80af6-ea41-4c6f-b8e5-43d74197630d'),
+(447,'plugin:freeform','m231128_142144_AddLinkToPaymentsTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','93dd7763-bb31-4f6c-9c85-1f1dea925bf6'),
+(448,'plugin:freeform','m231206_132139_RemoveLockTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','cbde5548-51f8-4d66-8951-04549acf3225'),
+(449,'plugin:freeform','m231219_105754_AddUsersToFormsTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','c0823abf-74ec-44be-ac09-618c5a020246'),
+(450,'plugin:freeform','m231229_155623_CreateSurveysPreferencesTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','6ba94871-7541-4de6-8a15-42c89704278b'),
+(451,'plugin:freeform','m231230_074448_CreateFieldsTypeGroupsTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','ee5738c0-4f2a-49d6-a6a1-c3e1b1b46726'),
+(452,'plugin:freeform','m240109_142124_UpdatePageButtonMetadata','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','c91e6fb9-83a6-4e03-b8a8-fa7dc5217d64'),
+(453,'plugin:freeform','m240110_111258_ChangeFormFieldRowForeignKey','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','665cdb42-13d5-4a54-a0ea-979687e1c657'),
+(454,'plugin:freeform','m240111_162954_RemoveStatisticsWidgetFromWidgetsTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','a04726f3-d0ec-43a0-997b-1800e997b8d6'),
+(455,'plugin:freeform','m240315_100655_UserIntegrationMultiGroupChoice','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','4532aa33-e4bb-4e63-9b81-43f25e5872d6'),
+(456,'plugin:freeform','m240405_151009_MigrateEntryIntegrations','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','5c0eb973-b3bc-4e40-915a-c27b02157c1c'),
+(457,'plugin:freeform','m240415_150746_CreateSubmitFormRuleTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','a80c4f90-21d7-4b31-9267-f97ff6ff6af6'),
+(458,'plugin:freeform','m240425_062916_CreateButtonRuleTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','020de917-a6fc-404e-b256-538bd6df4a9c'),
+(459,'plugin:freeform','m240429_120039_CreateFormSitesMapTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','b42c3058-cab2-4b94-bb13-3fd6c59a368a'),
+(460,'plugin:freeform','m240501_091330_AddHiddenFieldToGroupsTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','28816a4a-6467-4f3b-8892-7f24c5080372'),
+(461,'plugin:freeform','m240507_073204_DropStatusDefaultColumn','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','757ca07a-d174-41a2-a489-301753f3538e'),
+(462,'plugin:freeform','m240521_110910_CreateLimitedUsersTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','a35eebf1-8658-4f4e-851e-c1572c3f1ee9'),
+(463,'plugin:freeform','m240619_111214_GenerateSpamBlockIntegrations','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','5516ba58-4fa4-409c-90d0-f1f12c4116d9'),
+(464,'plugin:freeform','m240624_113811_AddArchivedDateToFormsTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','877452cc-ab48-4151-9a7e-a3699fc15442'),
+(465,'plugin:freeform','m240813_161214_UpdateStatusColors','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','1fc868cd-5537-42c6-ad16-cb2897cb1735'),
+(466,'plugin:freeform','m240814_120443_RefactorGridAndFlexboxFormattingTemplatePaths','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','97b7df7a-447c-4c0b-8f2a-26d5c1f1631f'),
+(467,'plugin:freeform','m240819_104209_AddTranslationTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','7e031c7e-c6af-455c-842d-4c6f5e30c1bf'),
+(468,'plugin:freeform','m240903_145017_CreateFormGroupsTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','e4c81ed1-f481-4fc2-8a5a-ac0782cc7faf'),
+(469,'plugin:freeform','m240903_145034_CreateFormGroupsEntriesTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','46b6f39d-0ce7-4d6f-8e26-24c1c50efb6a'),
+(470,'plugin:freeform','m241023_080038_AddPdfTemplateTable','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','2c25c20c-9af8-4943-ada7-e89b17d4e170'),
+(471,'plugin:freeform','m241104_091432_AddOptionsToIntegrationFields','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','a0517664-e191-464b-bacc-9d67024d5962'),
+(472,'plugin:freeform','m241126_113656_UpdateTableLayoutProperties','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','aae067c0-2011-4d73-a7d7-f5ce0ff2d342'),
+(473,'plugin:freeform','m241206_123733_AddIsHiddenToSubmissions','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','683d7b9e-7b20-4e2d-add0-676f8dd31309'),
+(474,'plugin:freeform','m241210_054218_AddOptionColumnFixForIntegrations','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','cbb47ca1-68a4-42a8-88f7-9a39903265e1'),
+(475,'plugin:freeform','m250121_085946_AddForeignKeyToAssetsInUnfinalizedAssets','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','0feb6229-1c37-4495-89dd-512865591aa6'),
+(476,'plugin:freeform','m250121_163320_UpdateCRMFieldOptionsColumnType','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','77ef9002-f649-48c0-adfe-40cea8473131'),
+(477,'plugin:freeform','m250121_163956_UpdateEmailMarketingFieldOptionsColumnType','2025-07-01 17:58:23','2025-07-01 17:58:23','2025-07-01 17:58:23','47e27103-cf70-4470-bc93-9dfb7d124cc2'),
+(478,'plugin:freeform','m250321_131543_AddFormIdToNotificationTemplates','2025-07-01 17:58:24','2025-07-01 17:58:24','2025-07-01 17:58:24','a661e2bc-cf7d-4ff6-a4fd-fe3ac2b3f0f5'),
+(479,'plugin:freeform','m250513_104454_AddEmailWrapperTable','2025-07-01 17:58:24','2025-07-01 17:58:24','2025-07-01 17:58:24','ce09356c-17d0-4034-9307-b3f5205078ed'),
+(480,'plugin:freeform','m250519_122738_LinkTemplatesToWrappers','2025-07-01 17:58:24','2025-07-01 17:58:24','2025-07-01 17:58:24','32fb4cfa-b2a8-4500-967f-66db1c5c5a27'),
+(481,'plugin:freeform','m250616_182402_SetDefaultTemplateMethod','2025-07-01 17:58:24','2025-07-01 17:58:24','2025-07-01 17:58:24','d85358b4-96fb-4ce1-8c3a-541705f95caa'),
+(482,'plugin:freeform','m250620_053458_RemoveUniqueHandleIndexFromNotificationTemplates','2025-07-01 17:58:24','2025-07-01 17:58:24','2025-07-01 17:58:24','6ef063df-72f2-4eb3-87b1-a41c3f0c1ee6');
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -12904,7 +14643,8 @@ INSERT INTO `plugins` VALUES
 (7,'vite','5.0.1','1.0.0','2025-06-02 15:35:45','2025-06-02 15:35:45','2025-06-19 13:58:20','97a9226d-854c-4fad-b5aa-6ede2b43bc99'),
 (8,'express-forms','2.0.3','1.0.2','2025-06-02 15:35:49','2025-06-02 15:35:49','2025-06-02 15:35:49','5a278174-77d2-4e77-a10d-a22257139fe5'),
 (9,'aws-s3','2.2.3','2.0','2025-06-02 15:35:51','2025-06-02 15:35:51','2025-06-19 13:46:50','8c8feb32-dcde-4dae-88be-e2ca6584a905'),
-(10,'sprig','3.6.1','1.0.1','2025-06-02 15:35:53','2025-06-02 15:35:53','2025-06-19 13:58:20','58ea128d-879a-4d18-be85-2a3c05d6a8e8');
+(10,'sprig','3.6.1','1.0.1','2025-06-02 15:35:53','2025-06-02 15:35:53','2025-06-19 13:58:20','58ea128d-879a-4d18-be85-2a3c05d6a8e8'),
+(11,'freeform','5.11.3','5.6.1','2025-07-01 17:58:20','2025-07-01 17:58:20','2025-07-01 17:58:20','1a126721-2938-4b81-a2f5-6d91447636d6');
 /*!40000 ALTER TABLE `plugins` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -12969,7 +14709,7 @@ INSERT INTO `projectconfig` VALUES
 ('addresses.fieldLayouts.b94e2b29-6cbc-4b34-94d4-4999c145318f.tabs.0.name','\"Content\"'),
 ('addresses.fieldLayouts.b94e2b29-6cbc-4b34-94d4-4999c145318f.tabs.0.uid','\"d8674094-2fbe-48f9-9f65-b8c9d8bd3efe\"'),
 ('addresses.fieldLayouts.b94e2b29-6cbc-4b34-94d4-4999c145318f.tabs.0.userCondition','null'),
-('dateModified','1750341529'),
+('dateModified','1751392704'),
 ('elementSources.craft\\elements\\Entry.0.key','\"*\"'),
 ('elementSources.craft\\elements\\Entry.0.type','\"native\"'),
 ('elementSources.craft\\elements\\Entry.1.key','\"singles\"'),
@@ -15234,6 +16974,9 @@ INSERT INTO `projectconfig` VALUES
 ('plugins.express-forms.edition','\"lite\"'),
 ('plugins.express-forms.enabled','true'),
 ('plugins.express-forms.schemaVersion','\"1.0.2\"'),
+('plugins.freeform.edition','\"express\"'),
+('plugins.freeform.enabled','true'),
+('plugins.freeform.schemaVersion','\"5.6.1\"'),
 ('plugins.redactor.edition','\"standard\"'),
 ('plugins.redactor.enabled','true'),
 ('plugins.redactor.schemaVersion','\"2.3.0\"'),
@@ -15570,7 +17313,12 @@ INSERT INTO `relations` VALUES
 (141,53,2223,NULL,12,1,'2025-06-08 04:05:42','2025-06-08 04:05:42','d83ff381-b550-49d1-bfa4-0008ec359661'),
 (142,53,2224,NULL,12,1,'2025-06-08 04:05:42','2025-06-08 04:05:42','ef78a0a1-8209-4cf7-9fd8-bd746e389043'),
 (144,53,2226,NULL,7,1,'2025-06-09 13:01:44','2025-06-09 13:01:44','c6f26dc9-1057-4273-9ee4-107c11c94d70'),
-(146,53,2228,NULL,7,1,'2025-06-19 13:36:25','2025-06-19 13:36:25','d0e47304-bb0f-4387-8f97-c346dd7fba64');
+(146,53,2228,NULL,7,1,'2025-06-19 13:36:25','2025-06-19 13:36:25','d0e47304-bb0f-4387-8f97-c346dd7fba64'),
+(148,29,140,NULL,2229,1,'2025-07-01 17:52:37','2025-07-01 17:52:37','88ac03c0-6673-4764-b275-79ce882a346a'),
+(149,29,2231,NULL,2229,1,'2025-07-01 17:52:37','2025-07-01 17:52:37','67037230-bed8-464b-9abb-04414c987631'),
+(150,29,2237,NULL,2229,1,'2025-07-01 17:53:57','2025-07-01 17:53:57','85a2ac06-8c73-45fb-8cfd-f74b0e6b2af0'),
+(152,29,10,NULL,2238,1,'2025-07-01 17:54:46','2025-07-01 17:54:46','2b7d61dc-a5ef-46ff-8322-eeb7fafc4e31'),
+(153,29,2240,NULL,2238,1,'2025-07-01 17:54:46','2025-07-01 17:54:46','0b232f5b-a28f-4f7e-923a-56f159425a3c');
 /*!40000 ALTER TABLE `relations` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -16372,7 +18120,15 @@ INSERT INTO `revisions` VALUES
 (804,2221,1,1,''),
 (805,2223,1,1,''),
 (806,2209,1,2,'Applied “Draft 1”'),
-(807,2209,1,3,'Applied “Draft 1”');
+(807,2209,1,3,'Applied “Draft 1”'),
+(808,140,1,19,'Applied “Draft 1”'),
+(809,637,1,1,NULL),
+(810,600,1,1,NULL),
+(811,601,1,1,NULL),
+(812,602,1,1,NULL),
+(813,603,1,1,NULL),
+(814,140,1,20,''),
+(815,10,1,23,'Applied “Draft 5”');
 /*!40000 ALTER TABLE `revisions` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -16389,9 +18145,9 @@ INSERT INTO `searchindex` VALUES
 (2,'slug',0,1,' home '),
 (5,'title',0,1,' music '),
 (7,'slug',0,1,' tour '),
-(10,'slug',0,1,' about '),
-(12,'slug',0,1,' contact '),
 (10,'title',0,1,' about '),
+(12,'slug',0,1,' contact '),
+(10,'slug',0,1,' about '),
 (5,'slug',0,1,' music '),
 (10,'field',1,1,''),
 (23,'slug',0,1,''),
@@ -16421,7 +18177,7 @@ INSERT INTO `searchindex` VALUES
 (1821,'slug',0,1,' rippys rooftop '),
 (1819,'title',0,1,' honky tonk central 3rd floor '),
 (7,'field',1,1,''),
-(140,'slug',0,1,' media '),
+(140,'title',0,1,' media '),
 (140,'field',1,1,''),
 (1819,'slug',0,1,' honky tonk central 3rd floor '),
 (1817,'title',0,1,' tootsies backroom '),
@@ -16445,7 +18201,7 @@ INSERT INTO `searchindex` VALUES
 (1807,'title',0,1,' rippys rooftop '),
 (1805,'slug',0,1,' rippys rooftop w kid poser '),
 (1805,'title',0,1,' rippys rooftop w kid poser '),
-(140,'title',0,1,' media '),
+(140,'slug',0,1,' media '),
 (1807,'slug',0,1,' rippys rooftop '),
 (1803,'slug',0,1,' tootsies backroom '),
 (1803,'title',0,1,' tootsies backroom '),
@@ -17780,7 +19536,19 @@ INSERT INTO `searchindex` VALUES
 (2223,'title',0,1,' contact '),
 (2223,'field',53,1,' contact '),
 (2209,'field',54,1,''),
-(2209,'field',53,1,' tour ');
+(2209,'field',53,1,' tour '),
+(2229,'filename',0,1,' crowd stock jpeg '),
+(2229,'extension',0,1,' jpeg '),
+(2229,'kind',0,1,' image '),
+(2229,'alt',0,1,''),
+(2229,'slug',0,1,''),
+(2229,'title',0,1,' crowd stock '),
+(2238,'filename',0,1,' jumbo 1 jpg '),
+(2238,'extension',0,1,' jpg '),
+(2238,'kind',0,1,' image '),
+(2238,'alt',0,1,''),
+(2238,'slug',0,1,''),
+(2238,'title',0,1,' jumbo 1 ');
 /*!40000 ALTER TABLE `searchindex` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -18285,7 +20053,7 @@ LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `users` VALUES
-(1,'admin','',NULL,NULL,NULL,NULL,'daverudolphguitar@gmail.com','$2y$13$T.23jNq2CM3bVS9QM7fc5exbB0mNfh.Qoqdih3.OTUZl9Q4MYqcEy',1,1,0,0,0,'2025-06-26 01:04:28',NULL,NULL,NULL,'2023-04-22 06:07:38',NULL,1,NULL,NULL,NULL,0,'2021-02-17 05:42:01','2020-11-18 04:39:52','2025-06-26 01:04:28');
+(1,'admin','',NULL,NULL,NULL,NULL,'daverudolphguitar@gmail.com','$2y$13$T.23jNq2CM3bVS9QM7fc5exbB0mNfh.Qoqdih3.OTUZl9Q4MYqcEy',1,1,0,0,0,'2025-07-10 21:19:05',NULL,NULL,NULL,'2023-04-22 06:07:38',NULL,1,NULL,NULL,NULL,0,'2021-02-17 05:42:01','2020-11-18 04:39:52','2025-07-10 21:19:05');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -18357,4 +20125,4 @@ commit;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-25 22:48:47
+-- Dump completed on 2025-07-10 16:20:39
