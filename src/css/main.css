@@ -13,9 +13,11 @@
     font-weight: normal;
     font-style: italic;
 }
+
 @theme{
-    --color-primary:#68a79e;
-    --color-secondary:#2b5751;
+    --color-primary: #68a79e;
+    --color-secondary: #2b5751;
+    --color-gray: #6c757d;
     --font-russo: "Russo One";
     --font-xball: "XBall";
 }

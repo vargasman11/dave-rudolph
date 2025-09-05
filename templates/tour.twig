@@ -1,53 +1,50 @@
 {% set today = "now"|date("m/d/Y") %}
 {# Fetch entries with a selected date in the next month #}
-{% set start = now|atom %}
+ {% set start = now|atom %}
+{#{% set start = "01/01/2023" %}#}
 {% set end = now|atom %}
 
 {% include "partials/header" %}
 {% include "partials/nav" %}
 
-{% set image = entry.headerImage.one ?: false  %}
+{% set image = entry.headerImage.one ?: false %}
 {% include '_components/header.twig' with { params:{
     image: image,
     title: entry.title
 }} %}
 
 
-    <div class="container-fluid py-5 mt-5">
-        <div class="row">
-            <div class="col-sm-12 col-md-8 mx-auto">
-                <h1 class="pb-5 xball">Upcoming Dates:</h1>
-                <table class="table">
-                    <tbody>
-                    {# Fetch entries posted this month #}
-                    {% set entries = craft.entries()
-                        .date(['and', ">= #{start}"])
-                        .all() %}
-                    {% set entries = entries|multisort('date', direction=SORT_ASC) %}
-                    {% if entries|length %}
-                        {% for entry in entries %}
-                            {% if  entry.date > '2021-04-01' %}
-                                <tr>
-                                    <td><span class="text-muted font-weight-bold">{{ entry.date|date('medium') }}</span>
-                                    </td>
-                                    <td>{{ entry.title }} @ {{ entry.time|time('short') }} </td>
-                                    <td><span class="text-muted font-weight-bold">Location:</span> {{ entry.city }}
-                                        , {{ entry.state }}
-                                    </td>
-                                    <td><a href={{ entry.infoUrl }} class="btn btn-md btn-info" target="_blank">info</a>
-                                    </td>
-                                </tr>
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+<div class="container mx-auto p-4">
+    <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-xball italic py-8">Upcoming Dates:</h1>
+    <table class="table-auto md:table-fixed">
+        <tbody>
+        {# Fetch entries posted this month #}
+        {% set entries = craft.entries()
+            .date(['and', ">= #{start}"])
+            .all() %}
+        {% set entries = entries|multisort('date', direction=SORT_ASC) %}
+        {% if entries|length %}
+            {% for entry in entries %}
+                {% if  entry.date > '2021-04-01' %}
+                    <tr class="border-t border-gray">
+                        <td class="text-left pr-4 py-4"><span class="font-bold text-gray">{{ entry.date|date('medium') }}</span>
+                        </td>
+                        <td class="text-left pr-4 py-4">{{ entry.title }} @ {{ entry.time|time('short') }} </td>
+                        <td class="text-left py-4"><span class="font-bold text-gray">Location:</span> {{ entry.city }}
+                            , {{ entry.state }}
+                        </td>
+                        <td class="px-4 py-4"><a href="{{ entry.infoUrl }}" class="mx-auto text-white bg-primary hover:bg-secondary py-1 px-2 font-bold font-russo rounded-sm" target="_blank">info</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+</div>
 
 
-    {# Passes a variable called `limit` into the component #}
+{# Passes a variable called `limit` into the component #}
     {{ sprig('_components/pagination', {
         'title':'Past Dates',
         'limit': 12,
