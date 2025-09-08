@@ -25,17 +25,17 @@
             <tbody>
             {% for entry in entries %}
                 <tr class="border-t border-gray">
-                    <td>{{ entry.id }}</td>
-                    <td class="text-left pr-4 py-4"><span
-                                class="font-bold text-gray">{{ entry.date|date('medium') }}</span>
+                    <td class="text-left pr-4 py-4">
+                        <span class="font-bold text-gray">{{ entry.date|date('medium') }}</span>
                     </td>
                     <td class="text-left pr-4 py-4">{{ entry.title }} @ {{ entry.time|time('short') }} </td>
-                    <td class="text-left py-4"><span class="font-bold text-gray">Location:</span> {{ entry.city }}
-                        , {{ entry.state }}
+                    <td class="text-left py-4">
+                        <span class="font-bold text-gray">Location:</span> {{ entry.city }}, {{ entry.state }}
                     </td>
-                    <td class="px-4 py-4"><a href="{{ entry.infoUrl }}"
-                                             class="mx-auto text-white bg-primary hover:bg-secondary py-1 px-2 font-bold font-russo rounded-sm"
-                                             target="_blank">info</a>
+                    <td class="px-4 py-4">
+                        <a href="{{ entry.infoUrl }}"
+                           class="mx-auto text-white bg-primary hover:bg-secondary py-1 px-2 font-bold font-russo rounded-sm"
+                           target="_blank">info</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -48,59 +48,45 @@
             {% set halfTotalPagesToShow = (totalPagesToShow / 2)|round %}
             {% set startPage = max(1, pageInfo.currentPage - halfTotalPagesToShow) %}
             {% set endPage = min(pageInfo.totalPages, startPage + totalPagesToShow - 1) %}
-            <nav aria-label="Pagination" class="mx-auto">
-                <ul class="flex justify-center list-none">
-                    <li class="page-item{% if page == 1 %} disabled{% endif %}">
-                        <a class="page-link" href="#" sprig s-val:page="{{ page - 1 }}"
-                           s-push-url="?page={{ page - 1 }}">Previous</a>
+            {# Styles #}
+            {% set anchorClass = "border border-gray p-2 text-primary hover:bg-primary hover:text-white" %}
+            <div class=flex"">
+            <nav aria-label="Pagination">
+                <ul class="flex">
+                    <li class=" {% if page == 1 %} disabled {% endif %}">
+                        <a class="{{ anchorClass }}" href="#" sprig s-val:page="{{ page - 1 }}">Previous</a>
                     </li>
                     {% if startPage > 1 %}
-                        <li class="page-item">
-                            <a class="page-link" sprig s-val:page="1" s-push-url="?page=1">1</a>
+                        <li class="">
+                            <a class="{{ anchorClass }}" sprig s-val:page="1">1</a>
                         </li>
                         {% if startPage > 2 %}
-                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                            <li class=" disabled"><span class="{{ anchorClass }}">...</span></li>
                         {% endif %}
                     {% endif %}
-
                     {% for i in startPage..endPage %}
-                        <li class="page-item{% if i == page %} active{% endif %}">
-                            <a class="page-link" sprig s-val:page="{{ i }}" s-push-url="?page={{ i }}">{{ i }}</a>
+                        <li class="{% if i == page %} active {% endif %}">
+                            <a class="{{ anchorClass }}" sprig s-val:page="{{ i }}">{{ i }}</a>
                         </li>
                     {% endfor %}
-
                     {% if endPage < pageInfo.totalPages %}
                         {% if endPage < pageInfo.totalPages - 1 %}
-                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                            <li class=" disabled"><span class="{{ anchorClass }}">...</span></li>
                         {% endif %}
-                        <li class="page-item">
-                            <a class="page-link" sprig s-val:page="{{ pageInfo.totalPages }}"
-                               s-push-url="?page={{ pageInfo.totalPages }}">{{ pageInfo.totalPages }}</a>
+                        <li class="">
+                            <a class="{{ anchorClass }}" sprig s-val:page="{{ pageInfo.totalPages }}">{{ pageInfo.totalPages }}</a>
                         </li>
                     {% endif %}
-
-
-                    <li class="page-item{% if page == pageInfo.totalPages %} disabled{% endif %}">
-                        <a class="page-link" href="#" sprig s-val:page="{{ page + 1 }}"
-                           s-push-url="?page={{ page + 1 }}">Next</a>
+                    <li class="{% if page == pageInfo.totalPages %} disabled{% endif %}">
+                        <a class="{{ anchorClass }}" href="#" sprig s-val:page="{{ page + 1 }}">Next</a>
                     </li>
-
                 </ul>
             </nav>
-
-            <p>
-                <em>
-                    Showing {{ pageInfo.first }}-{{ pageInfo.last }}
-                    of {{ pageInfo.total }} entries.
-                </em><br>
-                <em>Page {{ pageInfo.currentPage }} of {{ pageInfo.totalPages }} pages.</em><br>
-            </p>
+            </div>
         {% endif %}
-
     </div>
 {% else %}
     <div class="container mx-auto p-4">
-        <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-xball italic py-8">Stay tuned for more
-            dates</h1>
+        <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-xball italic py-8">Stay tuned for more dates</h1>
     </div>
 {% endif %}
