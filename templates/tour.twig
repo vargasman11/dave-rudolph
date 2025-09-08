@@ -1,7 +1,7 @@
 {% set today = "now"|date("m/d/Y") %}
 {# Fetch entries with a selected date in the next month #}
  {% set start = now|atom %}
-{#{% set start = "01/01/2023" %}#}
+{# {% set start = "01/01/2023" %} #}
 {% set end = now|atom %}
 
 {% include "partials/header" %}
@@ -13,43 +13,23 @@
     title: entry.title
 }} %}
 
-
-<div class="container mx-auto p-4">
-    <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-xball italic py-8">Upcoming Dates:</h1>
-    <table class="table-auto md:table-fixed">
-        <tbody>
-        {# Fetch entries posted this month #}
-        {% set entries = craft.entries()
-            .date(['and', ">= #{start}"])
-            .all() %}
-        {% set entries = entries|multisort('date', direction=SORT_ASC) %}
-        {% if entries|length %}
-            {% for entry in entries %}
-                {% if  entry.date > '2021-04-01' %}
-                    <tr class="border-t border-gray">
-                        <td class="text-left pr-4 py-4"><span class="font-bold text-gray">{{ entry.date|date('medium') }}</span>
-                        </td>
-                        <td class="text-left pr-4 py-4">{{ entry.title }} @ {{ entry.time|time('short') }} </td>
-                        <td class="text-left py-4"><span class="font-bold text-gray">Location:</span> {{ entry.city }}
-                            , {{ entry.state }}
-                        </td>
-                        <td class="px-4 py-4"><a href="{{ entry.infoUrl }}" class="mx-auto text-white bg-primary hover:bg-secondary py-1 px-2 font-bold font-russo rounded-sm" target="_blank">info</a>
-                        </td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-        </tbody>
-    </table>
-</div>
-
-
 {# Passes a variable called `limit` into the component #}
     {{ sprig('_components/pagination', {
-        'title':'Past Dates',
-        'limit': 12,
-        'start':start,
-        'end':end
+        params:{
+            title:'Upcoming Dates',
+            section:'tourDates',
+            limit: 12,
+            dateRange: [ ">= #{today}"]
+        }
+    }) }}
+
+    {{ sprig('_components/pagination', {
+        params: {
+            title:'Past Dates',
+            section:'tourDates',
+            limit: 12,
+            dateRange: ["<= #{today}"]
+        }
     }) }}
 
 
