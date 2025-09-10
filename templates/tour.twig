@@ -19,7 +19,7 @@
             title:'Upcoming Dates',
             section:'tourDates',
             limit: 6,
-            dateRange: [ ">= 01/01/2023"]
+            dateRange: [ ">= #{today} "]
         }
     }) }}
 
@@ -28,7 +28,7 @@
             title:'Past Dates',
             section:'tourDates',
             limit: 6,
-            dateRange: ["<= #{today}"]
+            dateRange: ["< #{today}"]
         }
     }) }}
 
