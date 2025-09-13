@@ -16,12 +16,12 @@
                  alt="{{ entry.headerImageAlt }}">
     </div>
     <div class="flex flex-col md:w-1/2 justify-center items-center p-4">
-        <ul class="list-unstyled">
+        <ul class="list-unstyled space-y-4 lg:space-y-8">
             {% set blocks = entry.spotifyiframes.all() %}
             {% if blocks|length %}
                 {% for block in blocks %}
-                    <li class="my-2">
-                        <iframe class="h-[100px]" src="{{ block.iframe }}" allowtransparency="true" allow="encrypted-media"></iframe>
+                    <li class="">
+                        <iframe class="h-[80px]" src="{{ block.iframe }}" allowtransparency="true" allow="encrypted-media"></iframe>
                     </li>
                 {% endfor %}
             {% endif %}

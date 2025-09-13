@@ -52,36 +52,37 @@
             {% set startPage = max(1, pageInfo.currentPage - halfTotalPagesToShow) %}
             {% set endPage = min(pageInfo.totalPages, startPage + totalPagesToShow - 1) %}
             {# Styles #}
-            {% set anchorClass = "p-2 text-primary hover:bg-primary hover:text-white" %}
+            {% set liClass = "p-2 text-sm md:text-base text-primary hover:bg-primary hover:text-white"  %}
+            {% set anchorClass = "hover:cursor-pointer" %}
 
             <div class="flex mt-4 justify-center">
             <nav aria-label="Pagination">
                 <ul class="flex border border-gray-200 divide-x divide-gray-200">
-                    <li class=" {% if page == 1 %} disabled {% endif %}">
+                    <li class="{{ liClass}} {% if page == 1 %} disabled {% endif %}">
                         <a class="{{ anchorClass }}" href="#" sprig s-val:page="{{ page - 1 }}">Previous</a>
                     </li>
                     {% if startPage > 1 %}
-                        <li class="hidden md:block">
+                        <li class="{{ liClass }} hidden md:block">
                             <a class="{{ anchorClass }}" sprig s-val:page="1">1</a>
                         </li>
                         {% if startPage > 2 %}
-                            <li class="hidden md:block disabled"><span class="{{ anchorClass }}">...</span></li>
+                            <li class="{{ liClass}} hidden md:block disabled"><span class="{{ anchorClass }}">...</span></li>
                         {% endif %}
                     {% endif %}
                     {% for i in startPage..endPage %}
-                        <li class="hidden md:block {% if i == page %} active {% endif %}">
+                        <li class="{{ liClass }} hidden md:block {% if i == page %} active {% endif %}">
                             <a class="{{ anchorClass }}" sprig s-val:page="{{ i }}">{{ i }}</a>
                         </li>
                     {% endfor %}
                     {% if endPage < pageInfo.totalPages %}
                         {% if endPage < pageInfo.totalPages - 1 %}
-                            <li class="hidden md:block disabled"><span class="{{ anchorClass }}">...</span></li>
+                            <li class="{{ liClass }} hidden md:block disabled"><span class="{{ anchorClass }}">...</span></li>
                         {% endif %}
-                        <li class="hidden md:block">
+                        <li class="{{ liClass }} hidden md:block">
                             <a class="{{ anchorClass }}" sprig s-val:page="{{ pageInfo.totalPages }}">{{ pageInfo.totalPages }}</a>
                         </li>
                     {% endif %}
-                    <li class="{% if page == pageInfo.totalPages %} disabled{% endif %}">
+                    <li class="{{ liClass }} {% if page == pageInfo.totalPages %} disabled{% endif %}">
                         <a class="{{ anchorClass }}" href="#" sprig s-val:page="{{ page + 1 }}">Next</a>
                     </li>
                 </ul>
@@ -91,6 +92,6 @@
     </div>
 {% else %}
     <div class="container mx-auto p-4 lg:max-w-4xl">
-        <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-xball italic py-8">Stay tuned for more dates</h1>
+        <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-xball italic py-8 text-center">Stay tuned for more dates</h1>
     </div>
 {% endif %}
