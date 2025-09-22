@@ -1,43 +1,18 @@
 {% include "partials/header" %}
 {% include "partials/nav" %}
 
-{% set image = entry.headerImage.one ?: false  %}
+{% set image = entry.headerImage.one ?: false %}
 {% include '_components/header.twig' with { params:{
     image: image,
     title: entry.title
 }} %}
 
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-sm-10 col-md-8 mx-auto py-5">
-                {% if entry.customContent %}
-                    {{ entry.customContent }}
-                {% else %}
-                    <h1 class="xball">Dave Rudolph is:</h1>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius id temporibus doloremque magni,
-                        voluptatum
-                        repellendus beatae, perferendis ullam minus asperiores placeat dolore sed ea inventore quos
-                        facere
-                        suscipit quo consequatur ad. Magnam, distinctio, soluta porro nostrum maxime nobis obcaecati
-                        repellat
-                        natus, provident harum nihil dicta!</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius id temporibus doloremque magni,
-                        voluptatum
-                        repellendus beatae, perferendis ullam minus asperiores placeat dolore sed ea inventore quos
-                        facere
-                        suscipit quo consequatur ad. Magnam, distinctio, soluta porro nostrum maxime nobis obcaecati
-                        repellat
-                        natus, provident harum nihil dicta!</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius id temporibus doloremque magni,
-                        voluptatum
-                        repellendus beatae, perferendis ullam minus asperiores placeat dolore sed ea inventore quos
-                        facere
-                        suscipit quo consequatur ad. Magnam, distinctio, soluta porro nostrum maxime nobis obcaecati
-                        repellat
-                        natus, provident harum nihil dicta!</p>
-                {% endif %}
-            </div>
-        </div>
+<div class="container mx-auto">
+    <div class="p-4 md:p-8 md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto contentArea">
+        {% if entry.customContent %}
+            {{ entry.customContent }}
+        {% endif %}
     </div>
+</div>
 
 {% include "partials/footer" %}

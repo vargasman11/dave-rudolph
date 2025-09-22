@@ -1,4 +1,4 @@
-dateModified: 1752182439
+dateModified: 1758045669
 elementSources:
   craft\elements\Entry:
     -
@@ -9,6 +9,7 @@ elementSources:
       type: native
     -
       heading: Channels
+      key: 'heading:1ac36f9f-8c73-4e13-8a45-01e4219f5c7b'
       type: heading
     -
       key: 'section:e3fc1639-4370-4ebc-96b1-93d75e1d6e0d' # Blog
@@ -30,6 +31,23 @@ elementSources:
         - 'field:d55cabd7-d990-4dac-9ea9-cc3941a1421f' # time
         - 'field:5fb9f1f8-c038-4593-b349-8cda166cb8fb' # City
         - 'field:0886b236-4a38-40bd-abfa-21fdee1352d7' # State
+      type: native
+    -
+      heading: Nav
+      key: 'heading:27483e0d-c4b9-47ac-84b9-8e5eba27cd30'
+      type: heading
+    -
+      defaultSort:
+        - structure
+        - asc
+      defaultViewMode: ''
+      disabled: false
+      key: 'section:85eff002-8100-42c8-a7a8-4532563dfd23' # Navigation
+      tableAttributes:
+        - status
+        - postDate
+        - expiryDate
+        - link
       type: native
 email:
   fromEmail: contact@daverudolphmusic.com
@@ -67,10 +85,8 @@ meta:
     4eb33154-2538-4037-9a27-198bbb7cfcfa: 'Tour Dates' # Tour Dates
     5e19d471-ef0b-4e95-9548-97c378c4b65d: 'Tour Dates' # Tour Dates
     5fb9f1f8-c038-4593-b349-8cda166cb8fb: City # City
-    5fc89b29-9281-4ea2-a80f-f71060a7fe93: 'Footer Links' # Footer Links
     6b2b62f0-3eb1-45ad-b397-559af7de174b: 'Dave Guitar' # Dave Guitar
     6f3a48db-efe7-4a2e-b25d-509fbd2ff05d: Music # Music
-    8f3db685-39df-478c-adc2-5cfb83c2861b: 'CTA Buttons' # CTA Buttons
     9d11247f-9656-4204-8973-026dfdcb2f2f: Contact # Contact
     10e41f88-75c4-478b-9f90-590df63cdfda: Default # Default
     20cc593a-1deb-4cbb-b161-ee53c5a114d9: Entry # Entry
