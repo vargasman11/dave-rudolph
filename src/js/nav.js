@@ -18,7 +18,28 @@ function mobileNav() {
 
     const isBars = icon.getAttribute('xlink:href') === '#bars';
     icon.setAttribute('xlink:href', isBars ? '#xmark' : '#bars');
+  })
+
+// Toggle submenus inside mobile nav
+  const submenuToggles = mobileNav.querySelectorAll('.toggle-submenu');
+  submenuToggles.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const submenu = btn.nextElementSibling;
+
+      // expand/collapse submenu
+      if (submenu.classList.contains('max-h-0')) {
+        submenu.classList.remove('max-h-0');
+        submenu.classList.add('max-h-96');
+        btn.style.transform = 'rotate(180deg)'; // rotate arrow down→up
+      } else {
+        submenu.classList.remove('max-h-96');
+        submenu.classList.add('max-h-0');
+        btn.style.transform = 'rotate(0deg)';
+      }
+    });
   });
+
 }
 
 export default mobileNav();

@@ -10,9 +10,10 @@
                 <use xlink:href="#bars"/>
             </svg>
         </button>
-        <ul class="hidden md:flex font-xball text-primary text-shadow-2xs group relative">
+        {# Desktop Nav #}
+        <ul class="hidden md:flex font-xball text-primary text-shadow-2xs">
             {% nav item in navigationItems %}
-                <li class="md:ml-2 lg:ml-4 xl:ml-6 lg:text-xl xl:text-2xl">
+                <li class="relative group md:ml-2 lg:ml-4 xl:ml-6 lg:text-xl xl:text-2xl">
                     {% if item.internalOrExternal %}
                         <a href="{{ item.externalPage }}"
                            class="nav-link hover:text-secondary" {{ item.openInNewTab ? 'target="_blank"' }}>{{ item.title }}</a>
@@ -30,11 +31,33 @@
         </ul>
     </div>
     {# Mobile Nav #}
+{#    <div class="bg-gray-50/90 absolute h-full left-0 w-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden flex justify-center"#}
+{#         id="mobileNav">#}
+{#        <ul class="w-fit mt-16 sm:mt-24">#}
+{#            {% nav item in navigationItems %}#}
+{#                <li class="text-2xl sm:text-4xl mb-4 sm:mb-8 text-center">#}
+{#                    {% if item.internalOrExternal %}#}
+{#                        <a class="text-primary font-russo hover:text-secondary transition-all delay-150 ease-in-out"#}
+{#                           href="{{ item.externalPage }}">{{ item.title }}</a>#}
+{#                    {% else %}#}
+{#                        <a class="text-primary font-russo hover:text-secondary transition-all delay-150 ease-in-out"#}
+{#                           href="{{ item.entry.one() ? item.entry.one().getUrl() }}" {{ item.openInNewTab ? 'target="_blank"' }}>{{ item.title }}</a>#}
+{#                    {% endif %}#}
+{#                    {% ifchildren %}#}
+{#                        <ul>#}
+{#                            {% children %}#}
+{#                        </ul>#}
+{#                    {% endifchildren %}#}
+{#                </li>#}
+{#            {% endnav %}#}
+{#        </ul>#}
+{#    </div>#}
+
     <div class="bg-gray-50/90 absolute h-full left-0 w-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden flex justify-center"
          id="mobileNav">
         <ul class="w-fit mt-16 sm:mt-24">
             {% nav item in navigationItems %}
-                <li class="text-2xl sm:text-4xl mb-4 sm:mb-8 text-center">
+                <li class="text-2xl sm:text-4xl mb-4 sm:mb-8 text-center relative">
                     {% if item.internalOrExternal %}
                         <a class="text-primary font-russo hover:text-secondary transition-all delay-150 ease-in-out"
                            href="{{ item.externalPage }}">{{ item.title }}</a>
@@ -42,8 +65,12 @@
                         <a class="text-primary font-russo hover:text-secondary transition-all delay-150 ease-in-out"
                            href="{{ item.entry.one() ? item.entry.one().getUrl() }}" {{ item.openInNewTab ? 'target="_blank"' }}>{{ item.title }}</a>
                     {% endif %}
+
                     {% ifchildren %}
-                        <ul>
+                        <button class="ml-2 text-primary text-lg align-middle toggle-submenu transition-transform duration-300">
+                            ▼
+                        </button>
+                        <ul class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out mt-2 space-y-2 submenu">
                             {% children %}
                         </ul>
                     {% endifchildren %}
@@ -51,4 +78,5 @@
             {% endnav %}
         </ul>
     </div>
+
 </nav>
