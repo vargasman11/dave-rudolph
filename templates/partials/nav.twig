@@ -22,7 +22,7 @@
                            class="nav-link hover:text-secondary" {{ item.openInNewTab ? 'target="_blank"' }}>{{ item.title }}</a>
                     {% endif %}
                     {% ifchildren %}
-                        <ul class="absolute right-0 top-full mt-2 w-max opacity-0 max-h-0 overflow-hidden transition-all duration-300 ease-out group-hover:opacity-100 group-hover:max-h-96 bg-white text-right p-2">
+                        <ul class="absolute right-0 top-full mt-2 w-max opacity-0 max-h-0 overflow-hidden transition-all duration-300 ease-out group-hover:opacity-100 group-hover:max-h-96 bg-white text-right p-2 sub-menu [&_li]:my-1 [&_li]:pe-3">
                             {% children %}
                         </ul>
                     {% endifchildren %}

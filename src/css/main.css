@@ -42,6 +42,29 @@
     --font-russo: "Russo One";
     --font-xball: "XBall";
 }
+/* Light mode (default) */
+body {
+    background: #ffffff;
+    color: #000000;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Dark mode overrides */
+body.dark-mode {
+    background: #121212;
+    color: #f5f5f5;
+}
+body.dark-mode  .sub-menu{
+    background: #000000;
+}
+
+body.dark-mode #mobileNav{
+background: rgba(0, 0, 0, 0.85);
+}
+
+body.dark-mode .icon-toggle{
+    color: var(--color-primary);
+}
 
 .contentArea {
     font-family: "Roboto", sans-serif;

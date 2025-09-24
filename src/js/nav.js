@@ -52,7 +52,7 @@ function mobileNav() {
       toggleBtn.textContent = "🌙 Dark Mode";
     }
   });
-  
+
 }
 
 export default mobileNav();
