@@ -1,4 +1,4 @@
-dateModified: 1758660920
+dateModified: 1759181299
 elementSources:
   craft\elements\Entry:
     -
@@ -73,6 +73,7 @@ graphql:
     expiryDate: null
 meta:
   __names__:
+    0f8ae41a-cd03-45a5-9a82-33a4de9cc7ea: 'Page Content Matrix Field' # Page Content Matrix Field
     0faa9768-b53e-4216-a53d-7812596fdc94: Videos # Videos
     1b725997-1c52-4c85-aaa8-7bb113ff338e: About # About
     1e6e3839-9a1e-4d98-a6f8-13b7cd0097d7: Default # Default
@@ -91,7 +92,10 @@ meta:
     10e41f88-75c4-478b-9f90-590df63cdfda: Default # Default
     20cc593a-1deb-4cbb-b161-ee53c5a114d9: Entry # Entry
     66bdc090-1029-4da8-a10f-8e0bc54176bb: spotifyIframes # spotifyIframes
+    75d85378-d455-4ff4-bda0-9a51e95d30f9: Lightswitch # Lightswitch
+    83f1bea5-400c-4373-8b03-cd7de4219b6c: 'Matrix Entry Type' # Matrix Entry Type
     85eff002-8100-42c8-a7a8-4532563dfd23: Navigation # Navigation
+    429c85c0-0ce1-4713-a254-7b8a2e585e95: 'Spotify Album Block' # Spotify Album Block
     458ab821-4880-4299-8232-f99733310016: date # date
     502b621a-4cc7-4a26-a910-042f30dca048: Home # Home
     569d7efe-e957-4fa0-a49a-c4b1b8fba23b: 'Album Cover' # Album Cover
@@ -99,6 +103,7 @@ meta:
     3304aae1-f09c-4687-bbe6-e0903dad9f0d: 'Nav Item' # Nav Item
     8972e6e4-7db5-4a0a-85b9-11be3f170a55: 'Custom Content' # Custom Content
     024543db-feed-428a-922b-5c42d8374aaa: 'Album CTA' # Album CTA
+    510624a0-5eb7-469d-80ad-f0fd8770b0c6: Image # Image
     885183e7-a46e-417d-888c-fca4f7e1734d: Uploads # Uploads
     17303915-9872-43ed-9684-e3ae9e8d6099: 'Open In new Tab' # Open In new Tab
     56361854-6cef-42f0-b788-03399c9f683b: 'Dave Guitar' # Dave Guitar
@@ -106,6 +111,8 @@ meta:
     b43bae05-d6b6-4b8a-84bc-f01097e47529: Navigation # Navigation
     b242a145-18ec-45dd-a31a-28e9e48279c0: TOUR # TOUR
     b2342e5b-b45b-48c9-ac11-267011a80bc5: 'Blog Content' # Blog Content
+    b6502537-1c47-451c-8402-2f8dcde9a941: spotifyIframe # spotifyIframe
+    bb6f1d70-bf17-4e29-8208-15d6b7aa53a3: 'Matrix Single' # Matrix Single
     bb9de470-f257-45e2-803f-c1a93509afbf: Media # Media
     c2111dd9-d621-4db5-9121-04eba429d67a: Home # Home
     cd2fbe89-ae24-4f97-a4e1-77aaf39f0a88: 'Footer Link' # Footer Link

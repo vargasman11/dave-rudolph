@@ -7,7 +7,7 @@ searchable: false
 settings:
   entryTypes:
     -
-      uid: b6502537-1c47-451c-8402-2f8dcde9a941
+      uid: b6502537-1c47-451c-8402-2f8dcde9a941 # spotifyIframe
   maxEntries: null
   minEntries: null
   propagationKeyFormat: null
