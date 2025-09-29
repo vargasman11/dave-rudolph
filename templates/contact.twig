@@ -7,16 +7,13 @@
     title: entry.title
 }} %}
 
-<div class="container mx-auto my-4 md:my-8 lg:my-12">
-    {#    {{ freeform.form("contact").render() }} #}
-
-
+<div class="container mx-auto my-4 md:my-8 lg:my-12 px-4">
     {% set form = freeform.form("contact") %}
-
     {{ form.render({
         attributes: {
             novalidate: true,
             class: "w-full max-w-2xl mx-auto",
+            id:"contact-form"
         },
         buttons: {
             attributes: {
@@ -76,8 +73,5 @@
             },
         },
     }) }}
-
-
 </div>
-
 {% include "partials/footer" %}

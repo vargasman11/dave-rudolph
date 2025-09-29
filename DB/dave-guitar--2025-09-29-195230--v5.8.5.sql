@@ -145,6 +145,7 @@ CREATE TABLE `assets` (
   `folderId` int(11) NOT NULL,
   `uploaderId` int(11) DEFAULT NULL,
   `filename` varchar(255) NOT NULL,
+  `mimeType` varchar(255) DEFAULT NULL,
   `kind` varchar(50) NOT NULL DEFAULT 'unknown',
   `alt` text DEFAULT NULL,
   `width` int(11) unsigned DEFAULT NULL,
@@ -352,6 +353,26 @@ CREATE TABLE `changedfields` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `contentblocks`
+--
+
+DROP TABLE IF EXISTS `contentblocks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `contentblocks` (
+  `id` int(11) NOT NULL,
+  `primaryOwnerId` int(11) DEFAULT NULL,
+  `fieldId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_oupwjqxygtuqgcfytewxbwfjwgogiwogvehr` (`primaryOwnerId`),
+  KEY `idx_rnojyoyqbyfbgejddxsznebwymdewafjscqq` (`fieldId`),
+  CONSTRAINT `fk_cfckdmwpmobdapaaskxvdczjbhlukzxurour` FOREIGN KEY (`primaryOwnerId`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_jdyyrvvedxyxsgfjardqdyzgqdpylnlmmfxf` FOREIGN KEY (`fieldId`) REFERENCES `fields` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_lhjynmifacbsrliugqgnwjxjoutymdmudsag` FOREIGN KEY (`id`) REFERENCES `elements` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `craftidtokens`
 --
 
@@ -420,7 +441,7 @@ CREATE TABLE `drafts` (
   KEY `idx_rdqvlwnelrdjabqijkuydkjwelbnqrxfjitb` (`creatorId`,`provisional`),
   CONSTRAINT `drafts_creatorId_fk` FOREIGN KEY (`creatorId`) REFERENCES `users` (`id`) ON DELETE SET NULL,
   CONSTRAINT `drafts_sourceId_fk` FOREIGN KEY (`canonicalId`) REFERENCES `elements` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=682 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=685 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -486,7 +507,7 @@ CREATE TABLE `elements` (
   CONSTRAINT `elements_fieldLayoutId_fk` FOREIGN KEY (`fieldLayoutId`) REFERENCES `fieldlayouts` (`id`) ON DELETE SET NULL,
   CONSTRAINT `elements_revisionId_fk` FOREIGN KEY (`revisionId`) REFERENCES `revisions` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_hthufgbdkvbhkqftwyyicyeisyewmgdzzcax` FOREIGN KEY (`canonicalId`) REFERENCES `elements` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2241 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2247 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -551,7 +572,7 @@ CREATE TABLE `elements_sites` (
   KEY `idx_ejtiautccrpbhaytzqhemssdvgfgnrbamzao` (`title`,`siteId`),
   CONSTRAINT `elements_sites_elementId_fk` FOREIGN KEY (`elementId`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `elements_sites_siteId_fk` FOREIGN KEY (`siteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2241 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2247 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -624,6 +645,7 @@ CREATE TABLE `entrytypes` (
   `fieldLayoutId` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `handle` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
   `icon` varchar(255) DEFAULT NULL,
   `color` varchar(255) DEFAULT NULL,
   `hasTitleField` tinyint(1) NOT NULL DEFAULT 1,
@@ -997,7 +1019,7 @@ CREATE TABLE `freeform_feed_messages` (
   PRIMARY KEY (`id`),
   KEY `freeform_feed_messages_feedId_fk` (`feedId`),
   CONSTRAINT `freeform_feed_messages_feedId_fk` FOREIGN KEY (`feedId`) REFERENCES `freeform_feeds` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1018,7 +1040,7 @@ CREATE TABLE `freeform_feeds` (
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `freeform_feeds_hash_unq_idx` (`hash`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1400,7 +1422,7 @@ CREATE TABLE `freeform_notification_template_wrappers` (
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `freeform_notification_template_wrappers_name` (`name`)
+  UNIQUE KEY `handle` (`handle`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1705,6 +1727,7 @@ CREATE TABLE `freeform_spam_reason` (
   `submissionId` int(11) NOT NULL,
   `reasonType` varchar(100) NOT NULL,
   `reasonMessage` text DEFAULT NULL,
+  `reasonValue` longtext DEFAULT NULL,
   `dateCreated` datetime NOT NULL,
   `dateUpdated` datetime NOT NULL,
   `uid` char(36) NOT NULL DEFAULT '0',
@@ -1947,7 +1970,7 @@ CREATE TABLE `imagetransformindex` (
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `idx_vzpmedsfmiuipzpwbawggylnxtdzibqxtzzj` (`assetId`,`transformString`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2018,7 +2041,7 @@ CREATE TABLE `migrations` (
   `uid` char(36) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `migrations_track_name_unq_idx` (`track`,`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=483 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=489 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2083,7 +2106,7 @@ CREATE TABLE `queue` (
   PRIMARY KEY (`id`),
   KEY `queue_channel_fail_timeUpdated_timePushed_idx` (`channel`,`fail`,`timeUpdated`,`timePushed`),
   KEY `queue_channel_fail_timeUpdated_delay_idx` (`channel`,`fail`,`timeUpdated`,`delay`)
-) ENGINE=InnoDB AUTO_INCREMENT=8389 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8521 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2130,7 +2153,7 @@ CREATE TABLE `relations` (
   CONSTRAINT `relations_fieldId_fk` FOREIGN KEY (`fieldId`) REFERENCES `fields` (`id`) ON DELETE CASCADE,
   CONSTRAINT `relations_sourceId_fk` FOREIGN KEY (`sourceId`) REFERENCES `elements` (`id`) ON DELETE CASCADE,
   CONSTRAINT `relations_sourceSiteId_fk` FOREIGN KEY (`sourceSiteId`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2165,7 +2188,7 @@ CREATE TABLE `revisions` (
   KEY `revisions_creatorId_fk` (`creatorId`),
   CONSTRAINT `revisions_creatorId_fk` FOREIGN KEY (`creatorId`) REFERENCES `users` (`id`) ON DELETE SET NULL,
   CONSTRAINT `revisions_sourceId_fk` FOREIGN KEY (`canonicalId`) REFERENCES `elements` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=816 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=819 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2201,7 +2224,7 @@ CREATE TABLE `searchindexqueue` (
   PRIMARY KEY (`id`),
   KEY `idx_oxgaliebzeejwggwylcfeceibjcutedbzzah` (`elementId`,`siteId`,`reserved`),
   CONSTRAINT `fk_cfcpdquqqgihcwkzhgtvrrppwbiwzujydgtj` FOREIGN KEY (`elementId`) REFERENCES `elements` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2264,6 +2287,7 @@ CREATE TABLE `sections_entrytypes` (
   `sortOrder` smallint(6) unsigned NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `handle` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
   PRIMARY KEY (`sectionId`,`typeId`),
   KEY `fk_udtbolwdmuthdfoktvnesguprogifnlnsqpx` (`typeId`),
   CONSTRAINT `fk_turvpofmquludarmdusenuuckrmsbhkocxtr` FOREIGN KEY (`sectionId`) REFERENCES `sections` (`id`) ON DELETE CASCADE,
@@ -2331,7 +2355,7 @@ CREATE TABLE `sessions` (
   KEY `sessions_dateUpdated_idx` (`dateUpdated`),
   KEY `sessions_userId_idx` (`userId`),
   CONSTRAINT `sessions_userId_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2833,7 +2857,7 @@ CREATE TABLE `structureelements` (
   KEY `structureelements_level_idx` (`level`),
   KEY `structureelements_elementId_idx` (`elementId`),
   CONSTRAINT `structureelements_structureId_fk` FOREIGN KEY (`structureId`) REFERENCES `structures` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3236,7 +3260,7 @@ CREATE TABLE `widgets` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-10 16:20:38
+-- Dump completed on 2025-09-29 14:52:30
 /*M!999999\- enable the sandbox mode */ 
 -- MariaDB dump 10.19  Distrib 10.11.10-MariaDB, for debian-linux-gnu (aarch64)
 --
@@ -3298,25 +3322,25 @@ LOCK TABLES `assets` WRITE;
 /*!40000 ALTER TABLE `assets` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `assets` VALUES
-(472,1,1,1,'album-art-test_2020-12-13-044609.jpg','image',NULL,700,700,33709,NULL,NULL,NULL,'2020-12-13 04:46:10','2020-12-13 04:46:10','2021-09-19 00:21:16'),
-(473,1,1,1,'album-art-test_2020-12-13-044743.jpg','image',NULL,700,700,33709,NULL,NULL,NULL,'2020-12-13 04:47:43','2020-12-13 04:47:43','2021-09-19 00:21:16'),
-(483,1,1,1,'MWBE-logo.png','image',NULL,123,58,7745,NULL,NULL,NULL,'2020-12-13 04:57:49','2020-12-13 04:57:49','2021-09-19 00:21:19'),
-(579,1,1,1,'DSC_9577.jpg','image',NULL,3600,2400,2897417,NULL,NULL,NULL,'2020-12-22 00:05:24','2020-12-22 00:05:25','2021-09-19 00:21:17'),
-(599,1,1,1,'Crowd4Blurred.jpg','image',NULL,2048,1152,169090,NULL,NULL,NULL,'2020-12-22 00:25:59','2020-12-22 00:25:59','2021-09-19 00:21:17'),
-(621,1,1,1,'DSC_9613.jpg','image',NULL,2400,3600,1605667,'0.4687;0.1958',NULL,NULL,'2020-12-22 00:53:49','2020-12-22 00:53:50','2021-09-19 00:21:18'),
-(632,1,1,1,'B-chord-and-Headstock.jpg','image',NULL,2039,1471,972252,NULL,NULL,NULL,'2020-12-22 03:02:25','2020-12-22 03:02:25','2021-09-19 00:21:16'),
-(1304,1,1,1,'venmo_logo_blue.png','image',NULL,786,149,9531,NULL,NULL,NULL,'2021-09-18 22:55:01','2021-09-18 22:55:01','2021-09-19 00:21:19'),
-(1311,1,1,1,'pp-logo-150px.png','image',NULL,150,38,2601,NULL,NULL,NULL,'2021-09-18 23:17:55','2021-09-18 23:17:55','2021-09-19 00:21:19'),
-(1314,1,1,1,'Cash-App-Dollar-Full.png','image',NULL,833,230,17639,NULL,NULL,NULL,'2021-09-18 23:20:18','2021-09-18 23:18:40','2021-09-19 00:21:16'),
-(1317,1,1,1,'Cash-App-Dollar-Full.jpg','image',NULL,1601,601,58801,NULL,NULL,NULL,'2021-09-18 23:19:34','2021-09-18 23:19:34','2021-09-19 00:21:16'),
-(1319,1,1,NULL,'OIP-2.jpg','image',NULL,363,227,32234,NULL,NULL,NULL,'2020-12-05 01:53:57','2021-09-18 23:22:08','2021-09-19 00:21:19'),
-(1320,1,1,NULL,'OIP.jpg','image',NULL,363,227,32321,NULL,NULL,NULL,'2020-12-05 01:24:18','2021-09-18 23:22:08','2021-09-19 00:21:19'),
-(1321,1,1,NULL,'Cash-App-Dollar-Full_2021-09-18-232323_fqma.png','image',NULL,833,216,17299,NULL,NULL,NULL,'2021-09-18 23:23:23','2021-09-18 23:23:23','2021-09-19 00:21:17'),
-(1324,1,1,1,'6002f8fa51c2ec00048c6c6b.png','image',NULL,400,238,12250,NULL,NULL,NULL,'2021-09-18 23:27:13','2021-09-18 23:27:13','2021-09-19 00:21:15'),
-(1326,1,1,1,'DSC_9682.jpg','image',NULL,3600,2400,3506210,NULL,NULL,NULL,'2021-09-19 00:02:45','2021-09-19 00:02:45','2021-09-19 00:21:18'),
-(1977,1,1,1,'5y4a1550-4.png','image',NULL,2171,3257,5473583,NULL,NULL,NULL,'2022-11-03 00:27:09','2022-11-03 00:27:10','2022-11-03 00:27:10'),
-(2229,1,1,1,'crowd-stock.jpeg','image',NULL,1880,1245,211478,NULL,NULL,NULL,'2025-07-01 17:52:33','2025-07-01 17:52:33','2025-07-01 17:52:33'),
-(2238,1,1,1,'jumbo-1.jpg','image',NULL,2048,1367,437247,NULL,NULL,NULL,'2025-07-01 17:54:43','2025-07-01 17:54:43','2025-07-01 17:54:43');
+(472,1,1,1,'album-art-test_2020-12-13-044609.jpg',NULL,'image',NULL,700,700,33709,NULL,NULL,NULL,'2020-12-13 04:46:10','2020-12-13 04:46:10','2021-09-19 00:21:16'),
+(473,1,1,1,'album-art-test_2020-12-13-044743.jpg',NULL,'image',NULL,700,700,33709,NULL,NULL,NULL,'2020-12-13 04:47:43','2020-12-13 04:47:43','2021-09-19 00:21:16'),
+(483,1,1,1,'MWBE-logo.png',NULL,'image',NULL,123,58,7745,NULL,NULL,NULL,'2020-12-13 04:57:49','2020-12-13 04:57:49','2021-09-19 00:21:19'),
+(579,1,1,1,'DSC_9577.jpg',NULL,'image',NULL,3600,2400,2897417,NULL,NULL,NULL,'2020-12-22 00:05:24','2020-12-22 00:05:25','2021-09-19 00:21:17'),
+(599,1,1,1,'Crowd4Blurred.jpg',NULL,'image',NULL,2048,1152,169090,NULL,NULL,NULL,'2020-12-22 00:25:59','2020-12-22 00:25:59','2021-09-19 00:21:17'),
+(621,1,1,1,'DSC_9613.jpg',NULL,'image',NULL,2400,3600,1605667,'0.4687;0.1958',NULL,NULL,'2020-12-22 00:53:49','2020-12-22 00:53:50','2021-09-19 00:21:18'),
+(632,1,1,1,'B-chord-and-Headstock.jpg',NULL,'image',NULL,2039,1471,972252,NULL,NULL,NULL,'2020-12-22 03:02:25','2020-12-22 03:02:25','2021-09-19 00:21:16'),
+(1304,1,1,1,'venmo_logo_blue.png',NULL,'image',NULL,786,149,9531,NULL,NULL,NULL,'2021-09-18 22:55:01','2021-09-18 22:55:01','2021-09-19 00:21:19'),
+(1311,1,1,1,'pp-logo-150px.png',NULL,'image',NULL,150,38,2601,NULL,NULL,NULL,'2021-09-18 23:17:55','2021-09-18 23:17:55','2021-09-19 00:21:19'),
+(1314,1,1,1,'Cash-App-Dollar-Full.png',NULL,'image',NULL,833,230,17639,NULL,NULL,NULL,'2021-09-18 23:20:18','2021-09-18 23:18:40','2021-09-19 00:21:16'),
+(1317,1,1,1,'Cash-App-Dollar-Full.jpg',NULL,'image',NULL,1601,601,58801,NULL,NULL,NULL,'2021-09-18 23:19:34','2021-09-18 23:19:34','2021-09-19 00:21:16'),
+(1319,1,1,NULL,'OIP-2.jpg',NULL,'image',NULL,363,227,32234,NULL,NULL,NULL,'2020-12-05 01:53:57','2021-09-18 23:22:08','2021-09-19 00:21:19'),
+(1320,1,1,NULL,'OIP.jpg',NULL,'image',NULL,363,227,32321,NULL,NULL,NULL,'2020-12-05 01:24:18','2021-09-18 23:22:08','2021-09-19 00:21:19'),
+(1321,1,1,NULL,'Cash-App-Dollar-Full_2021-09-18-232323_fqma.png',NULL,'image',NULL,833,216,17299,NULL,NULL,NULL,'2021-09-18 23:23:23','2021-09-18 23:23:23','2021-09-19 00:21:17'),
+(1324,1,1,1,'6002f8fa51c2ec00048c6c6b.png',NULL,'image',NULL,400,238,12250,NULL,NULL,NULL,'2021-09-18 23:27:13','2021-09-18 23:27:13','2021-09-19 00:21:15'),
+(1326,1,1,1,'DSC_9682.jpg',NULL,'image',NULL,3600,2400,3506210,NULL,NULL,NULL,'2021-09-19 00:02:45','2021-09-19 00:02:45','2021-09-19 00:21:18'),
+(1977,1,1,1,'5y4a1550-4.png',NULL,'image',NULL,2171,3257,5473583,NULL,NULL,NULL,'2022-11-03 00:27:09','2022-11-03 00:27:10','2022-11-03 00:27:10'),
+(2229,1,1,1,'crowd-stock.jpeg',NULL,'image',NULL,1880,1245,211478,NULL,NULL,NULL,'2025-07-01 17:52:33','2025-07-01 17:52:33','2025-07-01 17:52:33'),
+(2238,1,1,1,'jumbo-1.jpg',NULL,'image',NULL,2048,1367,437247,NULL,NULL,NULL,'2025-07-01 17:54:43','2025-07-01 17:54:43','2025-07-01 17:54:43');
 /*!40000 ALTER TABLE `assets` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -4244,7 +4268,11 @@ INSERT INTO `changedattributes` VALUES
 (2223,1,'postDate','2025-06-08 04:05:42',0,1),
 (2223,1,'slug','2025-06-08 04:05:38',0,1),
 (2223,1,'title','2025-06-08 04:05:38',0,1),
-(2223,1,'uri','2025-06-08 04:05:38',0,1);
+(2223,1,'uri','2025-06-08 04:05:38',0,1),
+(2244,1,'postDate','2025-09-16 18:01:24',0,1),
+(2244,1,'slug','2025-09-16 18:00:27',0,1),
+(2244,1,'title','2025-09-16 18:00:27',0,1),
+(2244,1,'uri','2025-09-16 18:00:27',0,1);
 /*!40000 ALTER TABLE `changedattributes` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -4268,7 +4296,7 @@ INSERT INTO `changedfields` VALUES
 (7,1,1,'4814a600-495f-465f-898b-c572d5076839','2020-12-07 01:39:56',0,1),
 (7,1,7,'0','2020-12-03 04:37:12',0,1),
 (7,1,29,'0','2020-12-22 00:37:47',0,1),
-(10,1,3,'d9a8969c-8032-4c8e-a8ab-f64b7f12845e','2022-05-05 01:13:13',0,1),
+(10,1,3,'d9a8969c-8032-4c8e-a8ab-f64b7f12845e','2025-09-16 17:20:22',0,1),
 (10,1,29,'6d3371dc-c533-4929-9795-94eb1a9e6fc0','2025-07-01 17:54:46',0,1),
 (25,1,1,'442e76f1-c862-42ae-b872-e0f64580dc76','2020-12-02 02:32:31',0,1),
 (25,1,3,'d9a8969c-8032-4c8e-a8ab-f64b7f12845e','2020-12-02 02:32:27',0,1),
@@ -6296,6 +6324,17 @@ UNLOCK TABLES;
 commit;
 
 --
+-- Dumping data for table `contentblocks`
+--
+
+LOCK TABLES `contentblocks` WRITE;
+/*!40000 ALTER TABLE `contentblocks` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `contentblocks` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
 -- Dumping data for table `craftidtokens`
 --
 
@@ -6351,8 +6390,8 @@ LOCK TABLES `elementactivity` WRITE;
 /*!40000 ALTER TABLE `elementactivity` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `elementactivity` VALUES
-(10,1,1,NULL,'edit','2025-07-01 17:54:45'),
-(10,1,1,NULL,'save','2025-07-01 17:54:46'),
+(10,1,1,NULL,'edit','2025-09-16 17:14:30'),
+(10,1,1,NULL,'save','2025-09-16 17:20:22'),
 (140,1,1,NULL,'edit','2025-07-01 17:52:35'),
 (140,1,1,NULL,'save','2025-07-01 17:53:57'),
 (2193,1,1,NULL,'save','2025-06-08 03:31:19'),
@@ -6365,10 +6404,12 @@ INSERT INTO `elementactivity` VALUES
 (2211,1,1,NULL,'save','2025-06-08 04:03:21'),
 (2213,1,1,NULL,'save','2025-06-08 04:03:38'),
 (2215,1,1,NULL,'save','2025-06-08 04:03:56'),
+(2217,1,1,NULL,'edit','2025-09-16 19:47:11'),
 (2217,1,1,NULL,'save','2025-06-08 04:04:14'),
 (2219,1,1,NULL,'save','2025-06-08 04:05:17'),
 (2221,1,1,NULL,'save','2025-06-08 04:05:29'),
-(2223,1,1,NULL,'save','2025-06-08 04:05:42');
+(2223,1,1,NULL,'save','2025-06-08 04:05:42'),
+(2244,1,1,NULL,'save','2025-09-16 18:01:24');
 /*!40000 ALTER TABLE `elementactivity` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -6390,7 +6431,7 @@ INSERT INTO `elements` VALUES
 (7,NULL,NULL,NULL,3,'craft\\elements\\Entry',1,0,'2020-11-21 19:28:45','2021-02-17 17:03:08',NULL,NULL,NULL,'2b7cb821-abac-4beb-8c85-750cc42a7d9e'),
 (8,7,NULL,4,3,'craft\\elements\\Entry',1,0,'2020-11-21 19:28:45','2020-11-21 19:28:45',NULL,NULL,NULL,'c955864c-31dd-484a-b6de-e225208a0a66'),
 (9,7,NULL,5,3,'craft\\elements\\Entry',1,0,'2020-11-21 19:28:46','2020-11-21 19:28:46',NULL,NULL,NULL,'a06860d9-bb15-4d97-99e0-f6e3bf1a97f8'),
-(10,NULL,NULL,NULL,4,'craft\\elements\\Entry',1,0,'2020-11-21 19:49:03','2025-07-01 17:54:46',NULL,NULL,NULL,'c869dc1f-407c-42b0-a3c3-519b6f377ade'),
+(10,NULL,NULL,NULL,4,'craft\\elements\\Entry',1,0,'2020-11-21 19:49:03','2025-09-16 17:20:22',NULL,NULL,NULL,'c869dc1f-407c-42b0-a3c3-519b6f377ade'),
 (11,10,NULL,6,4,'craft\\elements\\Entry',1,0,'2020-11-21 19:49:03','2020-11-21 19:49:03',NULL,NULL,NULL,'7b575bb8-9c3e-465b-8dc6-540a18fc9a42'),
 (12,NULL,NULL,NULL,5,'craft\\elements\\Entry',1,0,'2020-11-21 19:49:26','2021-02-17 16:55:15',NULL,NULL,NULL,'8a7dac34-99f7-4754-bb93-fbe156c863bd'),
 (13,12,NULL,7,5,'craft\\elements\\Entry',1,0,'2020-11-21 19:49:26','2020-11-21 19:49:26',NULL,NULL,NULL,'93996b2f-6aea-466d-acb9-3ef76d4b460e'),
@@ -8163,7 +8204,11 @@ INSERT INTO `elements` VALUES
 (2236,603,NULL,813,14,'craft\\elements\\Entry',1,0,'2020-12-29 04:41:07','2025-07-01 17:52:37',NULL,NULL,NULL,'ab639ca1-493d-47ef-a5ca-7f1b0cb1e4a4'),
 (2237,140,NULL,814,13,'craft\\elements\\Entry',1,0,'2025-07-01 17:53:57','2025-07-01 17:53:57',NULL,NULL,NULL,'145695a0-b3aa-4026-934e-6d3b9eb16e9d'),
 (2238,NULL,NULL,NULL,12,'craft\\elements\\Asset',1,0,'2025-07-01 17:54:43','2025-07-01 17:54:43',NULL,NULL,NULL,'5958f9f3-1fc3-4bfe-bbe2-5ea25da8f9c1'),
-(2240,10,NULL,815,4,'craft\\elements\\Entry',1,0,'2025-07-01 17:54:46','2025-07-01 17:54:46',NULL,NULL,NULL,'d291d75c-965a-4e65-b85c-7b9a843839d9');
+(2240,10,NULL,815,4,'craft\\elements\\Entry',1,0,'2025-07-01 17:54:46','2025-07-01 17:54:46',NULL,NULL,NULL,'d291d75c-965a-4e65-b85c-7b9a843839d9'),
+(2242,10,NULL,816,4,'craft\\elements\\Entry',1,0,'2025-09-16 17:14:35','2025-09-16 17:14:35',NULL,NULL,NULL,'9a081603-5825-4d4e-88db-f5b5b741f97c'),
+(2243,10,NULL,817,4,'craft\\elements\\Entry',1,0,'2025-09-16 17:20:22','2025-09-16 17:20:22',NULL,NULL,NULL,'38d7360e-f2b6-4758-a400-70c962204372'),
+(2244,NULL,NULL,NULL,25,'craft\\elements\\Entry',1,0,'2025-09-16 18:00:19','2025-09-16 18:01:24',NULL,NULL,NULL,'5aa856d8-5d5c-4a30-a3f2-1e4b17efc769'),
+(2245,2244,NULL,818,25,'craft\\elements\\Entry',1,0,'2025-09-16 18:01:24','2025-09-16 18:01:24',NULL,NULL,NULL,'69c32b08-2ad3-46a4-83ea-a4e7bf01286d');
 /*!40000 ALTER TABLE `elements` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -8572,7 +8617,7 @@ INSERT INTO `elements_sites` VALUES
 (7,7,1,'Tour','tour','tour',NULL,1,'2020-11-21 19:28:45','2020-11-21 19:28:45','cf825395-264b-4c2d-b56a-4d316c239362'),
 (8,8,1,'Tour','tour','tour',NULL,1,'2020-11-21 19:28:45','2020-11-21 19:28:45','f00cc952-4fb6-44ff-8a40-6742b13c0a9a'),
 (9,9,1,'Tour','tour','tour',NULL,1,'2020-11-21 19:28:46','2020-11-21 19:28:46','cb403ec7-df2c-403d-8277-0aa8b90e7d49'),
-(10,10,1,'About','about','about','{\"6d3371dc-c533-4929-9795-94eb1a9e6fc0\":[2238],\"d9a8969c-8032-4c8e-a8ab-f64b7f12845e\":\"<h4>When Dave Rudolph first picked up a guitar at just 3 years old, few could\'ve predicted the journey it would lead him on. The love and pursuit of music has taken him across the country and made him lifelong fans and friends alike.</h4>\\n<h4><br /></h4>\\n<h4>A veteran performer from Akron, Ohio, Dave has performed over 1000 live shows with a wide variety of bands, both live and in the studio. Dave has opened for major acts, such as Jake Owen, Chris Janson, Tracy Byrd, Tyler Farr, Saving Abel, Josh Thompson, and Craig Campbell. </h4>\\n<h4><br /></h4>\\n<h4>Dave has performed at events ranging from the NFL Hall of Fame Induction Ceremony, WGAR Country Jam, CMA Fest, Bus Call, Piqua Bike Fest, and Hamler Country Fest, to the shows at Tootsies Orchid Lounge, Honky Tonk Central, Kid Rock\'s Big Ass Honky Tonk, Dierks Bentley\'s Whiskey Row, Thirsty Cowboy, The Little Red Rooster, The Dusty Armadillo, and the world famous traveling Jaegermeister Stage. Tours have laid rubber from Cleveland to Nashville, Oklahoma City to Seattle, Bemidji to Woodruff, and many places between. </h4>\\n<h4><br /></h4>\\n<h4>While currently residing in Nashville, be sure to catch Dave performing with his band on Lower Broadway.</h4>\\n<h4><br /></h4>\\n<h4>Currently available for gigs as a frontman, sideman (vocal harmonies/lead guitar), co-writing, session work, and guitar lessons - send me a message through the contact page.</h4>\\n<figure><img class=\\\"img-fluid\\\" src=\\\"{asset:621:url||/uploads/DSC_9613.jpg}\\\" alt=\\\"Dave Rudolph Fender Tele Telecaster Black Leather Jacket Ripped Jeans Rustic Brooding Intense Serious Musician Promo Picture Photo Guitar Sexy Man Guitarist Singer American Country Rock Outlaw\\\" /><figcaption>Dave Rudolph with his Telecaster - Photo by Anna Bey Photography</figcaption></figure>\"}',1,'2020-11-21 19:49:03','2025-07-01 17:54:46','e6acbfa1-27ac-4c35-8c9e-70f2f3cef3d3'),
+(10,10,1,'About','about','about','{\"d9a8969c-8032-4c8e-a8ab-f64b7f12845e\":\"<p>When Dave Rudolph first picked up a guitar at just 3 years old, few could\'ve predicted the journey it would lead him on. The love and pursuit of music has taken him across the country and made him lifelong fans and friends alike.</p>\\n<p>A veteran performer from Akron, Ohio, Dave has performed over 1000 live shows with a wide variety of bands, both live and in the studio. Dave has opened for major acts, such as Jake Owen, Chris Janson, Tracy Byrd, Tyler Farr, Saving Abel, Josh Thompson, and Craig Campbell.</p>\\n<p>Dave has performed at events ranging from the NFL Hall of Fame Induction Ceremony, WGAR Country Jam, CMA Fest, Bus Call, Piqua Bike Fest, and Hamler Country Fest, to the shows at Tootsies Orchid Lounge, Honky Tonk Central, Kid Rock\'s Big Ass Honky Tonk, Dierks Bentley\'s Whiskey Row, Thirsty Cowboy, The Little Red Rooster, The Dusty Armadillo, and the world famous traveling Jaegermeister Stage. Tours have laid rubber from Cleveland to Nashville, Oklahoma City to Seattle, Bemidji to Woodruff, and many places between.</p>\\n<p>While currently residing in Nashville, be sure to catch Dave performing with his band on Lower Broadway.</p>\\n<p>Currently available for gigs as a frontman, sideman (vocal harmonies/lead guitar), co-writing, session work, and guitar lessons - send me a message through the contact page.</p>\\n<figure><img class=\\\"img-fluid\\\" src=\\\"{asset:621:url||/uploads/DSC_9613.jpg}\\\" alt=\\\"Dave Rudolph Fender Tele Telecaster Black Leather Jacket Ripped Jeans Rustic Brooding Intense Serious Musician Promo Picture Photo Guitar Sexy Man Guitarist Singer American Country Rock Outlaw\\\" /><figcaption>Dave Rudolph with his Telecaster - Photo by Anna Bey Photography</figcaption></figure>\",\"6d3371dc-c533-4929-9795-94eb1a9e6fc0\":[2238]}',1,'2020-11-21 19:49:03','2025-09-16 17:20:22','e6acbfa1-27ac-4c35-8c9e-70f2f3cef3d3'),
 (11,11,1,'About','about','about',NULL,1,'2020-11-21 19:49:03','2020-11-21 19:49:03','02a35f97-f31b-4df0-996d-9fe7fd529588'),
 (12,12,1,'Contact','contact','contact',NULL,1,'2020-11-21 19:49:26','2020-11-21 19:49:26','9d2f865f-9380-43dd-819e-892fbdf5896f'),
 (13,13,1,'Contact','contact','contact',NULL,1,'2020-11-21 19:49:26','2020-11-21 19:49:26','6b81eb0c-7cde-4269-ae92-38b31a2eeb15'),
@@ -10322,13 +10367,13 @@ INSERT INTO `elements_sites` VALUES
 (2210,2210,1,'Tour','tour','navigation/tour','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":false,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":false}',1,'2025-06-08 04:03:07','2025-06-08 04:03:07','193e5384-276e-4fba-84ef-2a50d4a1f909'),
 (2211,2211,1,'Music','music','navigation/music','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":false,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":false,\"84dc8940-8450-44e8-bd29-a12af88c7e8d\":[5]}',1,'2025-06-08 04:03:12','2025-06-19 13:59:01','6873f0ad-4f70-47e1-bfff-996278aee57f'),
 (2212,2212,1,'Music','music','navigation/music','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":false,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":false}',1,'2025-06-08 04:03:21','2025-06-08 04:03:21','e439ee2e-43b0-49f4-a556-be50f5a5ab4f'),
-(2213,2213,1,'Merch','merch','navigation/merch','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":true,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":true,\"9919e063-4421-44a3-8560-8312f2c6f5d2\":{\"value\":\"https://dave-rudolph.printify.me/products\",\"type\":\"url\"},\"84dc8940-8450-44e8-bd29-a12af88c7e8d\":[]}',1,'2025-06-08 04:03:25','2025-06-19 13:59:01','c71fb9a4-fb23-4d42-8398-e48d0c103f8a'),
+(2213,2213,1,'Merch','merch','navigation/merch','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":true,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":true,\"9919e063-4421-44a3-8560-8312f2c6f5d2\":{\"value\":\"https://dave-rudolph.printify.me/products\",\"type\":\"url\"},\"84dc8940-8450-44e8-bd29-a12af88c7e8d\":[]}',1,'2025-06-08 04:03:25','2025-09-16 18:01:34','c71fb9a4-fb23-4d42-8398-e48d0c103f8a'),
 (2214,2214,1,'Merch','merch','navigation/merch','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":true,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":true,\"9919e063-4421-44a3-8560-8312f2c6f5d2\":\"https://dave-rudolph.printify.me/products\"}',1,'2025-06-08 04:03:38','2025-06-08 04:03:38','396d71c7-4d9a-4aec-8900-bb9ff37a304c'),
 (2215,2215,1,'Media','media','navigation/media','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":false,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":false,\"84dc8940-8450-44e8-bd29-a12af88c7e8d\":[140]}',1,'2025-06-08 04:03:48','2025-06-19 13:59:01','628b52e3-da06-4559-b8aa-845145fbb7cf'),
 (2216,2216,1,'Media','media','navigation/media','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":false,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":false}',1,'2025-06-08 04:03:56','2025-06-08 04:03:56','796553d6-7a1f-48f9-b528-de5b28a07ed2'),
-(2217,2217,1,'Buy','buy','navigation/buy','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":true,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":true,\"9919e063-4421-44a3-8560-8312f2c6f5d2\":{\"value\":\"https://daverudolphmusic.bandcamp.com/community\",\"type\":\"url\"},\"84dc8940-8450-44e8-bd29-a12af88c7e8d\":[]}',1,'2025-06-08 04:04:01','2025-06-19 13:59:01','7bd196e9-b67a-4d47-8431-41600d3cfb80'),
+(2217,2217,1,'Buy','buy','navigation/buy','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":true,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":true,\"9919e063-4421-44a3-8560-8312f2c6f5d2\":{\"value\":\"https://daverudolphmusic.bandcamp.com/community\",\"type\":\"url\"},\"84dc8940-8450-44e8-bd29-a12af88c7e8d\":[]}',1,'2025-06-08 04:04:01','2025-09-16 18:01:38','7bd196e9-b67a-4d47-8431-41600d3cfb80'),
 (2218,2218,1,'Buy','buy','navigation/buy','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":true,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":true,\"9919e063-4421-44a3-8560-8312f2c6f5d2\":\"https://daverudolphmusic.bandcamp.com/community\"}',1,'2025-06-08 04:04:14','2025-06-08 04:04:14','ccd47e5c-c601-4f7b-b249-a61dff5ff78a'),
-(2219,2219,1,'Stagewear','stagewear','navigation/stagewear','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":true,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":true,\"9919e063-4421-44a3-8560-8312f2c6f5d2\":{\"value\":\"https://delta-wolf-productions.printify.me/\",\"type\":\"url\"},\"84dc8940-8450-44e8-bd29-a12af88c7e8d\":[]}',1,'2025-06-08 04:05:08','2025-06-19 13:59:01','91a067d7-488a-472d-a3c5-3f44d74a6880'),
+(2219,2219,1,'Stagewear','stagewear','navigation/stagewear','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":true,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":true,\"9919e063-4421-44a3-8560-8312f2c6f5d2\":{\"value\":\"https://delta-wolf-productions.printify.me/\",\"type\":\"url\"},\"84dc8940-8450-44e8-bd29-a12af88c7e8d\":[]}',1,'2025-06-08 04:05:08','2025-09-16 18:01:29','91a067d7-488a-472d-a3c5-3f44d74a6880'),
 (2220,2220,1,'Stagewear','stagewear','navigation/stagewear','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":true,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":true,\"9919e063-4421-44a3-8560-8312f2c6f5d2\":\"https://delta-wolf-productions.printify.me/\"}',1,'2025-06-08 04:05:17','2025-06-08 04:05:17','74fe1208-4854-4808-8d2b-68b9e81075bb'),
 (2221,2221,1,'About','about','navigation/about','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":false,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":false,\"84dc8940-8450-44e8-bd29-a12af88c7e8d\":[10]}',1,'2025-06-08 04:05:23','2025-06-19 13:59:01','ab695fe1-445a-4725-8e03-e7208d97f465'),
 (2222,2222,1,'About','about','navigation/about','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":false,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":false}',1,'2025-06-08 04:05:29','2025-06-08 04:05:29','e5aabf50-99c6-4650-bf72-7119221be7cd'),
@@ -10345,7 +10390,11 @@ INSERT INTO `elements_sites` VALUES
 (2236,2236,1,NULL,NULL,NULL,'{\"947990e2-e3eb-4698-84ef-3ea12d55a508\":\"Live Performance Cellphone Videos\",\"38d3463d-b8fa-4cae-84e1-ee183a8745e4\":\"<iframe src=\\\"https://www.youtube.com/embed/VhfBG6IFoB4\\\" frameborder=\\\"0\\\" allow=\\\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\\\" allowfullscreen></iframe>\"}',1,'2025-07-01 17:52:37','2025-07-01 17:52:37','e7f77e26-db24-4d3f-a738-4046f929e9f2'),
 (2237,2237,1,'Media','media','media','{\"4ec92d0e-0089-40aa-a6a7-4598926c8b5e\":[2229]}',1,'2025-07-01 17:53:57','2025-07-01 17:53:57','d26698a3-01b9-4156-ab9f-c4d4e795ad4d'),
 (2238,2238,1,'Jumbo 1',NULL,NULL,NULL,1,'2025-07-01 17:54:43','2025-07-01 17:54:43','9f0371d0-149d-44c6-850a-99edfdfd1778'),
-(2240,2240,1,'About','about','about','{\"6d3371dc-c533-4929-9795-94eb1a9e6fc0\":[2238],\"d9a8969c-8032-4c8e-a8ab-f64b7f12845e\":\"<h4>When Dave Rudolph first picked up a guitar at just 3 years old, few could\'ve predicted the journey it would lead him on. The love and pursuit of music has taken him across the country and made him lifelong fans and friends alike.</h4>\\n<h4><br /></h4>\\n<h4>A veteran performer from Akron, Ohio, Dave has performed over 1000 live shows with a wide variety of bands, both live and in the studio. Dave has opened for major acts, such as Jake Owen, Chris Janson, Tracy Byrd, Tyler Farr, Saving Abel, Josh Thompson, and Craig Campbell. </h4>\\n<h4><br /></h4>\\n<h4>Dave has performed at events ranging from the NFL Hall of Fame Induction Ceremony, WGAR Country Jam, CMA Fest, Bus Call, Piqua Bike Fest, and Hamler Country Fest, to the shows at Tootsies Orchid Lounge, Honky Tonk Central, Kid Rock\'s Big Ass Honky Tonk, Dierks Bentley\'s Whiskey Row, Thirsty Cowboy, The Little Red Rooster, The Dusty Armadillo, and the world famous traveling Jaegermeister Stage. Tours have laid rubber from Cleveland to Nashville, Oklahoma City to Seattle, Bemidji to Woodruff, and many places between. </h4>\\n<h4><br /></h4>\\n<h4>While currently residing in Nashville, be sure to catch Dave performing with his band on Lower Broadway.</h4>\\n<h4><br /></h4>\\n<h4>Currently available for gigs as a frontman, sideman (vocal harmonies/lead guitar), co-writing, session work, and guitar lessons - send me a message through the contact page.</h4>\\n<figure><img class=\\\"img-fluid\\\" src=\\\"{asset:621:url||/uploads/DSC_9613.jpg}\\\" alt=\\\"Dave Rudolph Fender Tele Telecaster Black Leather Jacket Ripped Jeans Rustic Brooding Intense Serious Musician Promo Picture Photo Guitar Sexy Man Guitarist Singer American Country Rock Outlaw\\\" /><figcaption>Dave Rudolph with his Telecaster - Photo by Anna Bey Photography</figcaption></figure>\"}',1,'2025-07-01 17:54:46','2025-07-01 17:54:46','3cfd91b9-f2a3-42d2-a743-2cc2b4a3860b');
+(2240,2240,1,'About','about','about','{\"6d3371dc-c533-4929-9795-94eb1a9e6fc0\":[2238],\"d9a8969c-8032-4c8e-a8ab-f64b7f12845e\":\"<h4>When Dave Rudolph first picked up a guitar at just 3 years old, few could\'ve predicted the journey it would lead him on. The love and pursuit of music has taken him across the country and made him lifelong fans and friends alike.</h4>\\n<h4><br /></h4>\\n<h4>A veteran performer from Akron, Ohio, Dave has performed over 1000 live shows with a wide variety of bands, both live and in the studio. Dave has opened for major acts, such as Jake Owen, Chris Janson, Tracy Byrd, Tyler Farr, Saving Abel, Josh Thompson, and Craig Campbell. </h4>\\n<h4><br /></h4>\\n<h4>Dave has performed at events ranging from the NFL Hall of Fame Induction Ceremony, WGAR Country Jam, CMA Fest, Bus Call, Piqua Bike Fest, and Hamler Country Fest, to the shows at Tootsies Orchid Lounge, Honky Tonk Central, Kid Rock\'s Big Ass Honky Tonk, Dierks Bentley\'s Whiskey Row, Thirsty Cowboy, The Little Red Rooster, The Dusty Armadillo, and the world famous traveling Jaegermeister Stage. Tours have laid rubber from Cleveland to Nashville, Oklahoma City to Seattle, Bemidji to Woodruff, and many places between. </h4>\\n<h4><br /></h4>\\n<h4>While currently residing in Nashville, be sure to catch Dave performing with his band on Lower Broadway.</h4>\\n<h4><br /></h4>\\n<h4>Currently available for gigs as a frontman, sideman (vocal harmonies/lead guitar), co-writing, session work, and guitar lessons - send me a message through the contact page.</h4>\\n<figure><img class=\\\"img-fluid\\\" src=\\\"{asset:621:url||/uploads/DSC_9613.jpg}\\\" alt=\\\"Dave Rudolph Fender Tele Telecaster Black Leather Jacket Ripped Jeans Rustic Brooding Intense Serious Musician Promo Picture Photo Guitar Sexy Man Guitarist Singer American Country Rock Outlaw\\\" /><figcaption>Dave Rudolph with his Telecaster - Photo by Anna Bey Photography</figcaption></figure>\"}',1,'2025-07-01 17:54:46','2025-07-01 17:54:46','3cfd91b9-f2a3-42d2-a743-2cc2b4a3860b'),
+(2242,2242,1,'About','about','about','{\"6d3371dc-c533-4929-9795-94eb1a9e6fc0\":[2238],\"d9a8969c-8032-4c8e-a8ab-f64b7f12845e\":\"<h4>When Dave Rudolph first picked up a guitar at just 3 years old, few could\'ve predicted the journey it would lead him on. The love and pursuit of music has taken him across the country and made him lifelong fans and friends alike.</h4>\\n<h4>A veteran performer from Akron, Ohio, Dave has performed over 1000 live shows with a wide variety of bands, both live and in the studio. Dave has opened for major acts, such as Jake Owen, Chris Janson, Tracy Byrd, Tyler Farr, Saving Abel, Josh Thompson, and Craig Campbell.</h4>\\n<h4>Dave has performed at events ranging from the NFL Hall of Fame Induction Ceremony, WGAR Country Jam, CMA Fest, Bus Call, Piqua Bike Fest, and Hamler Country Fest, to the shows at Tootsies Orchid Lounge, Honky Tonk Central, Kid Rock\'s Big Ass Honky Tonk, Dierks Bentley\'s Whiskey Row, Thirsty Cowboy, The Little Red Rooster, The Dusty Armadillo, and the world famous traveling Jaegermeister Stage. Tours have laid rubber from Cleveland to Nashville, Oklahoma City to Seattle, Bemidji to Woodruff, and many places between.</h4>\\n<h4>While currently residing in Nashville, be sure to catch Dave performing with his band on Lower Broadway.</h4>\\n<h4>Currently available for gigs as a frontman, sideman (vocal harmonies/lead guitar), co-writing, session work, and guitar lessons - send me a message through the contact page.</h4>\\n<figure><img class=\\\"img-fluid\\\" src=\\\"{asset:621:url||/uploads/DSC_9613.jpg}\\\" alt=\\\"Dave Rudolph Fender Tele Telecaster Black Leather Jacket Ripped Jeans Rustic Brooding Intense Serious Musician Promo Picture Photo Guitar Sexy Man Guitarist Singer American Country Rock Outlaw\\\" /><figcaption>Dave Rudolph with his Telecaster - Photo by Anna Bey Photography</figcaption></figure>\"}',1,'2025-09-16 17:14:35','2025-09-16 17:14:35','fb8e6c63-bc46-45d5-a2fd-f7c2923484e7'),
+(2243,2243,1,'About','about','about','{\"6d3371dc-c533-4929-9795-94eb1a9e6fc0\":[2238],\"d9a8969c-8032-4c8e-a8ab-f64b7f12845e\":\"<p>When Dave Rudolph first picked up a guitar at just 3 years old, few could\'ve predicted the journey it would lead him on. The love and pursuit of music has taken him across the country and made him lifelong fans and friends alike.</p>\\n<p>A veteran performer from Akron, Ohio, Dave has performed over 1000 live shows with a wide variety of bands, both live and in the studio. Dave has opened for major acts, such as Jake Owen, Chris Janson, Tracy Byrd, Tyler Farr, Saving Abel, Josh Thompson, and Craig Campbell.</p>\\n<p>Dave has performed at events ranging from the NFL Hall of Fame Induction Ceremony, WGAR Country Jam, CMA Fest, Bus Call, Piqua Bike Fest, and Hamler Country Fest, to the shows at Tootsies Orchid Lounge, Honky Tonk Central, Kid Rock\'s Big Ass Honky Tonk, Dierks Bentley\'s Whiskey Row, Thirsty Cowboy, The Little Red Rooster, The Dusty Armadillo, and the world famous traveling Jaegermeister Stage. Tours have laid rubber from Cleveland to Nashville, Oklahoma City to Seattle, Bemidji to Woodruff, and many places between.</p>\\n<p>While currently residing in Nashville, be sure to catch Dave performing with his band on Lower Broadway.</p>\\n<p>Currently available for gigs as a frontman, sideman (vocal harmonies/lead guitar), co-writing, session work, and guitar lessons - send me a message through the contact page.</p>\\n<figure><img class=\\\"img-fluid\\\" src=\\\"{asset:621:url||/uploads/DSC_9613.jpg}\\\" alt=\\\"Dave Rudolph Fender Tele Telecaster Black Leather Jacket Ripped Jeans Rustic Brooding Intense Serious Musician Promo Picture Photo Guitar Sexy Man Guitarist Singer American Country Rock Outlaw\\\" /><figcaption>Dave Rudolph with his Telecaster - Photo by Anna Bey Photography</figcaption></figure>\"}',1,'2025-09-16 17:20:22','2025-09-16 17:20:22','ca69a8d6-3fae-4edd-8786-0bbd8edaf39c'),
+(2244,2244,1,'Shop','shop','navigation/shop','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":false,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":false}',1,'2025-09-16 18:00:19','2025-09-16 18:00:27','e918f30d-057a-4153-a1ab-2406875e5fdc'),
+(2245,2245,1,'Shop','shop','navigation/shop','{\"77f870f7-c4cf-4199-9076-9b2d900c99bb\":false,\"4497ebff-112a-4ddf-84af-01512f0c95e4\":false}',1,'2025-09-16 18:01:24','2025-09-16 18:01:24','f249f54d-f3e2-48b0-9df9-23d1460de238');
 /*!40000 ALTER TABLE `elements_sites` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -12116,7 +12165,11 @@ INSERT INTO `entries` VALUES
 (2235,NULL,NULL,2231,30,12,'2020-12-22 00:26:48',NULL,'live',NULL,NULL,'2025-07-01 17:52:37','2025-07-01 17:52:37'),
 (2236,NULL,NULL,2231,30,12,'2020-12-22 00:26:48',NULL,'live',NULL,NULL,'2025-07-01 17:52:37','2025-07-01 17:52:37'),
 (2237,7,NULL,NULL,NULL,7,'2020-12-07 01:41:00',NULL,'live',NULL,NULL,'2025-07-01 17:53:57','2025-07-01 17:53:57'),
-(2240,4,NULL,NULL,NULL,4,'2020-11-21 19:49:00',NULL,'live',NULL,NULL,'2025-07-01 17:54:46','2025-07-01 17:54:46');
+(2240,4,NULL,NULL,NULL,4,'2020-11-21 19:49:00',NULL,'live',NULL,NULL,'2025-07-01 17:54:46','2025-07-01 17:54:46'),
+(2242,4,NULL,NULL,NULL,4,'2020-11-21 19:49:00',NULL,'live',NULL,NULL,'2025-09-16 17:14:35','2025-09-16 17:14:35'),
+(2243,4,NULL,NULL,NULL,4,'2020-11-21 19:49:00',NULL,'live',NULL,NULL,'2025-09-16 17:20:22','2025-09-16 17:20:22'),
+(2244,11,NULL,NULL,NULL,11,'2025-09-16 18:01:00',NULL,'live',NULL,NULL,'2025-09-16 18:00:19','2025-09-16 18:01:24'),
+(2245,11,NULL,NULL,NULL,11,'2025-09-16 18:01:00',NULL,'live',NULL,NULL,'2025-09-16 18:01:24','2025-09-16 18:01:24');
 /*!40000 ALTER TABLE `entries` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -13372,7 +13425,9 @@ INSERT INTO `entries_authors` VALUES
 (2223,1,1),
 (2224,1,1),
 (2226,1,1),
-(2228,1,1);
+(2228,1,1),
+(2244,1,1),
+(2245,1,1);
 /*!40000 ALTER TABLE `entries_authors` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -13385,25 +13440,25 @@ LOCK TABLES `entrytypes` WRITE;
 /*!40000 ALTER TABLE `entrytypes` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `entrytypes` VALUES
-(1,1,'Home','home',NULL,NULL,0,'site',NULL,'{section.name|raw}',1,'site',NULL,1,'2020-11-21 19:26:38','2020-11-21 19:26:38',NULL,'502b621a-4cc7-4a26-a910-042f30dca048'),
-(2,2,'Music','music',NULL,NULL,0,'site',NULL,'{section.name|raw}',1,'site',NULL,1,'2020-11-21 19:28:09','2020-11-21 19:28:09',NULL,'6f3a48db-efe7-4a2e-b25d-509fbd2ff05d'),
-(3,3,'Tour','tour',NULL,NULL,0,'site',NULL,'{section.name|raw}',1,'site',NULL,1,'2020-11-21 19:28:45','2020-11-21 19:28:45',NULL,'e28be8c5-7bcd-4e2b-9189-1f72f75ec7b4'),
-(4,4,'About','about',NULL,NULL,0,'site',NULL,'{section.name|raw}',1,'site',NULL,1,'2020-11-21 19:49:03','2020-11-21 19:49:03',NULL,'a88ef367-b120-4c2a-b952-d4c26c75cba5'),
-(5,5,'Contact','contact',NULL,NULL,0,'site',NULL,'{section.name|raw}',1,'site',NULL,1,'2020-11-21 19:49:26','2020-11-21 19:49:26',NULL,'2cb0502e-6cdf-449e-b6c3-d1297d2c6b45'),
-(6,9,'Tour Dates','tourDates',NULL,NULL,1,'site',NULL,NULL,1,'site',NULL,1,'2020-12-03 04:44:35','2020-12-03 04:44:35',NULL,'5e19d471-ef0b-4e95-9548-97c378c4b65d'),
-(7,13,'Media','media',NULL,NULL,0,'site',NULL,'{section.name|raw}',1,'site',NULL,1,'2020-12-07 01:41:39','2020-12-07 01:41:39',NULL,'e4343257-eacd-41fb-b2d1-0ac429892afc'),
-(8,18,'Default','linkPage_default',NULL,NULL,1,'site',NULL,NULL,1,'site',NULL,1,'2021-09-18 19:21:57','2025-06-19 13:58:49',NULL,'10e41f88-75c4-478b-9f90-590df63cdfda'),
-(9,19,'Default','default',NULL,NULL,1,'site',NULL,NULL,1,'site',NULL,1,'2021-09-18 23:57:18','2021-09-18 23:57:18',NULL,'1e6e3839-9a1e-4d98-a6f8-13b7cd0097d7'),
-(10,20,'Default','default',NULL,NULL,1,'site',NULL,NULL,1,'site',NULL,1,'2023-04-15 03:25:27','2023-04-15 03:25:27','2023-04-15 03:27:27','529146ce-3cd6-4b2a-a428-6820b62adc70'),
-(11,25,'Default','navigation_default',NULL,NULL,1,'site',NULL,'navitem',1,'site',NULL,1,'2025-06-08 03:31:07','2025-06-19 13:58:49',NULL,'d2d8c823-93e6-4574-a238-533954b4b8b9'),
-(12,14,'Video','video',NULL,NULL,0,'site',NULL,NULL,0,'site',NULL,1,'2025-06-19 13:58:50','2025-06-19 13:58:50',NULL,'5a99c46a-feb8-4904-a355-2715e51e048a'),
-(13,10,'Platform','platformtitle',NULL,NULL,0,'site',NULL,NULL,0,'site',NULL,1,'2025-06-19 13:58:50','2025-06-19 13:58:50',NULL,'93f4fd03-7ec3-4149-b30e-3d6a701d64a4'),
-(14,17,'Social Links','socialLinks',NULL,NULL,0,'site',NULL,NULL,0,'site',NULL,1,'2025-06-19 13:58:50','2025-06-19 13:58:50',NULL,'95e3be53-2293-4333-904c-5f7a07242a54'),
-(15,6,'button','button',NULL,NULL,0,'site',NULL,NULL,0,'site',NULL,1,'2025-06-19 13:58:50','2025-06-19 13:58:50',NULL,'33fc222b-d308-432c-b70c-c128f4df6783'),
-(16,15,'spotifyIframe','spotifyiframe',NULL,NULL,0,'site',NULL,NULL,0,'site',NULL,1,'2025-06-19 13:58:50','2025-06-19 13:58:50',NULL,'b6502537-1c47-451c-8402-2f8dcde9a941'),
-(17,21,'Nav Item','navItem',NULL,NULL,0,'site',NULL,NULL,0,'site',NULL,1,'2025-06-19 13:58:50','2025-06-19 13:58:50',NULL,'023b0d58-4838-416e-b816-2b62b1461f32'),
-(18,7,'Dates','dates',NULL,NULL,0,'site',NULL,NULL,0,'site',NULL,1,'2025-06-19 13:58:50','2025-06-19 13:58:50',NULL,'0408c66a-7daf-4481-afc7-2ac098e1e927'),
-(19,23,'Footer Link','footerLink',NULL,NULL,0,'site',NULL,NULL,0,'site',NULL,1,'2025-06-19 13:58:50','2025-06-19 13:58:50',NULL,'1e92d7ca-8270-41cf-aa77-85f7de45a55f');
+(1,1,'Home','home',NULL,NULL,NULL,0,'site',NULL,'{section.name|raw}',1,'site',NULL,1,'2020-11-21 19:26:38','2020-11-21 19:26:38',NULL,'502b621a-4cc7-4a26-a910-042f30dca048'),
+(2,2,'Music','music',NULL,NULL,NULL,0,'site',NULL,'{section.name|raw}',1,'site',NULL,1,'2020-11-21 19:28:09','2020-11-21 19:28:09',NULL,'6f3a48db-efe7-4a2e-b25d-509fbd2ff05d'),
+(3,3,'Tour','tour',NULL,NULL,NULL,0,'site',NULL,'{section.name|raw}',1,'site',NULL,1,'2020-11-21 19:28:45','2020-11-21 19:28:45',NULL,'e28be8c5-7bcd-4e2b-9189-1f72f75ec7b4'),
+(4,4,'About','about',NULL,NULL,NULL,0,'site',NULL,'{section.name|raw}',1,'site',NULL,1,'2020-11-21 19:49:03','2020-11-21 19:49:03',NULL,'a88ef367-b120-4c2a-b952-d4c26c75cba5'),
+(5,5,'Contact','contact',NULL,NULL,NULL,0,'site',NULL,'{section.name|raw}',1,'site',NULL,1,'2020-11-21 19:49:26','2020-11-21 19:49:26',NULL,'2cb0502e-6cdf-449e-b6c3-d1297d2c6b45'),
+(6,9,'Tour Dates','tourDates',NULL,NULL,NULL,1,'site',NULL,NULL,1,'site',NULL,1,'2020-12-03 04:44:35','2020-12-03 04:44:35',NULL,'5e19d471-ef0b-4e95-9548-97c378c4b65d'),
+(7,13,'Media','media',NULL,NULL,NULL,0,'site',NULL,'{section.name|raw}',1,'site',NULL,1,'2020-12-07 01:41:39','2020-12-07 01:41:39',NULL,'e4343257-eacd-41fb-b2d1-0ac429892afc'),
+(8,18,'Default','linkPage_default',NULL,NULL,NULL,1,'site',NULL,NULL,1,'site',NULL,1,'2021-09-18 19:21:57','2025-06-19 13:58:49',NULL,'10e41f88-75c4-478b-9f90-590df63cdfda'),
+(9,19,'Default','default',NULL,NULL,NULL,1,'site',NULL,NULL,1,'site',NULL,1,'2021-09-18 23:57:18','2021-09-18 23:57:18',NULL,'1e6e3839-9a1e-4d98-a6f8-13b7cd0097d7'),
+(10,20,'Default','default',NULL,NULL,NULL,1,'site',NULL,NULL,1,'site',NULL,1,'2023-04-15 03:25:27','2023-04-15 03:25:27','2023-04-15 03:27:27','529146ce-3cd6-4b2a-a428-6820b62adc70'),
+(11,25,'Default','navigation_default',NULL,NULL,NULL,1,'site',NULL,'navitem',1,'site',NULL,1,'2025-06-08 03:31:07','2025-06-19 13:58:49',NULL,'d2d8c823-93e6-4574-a238-533954b4b8b9'),
+(12,14,'Video','video',NULL,NULL,NULL,0,'site',NULL,NULL,0,'site',NULL,1,'2025-06-19 13:58:50','2025-06-19 13:58:50',NULL,'5a99c46a-feb8-4904-a355-2715e51e048a'),
+(13,10,'Platform','platformtitle',NULL,NULL,NULL,0,'site',NULL,NULL,0,'site',NULL,1,'2025-06-19 13:58:50','2025-06-19 13:58:50',NULL,'93f4fd03-7ec3-4149-b30e-3d6a701d64a4'),
+(14,17,'Social Links','socialLinks',NULL,NULL,NULL,0,'site',NULL,NULL,0,'site',NULL,1,'2025-06-19 13:58:50','2025-06-19 13:58:50',NULL,'95e3be53-2293-4333-904c-5f7a07242a54'),
+(15,6,'button','button',NULL,NULL,NULL,0,'site',NULL,NULL,0,'site',NULL,1,'2025-06-19 13:58:50','2025-06-19 13:58:50',NULL,'33fc222b-d308-432c-b70c-c128f4df6783'),
+(16,15,'spotifyIframe','spotifyiframe',NULL,NULL,NULL,0,'site',NULL,NULL,0,'site',NULL,1,'2025-06-19 13:58:50','2025-06-19 13:58:50',NULL,'b6502537-1c47-451c-8402-2f8dcde9a941'),
+(17,21,'Nav Item','navItem',NULL,NULL,NULL,0,'site',NULL,NULL,0,'site',NULL,1,'2025-06-19 13:58:50','2025-06-19 13:58:50',NULL,'023b0d58-4838-416e-b816-2b62b1461f32'),
+(18,7,'Dates','dates',NULL,NULL,NULL,0,'site',NULL,NULL,0,'site',NULL,1,'2025-06-19 13:58:50','2025-06-19 13:58:50',NULL,'0408c66a-7daf-4481-afc7-2ac098e1e927'),
+(19,23,'Footer Link','footerLink',NULL,NULL,NULL,0,'site',NULL,NULL,0,'site',NULL,1,'2025-06-19 13:58:50','2025-06-19 13:58:50',NULL,'1e92d7ca-8270-41cf-aa77-85f7de45a55f');
 /*!40000 ALTER TABLE `entrytypes` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -13498,7 +13553,7 @@ set autocommit=0;
 INSERT INTO `fields` VALUES
 (1,'Page Title','pageTitle','global',NULL,'This will be the title of the page. on top of the picture if there is a picture.',1,'none',NULL,'craft\\fields\\PlainText','{\"byteLimit\":null,\"charLimit\":null,\"code\":\"\",\"columnType\":null,\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\",\"uiMode\":\"normal\"}','2020-11-21 19:51:48','2020-11-21 19:51:48',NULL,'2d05a2b8-fa1f-4237-9abc-77880f943975'),
 (3,'Custom Content','customContent','global',NULL,'This could be any text content you\'d like. This can be a bio section or an about field or a simple announcement.',0,'none',NULL,'craft\\redactor\\Field','{\"availableTransforms\":\"*\",\"availableVolumes\":\"*\",\"cleanupHtml\":true,\"columnType\":\"text\",\"configSelectionMode\":\"choose\",\"defaultTransform\":\"\",\"manualConfig\":\"\",\"purifierConfig\":\"\",\"purifyHtml\":\"1\",\"redactorConfig\":\"\",\"removeEmptyTags\":\"1\",\"removeInlineStyles\":\"1\",\"removeNbsp\":\"1\",\"showHtmlButtonForNonAdmins\":\"\",\"showUnpermittedFiles\":false,\"showUnpermittedVolumes\":false,\"uiMode\":\"enlarged\"}','2020-11-21 20:36:39','2020-11-21 20:57:40',NULL,'8972e6e4-7db5-4a0a-85b9-11be3f170a55'),
-(4,'CTA Buttons','ctaButtons','global',NULL,'these are call to action buttons in the home page under the header title and image',0,'site',NULL,'craft\\fields\\Matrix','{\"propagationKeyFormat\":null,\"propagationMethod\":\"all\",\"maxEntries\":10,\"minEntries\":1,\"entryTypes\":[{\"uid\":\"33fc222b-d308-432c-b70c-c128f4df6783\"}],\"viewMode\":\"blocks\"}','2020-11-21 21:26:17','2020-11-21 21:26:17',NULL,'8f3db685-39df-478c-adc2-5cfb83c2861b'),
+(4,'CTA Buttons','ctaButtons','global',NULL,'these are call to action buttons in the home page under the header title and image',0,'site',NULL,'craft\\fields\\Matrix','{\"propagationKeyFormat\":null,\"propagationMethod\":\"all\",\"maxEntries\":10,\"minEntries\":1,\"entryTypes\":[{\"uid\":\"33fc222b-d308-432c-b70c-c128f4df6783\"}],\"viewMode\":\"blocks\"}','2020-11-21 21:26:17','2020-11-21 21:26:17','2025-09-16 17:16:34','8f3db685-39df-478c-adc2-5cfb83c2861b'),
 (5,'CTA Buttons - button - Button Text','buttonText','global',NULL,'This is what the button will say',1,'none',NULL,'craft\\fields\\PlainText','{\"byteLimit\":null,\"charLimit\":null,\"code\":\"\",\"columnType\":null,\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\",\"uiMode\":\"normal\"}','2020-11-21 21:26:17','2020-11-21 21:26:17',NULL,'3729fe64-ff51-4b75-972a-9ca5c405ba4e'),
 (6,'CTA Buttons - button - Button Link','buttonLink','global',NULL,'the link the button will take you',1,'none',NULL,'craft\\fields\\Url','{\"maxLength\":\"255\",\"placeholder\":\"\"}','2020-11-21 21:26:17','2020-11-21 21:26:17',NULL,'d06cd7cc-5d64-40d9-a4ad-126501bec771'),
 (7,'Tour Dates','tourDates','global',NULL,'',0,'site',NULL,'craft\\fields\\Matrix','{\"propagationKeyFormat\":null,\"propagationMethod\":\"all\",\"maxEntries\":null,\"minEntries\":null,\"entryTypes\":[{\"uid\":\"0408c66a-7daf-4481-afc7-2ac098e1e927\"}],\"viewMode\":\"blocks\"}','2020-11-22 01:29:41','2020-11-22 01:29:41',NULL,'daaeae58-7e1f-4ad5-b1e5-18ac93440c24'),
@@ -13524,7 +13579,7 @@ INSERT INTO `fields` VALUES
 (34,'spotifyIframes - spotifyIframe - iframe','iframe','global',NULL,'This will be the sharing link that your will get from spotify share button.  The share link will look like the following...\" <li class=\"mt-5\"><iframe src=\"https://open.spotify.com/embed/track/2sZstZY9sBDz5DCMpl4JBO\" width=\"300\" height=\"100\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe></li>\"\r\nYou will need to paste in on the src link from that i frame...',0,'none',NULL,'craft\\fields\\PlainText','{\"byteLimit\":null,\"charLimit\":null,\"code\":\"\",\"columnType\":null,\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\",\"uiMode\":\"normal\"}','2020-12-07 02:29:45','2020-12-07 02:29:45',NULL,'e46c4b23-d422-4dec-8758-ef4e9016d1fe'),
 (35,'Album Cover','albumCover','global',NULL,'',0,'site',NULL,'craft\\fields\\Assets','{\"allowSelfRelations\":false,\"allowUploads\":true,\"allowedKinds\":null,\"defaultUploadLocationSource\":\"volume:885183e7-a46e-417d-888c-fca4f7e1734d\",\"defaultUploadLocationSubpath\":\"\",\"limit\":\"1\",\"localizeRelations\":false,\"previewMode\":\"full\",\"restrictFiles\":\"\",\"selectionLabel\":\"\",\"showSiteMenu\":false,\"showUnpermittedFiles\":false,\"showUnpermittedVolumes\":false,\"singleUploadLocationSource\":\"volume:885183e7-a46e-417d-888c-fca4f7e1734d\",\"singleUploadLocationSubpath\":\"\",\"source\":null,\"sources\":\"*\",\"targetSiteId\":null,\"useSingleFolder\":false,\"validateRelatedElements\":false,\"viewMode\":\"list\"}','2020-12-07 03:07:30','2020-12-07 03:07:30',NULL,'569d7efe-e957-4fa0-a49a-c4b1b8fba23b'),
 (36,'Album CTA','albumCta','global',NULL,'',0,'none',NULL,'craft\\fields\\PlainText','{\"byteLimit\":null,\"charLimit\":null,\"code\":\"\",\"columnType\":null,\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\",\"uiMode\":\"normal\"}','2020-12-07 03:08:52','2020-12-07 03:08:52',NULL,'024543db-feed-428a-922b-5c42d8374aaa'),
-(37,'Footer Links','footerLinks','global',NULL,'This will be the bottom icons and links in your footer going out to facebook, youtube, insta etc etc',0,'site',NULL,'craft\\fields\\Matrix','{\"propagationKeyFormat\":null,\"propagationMethod\":\"all\",\"maxEntries\":null,\"minEntries\":null,\"entryTypes\":[{\"uid\":\"95e3be53-2293-4333-904c-5f7a07242a54\"}],\"viewMode\":\"blocks\"}','2020-12-13 05:14:44','2020-12-13 05:14:44',NULL,'5fc89b29-9281-4ea2-a80f-f71060a7fe93'),
+(37,'Footer Links','footerLinks','global',NULL,'This will be the bottom icons and links in your footer going out to facebook, youtube, insta etc etc',0,'site',NULL,'craft\\fields\\Matrix','{\"propagationKeyFormat\":null,\"propagationMethod\":\"all\",\"maxEntries\":null,\"minEntries\":null,\"entryTypes\":[{\"uid\":\"95e3be53-2293-4333-904c-5f7a07242a54\"}],\"viewMode\":\"blocks\"}','2020-12-13 05:14:44','2020-12-13 05:14:44','2025-09-16 17:16:40','5fc89b29-9281-4ea2-a80f-f71060a7fe93'),
 (38,'Footer Links - Social Links - Social Media URl','socialMediaUrl','global',NULL,'This is the url to your social media, you have to include the full url for example a facebook page url would look like this...\"https://www.facebook.com/DaveRudolphMusic/\"',0,'none',NULL,'craft\\fields\\PlainText','{\"byteLimit\":null,\"charLimit\":null,\"code\":\"\",\"columnType\":null,\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"\",\"uiMode\":\"normal\"}','2020-12-13 05:14:44','2020-12-13 05:14:44',NULL,'1362be94-49c6-41a7-8c6e-5613f8983bbc'),
 (39,'Footer Links - Social Links - Social Media Icon','socialMediaIcon','global',NULL,'Pick the social media icon that correlates to your platform. If you dont see the right icon please contact Jerry.',0,'none',NULL,'craft\\fields\\Dropdown','{\"optgroups\":true,\"options\":[{\"label\":\"facebook\",\"value\":\"<i class=\\\"fab fa-facebook-f\\\"></i>\",\"default\":\"\"},{\"label\":\"instagram\",\"value\":\"<i class=\\\"fab fa-instagram\\\"></i>\",\"default\":\"\"},{\"label\":\"twitter\",\"value\":\"<i class=\\\"fab fa-twitter\\\"></i>\",\"default\":\"\"},{\"label\":\"youtube\",\"value\":\"<i class=\\\"fab fa-youtube\\\"></i>\",\"default\":\"\"},{\"label\":\"soundcloud\",\"value\":\"<i class=\\\"fab fa-soundcloud\\\"></i>\",\"default\":\"\"},{\"label\":\"applemusic\",\"value\":\"<i class=\\\"fab fa-apple\\\"></i>\",\"default\":\"\"},{\"label\":\"google music\",\"value\":\"<i class=\\\"fab fa-google\\\"></i>\",\"default\":\"\"},{\"label\":\"tiktok\",\"value\":\"<i class=\\\"fab fa-tiktok\\\"></i>\",\"default\":\"\"},{\"label\":\"amazonmusic\",\"value\":\"<i class=\\\"fab fa-amazon\\\"></i>\",\"default\":\"\"},{\"label\":\"spotify\",\"value\":\"<i class=\\\"fab fa-spotify\\\"></i>\",\"default\":\"\"}]}','2020-12-13 05:23:04','2020-12-13 05:23:04',NULL,'cbc56c31-9669-4305-8581-335621349eec'),
 (40,'Header Image Alt','headerImageAlt','global',NULL,'',0,'none',NULL,'craft\\fields\\PlainText','{\"byteLimit\":null,\"charLimit\":180,\"code\":\"\",\"columnType\":null,\"initialRows\":\"4\",\"multiline\":\"\",\"placeholder\":\"This is the tags for images for google search\",\"uiMode\":\"normal\"}','2021-02-17 05:31:22','2021-02-17 05:31:22',NULL,'ed2878ee-102f-406d-b62d-3d231fd7460b'),
@@ -13631,6 +13686,8 @@ commit;
 LOCK TABLES `freeform_feed_messages` WRITE;
 /*!40000 ALTER TABLE `freeform_feed_messages` DISABLE KEYS */;
 set autocommit=0;
+INSERT INTO `freeform_feed_messages` VALUES
+(1,3,'Form Monitor is a new Freeform Pro feature that automatically tests and validates your forms and email notifications. It catches silent failures before they can impact your business, allowing you to fix issues quickly and keep leads coming in. Learn more about how it works and how to enable it here: https://docs.solspace.com/craft/freeform/v5/monitoring/','[]','info',0,'2025-08-12 13:00:00','2025-08-18 22:04:15','2025-08-18 22:04:15','5a54cbbf-9fa3-4f9a-8e15-2cc59fee0b4d');
 /*!40000 ALTER TABLE `freeform_feed_messages` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -13642,6 +13699,11 @@ commit;
 LOCK TABLES `freeform_feeds` WRITE;
 /*!40000 ALTER TABLE `freeform_feeds` DISABLE KEYS */;
 set autocommit=0;
+INSERT INTO `freeform_feeds` VALUES
+(1,'54db2154-ab74-47aa-a552-f12a5150549a','3.0.0','3.99.999','2025-08-12 14:30:00','2025-08-18 22:04:14','2025-08-18 22:04:14','8723c2f8-23bf-4e33-a3b2-f4ae240d3f51'),
+(2,'32354cc4-c6a0-4167-9794-ce8387d68fe3','4.0.0','4.99.999','2025-08-12 14:00:00','2025-08-18 22:04:14','2025-08-18 22:04:14','1b747cc2-838d-44ff-b7d1-4d8e7b0c09db'),
+(3,'d3454521-fd86-4cc9-84af-e480d751bb43','5.11.0','5.11.999','2025-08-12 13:00:00','2025-08-18 22:04:14','2025-08-18 22:04:14','70c666fc-6b1c-4e42-9742-75a79acc9e28'),
+(4,'49458a98-4be2-49c4-8ab9-365850c75acf','5.0.0','5.10.999','2025-08-11 13:00:00','2025-08-18 22:04:15','2025-08-18 22:04:15','9bfc32ca-6da2-4132-964c-b57453ec979f');
 /*!40000 ALTER TABLE `freeform_feeds` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -13672,7 +13734,7 @@ LOCK TABLES `freeform_forms` WRITE;
 /*!40000 ALTER TABLE `freeform_forms` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `freeform_forms` VALUES
-(1,'Solspace\\Freeform\\Form\\Types\\Regular','Contact','contact',0,'{\"behavior\":{\"ajax\":true,\"successBehavior\":\"reload\",\"duplicateCheck\":\"no_limit\",\"showProcessingSpinner\":true,\"successTemplate\":null,\"stopSubmissionsAfter\":null,\"showProcessingText\":true,\"returnUrl\":\"\",\"processingText\":\"Processing...\",\"successMessage\":\"Form has been submitted successfully!\",\"errorMessage\":\"Sorry, there was an error submitting the form. Please try again.\"},\"general\":{\"name\":\"Contact\",\"storeData\":true,\"handle\":\"contact\",\"defaultStatus\":2,\"type\":\"Solspace\\\\Freeform\\\\Form\\\\Types\\\\Regular\",\"collectIpAddresses\":true,\"sites\":[\"1\"],\"allowUsersToOptIn\":false,\"translations\":false,\"optInCheckbox\":null,\"submissionTitle\":\"{{ dateCreated|date(\\\"Y-m-d H:i:s\\\") }}\",\"formattingTemplate\":\"tailwind-3\\/index.twig\",\"description\":\"\",\"color\":\"#940F56\",\"attributes\":{\"form\":{},\"row\":{},\"success\":{},\"errors\":{}}}}',NULL,1,1,NULL,'2025-07-01 18:02:41','2025-07-01 18:14:21','6ff80b50-5d94-4457-a63b-0a0ef9fe2e01');
+(1,'Solspace\\Freeform\\Form\\Types\\Regular','Contact','contact',0,'{\"behavior\":{\"ajax\":true,\"successBehavior\":\"reload\",\"duplicateCheck\":\"no_limit\",\"showProcessingSpinner\":true,\"successTemplate\":null,\"stopSubmissionsAfter\":null,\"showProcessingText\":true,\"returnUrl\":\"\",\"processingText\":\"Processing...\",\"successMessage\":\"Form has been submitted successfully!\",\"errorMessage\":\"Sorry, there was an error submitting the form. Please try again.\"},\"general\":{\"name\":\"Contact\",\"storeData\":true,\"handle\":\"contact\",\"defaultStatus\":2,\"type\":\"Solspace\\\\Freeform\\\\Form\\\\Types\\\\Regular\",\"collectIpAddresses\":true,\"sites\":[\"1\"],\"allowUsersToOptIn\":false,\"translations\":false,\"optInCheckbox\":null,\"submissionTitle\":\"{{ dateCreated|date(\\\"Y-m-d H:i:s\\\") }}\",\"formattingTemplate\":\"flexbox\\/index.twig\",\"description\":\"\",\"color\":\"#940F56\",\"attributes\":{\"form\":{},\"row\":{},\"success\":{},\"errors\":{}}}}',NULL,1,1,NULL,'2025-07-01 18:02:41','2025-09-23 21:03:37','6ff80b50-5d94-4457-a63b-0a0ef9fe2e01');
 /*!40000 ALTER TABLE `freeform_forms` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -13685,11 +13747,11 @@ LOCK TABLES `freeform_forms_fields` WRITE;
 /*!40000 ALTER TABLE `freeform_forms_fields` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `freeform_forms_fields` VALUES
-(1,1,'Solspace\\Freeform\\Fields\\Implementations\\TextField','{\"label\":\"First Name\",\"encrypted\":false,\"handle\":\"firstName\",\"fieldType\":null,\"instructions\":\"\",\"attributes\":{\"input\":{},\"label\":{},\"instructions\":{},\"container\":{},\"error\":{},\"option\":{},\"optionLabel\":{}},\"placeholder\":\"\",\"required\":true,\"requiredMessage\":\"\",\"defaultValue\":\"\",\"maxLength\":null}',1,0,'2025-07-01 18:11:48','2025-07-01 18:13:56','98401b4f-b30f-4533-bf98-5167c43fcbdd'),
-(2,1,'Solspace\\Freeform\\Fields\\Implementations\\TextField','{\"label\":\"Last Name\",\"encrypted\":false,\"handle\":\"lastName\",\"fieldType\":null,\"instructions\":\"\",\"attributes\":{\"input\":{},\"label\":{},\"instructions\":{},\"container\":{},\"error\":{},\"option\":{},\"optionLabel\":{}},\"placeholder\":\"\",\"required\":true,\"requiredMessage\":\"\",\"defaultValue\":\"\",\"maxLength\":null}',2,0,'2025-07-01 18:12:03','2025-07-01 18:13:56','5069071a-94da-46d8-80d7-481f739427ca'),
-(3,1,'Solspace\\Freeform\\Fields\\Implementations\\EmailField','{\"label\":\"Email\",\"encrypted\":false,\"handle\":\"email\",\"fieldType\":null,\"instructions\":\"\",\"attributes\":{\"input\":{},\"label\":{},\"instructions\":{},\"container\":{},\"error\":{},\"option\":{},\"optionLabel\":{}},\"placeholder\":\"\",\"required\":true,\"requiredMessage\":\"\",\"defaultValue\":\"\",\"maxLength\":null}',3,0,'2025-07-01 18:12:29','2025-07-01 18:12:29','80887942-327e-450e-a198-1f0b84366282'),
-(4,1,'Solspace\\Freeform\\Fields\\Implementations\\TextField','{\"label\":\"Subject\",\"encrypted\":false,\"handle\":\"subject\",\"fieldType\":null,\"instructions\":\"\",\"attributes\":{\"input\":{},\"label\":{},\"instructions\":{},\"container\":{},\"error\":{},\"option\":{},\"optionLabel\":{}},\"placeholder\":\"\",\"required\":true,\"requiredMessage\":\"\",\"defaultValue\":\"\",\"maxLength\":null}',4,0,'2025-07-01 18:12:43','2025-07-01 18:13:56','6a9cc343-6059-48a9-ba77-e1dbe694dd73'),
-(5,1,'Solspace\\Freeform\\Fields\\Implementations\\TextareaField','{\"defaultValue\":\"\",\"label\":\"Message\",\"encrypted\":false,\"rows\":6,\"handle\":\"message\",\"fieldType\":null,\"instructions\":\"\",\"attributes\":{\"input\":{},\"label\":{},\"instructions\":{},\"container\":{},\"error\":{},\"option\":{},\"optionLabel\":{}},\"placeholder\":\"\",\"required\":false,\"requiredMessage\":\"\",\"maxLength\":null}',5,0,'2025-07-01 18:13:56','2025-07-01 18:13:56','861aebba-eb73-4116-a23d-b53a8f0eca48');
+(1,1,'Solspace\\Freeform\\Fields\\Implementations\\TextField','{\"label\":\"First Name\",\"encrypted\":false,\"handle\":\"firstName\",\"fieldType\":null,\"instructions\":\"\",\"attributes\":{\"input\":{},\"label\":{},\"instructions\":{},\"container\":{},\"error\":{},\"option\":{},\"optionLabel\":{}},\"placeholder\":\"\",\"required\":true,\"requiredMessage\":null,\"defaultValue\":null,\"maxLength\":null}',1,0,'2025-07-01 18:11:48','2025-09-23 20:57:13','98401b4f-b30f-4533-bf98-5167c43fcbdd'),
+(2,1,'Solspace\\Freeform\\Fields\\Implementations\\TextField','{\"label\":\"Last Name\",\"encrypted\":false,\"handle\":\"lastName\",\"fieldType\":null,\"instructions\":\"\",\"attributes\":{\"input\":{},\"label\":{},\"instructions\":{},\"container\":{},\"error\":{},\"option\":{},\"optionLabel\":{}},\"placeholder\":\"\",\"required\":true,\"requiredMessage\":null,\"defaultValue\":null,\"maxLength\":null}',2,0,'2025-07-01 18:12:03','2025-09-23 20:57:13','5069071a-94da-46d8-80d7-481f739427ca'),
+(3,1,'Solspace\\Freeform\\Fields\\Implementations\\EmailField','{\"label\":\"Email\",\"encrypted\":false,\"handle\":\"email\",\"fieldType\":null,\"instructions\":\"\",\"attributes\":{\"input\":{},\"label\":{},\"instructions\":{},\"container\":{},\"error\":{},\"option\":{},\"optionLabel\":{}},\"placeholder\":\"\",\"required\":true,\"requiredMessage\":null,\"defaultValue\":null,\"maxLength\":null}',3,0,'2025-07-01 18:12:29','2025-09-23 20:57:13','80887942-327e-450e-a198-1f0b84366282'),
+(4,1,'Solspace\\Freeform\\Fields\\Implementations\\TextField','{\"label\":\"Subject\",\"encrypted\":false,\"handle\":\"subject\",\"fieldType\":null,\"instructions\":\"\",\"attributes\":{\"input\":{},\"label\":{},\"instructions\":{},\"container\":{},\"error\":{},\"option\":{},\"optionLabel\":{}},\"placeholder\":\"\",\"required\":true,\"requiredMessage\":null,\"defaultValue\":null,\"maxLength\":null}',4,0,'2025-07-01 18:12:43','2025-09-23 20:57:13','6a9cc343-6059-48a9-ba77-e1dbe694dd73'),
+(5,1,'Solspace\\Freeform\\Fields\\Implementations\\TextareaField','{\"defaultValue\":null,\"label\":\"Message\",\"encrypted\":false,\"rows\":6,\"handle\":\"message\",\"fieldType\":null,\"instructions\":\"\",\"attributes\":{\"input\":{},\"label\":{},\"instructions\":{},\"container\":{},\"error\":{},\"option\":{},\"optionLabel\":{}},\"placeholder\":\"\",\"required\":false,\"requiredMessage\":null,\"maxLength\":null}',5,0,'2025-07-01 18:13:56','2025-09-23 20:57:13','861aebba-eb73-4116-a23d-b53a8f0eca48');
 /*!40000 ALTER TABLE `freeform_forms_fields` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -13759,7 +13821,7 @@ LOCK TABLES `freeform_forms_pages` WRITE;
 /*!40000 ALTER TABLE `freeform_forms_pages` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `freeform_forms_pages` VALUES
-(1,1,1,'Page 1',0,'{\"buttons\":{\"layout\":\"save back|submit\",\"attributes\":{\"container\":{},\"column\":{},\"submit\":{},\"back\":{},\"save\":{}},\"submitLabel\":\"Submit\",\"back\":true,\"backLabel\":\"Back\",\"save\":false,\"saveLabel\":\"Save\"}}','2025-07-01 18:11:48','2025-07-01 18:11:48','182d6c0e-0da5-4190-b4f3-77f3bc60a2bb');
+(1,1,1,'Page 1',0,'{\"buttons\":{\"layout\":\"save back|submit\",\"attributes\":{\"container\":[],\"column\":[],\"submit\":[],\"back\":[],\"save\":[]},\"submitLabel\":\"Submit\",\"back\":true,\"backLabel\":\"Back\",\"save\":false,\"saveLabel\":\"Save\"}}','2025-07-01 18:11:48','2025-09-23 20:57:13','182d6c0e-0da5-4190-b4f3-77f3bc60a2bb');
 /*!40000 ALTER TABLE `freeform_forms_pages` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -14129,7 +14191,7 @@ LOCK TABLES `info` WRITE;
 /*!40000 ALTER TABLE `info` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `info` VALUES
-(1,'5.7.11','5.7.0.3',1,'ourxpanpwatw','3@lnmlsyquwe','2020-11-18 04:39:52','2025-07-10 21:20:14','1151ab4b-b451-4ad6-b0ee-b4ef6b428c4e');
+(1,'5.8.5','5.8.0.3',0,'zknuyintggew','3@wcvmtkmgnh','2020-11-18 04:39:52','2025-09-23 20:55:20','1151ab4b-b451-4ad6-b0ee-b4ef6b428c4e');
 /*!40000 ALTER TABLE `info` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -14623,7 +14685,13 @@ INSERT INTO `migrations` VALUES
 (479,'plugin:freeform','m250513_104454_AddEmailWrapperTable','2025-07-01 17:58:24','2025-07-01 17:58:24','2025-07-01 17:58:24','ce09356c-17d0-4034-9307-b3f5205078ed'),
 (480,'plugin:freeform','m250519_122738_LinkTemplatesToWrappers','2025-07-01 17:58:24','2025-07-01 17:58:24','2025-07-01 17:58:24','32fb4cfa-b2a8-4500-967f-66db1c5c5a27'),
 (481,'plugin:freeform','m250616_182402_SetDefaultTemplateMethod','2025-07-01 17:58:24','2025-07-01 17:58:24','2025-07-01 17:58:24','d85358b4-96fb-4ce1-8c3a-541705f95caa'),
-(482,'plugin:freeform','m250620_053458_RemoveUniqueHandleIndexFromNotificationTemplates','2025-07-01 17:58:24','2025-07-01 17:58:24','2025-07-01 17:58:24','6ef063df-72f2-4eb3-87b1-a41c3f0c1ee6');
+(482,'plugin:freeform','m250620_053458_RemoveUniqueHandleIndexFromNotificationTemplates','2025-07-01 17:58:24','2025-07-01 17:58:24','2025-07-01 17:58:24','6ef063df-72f2-4eb3-87b1-a41c3f0c1ee6'),
+(483,'craft','m250512_164202_asset_mime_types','2025-07-10 21:20:39','2025-07-10 21:20:39','2025-07-10 21:20:39','c90f320d-7fbe-48d8-a521-3974cdb9094d'),
+(484,'craft','m250522_090843_add_deleteEntriesForSite_and_deletePeerEntriesForSite_permissions','2025-07-10 21:20:39','2025-07-10 21:20:39','2025-07-10 21:20:39','ea8a48be-d943-4e6d-8ccd-c4b2a98d3727'),
+(485,'craft','m250531_183058_content_blocks','2025-07-10 21:20:39','2025-07-10 21:20:39','2025-07-10 21:20:39','b1d04f0f-4961-4ae0-b5fe-f91ea2089a60'),
+(486,'craft','m250623_105031_entry_type_descriptions','2025-07-10 21:20:39','2025-07-10 21:20:39','2025-07-10 21:20:39','29ff5a33-5f20-4455-9b60-e8b7f6b63518'),
+(487,'plugin:freeform','m250703_081352_AddHoneypotValueToSpamReasonTable','2025-07-10 21:20:39','2025-07-10 21:20:39','2025-07-10 21:20:39','a715bd00-eefe-44ed-a6fa-8a8aaf8779ef'),
+(488,'plugin:freeform','m250704_092101_ChangeWrapperNameIndexToHandle','2025-07-10 21:20:39','2025-07-10 21:20:39','2025-07-10 21:20:39','100f3843-cc38-4285-8004-7445113232aa');
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -14644,7 +14712,7 @@ INSERT INTO `plugins` VALUES
 (8,'express-forms','2.0.3','1.0.2','2025-06-02 15:35:49','2025-06-02 15:35:49','2025-06-02 15:35:49','5a278174-77d2-4e77-a10d-a22257139fe5'),
 (9,'aws-s3','2.2.3','2.0','2025-06-02 15:35:51','2025-06-02 15:35:51','2025-06-19 13:46:50','8c8feb32-dcde-4dae-88be-e2ca6584a905'),
 (10,'sprig','3.6.1','1.0.1','2025-06-02 15:35:53','2025-06-02 15:35:53','2025-06-19 13:58:20','58ea128d-879a-4d18-be85-2a3c05d6a8e8'),
-(11,'freeform','5.11.3','5.6.1','2025-07-01 17:58:20','2025-07-01 17:58:20','2025-07-01 17:58:20','1a126721-2938-4b81-a2f5-6d91447636d6');
+(11,'freeform','5.11.5','5.6.2','2025-07-01 17:58:20','2025-07-01 17:58:20','2025-07-10 21:20:39','1a126721-2938-4b81-a2f5-6d91447636d6');
 /*!40000 ALTER TABLE `plugins` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -14709,12 +14777,13 @@ INSERT INTO `projectconfig` VALUES
 ('addresses.fieldLayouts.b94e2b29-6cbc-4b34-94d4-4999c145318f.tabs.0.name','\"Content\"'),
 ('addresses.fieldLayouts.b94e2b29-6cbc-4b34-94d4-4999c145318f.tabs.0.uid','\"d8674094-2fbe-48f9-9f65-b8c9d8bd3efe\"'),
 ('addresses.fieldLayouts.b94e2b29-6cbc-4b34-94d4-4999c145318f.tabs.0.userCondition','null'),
-('dateModified','1751392704'),
+('dateModified','1758660920'),
 ('elementSources.craft\\elements\\Entry.0.key','\"*\"'),
 ('elementSources.craft\\elements\\Entry.0.type','\"native\"'),
 ('elementSources.craft\\elements\\Entry.1.key','\"singles\"'),
 ('elementSources.craft\\elements\\Entry.1.type','\"native\"'),
 ('elementSources.craft\\elements\\Entry.2.heading','\"Channels\"'),
+('elementSources.craft\\elements\\Entry.2.key','\"heading:1ac36f9f-8c73-4e13-8a45-01e4219f5c7b\"'),
 ('elementSources.craft\\elements\\Entry.2.type','\"heading\"'),
 ('elementSources.craft\\elements\\Entry.3.key','\"section:e3fc1639-4370-4ebc-96b1-93d75e1d6e0d\"'),
 ('elementSources.craft\\elements\\Entry.3.type','\"native\"'),
@@ -14732,6 +14801,19 @@ INSERT INTO `projectconfig` VALUES
 ('elementSources.craft\\elements\\Entry.5.tableAttributes.5','\"field:5fb9f1f8-c038-4593-b349-8cda166cb8fb\"'),
 ('elementSources.craft\\elements\\Entry.5.tableAttributes.6','\"field:0886b236-4a38-40bd-abfa-21fdee1352d7\"'),
 ('elementSources.craft\\elements\\Entry.5.type','\"native\"'),
+('elementSources.craft\\elements\\Entry.6.heading','\"Nav\"'),
+('elementSources.craft\\elements\\Entry.6.key','\"heading:27483e0d-c4b9-47ac-84b9-8e5eba27cd30\"'),
+('elementSources.craft\\elements\\Entry.6.type','\"heading\"'),
+('elementSources.craft\\elements\\Entry.7.defaultSort.0','\"structure\"'),
+('elementSources.craft\\elements\\Entry.7.defaultSort.1','\"asc\"'),
+('elementSources.craft\\elements\\Entry.7.defaultViewMode','\"\"'),
+('elementSources.craft\\elements\\Entry.7.disabled','false'),
+('elementSources.craft\\elements\\Entry.7.key','\"section:85eff002-8100-42c8-a7a8-4532563dfd23\"'),
+('elementSources.craft\\elements\\Entry.7.tableAttributes.0','\"status\"'),
+('elementSources.craft\\elements\\Entry.7.tableAttributes.1','\"postDate\"'),
+('elementSources.craft\\elements\\Entry.7.tableAttributes.2','\"expiryDate\"'),
+('elementSources.craft\\elements\\Entry.7.tableAttributes.3','\"link\"'),
+('elementSources.craft\\elements\\Entry.7.type','\"native\"'),
 ('email.fromEmail','\"contact@daverudolphmusic.com\"'),
 ('email.fromName','\"Dave Rudolph\"'),
 ('email.replyToEmail','\"daverudolphguitar@gmail.com\"'),
@@ -16328,21 +16410,6 @@ INSERT INTO `projectconfig` VALUES
 ('fields.5fb9f1f8-c038-4593-b349-8cda166cb8fb.translationKeyFormat','null'),
 ('fields.5fb9f1f8-c038-4593-b349-8cda166cb8fb.translationMethod','\"none\"'),
 ('fields.5fb9f1f8-c038-4593-b349-8cda166cb8fb.type','\"craft\\\\fields\\\\PlainText\"'),
-('fields.5fc89b29-9281-4ea2-a80f-f71060a7fe93.columnSuffix','null'),
-('fields.5fc89b29-9281-4ea2-a80f-f71060a7fe93.contentColumnType','\"string\"'),
-('fields.5fc89b29-9281-4ea2-a80f-f71060a7fe93.handle','\"footerLinks\"'),
-('fields.5fc89b29-9281-4ea2-a80f-f71060a7fe93.instructions','\"This will be the bottom icons and links in your footer going out to facebook, youtube, insta etc etc\"'),
-('fields.5fc89b29-9281-4ea2-a80f-f71060a7fe93.name','\"Footer Links\"'),
-('fields.5fc89b29-9281-4ea2-a80f-f71060a7fe93.searchable','false'),
-('fields.5fc89b29-9281-4ea2-a80f-f71060a7fe93.settings.entryTypes.0.uid','\"95e3be53-2293-4333-904c-5f7a07242a54\"'),
-('fields.5fc89b29-9281-4ea2-a80f-f71060a7fe93.settings.maxEntries','null'),
-('fields.5fc89b29-9281-4ea2-a80f-f71060a7fe93.settings.minEntries','null'),
-('fields.5fc89b29-9281-4ea2-a80f-f71060a7fe93.settings.propagationKeyFormat','null'),
-('fields.5fc89b29-9281-4ea2-a80f-f71060a7fe93.settings.propagationMethod','\"all\"'),
-('fields.5fc89b29-9281-4ea2-a80f-f71060a7fe93.settings.viewMode','\"blocks\"'),
-('fields.5fc89b29-9281-4ea2-a80f-f71060a7fe93.translationKeyFormat','null'),
-('fields.5fc89b29-9281-4ea2-a80f-f71060a7fe93.translationMethod','\"site\"'),
-('fields.5fc89b29-9281-4ea2-a80f-f71060a7fe93.type','\"craft\\\\fields\\\\Matrix\"'),
 ('fields.61168750-51cd-4179-aedb-4efc42146742.columnSuffix','null'),
 ('fields.61168750-51cd-4179-aedb-4efc42146742.handle','\"infoUrl2\"'),
 ('fields.61168750-51cd-4179-aedb-4efc42146742.instructions','\"Link to more information about the show.\"'),
@@ -16413,21 +16480,6 @@ INSERT INTO `projectconfig` VALUES
 ('fields.8972e6e4-7db5-4a0a-85b9-11be3f170a55.translationKeyFormat','null'),
 ('fields.8972e6e4-7db5-4a0a-85b9-11be3f170a55.translationMethod','\"none\"'),
 ('fields.8972e6e4-7db5-4a0a-85b9-11be3f170a55.type','\"craft\\\\redactor\\\\Field\"'),
-('fields.8f3db685-39df-478c-adc2-5cfb83c2861b.columnSuffix','null'),
-('fields.8f3db685-39df-478c-adc2-5cfb83c2861b.contentColumnType','\"string\"'),
-('fields.8f3db685-39df-478c-adc2-5cfb83c2861b.handle','\"ctaButtons\"'),
-('fields.8f3db685-39df-478c-adc2-5cfb83c2861b.instructions','\"these are call to action buttons in the home page under the header title and image\"'),
-('fields.8f3db685-39df-478c-adc2-5cfb83c2861b.name','\"CTA Buttons\"'),
-('fields.8f3db685-39df-478c-adc2-5cfb83c2861b.searchable','false'),
-('fields.8f3db685-39df-478c-adc2-5cfb83c2861b.settings.entryTypes.0.uid','\"33fc222b-d308-432c-b70c-c128f4df6783\"'),
-('fields.8f3db685-39df-478c-adc2-5cfb83c2861b.settings.maxEntries','10'),
-('fields.8f3db685-39df-478c-adc2-5cfb83c2861b.settings.minEntries','1'),
-('fields.8f3db685-39df-478c-adc2-5cfb83c2861b.settings.propagationKeyFormat','null'),
-('fields.8f3db685-39df-478c-adc2-5cfb83c2861b.settings.propagationMethod','\"all\"'),
-('fields.8f3db685-39df-478c-adc2-5cfb83c2861b.settings.viewMode','\"blocks\"'),
-('fields.8f3db685-39df-478c-adc2-5cfb83c2861b.translationKeyFormat','null'),
-('fields.8f3db685-39df-478c-adc2-5cfb83c2861b.translationMethod','\"site\"'),
-('fields.8f3db685-39df-478c-adc2-5cfb83c2861b.type','\"craft\\\\fields\\\\Matrix\"'),
 ('fields.a2058849-7eb6-49c3-9d32-a1a3a06e6908.columnSuffix','null'),
 ('fields.a2058849-7eb6-49c3-9d32-a1a3a06e6908.handle','\"navPageLink\"'),
 ('fields.a2058849-7eb6-49c3-9d32-a1a3a06e6908.instructions','\"Use this to link to an internal page. Internal Page links will take precedence over external pages. Please choose one or the other.\"'),
@@ -16926,14 +16978,12 @@ INSERT INTO `projectconfig` VALUES
 ('meta.__names__.569d7efe-e957-4fa0-a49a-c4b1b8fba23b','\"Album Cover\"'),
 ('meta.__names__.5e19d471-ef0b-4e95-9548-97c378c4b65d','\"Tour Dates\"'),
 ('meta.__names__.5fb9f1f8-c038-4593-b349-8cda166cb8fb','\"City\"'),
-('meta.__names__.5fc89b29-9281-4ea2-a80f-f71060a7fe93','\"Footer Links\"'),
 ('meta.__names__.66bdc090-1029-4da8-a10f-8e0bc54176bb','\"spotifyIframes\"'),
 ('meta.__names__.6b2b62f0-3eb1-45ad-b397-559af7de174b','\"Dave Guitar\"'),
 ('meta.__names__.6f3a48db-efe7-4a2e-b25d-509fbd2ff05d','\"Music\"'),
 ('meta.__names__.85eff002-8100-42c8-a7a8-4532563dfd23','\"Navigation\"'),
 ('meta.__names__.885183e7-a46e-417d-888c-fca4f7e1734d','\"Uploads\"'),
 ('meta.__names__.8972e6e4-7db5-4a0a-85b9-11be3f170a55','\"Custom Content\"'),
-('meta.__names__.8f3db685-39df-478c-adc2-5cfb83c2861b','\"CTA Buttons\"'),
 ('meta.__names__.9d11247f-9656-4204-8973-026dfdcb2f2f','\"Contact\"'),
 ('meta.__names__.a88ef367-b120-4c2a-b952-d4c26c75cba5','\"About\"'),
 ('meta.__names__.b2342e5b-b45b-48c9-ac11-267011a80bc5','\"Blog Content\"'),
@@ -16976,7 +17026,197 @@ INSERT INTO `projectconfig` VALUES
 ('plugins.express-forms.schemaVersion','\"1.0.2\"'),
 ('plugins.freeform.edition','\"express\"'),
 ('plugins.freeform.enabled','true'),
-('plugins.freeform.schemaVersion','\"5.6.1\"'),
+('plugins.freeform.schemaVersion','\"5.6.2\"'),
+('plugins.freeform.settings.alertNotificationRecipients','null'),
+('plugins.freeform.settings.allowBuilderTemplateCreation','true'),
+('plugins.freeform.settings.allowDashesInFieldHandles','false'),
+('plugins.freeform.settings.allowFileTemplateEdit','\"1\"'),
+('plugins.freeform.settings.autoScroll','true'),
+('plugins.freeform.settings.autoScrollToErrors','true'),
+('plugins.freeform.settings.badgeType','\"all\"'),
+('plugins.freeform.settings.blockedEmails','null'),
+('plugins.freeform.settings.blockedEmailsError','\"Invalid Email Address\"'),
+('plugins.freeform.settings.blockedIpAddresses','null'),
+('plugins.freeform.settings.blockedKeywords','null'),
+('plugins.freeform.settings.blockedKeywordsError','\"Invalid Entry Data\"'),
+('plugins.freeform.settings.bypassSpamCheckOnLoggedInUsers','false'),
+('plugins.freeform.settings.clientDigestFrequency','1'),
+('plugins.freeform.settings.clientDigestRecipients','null'),
+('plugins.freeform.settings.csrfRefresh','\"none\"'),
+('plugins.freeform.settings.defaultFromEmail','\"{{ general.systemEmail }}\"'),
+('plugins.freeform.settings.defaultFromName','\"{{ general.systemName }}\"'),
+('plugins.freeform.settings.defaults.__assoc__.0.0','\"previewHtml\"'),
+('plugins.freeform.settings.defaults.__assoc__.0.1','true'),
+('plugins.freeform.settings.defaults.__assoc__.1.0','\"twigInHtml\"'),
+('plugins.freeform.settings.defaults.__assoc__.1.1','true'),
+('plugins.freeform.settings.defaults.__assoc__.2.0','\"twigIsolation\"'),
+('plugins.freeform.settings.defaults.__assoc__.2.1','true'),
+('plugins.freeform.settings.defaults.__assoc__.3.0','\"richTextFieldToolbarConfiguration\"'),
+('plugins.freeform.settings.defaults.__assoc__.3.1','\"blocks bold italic underline forecolor backcolor | align numlist bullist | link image table | removeformat code\"'),
+('plugins.freeform.settings.defaults.__assoc__.4.0','\"includeSampleTemplates\"'),
+('plugins.freeform.settings.defaults.__assoc__.4.1','true'),
+('plugins.freeform.settings.defaults.__assoc__.5.0','\"notifications\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.0.0','\"admin\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.0.1.__assoc__.0.0','\"template\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.0.1.__assoc__.0.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.0.1.__assoc__.0.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.0.1.__assoc__.0.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.0.1.__assoc__.0.1.__assoc__.1.1','\"\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.1.0','\"conditional\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.1.1.__assoc__.0.0','\"template\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.1.1.__assoc__.0.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.1.1.__assoc__.0.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.1.1.__assoc__.0.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.1.1.__assoc__.0.1.__assoc__.1.1','\"\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.2.0','\"userSelect\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.2.1.__assoc__.0.0','\"template\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.2.1.__assoc__.0.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.2.1.__assoc__.0.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.2.1.__assoc__.0.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.2.1.__assoc__.0.1.__assoc__.1.1','\"\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.3.0','\"emailField\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.3.1.__assoc__.0.0','\"template\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.3.1.__assoc__.0.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.3.1.__assoc__.0.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.3.1.__assoc__.0.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.5.1.__assoc__.3.1.__assoc__.0.1.__assoc__.1.1','\"\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.0','\"settings\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.0.0','\"general\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.0.1.__assoc__.0.0','\"formType\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.0.1.__assoc__.0.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.0.1.__assoc__.0.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.0.1.__assoc__.0.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.0.1.__assoc__.0.1.__assoc__.1.1','\"\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.0.1.__assoc__.1.0','\"submissionTitle\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.0.1.__assoc__.1.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.0.1.__assoc__.1.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.0.1.__assoc__.1.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.0.1.__assoc__.1.1.__assoc__.1.1','\"{{ dateCreated|date(\\\"Y-m-d H:i:s\\\") }}\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.0.1.__assoc__.2.0','\"formattingTemplate\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.0.1.__assoc__.2.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.0.1.__assoc__.2.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.0.1.__assoc__.2.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.0.1.__assoc__.2.1.__assoc__.1.1','\"basic-light/index.twig\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.1.0','\"dataStorage\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.1.1.__assoc__.0.0','\"storeData\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.1.1.__assoc__.0.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.1.1.__assoc__.0.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.1.1.__assoc__.0.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.1.1.__assoc__.0.1.__assoc__.1.1','true'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.1.1.__assoc__.1.0','\"defaultStatus\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.1.1.__assoc__.1.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.1.1.__assoc__.1.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.1.1.__assoc__.1.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.1.1.__assoc__.1.1.__assoc__.1.1','2'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.1.1.__assoc__.2.0','\"collectIp\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.1.1.__assoc__.2.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.1.1.__assoc__.2.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.1.1.__assoc__.2.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.1.1.__assoc__.2.1.__assoc__.1.1','true'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.0','\"processing\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.0.0','\"ajax\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.0.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.0.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.0.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.0.1.__assoc__.1.1','true'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.1.0','\"showIndicator\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.1.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.1.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.1.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.1.1.__assoc__.1.1','true'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.2.0','\"showText\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.2.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.2.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.2.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.2.1.__assoc__.1.1','true'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.3.0','\"processingText\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.3.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.3.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.3.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.2.1.__assoc__.3.1.__assoc__.1.1','\"Processing...\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.0','\"successAndErrors\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.0.0','\"successBehavior\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.0.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.0.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.0.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.0.1.__assoc__.1.1','\"reload\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.1.0','\"returnUrl\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.1.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.1.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.1.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.1.1.__assoc__.1.1','\"\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.2.0','\"successTemplate\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.2.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.2.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.2.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.2.1.__assoc__.1.1','\"\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.3.0','\"successMessage\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.3.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.3.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.3.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.3.1.__assoc__.1.1','\"Form has been submitted successfully!\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.4.0','\"errorMessage\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.4.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.4.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.4.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.3.1.__assoc__.4.1.__assoc__.1.1','\"Sorry, there was an error submitting the form. Please try again.\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.4.0','\"limits\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.4.1.__assoc__.0.0','\"duplicateCheck\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.4.1.__assoc__.0.1.__assoc__.0.0','\"locked\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.4.1.__assoc__.0.1.__assoc__.0.1','false'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.4.1.__assoc__.0.1.__assoc__.1.0','\"value\"'),
+('plugins.freeform.settings.defaults.__assoc__.6.1.__assoc__.4.1.__assoc__.0.1.__assoc__.1.1','\"no_limit\"'),
+('plugins.freeform.settings.defaultView','\"forms\"'),
+('plugins.freeform.settings.digestFrequency','1'),
+('plugins.freeform.settings.digestOnlyOnProduction','false'),
+('plugins.freeform.settings.digestRecipients','null'),
+('plugins.freeform.settings.displayFeed','true'),
+('plugins.freeform.settings.emailNotificationToolbarConfiguration','\"blocks bold italic underline forecolor backcolor | align numlist bullist | link image table | removeformat code\"'),
+('plugins.freeform.settings.emailTemplateDefault','\"database\"'),
+('plugins.freeform.settings.emailTemplateDirectory','\"\"'),
+('plugins.freeform.settings.emailTemplateMethod','\"form\"'),
+('plugins.freeform.settings.emailTemplateStorageType','\"files_database\"'),
+('plugins.freeform.settings.exportHandlesAsNames','false'),
+('plugins.freeform.settings.exportLabels','false'),
+('plugins.freeform.settings.fillWithGet','false'),
+('plugins.freeform.settings.footerScripts','false'),
+('plugins.freeform.settings.formattingTemplate','\"basic-light/index.twig\"'),
+('plugins.freeform.settings.formFieldShowOnlyAllowedForms','false'),
+('plugins.freeform.settings.formSubmitDisable','true'),
+('plugins.freeform.settings.formSubmitExpiration','null'),
+('plugins.freeform.settings.formTemplateDirectory','\"_freeform\"'),
+('plugins.freeform.settings.loggingLevel','\"error\"'),
+('plugins.freeform.settings.minimumSubmitTime','null'),
+('plugins.freeform.settings.pluginName','null'),
+('plugins.freeform.settings.purgableSpamAgeInDays','null'),
+('plugins.freeform.settings.purgableSubmissionAgeInDays','null'),
+('plugins.freeform.settings.purgableUnfinalizedAssetAgeInMinutes','180'),
+('plugins.freeform.settings.purgeAssets','true'),
+('plugins.freeform.settings.queuePriority','null'),
+('plugins.freeform.settings.rememberPageSubmitOrder','true'),
+('plugins.freeform.settings.removeNewlines','false'),
+('plugins.freeform.settings.renderFormHtmlInCpViews','true'),
+('plugins.freeform.settings.saveFormSessionLimit','10'),
+('plugins.freeform.settings.saveFormTtl','30'),
+('plugins.freeform.settings.scriptInsertLocation','\"footer\"'),
+('plugins.freeform.settings.scriptInsertType','\"files\"'),
+('plugins.freeform.settings.sessionContext','\"payload\"'),
+('plugins.freeform.settings.sessionContextCount','100'),
+('plugins.freeform.settings.sessionContextSecret','\"\"'),
+('plugins.freeform.settings.sessionContextTimeToLiveMinutes','180'),
+('plugins.freeform.settings.sessionEntryMaxCount','50'),
+('plugins.freeform.settings.sessionEntryTTL','10800'),
+('plugins.freeform.settings.showErrorsForBlockedEmails','false'),
+('plugins.freeform.settings.showErrorsForBlockedKeywords','false'),
+('plugins.freeform.settings.sitesEnabled','false'),
+('plugins.freeform.settings.spamFolderEnabled','true'),
+('plugins.freeform.settings.spamProtectionBehavior','\"simulate_success\"'),
+('plugins.freeform.settings.submissionThrottlingCount','null'),
+('plugins.freeform.settings.submissionThrottlingTimeFrame','null'),
+('plugins.freeform.settings.successTemplateDirectory','\"\"'),
+('plugins.freeform.settings.updateSearchIndexes','true'),
+('plugins.freeform.settings.useQueueForEmailNotifications','false'),
+('plugins.freeform.settings.useQueueForIntegrations','false'),
 ('plugins.redactor.edition','\"standard\"'),
 ('plugins.redactor.enabled','true'),
 ('plugins.redactor.schemaVersion','\"2.3.0\"'),
@@ -17036,6 +17276,7 @@ INSERT INTO `projectconfig` VALUES
 ('sections.4eb33154-2538-4037-9a27-198bbb7cfcfa.type','\"channel\"'),
 ('sections.85eff002-8100-42c8-a7a8-4532563dfd23.defaultPlacement','\"end\"'),
 ('sections.85eff002-8100-42c8-a7a8-4532563dfd23.enableVersioning','true'),
+('sections.85eff002-8100-42c8-a7a8-4532563dfd23.entryTypes.0.handle','\"default\"'),
 ('sections.85eff002-8100-42c8-a7a8-4532563dfd23.entryTypes.0.uid','\"d2d8c823-93e6-4574-a238-533954b4b8b9\"'),
 ('sections.85eff002-8100-42c8-a7a8-4532563dfd23.handle','\"navigation\"'),
 ('sections.85eff002-8100-42c8-a7a8-4532563dfd23.maxAuthors','1'),
@@ -17044,12 +17285,14 @@ INSERT INTO `projectconfig` VALUES
 ('sections.85eff002-8100-42c8-a7a8-4532563dfd23.previewTargets.0.__assoc__.0.1','\"Primary entry page\"'),
 ('sections.85eff002-8100-42c8-a7a8-4532563dfd23.previewTargets.0.__assoc__.1.0','\"urlFormat\"'),
 ('sections.85eff002-8100-42c8-a7a8-4532563dfd23.previewTargets.0.__assoc__.1.1','\"{url}\"'),
+('sections.85eff002-8100-42c8-a7a8-4532563dfd23.previewTargets.0.__assoc__.2.0','\"refresh\"'),
+('sections.85eff002-8100-42c8-a7a8-4532563dfd23.previewTargets.0.__assoc__.2.1','\"1\"'),
 ('sections.85eff002-8100-42c8-a7a8-4532563dfd23.propagationMethod','\"all\"'),
 ('sections.85eff002-8100-42c8-a7a8-4532563dfd23.siteSettings.56361854-6cef-42f0-b788-03399c9f683b.enabledByDefault','true'),
 ('sections.85eff002-8100-42c8-a7a8-4532563dfd23.siteSettings.56361854-6cef-42f0-b788-03399c9f683b.hasUrls','true'),
 ('sections.85eff002-8100-42c8-a7a8-4532563dfd23.siteSettings.56361854-6cef-42f0-b788-03399c9f683b.template','\"navigation/_entry.twig\"'),
 ('sections.85eff002-8100-42c8-a7a8-4532563dfd23.siteSettings.56361854-6cef-42f0-b788-03399c9f683b.uriFormat','\"navigation/{slug}\"'),
-('sections.85eff002-8100-42c8-a7a8-4532563dfd23.structure.maxLevels','1'),
+('sections.85eff002-8100-42c8-a7a8-4532563dfd23.structure.maxLevels','2'),
 ('sections.85eff002-8100-42c8-a7a8-4532563dfd23.structure.uid','\"a2db335f-e994-4433-9656-dd2186631736\"'),
 ('sections.85eff002-8100-42c8-a7a8-4532563dfd23.type','\"structure\"'),
 ('sections.9d11247f-9656-4204-8973-026dfdcb2f2f.defaultPlacement','\"end\"'),
@@ -17178,7 +17421,7 @@ INSERT INTO `projectconfig` VALUES
 ('system.live','true'),
 ('system.name','\"Dave Guitar\"'),
 ('system.retryDuration','null'),
-('system.schemaVersion','\"5.7.0.3\"'),
+('system.schemaVersion','\"5.8.0.3\"'),
 ('system.timeZone','\"America/Chicago\"'),
 ('users.allowPublicRegistration','false'),
 ('users.deactivateByDefault','false'),
@@ -17235,6 +17478,8 @@ commit;
 LOCK TABLES `queue` WRITE;
 /*!40000 ALTER TABLE `queue` DISABLE KEYS */;
 set autocommit=0;
+INSERT INTO `queue` VALUES
+(8520,'queue','O:48:\"Solspace\\Freeform\\Jobs\\PurgeUnfinalizedAssetsJob\":4:{s:11:\"description\";N;s:30:\"\0craft\\queue\\BaseJob\0_progress\";i:0;s:35:\"\0craft\\queue\\BaseJob\0_progressLabel\";N;s:3:\"age\";i:180;}','Freeform: Purging Unfinalized Assets',1758745426,300,0,1024,NULL,NULL,0,NULL,NULL,0,NULL,NULL);
 /*!40000 ALTER TABLE `queue` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -17318,7 +17563,9 @@ INSERT INTO `relations` VALUES
 (149,29,2231,NULL,2229,1,'2025-07-01 17:52:37','2025-07-01 17:52:37','67037230-bed8-464b-9abb-04414c987631'),
 (150,29,2237,NULL,2229,1,'2025-07-01 17:53:57','2025-07-01 17:53:57','85a2ac06-8c73-45fb-8cfd-f74b0e6b2af0'),
 (152,29,10,NULL,2238,1,'2025-07-01 17:54:46','2025-07-01 17:54:46','2b7d61dc-a5ef-46ff-8322-eeb7fafc4e31'),
-(153,29,2240,NULL,2238,1,'2025-07-01 17:54:46','2025-07-01 17:54:46','0b232f5b-a28f-4f7e-923a-56f159425a3c');
+(153,29,2240,NULL,2238,1,'2025-07-01 17:54:46','2025-07-01 17:54:46','0b232f5b-a28f-4f7e-923a-56f159425a3c'),
+(155,29,2242,NULL,2238,1,'2025-09-16 17:14:35','2025-09-16 17:14:35','7e0f3ca0-0aab-4934-8f5d-7ed4229b0bd4'),
+(156,29,2243,NULL,2238,1,'2025-09-16 17:20:22','2025-09-16 17:20:22','86f475ee-f1bf-488a-88b4-96b671925486');
 /*!40000 ALTER TABLE `relations` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -18128,7 +18375,10 @@ INSERT INTO `revisions` VALUES
 (812,602,1,1,NULL),
 (813,603,1,1,NULL),
 (814,140,1,20,''),
-(815,10,1,23,'Applied “Draft 5”');
+(815,10,1,23,'Applied “Draft 5”'),
+(816,10,1,24,'Applied “Draft 5”'),
+(817,10,1,25,''),
+(818,2244,1,1,'');
 /*!40000 ALTER TABLE `revisions` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -18145,9 +18395,9 @@ INSERT INTO `searchindex` VALUES
 (2,'slug',0,1,' home '),
 (5,'title',0,1,' music '),
 (7,'slug',0,1,' tour '),
-(10,'title',0,1,' about '),
-(12,'slug',0,1,' contact '),
 (10,'slug',0,1,' about '),
+(12,'slug',0,1,' contact '),
+(10,'title',0,1,' about '),
 (5,'slug',0,1,' music '),
 (10,'field',1,1,''),
 (23,'slug',0,1,''),
@@ -19548,7 +19798,9 @@ INSERT INTO `searchindex` VALUES
 (2238,'kind',0,1,' image '),
 (2238,'alt',0,1,''),
 (2238,'slug',0,1,''),
-(2238,'title',0,1,' jumbo 1 ');
+(2238,'title',0,1,' jumbo 1 '),
+(2244,'title',0,1,' shop '),
+(2244,'slug',0,1,' shop ');
 /*!40000 ALTER TABLE `searchindex` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -19593,7 +19845,7 @@ INSERT INTO `sections` VALUES
 (8,NULL,'Link Page','linkPage','channel',1,1,'all','end','[{\"label\":\"Primary entry page\",\"urlFormat\":\"{url}\"}]','2021-09-18 19:21:57','2021-09-18 19:21:57',NULL,'d2436398-f3e3-4b75-9115-13f2fa0afe1a'),
 (9,NULL,'Blog','blog','channel',1,1,'all','end','[{\"label\":\"Primary entry page\",\"urlFormat\":\"{url}\"}]','2021-09-18 23:57:18','2021-09-18 23:57:18',NULL,'e3fc1639-4370-4ebc-96b1-93d75e1d6e0d'),
 (10,1,'Navigation','navigation','structure',1,1,'all','end',NULL,'2023-04-15 03:25:27','2023-04-15 03:25:27','2023-04-15 03:27:27','ffcf9c8b-a87f-45db-87d3-81089d04d1af'),
-(11,2,'Navigation','navigation','structure',1,1,'all','end','[{\"label\":\"Primary entry page\",\"urlFormat\":\"{url}\"}]','2025-06-08 03:31:07','2025-06-08 03:31:07',NULL,'85eff002-8100-42c8-a7a8-4532563dfd23');
+(11,2,'Navigation','navigation','structure',1,1,'all','end','[{\"label\":\"Primary entry page\",\"urlFormat\":\"{url}\",\"refresh\":\"1\"}]','2025-06-08 03:31:07','2025-09-16 18:01:09',NULL,'85eff002-8100-42c8-a7a8-4532563dfd23');
 /*!40000 ALTER TABLE `sections` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -19606,17 +19858,17 @@ LOCK TABLES `sections_entrytypes` WRITE;
 /*!40000 ALTER TABLE `sections_entrytypes` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `sections_entrytypes` VALUES
-(1,1,1,NULL,NULL),
-(2,2,2,NULL,NULL),
-(3,3,3,NULL,NULL),
-(4,4,4,NULL,NULL),
-(5,5,5,NULL,NULL),
-(6,6,6,NULL,NULL),
-(7,7,7,NULL,NULL),
-(8,8,8,NULL,'default'),
-(9,9,9,NULL,NULL),
-(10,10,10,NULL,NULL),
-(11,11,11,NULL,'default');
+(1,1,1,NULL,NULL,NULL),
+(2,2,2,NULL,NULL,NULL),
+(3,3,3,NULL,NULL,NULL),
+(4,4,4,NULL,NULL,NULL),
+(5,5,5,NULL,NULL,NULL),
+(6,6,6,NULL,NULL,NULL),
+(7,7,7,NULL,NULL,NULL),
+(8,8,8,NULL,'default',NULL),
+(9,9,9,NULL,NULL,NULL),
+(10,10,10,NULL,NULL,NULL),
+(11,11,1,NULL,'default',NULL);
 /*!40000 ALTER TABLE `sections_entrytypes` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -19900,17 +20152,18 @@ LOCK TABLES `structureelements` WRITE;
 /*!40000 ALTER TABLE `structureelements` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `structureelements` VALUES
-(1,2,NULL,1,1,22,0,'2025-06-08 03:31:13','2025-06-08 04:05:35','c26a6fd3-339b-411a-ad29-3c9a3ad0ef06'),
+(1,2,NULL,1,1,24,0,'2025-06-08 03:31:13','2025-09-16 18:01:38','c26a6fd3-339b-411a-ad29-3c9a3ad0ef06'),
 (5,2,2204,1,2,3,1,'2025-06-08 03:35:09','2025-06-08 03:35:09','2c63aa1f-61d6-4a7c-b2d3-b5600aa7a186'),
 (8,2,2208,1,4,5,1,'2025-06-08 04:02:31','2025-06-08 04:02:31','0dd87a14-55b9-4fc2-994c-e7a9ea6b575a'),
 (9,2,2209,1,6,7,1,'2025-06-08 04:02:55','2025-06-08 04:02:55','80dd8421-b586-46f5-ad44-d94940c9fb8e'),
 (10,2,2211,1,8,9,1,'2025-06-08 04:03:12','2025-06-08 04:03:12','cf1c263a-e55b-4506-9547-266cace740ef'),
-(11,2,2213,1,10,11,1,'2025-06-08 04:03:25','2025-06-08 04:03:25','538a3a8b-40c6-4b1d-9ed5-29cc5431e352'),
-(12,2,2215,1,12,13,1,'2025-06-08 04:03:48','2025-06-08 04:03:48','75a50895-2f15-433f-a1a7-322785a3d0c0'),
-(13,2,2217,1,14,15,1,'2025-06-08 04:04:01','2025-06-08 04:04:01','72ba7c9d-8cfb-47fa-b05b-67d0957f714a'),
-(14,2,2219,1,16,17,1,'2025-06-08 04:05:08','2025-06-08 04:05:08','604a7c44-f544-4a17-9773-558f0ac933cf'),
-(15,2,2221,1,18,19,1,'2025-06-08 04:05:23','2025-06-08 04:05:23','258a5554-14da-47ab-8173-38049cb87a5d'),
-(16,2,2223,1,20,21,1,'2025-06-08 04:05:35','2025-06-08 04:05:35','7fbcefa2-5b9a-47e9-9cda-51cb88d19bb7');
+(11,2,2213,1,21,22,2,'2025-06-08 04:03:25','2025-09-16 18:01:38','538a3a8b-40c6-4b1d-9ed5-29cc5431e352'),
+(12,2,2215,1,10,11,1,'2025-06-08 04:03:48','2025-09-16 18:01:33','75a50895-2f15-433f-a1a7-322785a3d0c0'),
+(13,2,2217,1,17,18,2,'2025-06-08 04:04:01','2025-09-16 18:01:38','72ba7c9d-8cfb-47fa-b05b-67d0957f714a'),
+(14,2,2219,1,19,20,2,'2025-06-08 04:05:08','2025-09-16 18:01:38','604a7c44-f544-4a17-9773-558f0ac933cf'),
+(15,2,2221,1,12,13,1,'2025-06-08 04:05:23','2025-09-16 18:01:38','258a5554-14da-47ab-8173-38049cb87a5d'),
+(16,2,2223,1,14,15,1,'2025-06-08 04:05:35','2025-09-16 18:01:38','7fbcefa2-5b9a-47e9-9cda-51cb88d19bb7'),
+(17,2,2244,1,16,23,1,'2025-09-16 18:00:19','2025-09-16 18:01:38','1d1ed868-5301-4115-b768-a1d6c16866b2');
 /*!40000 ALTER TABLE `structureelements` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -19924,7 +20177,7 @@ LOCK TABLES `structures` WRITE;
 set autocommit=0;
 INSERT INTO `structures` VALUES
 (1,2,'2023-04-15 03:25:27','2023-04-15 03:25:27','2023-04-15 03:27:27','7c03e5d4-2791-4caa-8dbe-af7191d74a10'),
-(2,1,'2025-06-08 03:31:07','2025-06-08 03:32:22',NULL,'a2db335f-e994-4433-9656-dd2186631736');
+(2,2,'2025-06-08 03:31:07','2025-09-16 18:01:09',NULL,'a2db335f-e994-4433-9656-dd2186631736');
 /*!40000 ALTER TABLE `structures` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -20053,7 +20306,7 @@ LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `users` VALUES
-(1,'admin','',NULL,NULL,NULL,NULL,'daverudolphguitar@gmail.com','$2y$13$T.23jNq2CM3bVS9QM7fc5exbB0mNfh.Qoqdih3.OTUZl9Q4MYqcEy',1,1,0,0,0,'2025-07-10 21:19:05',NULL,NULL,NULL,'2023-04-22 06:07:38',NULL,1,NULL,NULL,NULL,0,'2021-02-17 05:42:01','2020-11-18 04:39:52','2025-07-10 21:19:05');
+(1,'admin','',NULL,NULL,NULL,NULL,'daverudolphguitar@gmail.com','$2y$13$T.23jNq2CM3bVS9QM7fc5exbB0mNfh.Qoqdih3.OTUZl9Q4MYqcEy',1,1,0,0,0,'2025-09-24 20:27:11',NULL,NULL,NULL,'2023-04-22 06:07:38',NULL,1,NULL,NULL,NULL,0,'2021-02-17 05:42:01','2020-11-18 04:39:52','2025-09-24 20:27:11');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -20125,4 +20378,4 @@ commit;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-10 16:20:39
+-- Dump completed on 2025-09-29 14:52:31
