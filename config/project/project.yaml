@@ -1,4 +1,4 @@
-dateModified: 1759181299
+dateModified: 1759258433
 elementSources:
   craft\elements\Entry:
     -
@@ -33,6 +33,19 @@ elementSources:
         - 'field:0886b236-4a38-40bd-abfa-21fdee1352d7' # State
       type: native
     -
+      defaultSort:
+        - postDate
+        - desc
+      defaultViewMode: ''
+      disabled: false
+      key: 'section:7e048754-9e2b-4fef-a0ec-1afa07efa29b' # Pages
+      tableAttributes:
+        - status
+        - postDate
+        - expiryDate
+        - link
+      type: native
+    -
       heading: Nav
       key: 'heading:27483e0d-c4b9-47ac-84b9-8e5eba27cd30'
       type: heading
@@ -49,6 +62,10 @@ elementSources:
         - expiryDate
         - link
       type: native
+    -
+      heading: ''
+      key: 'heading:038f13dc-9cad-44ac-9610-a3a1a21232cd'
+      type: heading
 email:
   fromEmail: contact@daverudolphmusic.com
   fromName: 'Dave Rudolph'
@@ -88,6 +105,7 @@ meta:
     5fb9f1f8-c038-4593-b349-8cda166cb8fb: City # City
     6b2b62f0-3eb1-45ad-b397-559af7de174b: 'Dave Guitar' # Dave Guitar
     6f3a48db-efe7-4a2e-b25d-509fbd2ff05d: Music # Music
+    7e048754-9e2b-4fef-a0ec-1afa07efa29b: Pages # Pages
     9d11247f-9656-4204-8973-026dfdcb2f2f: Contact # Contact
     10e41f88-75c4-478b-9f90-590df63cdfda: Default # Default
     20cc593a-1deb-4cbb-b161-ee53c5a114d9: Entry # Entry
@@ -125,6 +143,7 @@ meta:
     e3fc1639-4370-4ebc-96b1-93d75e1d6e0d: Blog # Blog
     e28be8c5-7bcd-4e2b-9189-1f72f75ec7b4: Tour # Tour
     e819b4cf-0c03-4d0e-a011-c3af102e306f: 'Footer Links' # Footer Links
+    e3406de7-2a12-435b-9899-630c47926027: 'Page Type' # Page Type
     e4343257-eacd-41fb-b2d1-0ac429892afc: Media # Media
     ed2878ee-102f-406d-b62d-3d231fd7460b: 'Header Image Alt' # Header Image Alt
     eeaff83a-803a-4ddd-bcc6-a1563a735cd6: Tour # Tour

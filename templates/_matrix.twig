@@ -1,4 +1,18 @@
 {% extends '_layout.twig' %}
 {% block content %}
+  {% switch entry.pageType %}
+  {% case "tour" %}
+  <h1>TOur Block</h1>
+  {% case "music" %}
+    <h1>music</h1>
+  {% case "about" %}
+    <h1>about</h1>
+  {% case "contact" %}
+    <h1>contact</h1>
+  {% case "media" %}
+    <h1>media</h1>
+
+  {% default %}
+  {% endswitch %}
 
 {% endblock %}
