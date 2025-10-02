@@ -1,0 +1,11 @@
+{% set params = {
+    showForm: false
+}|merge(params|default({})) %}
+
+{% if params.customContent|boolean %}
+    <div class="container mx-auto">
+        <div class="p-4 md:p-8 md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto contentArea">
+            {{ params.customContent }}
+        </div>
+    </div>
+{% endif %}

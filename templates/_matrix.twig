@@ -9,8 +9,13 @@
             spotifyAlbumBlock: entry.spotifyAlbumBlock
         }} %}
     {% case "about" %}
+        {% include "blocks/_about.twig" with { params:{
+            customContent: entry.customContent
+        }} %}
     {% case "contact" %}
-        <h1>contact</h1>
+        {% include "blocks/_contact.twig" with { params:{
+            showForm: entry.lightswitch
+        }} %}
     {% case "media" %}
         <h1>media</h1>
     {% default %}
