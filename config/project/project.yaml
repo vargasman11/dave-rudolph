@@ -1,4 +1,4 @@
-dateModified: 1759464976
+dateModified: 1759465543
 elementSources:
   craft\elements\Entry:
     -
@@ -111,6 +111,7 @@ meta:
     75d85378-d455-4ff4-bda0-9a51e95d30f9: Lightswitch # Lightswitch
     83f1bea5-400c-4373-8b03-cd7de4219b6c: 'Matrix Entry Type' # Matrix Entry Type
     85eff002-8100-42c8-a7a8-4532563dfd23: Navigation # Navigation
+    97ddd7ba-c25a-4043-a699-94f190c43cd2: Default # Default
     429c85c0-0ce1-4713-a254-7b8a2e585e95: 'Spotify Album Block' # Spotify Album Block
     458ab821-4880-4299-8232-f99733310016: date # date
     502b621a-4cc7-4a26-a910-042f30dca048: Home # Home
@@ -131,6 +132,7 @@ meta:
     d2d8c823-93e6-4574-a238-533954b4b8b9: Default # Default
     d55cabd7-d990-4dac-9ea9-cc3941a1421f: time # time
     daaeae58-7e1f-4ad5-b1e5-18ac93440c24: 'Tour Dates' # Tour Dates
+    daee7290-b96e-43e3-b2ee-f47534e9c586: Simple # Simple
     df3eb26c-d215-44f0-a235-413cdb54c672: 'External Page' # External Page
     e025fb83-6598-430d-9ab8-5d4ced49979a: 'info url' # info url
     e819b4cf-0c03-4d0e-a011-c3af102e306f: 'Footer Links' # Footer Links
@@ -143,6 +145,10 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: '2.0'
+  ckeditor:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.0.0.0
   contact-form:
     edition: standard
     enabled: true
@@ -164,7 +170,7 @@ plugins:
   freeform:
     edition: express
     enabled: true
-    schemaVersion: 5.6.2
+    schemaVersion: 5.7.0
     settings:
       alertNotificationRecipients: null
       allowBuilderTemplateCreation: true
@@ -496,10 +502,6 @@ plugins:
       updateSearchIndexes: true
       useQueueForEmailNotifications: false
       useQueueForIntegrations: false
-  redactor:
-    edition: standard
-    enabled: true
-    schemaVersion: 2.3.0
   sprig:
     edition: standard
     enabled: true
