@@ -1,22 +1,35 @@
-dateModified: 1759363814
+dateModified: 1759463245
 elementSources:
   craft\elements\Entry:
     -
+      defaultSort:
+        - postDate
+        - desc
+      defaultViewMode: ''
+      disabled: false
       key: '*'
+      tableAttributes:
+        - status
+        - section
+        - postDate
+        - expiryDate
+        - link
       type: native
     -
+      defaultSort:
+        - title
+        - asc
+      defaultViewMode: ''
+      disabled: false
       key: singles
+      tableAttributes:
+        - status
+        - link
       type: native
     -
       heading: Channels
       key: 'heading:1ac36f9f-8c73-4e13-8a45-01e4219f5c7b'
       type: heading
-    -
-      key: 'section:e3fc1639-4370-4ebc-96b1-93d75e1d6e0d' # Blog
-      type: native
-    -
-      key: 'section:d2436398-f3e3-4b75-9115-13f2fa0afe1a' # Link Page
-      type: native
     -
       defaultSort:
         - postDate
@@ -62,10 +75,6 @@ elementSources:
         - expiryDate
         - link
       type: native
-    -
-      heading: ''
-      key: 'heading:038f13dc-9cad-44ac-9610-a3a1a21232cd'
-      type: heading
 email:
   fromEmail: contact@daverudolphmusic.com
   fromName: 'Dave Rudolph'
@@ -92,7 +101,6 @@ meta:
   __names__:
     0f8ae41a-cd03-45a5-9a82-33a4de9cc7ea: 'Page Content Matrix Field' # Page Content Matrix Field
     0faa9768-b53e-4216-a53d-7812596fdc94: Videos # Videos
-    1b725997-1c52-4c85-aaa8-7bb113ff338e: About # About
     1e6e3839-9a1e-4d98-a6f8-13b7cd0097d7: Default # Default
     1e7716dd-da4e-4a82-9a4a-f4eb04970454: ListenCTA # ListenCTA
     2cb0502e-6cdf-449e-b6c3-d1297d2c6b45: Contact # Contact
@@ -106,7 +114,6 @@ meta:
     6b2b62f0-3eb1-45ad-b397-559af7de174b: 'Dave Guitar' # Dave Guitar
     6f3a48db-efe7-4a2e-b25d-509fbd2ff05d: Music # Music
     7e048754-9e2b-4fef-a0ec-1afa07efa29b: Pages # Pages
-    9d11247f-9656-4204-8973-026dfdcb2f2f: Contact # Contact
     10e41f88-75c4-478b-9f90-590df63cdfda: Default # Default
     20cc593a-1deb-4cbb-b161-ee53c5a114d9: Entry # Entry
     66bdc090-1029-4da8-a10f-8e0bc54176bb: spotifyIframes # spotifyIframes
@@ -130,26 +137,20 @@ meta:
     b242a145-18ec-45dd-a31a-28e9e48279c0: TOUR # TOUR
     b2342e5b-b45b-48c9-ac11-267011a80bc5: 'Blog Content' # Blog Content
     b6502537-1c47-451c-8402-2f8dcde9a941: spotifyIframe # spotifyIframe
-    bb6f1d70-bf17-4e29-8208-15d6b7aa53a3: 'Matrix Single' # Matrix Single
-    bb9de470-f257-45e2-803f-c1a93509afbf: Media # Media
     c2111dd9-d621-4db5-9121-04eba429d67a: Home # Home
     cd2fbe89-ae24-4f97-a4e1-77aaf39f0a88: 'Footer Link' # Footer Link
     d2d8c823-93e6-4574-a238-533954b4b8b9: Default # Default
     d55cabd7-d990-4dac-9ea9-cc3941a1421f: time # time
-    d2436398-f3e3-4b75-9115-13f2fa0afe1a: 'Link Page' # Link Page
     daaeae58-7e1f-4ad5-b1e5-18ac93440c24: 'Tour Dates' # Tour Dates
     df3eb26c-d215-44f0-a235-413cdb54c672: 'External Page' # External Page
     e025fb83-6598-430d-9ab8-5d4ced49979a: 'info url' # info url
-    e3fc1639-4370-4ebc-96b1-93d75e1d6e0d: Blog # Blog
     e28be8c5-7bcd-4e2b-9189-1f72f75ec7b4: Tour # Tour
     e819b4cf-0c03-4d0e-a011-c3af102e306f: 'Footer Links' # Footer Links
     e3406de7-2a12-435b-9899-630c47926027: 'Page Type' # Page Type
     e4343257-eacd-41fb-b2d1-0ac429892afc: Media # Media
     ed2878ee-102f-406d-b62d-3d231fd7460b: 'Header Image Alt' # Header Image Alt
-    eeaff83a-803a-4ddd-bcc6-a1563a735cd6: Tour # Tour
     eef00113-cbb0-4694-a0b5-70dbfd82c243: 'Internal or External' # Internal or External
     ef74887a-7a07-4977-84c2-c7793e0529a5: 'Header Image' # Header Image
-    fa196411-87a8-410a-9288-9036a802a194: Music # Music
 plugins:
   aws-s3:
     edition: standard

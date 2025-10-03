@@ -1,0 +1,25 @@
+{% set params = {
+    headerImage:false,
+}|merge(params|default({})) %}
+
+{% set transform = {
+    small:{ mode: 'crop', format: 'webp', width: 640  },
+    medium:{ mode: 'crop', format: 'webp', width: 768 },
+    large:{ mode: 'crop', format: 'webp', width: 1024 }
+} %}
+
+<div class="container mx-auto">
+    <picture>
+        <source media="(min-width: 1024px)"
+                srcset="{{ params.headerImage.getUrl(transform.large) }}">
+        <source media="(min-width: 768px)"
+                srcset="{{ params.headerImage.getUrl(transform.medium) }}">
+        <img src="{{ params.headerImage.getUrl(transform.small) }}"
+             class="mx-auto"
+             srcset="{{ params.headerImage.getUrl(transform.small) }}"
+             title="{{ params.headerImage.title }}"
+             alt="{{ params.headerImage.alt }}"
+             fetchpriority="high"
+             height="1024">
+    </picture>
+</div>

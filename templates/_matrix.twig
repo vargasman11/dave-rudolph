@@ -1,6 +1,20 @@
+{% set homepage = entry.id == 2 %}
 {% extends '_layout.twig' %}
 
 {% block content %}
+    <!-- Hero Image -->
+    {% if homepage %}
+        {% include '_components/headerHome.twig' with { params:{
+            headerImage: entry.headerImage.one() ?: false,
+        }} %}
+    {% else %}
+        {% include '_components/header.twig' with { params:{
+            image: entry.image.one(),
+            title: entry.title
+        }} %}
+    {% endif %}
+
+<!-- page content -->
     {% switch entry.pageType %}
     {% case "tour" %}
         {% include "blocks/_tour.twig" %}
@@ -17,7 +31,9 @@
             showForm: entry.lightswitch
         }} %}
     {% case "media" %}
-        <h1>media</h1>
+        {% include "blocks/_media.twig" with { params:{
+            videos: entry.videos
+        }} %}
     {% default %}
     {% endswitch %}
 
