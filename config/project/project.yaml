@@ -1,4 +1,4 @@
-dateModified: 1759464135
+dateModified: 1759464834
 elementSources:
   craft\elements\Entry:
     -
@@ -99,13 +99,8 @@ graphql:
     expiryDate: null
 meta:
   __names__:
-    0f8ae41a-cd03-45a5-9a82-33a4de9cc7ea: 'Page Content Matrix Field' # Page Content Matrix Field
     0faa9768-b53e-4216-a53d-7812596fdc94: Videos # Videos
     1e7716dd-da4e-4a82-9a4a-f4eb04970454: ListenCTA # ListenCTA
-    2d05a2b8-fa1f-4237-9abc-77880f943975: 'Page Title' # Page Title
-    3ba03f7c-87d0-45e6-aab0-f9b8eb0520e6: 'URL to source' # URL to source
-    3c12875b-36b2-4feb-b8c3-8525959af403: 'Link Title' # Link Title
-    4a571784-9016-4b75-a548-b490b4697364: 'link logo' # link logo
     4eb33154-2538-4037-9a27-198bbb7cfcfa: 'Tour Dates' # Tour Dates
     5e19d471-ef0b-4e95-9548-97c378c4b65d: 'Tour Dates' # Tour Dates
     5fb9f1f8-c038-4593-b349-8cda166cb8fb: City # City
@@ -130,7 +125,6 @@ meta:
     56361854-6cef-42f0-b788-03399c9f683b: 'Dave Guitar' # Dave Guitar
     b43bae05-d6b6-4b8a-84bc-f01097e47529: Navigation # Navigation
     b242a145-18ec-45dd-a31a-28e9e48279c0: TOUR # TOUR
-    b2342e5b-b45b-48c9-ac11-267011a80bc5: 'Blog Content' # Blog Content
     b6502537-1c47-451c-8402-2f8dcde9a941: spotifyIframe # spotifyIframe
     c2111dd9-d621-4db5-9121-04eba429d67a: Home # Home
     cd2fbe89-ae24-4f97-a4e1-77aaf39f0a88: 'Footer Link' # Footer Link
