@@ -3,35 +3,31 @@
 
 {% block content %}
     <!-- Hero Image -->
-    {% if homepage %}
-        {% include '_components/headerHome.twig' with { params:{
-            headerImage: entry.headerImage.one() ?: false,
-        }} %}
-    {% else %}
+    {% if homepage == false %}
         {% include '_components/header.twig' with { params:{
             image: entry.image.one(),
             title: entry.title
         }} %}
     {% endif %}
 
-<!-- page content -->
+    <!-- page content -->
     {% switch entry.pageType %}
     {% case "tour" %}
-        {% include "blocks/_tour.twig" %}
+        {% include "_blocks/_tour.twig" %}
     {% case "music" %}
-        {% include "blocks/_music.twig" with { params:{
+        {% include "_blocks/_music.twig" with { params:{
             spotifyAlbumBlock: entry.spotifyAlbumBlock
         }} %}
     {% case "about" %}
-        {% include "blocks/_about.twig" with { params:{
+        {% include "_blocks/_about.twig" with { params:{
             customContent: entry.customContent
         }} %}
     {% case "contact" %}
-        {% include "blocks/_contact.twig" with { params:{
+        {% include "_blocks/_contact.twig" with { params:{
             showForm: entry.lightswitch
         }} %}
     {% case "media" %}
-        {% include "blocks/_media.twig" with { params:{
+        {% include "_blocks/_media.twig" with { params:{
             videos: entry.videos
         }} %}
     {% default %}

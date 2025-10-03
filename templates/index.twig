@@ -1,64 +1,33 @@
+{# Asset Vars #}
 {% set headerImage = entry.headerImage.one() ?? null %}
-
-{% set today = "now"|date("m/d/Y") %}
-{# Fetch entries with a selected date in the next month #}
-{% set start = now|atom %}
-{% set entries = craft.entries().date(['and', ">= #{start}"]).all() %}
-{% set entries = entries|multisort('date', direction=SORT_ASC) %}
-
 {% set transform = {
     small:{ mode: 'crop', format: 'webp', width: 640  },
     medium:{ mode: 'crop', format: 'webp', width: 768 },
     large:{ mode: 'crop', format: 'webp', width: 1024 }
 } %}
+{# Date Vars #}
+{% set today = "now"|date("m/d/Y") %}
+{# Fetch entries with a selected date in the next month #}
+{% set start = now|atom %}
+{# {% set start = "01/01/2023" %} #}
+{% set end = now|atom %}
 
-{% include "partials/header" %}
-{% include "partials/nav" %}
-<div class="container mx-auto">
-    <picture>
-        <source media="(min-width: 1024px)" srcset="{{ headerImage.getUrl(transform.large) }}">
-        <source media="(min-width: 768px)" srcset="{{ headerImage.getUrl(transform.medium) }}">
-        <img src="{{ headerImage.getUrl(transform.small) }}"
-             class="mx-auto"
-             srcset="{{ headerImage.getUrl(transform.small) }}"
-             title="{{ headerImage.title }}" alt="{{ headerImage.alt }}" fetchpriority="high" height="1024">
-    </picture>
-</div>
+{% extends '_layout.twig' %}
+{% block content %}
+    {% include '_components/headerHome.twig' with { params:{
+        headerImage: headerImage,
+    }} %}
+    {% include '_components/listenLinks.twig' with { params:{
+        listencta: entry.listencta.all(),
+    }} %}
+    {# Tour Dates #}
+    {{ sprig('_components/pagination', {
+        params:{
+            title:'Upcoming Dates',
+            section:'tourDates',
+            limit: 6,
+            dateRange: [ ">= #{today} "]
+        }
+    }) }}
 
-<div class="container mx-auto px-4 flex flex-col sm:grid sm:grid-cols-2 md:grid-cols-4 py-6 sm:py-8 md:py-12 lg:py-16">
-    {% set blocks = entry.listencta.all() %}
-    {% if blocks|length %}
-        {% for block in blocks %}
-            <a href="{{ block.platformUrl|raw }}" target="_blank"
-               class="bg-primary hover:bg-secondary transition-colors ease-in-out duration-300 text-white py-2 px-1 text-center my-2 grow-1 sm:p-2 sm:mx-4 lg:mx-8 xl:mx-12 font-russo">{{ block.platformName }}</a>
-        {% endfor %}
-    {% endif %}
-</div>
-
-{% if entries|length %}
-<div class="container-fluid p-5">
-    <div class="row">
-        <div class="col-12 col-sm-10 col-md-8 mx-auto">
-            <div class="table-responsive">
-                <table class="table">
-                    <tbody>
-                        {% for entry in entries %}
-                            <tr>
-                                <td><span class="text-muted font-weight-bold">{{ entry.date|date('medium') }}</span>
-                                </td>
-                                <td>{{ entry.title }} @ {{ entry.time|time('short') }} </td>
-                                <td><span class="text-muted font-weight-bold">Location:</span> {{ entry.city }}
-                                    , {{ entry.state }}</td>
-                                <td><a href="{{ entry.infoUrl }}" class="btn btn-md btn-info" target="_blank">info</a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-{% endif %}
-
-{% include "partials/footer" %}
+{% endblock %}
