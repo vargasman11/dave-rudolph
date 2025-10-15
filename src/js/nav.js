@@ -40,58 +40,54 @@ function mobileNav() {
     });
   });
 
-  // ====== Dark Mode with Cookie Support ======
+  // ====== Dark Mode with localStorage ======
 
-  // Helper function to get cookie value
-  function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-    return null;
+  // Get current theme from localStorage or system preference
+  function getTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 
-  // Helper function to set cookie value
-  function setCookie(name, value, days = 365) {
-    const expires = new Date(Date.now() + days * 864e5).toUTCString();
-    document.cookie = `${name}=${value}; expires=${expires}; path=/; SameSite=Lax`;
+  // Apply theme to DOM
+  function applyTheme(theme) {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark-mode');
+    } else {
+      document.documentElement.classList.remove('dark-mode');
+    }
+    localStorage.setItem('theme', theme);
   }
 
-  // Initialize cookie if it doesn't exist
-  let darkModeCookie = getCookie('darkMode');
-  if (darkModeCookie === null) {
-    setCookie('darkMode', '0');
-    darkModeCookie = '0';
-  }
-
+  // Initialize theme on page load
+  const currentTheme = getTheme();
   const toggleBtn = document.getElementById('darkModeToggle');
 
-  // Apply dark mode on page load based on cookie
-  if (darkModeCookie === '1') {
-    document.documentElement.classList.add('dark-mode');
-    if (toggleBtn) {
-      toggleBtn.textContent = "☀️ Light Mode";
-    }
-  } else {
-    if (toggleBtn) {
-      toggleBtn.textContent = "🌙 Dark Mode";
-    }
-  }
-
-// Toggle dark mode on button click
+  // Update button text based on current theme
   if (toggleBtn) {
-    toggleBtn.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark-mode');
+    toggleBtn.textContent = currentTheme === 'dark' ? "☀️ Light Mode" : "🌙 Dark Mode";
 
-      // Update cookie and button text
-      if (document.documentElement.classList.contains('dark-mode')) {
-        setCookie('darkMode', '1');
-        toggleBtn.textContent = "☀️ Light Mode";
-      } else {
-        setCookie('darkMode', '0');
-        toggleBtn.textContent = "🌙 Dark Mode";
-      }
+    // Toggle theme on button click
+    toggleBtn.addEventListener('click', () => {
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
+      toggleBtn.textContent = newTheme === 'dark' ? "☀️ Light Mode" : "🌙 Dark Mode";
+
+      // Update currentTheme for next toggle
+      currentTheme = newTheme;
     });
   }
+
+  // Watch for system theme changes (optional but nice UX)
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    // Only auto-update if user hasn't set a preference
+    if (!localStorage.getItem('theme')) {
+      applyTheme(e.matches ? 'dark' : 'light');
+      if (toggleBtn) {
+        toggleBtn.textContent = e.matches ? "☀️ Light Mode" : "🌙 Dark Mode";
+      }
+    }
+  });
 }
 
 export default mobileNav();
