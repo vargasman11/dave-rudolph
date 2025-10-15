@@ -35,6 +35,16 @@
     {# Meta Tags partial #}
     {% include 'partials/_metaTags.twig' %}
 
+    <script>
+      // Apply dark mode to html element immediately
+      (function() {
+        const darkMode = document.cookie.split('; ').find(row => row.startsWith('darkMode='));
+        if (darkMode && darkMode.split('=')[1] === '1') {
+          document.documentElement.classList.add('dark-mode');
+        }
+      })();
+    </script>
+
     {{ craft.vite.script("src/app.js", false) }}
 </head>
 <body class="relative">
