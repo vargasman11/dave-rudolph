@@ -30,6 +30,11 @@
         {% include "_blocks/_media.twig" with { params:{
             videos: entry.videos
         }} %}
+    {% case "links" %}
+        {% include "_blocks/_links.twig" with { params:{
+            links: entry.listencta.all(),
+            content: entry.customContent2
+        }} %}
     {% default %}
     {% endswitch %}
 

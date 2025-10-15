@@ -1,20 +1,26 @@
 columnSuffix: null
-contentColumnType: text
 handle: customContent
 instructions: "This could be any text content you'd like. This can be a bio section or an about field or a simple announcement."
 name: 'Custom Content'
 searchable: false
 settings:
-  availableTransforms: '*'
+  availableTransforms: ''
   availableVolumes: '*'
+  characterLimit: null
   ckeConfig: 97ddd7ba-c25a-4043-a699-94f190c43cd2 # Default
-  columnType: text
-  defaultTransform: ''
-  enableSourceEditingForNonAdmins: false
+  createButtonLabel: null
+  defaultTransform: null
+  expandEntryButtons: false
+  fullGraphqlData: false
+  parseEmbeds: false
   purifierConfig: null
-  purifyHtml: true
+  purifyHtml: false
   showUnpermittedFiles: false
   showUnpermittedVolumes: false
+  showWordCount: false
+  sourceEditingGroups:
+    - __ADMINS__
+  wordLimit: null
 translationKeyFormat: null
 translationMethod: none
 type: craft\ckeditor\Field

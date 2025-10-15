@@ -96,3 +96,10 @@ body.dark-mode .icon-toggle{
         font-size: 0.875rem;
     }
 }
+ iframe {
+    width: 100% !important;
+    min-height: 600px !important;
+    height: 70vh !important;
+    border: none !important;
+    display: block;
+}
