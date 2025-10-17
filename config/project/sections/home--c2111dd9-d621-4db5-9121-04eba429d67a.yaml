@@ -1,7 +1,20 @@
 defaultPlacement: end
 enableVersioning: true
+entryTypes:
+  -
+    uid: 502b621a-4cc7-4a26-a910-042f30dca048 # Home
 handle: home
+maxAuthors: 1
 name: Home
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
 propagationMethod: all
 siteSettings:
   56361854-6cef-42f0-b788-03399c9f683b: # Dave Guitar

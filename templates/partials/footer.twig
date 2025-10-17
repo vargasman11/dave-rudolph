@@ -1,81 +1,95 @@
+{% set socialLinks = {
+    "facebook-f": "https://www.facebook.com/DaveRudolphMusic",
+    "instagram":"https://www.instagram.com/daverudolphmusic",
+    "x-twitter":"https://music.youtube.com/channel/UC6hkMDC5qOwwwZiitKFftTQ",
+    "youtube": "https://music.apple.com/us/artist/dave-rudolph/1537874270",
+    "applemusic":"https://music.apple.com/us/artist/dave-rudolph/1537874270",
+    "tiktok":"https://www.tiktok.com/@daverudolphmusic",
+    "amazon": "https://music.amazon.com/artists/B07FC6YDC2/dave-rud",
+    "bandcamp":"https://daverudolphmusic.bandcamp.com/releases",
+    "deezer": "https://deezer.page.link/n66HUgRhtmAd9yc58"
+} %}
+
+{% set anchorClass = "my-2 mx-3 sm:m-2 rounded-full p-2 border-2 border-primary shadow-sm" %}
+{% set hoverClass = "hover:text-secondary hover:border-secondary hover:[&_svg]:text-secondary transform hover:scale-125 transition duration-300 ease-out" %}
+
 <!-- Social icons row -->
-<nav class="container-xl mx-auto" id="footer">
-    <div class="row">
-        <div class="col-12 text-center footer-col">
-            <h4>Social</h4>
-            <ul class="list-unstyled list-inline">
-                <li class="list-inline-item m-1"><a href="https://www.facebook.com/DaveRudolphMusic" target="_blank" rel="noopener noreferrer" aria-label="facebook-link"><i class="fab fa-facebook-f" aria-label="Facebook"></i></a></li>
-                <li class="list-inline-item m-1"><a href="https://www.instagram.com/daverudolphmusic/" target="_blank" rel="noopener noreferrer" aria-label="instagram-link"><i class="fab fa-instagram" aria-label="Instagram"></i></a></li>
-                <li class="list-inline-item m-1"><a href="https://twitter.com/DaveRudolphGtr" target="_blank" rel="noopener noreferrer" aria-label="twitter-link"><i class="fab fa-twitter" aria-label="Twitter"></i></a></li>
-                <li class="list-inline-item m-1"><a href="https://music.youtube.com/channel/UC6hkMDC5qOwwwZiitKFftTQ" target="_blank" rel="noopener noreferrer" aria-label="youtube-link"><i class="fab fa-youtube" aria-label="YouTube"></i></a></li>
-                <li class="list-inline-item m-1"><a href="https://music.apple.com/us/artist/dave-rudolph/1537874270" target="_blank" rel="noopener noreferrer" aria-label="apple music-link"><i class="fab fa-itunes-note" aria-label="iTunes"></i></a></li>
-                <li class="list-inline-item m-1"><a href="https://www.tiktok.com/@daverudolphmusic" target="_blank" rel="noopener noreferrer" aria-label="tiktok-link"><i class="fab fa-tiktok" aria-label="TikTok"></i></a></li>
-                <li class="list-inline-item m-1"><a href="https://music.amazon.com/artists/B07FC6YDC2/dave-rud" target="_blank" rel="noopener noreferrer" aria-label="amazon-link"><i class="fab fa-amazon" aria-label="Amazon"></i></a></li>
-                <li class="list-inline-item m-1"><a href="https://daverudolphmusic.bandcamp.com/releases" target="_blank" rel="noopener noreferrer" aria-label="bandcamp-link"><i class="fab fa-bandcamp" aria-label="Bandcamp"></i></a></li>
-                <li class="list-inline-item m-1"><a href="https://deezer.page.link/n66HUgRhtmAd9yc58" target="_blank" rel="noopener noreferrer" aria-label="deezer-link"><i class="fab fa-deezer" aria-label="Deezer"></i></a></li>
-            </ul>
-        </div>
-    </div>
+<nav class="container mx-auto flex justify-center flex-wrap sm:flex-nowrap py-4 sm:py-8 md:pb-10 md:pt-5" id="footer">
+    {% for icon, url in socialLinks %}
+        <a href="{{ url }}" class="{{ anchorClass}} {{ hoverClass }}" target="_blank" rel="noopener">
+            <svg class="h-4 w-4 text-primary">
+                <use xlink:href="#{{ icon }}"></use>
+            </svg>
+        </a>
+    {% endfor %}
 </nav>
 
-<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
 <script>
-    const darkModeSwitch = document.getElementById("darkModeSwitch");
-    const body = document.body;
-    const slider = darkModeSwitch.querySelector(".lightswitch-slider");
+  const darkModeSwitch = document.getElementById("darkModeSwitch");
+  const body = document.body;
+  const slider = darkModeSwitch.querySelector(".lightswitch-slider");
 
-    // Function to set the cookie with an expiration time of 30 minutes
-    function setDarkModeCookie(value) {
-        let expirationTime = new Date();
-        expirationTime.setTime(expirationTime.getTime() + 30 * 60 * 1000);
-        let expires = "expires=" + expirationTime.toUTCString();
-        document.cookie = "dark-mode=" + value + "; " + expires + "; path=/";
+  // Function to set the cookie with an expiration time of 30 minutes
+  function setDarkModeCookie(value) {
+    let expirationTime = new Date();
+    expirationTime.setTime(expirationTime.getTime() + 30 * 60 * 1000);
+    let expires = "expires=" + expirationTime.toUTCString();
+    document.cookie = "dark-mode=" + value + "; " + expires + "; path=/";
+  }
+
+  // Function to get the value of the dark-mode cookie
+  function getDarkModeCookie() {
+    const name = "dark-mode=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
+
+    for (let i = 0; i < cookieArray.length; i++) {
+      let cookie = cookieArray[i];
+      while (cookie.charAt(0) === ' ') {
+        cookie = cookie.substring(1);
+      }
+      if (cookie.indexOf(name) === 0) {
+        return cookie.substring(name.length, cookie.length);
+      }
     }
+    return null;
+  }
 
-    // Function to get the value of the dark-mode cookie
-    function getDarkModeCookie() {
-        const name = "dark-mode=";
-        const decodedCookie = decodeURIComponent(document.cookie);
-        const cookieArray = decodedCookie.split(';');
+  // Check the initial state of the cookie and update UI accordingly
+  const initialDarkModeValue = getDarkModeCookie();
+  if (initialDarkModeValue === "1") {
+    body.classList.add("dark-mode");
+    slider.classList.add("slide-right");
+  }
 
-        for (let i = 0; i < cookieArray.length; i++) {
-            let cookie = cookieArray[i];
-            while (cookie.charAt(0) === ' ') {
-                cookie = cookie.substring(1);
-            }
-            if (cookie.indexOf(name) === 0) {
-                return cookie.substring(name.length, cookie.length);
-            }
-        }
-        return null;
-    }
+  // Event listener for the darkModeSwitch
+  darkModeSwitch.addEventListener("click", () => {
+    const currentDarkModeValue = getDarkModeCookie();
 
-    // Check the initial state of the cookie and update UI accordingly
-    const initialDarkModeValue = getDarkModeCookie();
-    if (initialDarkModeValue === "1") {
-        body.classList.add("dark-mode");
-        slider.classList.add("slide-right");
-    }
+    // Toggle the cookie value
+    const newDarkModeValue = currentDarkModeValue === "1" ? "0" : "1";
+    setDarkModeCookie(newDarkModeValue);
 
-    // Event listener for the darkModeSwitch
-    darkModeSwitch.addEventListener("click", () => {
-        const currentDarkModeValue = getDarkModeCookie();
-
-        // Toggle the cookie value
-        const newDarkModeValue = currentDarkModeValue === "1" ? "0" : "1";
-        setDarkModeCookie(newDarkModeValue);
-
-        // Toggle the UI
-        body.classList.toggle("dark-mode");
-        slider.classList.toggle("slide-right");
-    });
+    // Toggle the UI
+    body.classList.toggle("dark-mode");
+    slider.classList.toggle("slide-right");
+  });
 
 </script>
-</body>
 
+<div class="fixed left-0 bottom-0 text-center flex">
+    {% if currentUser|boolean %}
+        <div class="inline-block px-4 py-2 bg-teal-400
+                  before:content-['mobile']
+                  sm:before:content-['sm']
+                  md:before:content-['md']
+                  lg:before:content-['lg']
+                  xl:before:content-['xl']">
+        </div>
+    {% endif %}
+</div>
+
+{% include "_components/svg.twig" %}
+</body>
 </html>

@@ -1,6 +1,10 @@
 defaultPlacement: end
 enableVersioning: true
+entryTypes:
+  -
+    uid: 5e19d471-ef0b-4e95-9548-97c378c4b65d # Tour Dates
 handle: tourDates
+maxAuthors: 1
 name: 'Tour Dates'
 propagationMethod: all
 siteSettings:

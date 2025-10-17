@@ -1,0 +1,33 @@
+{% set params = {
+    links: false,
+    content: false
+}|merge(params|default({})) %}
+
+<main class="max-w-7xl mx-auto px-4 py-10">
+    <!-- Payment Links Section -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+        {% for link in params.links %}
+            <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
+                <a class="text-4xl font-bold mb-3" style="color: {{ loop.index == 1 ? '#008CFF' : (loop.index == 2 ? '#0070BA' : '#00D54B') }}" href="{{ link.platformUrl }}" target="_blank">
+                    {{ link.platformName }}
+                </a>
+                <p id="platform-{{ loop.index }}"
+                   class="font-bold text-xl text-gray-900 mb-2">{{ link.platformUrl|trim('/')|split('/')|last }}</p>
+                <p class="text-sm text-gray-500 mb-4">Tap to copy or use the button</p>
+                <button onclick="copyToClipboard('platform-{{ loop.index }}')"
+                        class="px-6 py-2.5 border-2 rounded-full font-semibold transition-all hover:scale-105 active:scale-95"
+                        style="border-color: {{ loop.index == 1 ? '#008CFF' : (loop.index == 2 ? '#0070BA' : '#00D54B') }}; color: {{ loop.index == 1 ? '#008CFF' : (loop.index == 2 ? '#0070BA' : '#00D54B') }};"
+                        onmouseover="this.style.backgroundColor='{{ loop.index == 1 ? '#008CFF15' : (loop.index == 2 ? '#0070BA15' : '#00D54B15') }}'"
+                        onmouseout="this.style.backgroundColor='transparent'">
+                    Copy {{ link.platformName }}
+                </button>
+            </div>
+        {% endfor %}
+    </section>
+
+    <!-- Song List Section -->
+    <section class="bg-white rounded-2xl shadow-lg p-8 links-content">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Song List</h2>
+        {{ params.content }}
+    </section>
+</main>

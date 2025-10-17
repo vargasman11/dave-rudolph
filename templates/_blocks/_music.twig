@@ -1,0 +1,31 @@
+{% set params = {
+    spotifyAlbumBlock: false
+}|merge(params|default({})) %}
+
+{% if params.spotifyAlbumBlock|length %}
+    <div class="container mx-auto flex flex-col md:flex-row px-4 py-12">
+        <div class="flex flex-col md:w-1/2 justify-center items-center p-4">
+            {% if params.spotifyAlbumBlock.albumCta|length %}
+                <h2 class="text-2xl sm:text-4xl lg:text-5xl mb-4 text-center font-xball italic">{{ params.spotifyAlbumBlock.albumCta }}</h2>
+            {% endif %}
+            {% if params.spotifyAlbumBlock.albumCover.one()|boolean %}
+                <img class="max-h-72 sm:max-h-96 md:max-h-120 lg:max-h-160"
+                     src="{{ params.spotifyAlbumBlock.albumCover.one().getUrl() }}"
+                     alt="{{ params.spotifyAlbumBlock.albumCover.one().fileName }}">
+            {% endif %}
+        </div>
+        {% set blocks = params.spotifyAlbumBlock.spotifyiframes.all() %}
+        {% if blocks|length %}
+            <div class="flex flex-col md:w-1/2 justify-center items-center p-4">
+                <ul class="list-unstyled space-y-4 lg:space-y-8">
+                    {% for block in blocks %}
+                        <li class="">
+                            <iframe class="h-[80px]" src="{{ block.iframe }}" allowtransparency="true"
+                                    allow="encrypted-media"></iframe>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+{% endif %}

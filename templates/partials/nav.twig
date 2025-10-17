@@ -1,32 +1,66 @@
-{% set pages = craft.entries.section('navigation').all() %}
-<nav class="navbar navbar-expand-lg p-5">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">Dave Rudolph</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDrop"
-                aria-controls="navbarDrop" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
+{% set navigationItems = craft.entries.section('navigation').all() %}
 
-        <div class="collapse navbar-collapse justify-content-end" id="navbarDrop">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <span class="nav-link">Dark Mode</span>
-                    <span class="lightswitch" id="darkModeSwitch">
-                        <span class="lightswitch-slider"></span>
-                    </span>
+<nav class="container mx-auto">
+    <div class="flex justify-between items-center p-4 md:py-8 xl:py-10">
+        <a href="/"
+           class="text-primary font-xball text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-shadow-2xs">Dave
+            Rudolph</a>
+        <button class="md:hidden" id="mobileNavIcon">
+            <svg class="w-6 h-6 sm:w-8 sm:h-8 text-gray-500 icon-toggle">
+                <use xlink:href="#bars"/>
+            </svg>
+        </button>
+        {# Desktop Nav #}
+        <ul class="hidden md:flex font-xball text-primary text-shadow-2xs">
+            {% nav item in navigationItems %}
+                <li class="relative group md:ml-2 lg:ml-4 xl:ml-6 lg:text-xl xl:text-2xl">
+                    {% if item.internalOrExternal %}
+                        <a href="{{ item.externalPage }}"
+                           class="nav-link hover:text-secondary" {{ item.openInNewTab ? 'target="_blank"' }}>{{ item.title }}</a>
+                    {% else %}
+                        <a href="{{ item.entry.one() ? item.entry.one().getUrl() }}"
+                           class="nav-link hover:text-secondary" {{ item.openInNewTab ? 'target="_blank"' }}>{{ item.title }}</a>
+                    {% endif %}
+                    {% ifchildren %}
+                        <ul class="absolute right-0 top-full mt-2 w-max opacity-0 max-h-0 overflow-hidden transition-all duration-300 ease-out group-hover:opacity-100 group-hover:max-h-96 bg-white text-right p-2 sub-menu [&_li]:my-1 [&_li]:pe-3">
+                            {% children %}
+                        </ul>
+                    {% endifchildren %}
                 </li>
-                {% for page in pages %}
-                    {% set entry = page.navMatrix.one() %}
-                    {% set link = entry.internalLink.one().url() ?? entry.externalLink %}
-                    {% if link %}
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ link }}" {{ entry.newWindow ? 'target="_blank"': '' }}>{{ page.title }}
-                            </a>
-                        </li>
+            {% endnav %}
+            <li class="relative group md:ml-2 lg:ml-4 xl:ml-6 lg:text-xl xl:text-2xl">
+                <button id="darkModeToggle" class="cursor-pointer">🌙 Dark Mode</button>
+            </li>
+        </ul>
+    </div>
+    {# Mobile Nav #}
+    <div class="bg-gray-50/90 absolute h-full left-0 w-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden flex justify-center"
+         id="mobileNav">
+        <ul class="w-fit mt-16 sm:mt-24">
+            {% nav item in navigationItems %}
+                <li class="text-2xl sm:text-4xl mb-4 sm:mb-8 text-center relative">
+                    {% if item.internalOrExternal %}
+                        <a class="text-primary font-russo hover:text-secondary transition-all delay-150 ease-in-out"
+                           href="{{ item.externalPage }}">{{ item.title }}</a>
+                    {% else %}
+                        <a class="text-primary font-russo hover:text-secondary transition-all delay-150 ease-in-out"
+                           href="{{ item.entry.one() ? item.entry.one().getUrl() }}" {{ item.openInNewTab ? 'target="_blank"' }}>{{ item.title }}</a>
                     {% endif %}
 
-                {% endfor %}
-            </ul>
-        </div>
+                    {% ifchildren %}
+                        <button class="ml-2 text-primary text-lg align-middle toggle-submenu transition-transform duration-300">
+                            ▼
+                        </button>
+                        <ul class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out mt-2 space-y-2 submenu">
+                            {% children %}
+                        </ul>
+                    {% endifchildren %}
+                </li>
+            {% endnav %}
+            <li class="text-2xl sm:text-4xl mb-4 sm:mb-8 text-center">
+                <button id="darkModeToggleMobile" class="text-primary font-russo hover:text-secondary transition-all delay-150 ease-in-out">🌙 Dark Mode</button>
+            </li>
+        </ul>
     </div>
+
 </nav>

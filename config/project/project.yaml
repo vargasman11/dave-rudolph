@@ -1,21 +1,35 @@
-dateModified: 1747796248
+dateModified: 1759869700
 elementSources:
   craft\elements\Entry:
     -
+      defaultSort:
+        - postDate
+        - desc
+      defaultViewMode: ''
+      disabled: false
       key: '*'
+      tableAttributes:
+        - status
+        - section
+        - postDate
+        - expiryDate
+        - link
       type: native
     -
+      defaultSort:
+        - title
+        - asc
+      defaultViewMode: ''
+      disabled: false
       key: singles
+      tableAttributes:
+        - status
+        - link
       type: native
     -
       heading: Channels
+      key: 'heading:1ac36f9f-8c73-4e13-8a45-01e4219f5c7b'
       type: heading
-    -
-      key: 'section:e3fc1639-4370-4ebc-96b1-93d75e1d6e0d' # Blog
-      type: native
-    -
-      key: 'section:d2436398-f3e3-4b75-9115-13f2fa0afe1a' # Link Page
-      type: native
     -
       defaultSort:
         - postDate
@@ -26,27 +40,55 @@ elementSources:
         - postDate
         - expiryDate
         - link
-        - dateCreated
+        - 'field:458ab821-4880-4299-8232-f99733310016' # date
+        - 'field:d55cabd7-d990-4dac-9ea9-cc3941a1421f' # time
+        - 'field:5fb9f1f8-c038-4593-b349-8cda166cb8fb' # City
+        - 'field:0886b236-4a38-40bd-abfa-21fdee1352d7' # State
       type: native
     -
-      heading: Structures
+      defaultSort:
+        - postDate
+        - desc
+      defaultViewMode: ''
+      disabled: false
+      key: 'section:7e048754-9e2b-4fef-a0ec-1afa07efa29b' # Pages
+      tableAttributes:
+        - status
+        - postDate
+        - expiryDate
+        - link
+      type: native
+    -
+      heading: Nav
+      key: 'heading:27483e0d-c4b9-47ac-84b9-8e5eba27cd30'
       type: heading
     -
-      key: 'section:01f22741-5be0-4e6d-b671-4ec3c2af8464' # Navigation
+      defaultSort:
+        - structure
+        - asc
+      defaultViewMode: ''
+      disabled: false
+      key: 'section:85eff002-8100-42c8-a7a8-4532563dfd23' # Navigation
+      tableAttributes:
+        - status
+        - postDate
+        - expiryDate
+        - link
       type: native
 email:
-  fromEmail: vargas.j.jerry@gmail.com
+  fromEmail: contact@daverudolphmusic.com
   fromName: 'Dave Rudolph'
   replyToEmail: daverudolphguitar@gmail.com
   template: null
   transportSettings:
-    apiKey: $SENDGRID_API_KEY
-    categories: ''
-  transportType: putyourlightson\sendgrid\mail\SendgridAdapter
+    password: 'Dajr*2448'
+    timeout: '10'
+    username: daverudolphguitar
+  transportType: craft\mail\transportadapters\Gmail
 fs:
-  amazonS3:
+  uploads:
     hasUrls: true
-    name: 'amazon s3'
+    name: Uploads
     settings:
       addSubfolderToRootUrl: true
       autoFocalPoint: false
@@ -60,93 +102,65 @@ fs:
       region: us-east-2
       secret: $SECRET_ACCESS_KEY
       storageClass: ''
-      subfolder: ''
+      subfolder: /uploads
     type: craft\awss3\Fs
     url: 'https://daverudolph.s3.amazonaws.com/'
+graphql:
+  publicToken:
+    enabled: false
+    expiryDate: null
 meta:
   __names__:
     0faa9768-b53e-4216-a53d-7812596fdc94: Videos # Videos
-    1a2a94c2-a18f-4c14-ae13-bff389ad0c04: time # time
-    1b725997-1c52-4c85-aaa8-7bb113ff338e: About # About
-    1e6e3839-9a1e-4d98-a6f8-13b7cd0097d7: Default # Default
     1e7716dd-da4e-4a82-9a4a-f4eb04970454: ListenCTA # ListenCTA
-    01f22741-5be0-4e6d-b671-4ec3c2af8464: Navigation # Navigation
-    2cb0502e-6cdf-449e-b6c3-d1297d2c6b45: Contact # Contact
-    2d05a2b8-fa1f-4237-9abc-77880f943975: 'Page Title' # Page Title
-    3ba03f7c-87d0-45e6-aab0-f9b8eb0520e6: 'URL to source' # URL to source
-    3c12875b-36b2-4feb-b8c3-8525959af403: 'Link Title' # Link Title
-    4a571784-9016-4b75-a548-b490b4697364: 'link logo' # link logo
     4eb33154-2538-4037-9a27-198bbb7cfcfa: 'Tour Dates' # Tour Dates
-    5a99c46a-feb8-4904-a355-2715e51e048a: Video # Video
     5e19d471-ef0b-4e95-9548-97c378c4b65d: 'Tour Dates' # Tour Dates
     5fb9f1f8-c038-4593-b349-8cda166cb8fb: City # City
-    5fc89b29-9281-4ea2-a80f-f71060a7fe93: 'Footer Links' # Footer Links
     6b2b62f0-3eb1-45ad-b397-559af7de174b: 'Dave Guitar' # Dave Guitar
-    6ea3ecd7-bbe8-4d4a-b5e6-b83fcf7e96c5: 'Video embed' # Video embed
-    6eace8d6-d19b-4fe8-888f-6549afb1a3b3: 'Link Page' # Link Page
-    6f3a48db-efe7-4a2e-b25d-509fbd2ff05d: Music # Music
-    8f3db685-39df-478c-adc2-5cfb83c2861b: 'CTA Buttons' # CTA Buttons
-    9c72894b-5f1f-4387-8507-22e9af77722d: 'Page Fields' # Page Fields
-    9d11247f-9656-4204-8973-026dfdcb2f2f: Contact # Contact
-    9ebd9394-4f97-4694-bb2a-f43e11014f3c: 'Song List' # Song List
-    9fb98c9b-114b-4d58-a74d-ae29c4ab27ee: 'Nav Block' # Nav Block
-    10e41f88-75c4-478b-9f90-590df63cdfda: Default # Default
-    33fc222b-d308-432c-b70c-c128f4df6783: button # button
+    7e048754-9e2b-4fef-a0ec-1afa07efa29b: Pages # Pages
+    20cc593a-1deb-4cbb-b161-ee53c5a114d9: Entry # Entry
     66bdc090-1029-4da8-a10f-8e0bc54176bb: spotifyIframes # spotifyIframes
-    93f4fd03-7ec3-4149-b30e-3d6a701d64a4: Platform # Platform
-    95e3be53-2293-4333-904c-5f7a07242a54: 'Social Links' # Social Links
-    188a400c-cbc3-4efe-9a4b-8d1c9fa9a0d5: Default # Default
-    402d6622-2ec3-4171-953b-aa350c4767fe: 'External Link' # External Link
-    0408c66a-7daf-4481-afc7-2ac098e1e927: Dates # Dates
-    450b73b5-8b6d-4083-89ef-c04a318c1671: Navigation # Navigation
+    75d85378-d455-4ff4-bda0-9a51e95d30f9: Lightswitch # Lightswitch
+    83f1bea5-400c-4373-8b03-cd7de4219b6c: 'Matrix Entry Type' # Matrix Entry Type
+    85eff002-8100-42c8-a7a8-4532563dfd23: Navigation # Navigation
+    97ddd7ba-c25a-4043-a699-94f190c43cd2: Default # Default
+    429c85c0-0ce1-4713-a254-7b8a2e585e95: 'Spotify Album Block' # Spotify Album Block
     458ab821-4880-4299-8232-f99733310016: date # date
-    458c94f6-44fb-497c-bf73-59e053894675: City # City
-    462ceec0-6897-4ec4-9f80-10b8e1ab7308: 'Nav Matrix' # Nav Matrix
     502b621a-4cc7-4a26-a910-042f30dca048: Home # Home
     569d7efe-e957-4fa0-a49a-c4b1b8fba23b: 'Album Cover' # Album Cover
-    681b6776-7192-457f-81fc-ae308dabb2f3: 'Public Schema' # Public Schema
-    00776b8b-b9b2-49e0-b7d9-26ec3aaef7c1: 'Video Title' # Video Title
     0886b236-4a38-40bd-abfa-21fdee1352d7: State # State
-    1362be94-49c6-41a7-8c6e-5613f8983bbc: 'Social Media URl' # Social Media URl
-    3729fe64-ff51-4b75-972a-9ca5c405ba4e: 'Button Text' # Button Text
+    3304aae1-f09c-4687-bbe6-e0903dad9f0d: 'Nav Item' # Nav Item
     8972e6e4-7db5-4a0a-85b9-11be3f170a55: 'Custom Content' # Custom Content
     024543db-feed-428a-922b-5c42d8374aaa: 'Album CTA' # Album CTA
+    510624a0-5eb7-469d-80ad-f0fd8770b0c6: Image # Image
     885183e7-a46e-417d-888c-fca4f7e1734d: Uploads # Uploads
-    5432599a-25c2-480c-92ba-3dcbf18b1d20: 'Platform Url' # Platform Url
+    17303915-9872-43ed-9684-e3ae9e8d6099: 'Open In new Tab' # Open In new Tab
     56361854-6cef-42f0-b788-03399c9f683b: 'Dave Guitar' # Dave Guitar
-    61168750-51cd-4179-aedb-4efc42146742: 'info url' # info url
-    a5f13344-7df6-4d61-bc56-ff72e9f7a0bf: date # date
-    a88ef367-b120-4c2a-b952-d4c26c75cba5: About # About
-    a6368d7b-66bc-481d-bdc7-8115ac30626f: State # State
+    b43bae05-d6b6-4b8a-84bc-f01097e47529: Navigation # Navigation
     b242a145-18ec-45dd-a31a-28e9e48279c0: TOUR # TOUR
-    b2342e5b-b45b-48c9-ac11-267011a80bc5: 'Blog Content' # Blog Content
     b6502537-1c47-451c-8402-2f8dcde9a941: spotifyIframe # spotifyIframe
-    bb9de470-f257-45e2-803f-c1a93509afbf: Media # Media
-    bf73add2-e7d0-4ec6-a1e5-1b8904484990: 'New Window' # New Window
     c2111dd9-d621-4db5-9121-04eba429d67a: Home # Home
-    ca562c02-fd2a-410a-9be0-d9ccb0654e50: Blog # Blog
-    cbc56c31-9669-4305-8581-335621349eec: 'Social Media Icon' # Social Media Icon
-    d06cd7cc-5d64-40d9-a4ad-126501bec771: 'Button Link' # Button Link
+    cd2fbe89-ae24-4f97-a4e1-77aaf39f0a88: 'Footer Link' # Footer Link
+    d2d8c823-93e6-4574-a238-533954b4b8b9: Default # Default
     d55cabd7-d990-4dac-9ea9-cc3941a1421f: time # time
-    d2436398-f3e3-4b75-9115-13f2fa0afe1a: 'Link Page' # Link Page
     daaeae58-7e1f-4ad5-b1e5-18ac93440c24: 'Tour Dates' # Tour Dates
-    dd1af556-4340-4c92-91ad-228e54780c45: 'Venue ' # Venue 
+    daee7290-b96e-43e3-b2ee-f47534e9c586: Simple # Simple
+    df3eb26c-d215-44f0-a235-413cdb54c672: 'External Page' # External Page
     e025fb83-6598-430d-9ab8-5d4ced49979a: 'info url' # info url
-    e3fc1639-4370-4ebc-96b1-93d75e1d6e0d: Blog # Blog
-    e28be8c5-7bcd-4e2b-9189-1f72f75ec7b4: Tour # Tour
-    e46c4b23-d422-4dec-8758-ef4e9016d1fe: iframe # iframe
-    e4343257-eacd-41fb-b2d1-0ac429892afc: Media # Media
-    ed10aba0-702e-4601-b1ef-a5e289b7ac04: 'Platform Name' # Platform Name
+    e819b4cf-0c03-4d0e-a011-c3af102e306f: 'Footer Links' # Footer Links
+    e3406de7-2a12-435b-9899-630c47926027: 'Page Type' # Page Type
     ed2878ee-102f-406d-b62d-3d231fd7460b: 'Header Image Alt' # Header Image Alt
-    eeaff83a-803a-4ddd-bcc6-a1563a735cd6: Tour # Tour
+    eef00113-cbb0-4694-a0b5-70dbfd82c243: 'Internal or External' # Internal or External
     ef74887a-7a07-4977-84c2-c7793e0529a5: 'Header Image' # Header Image
-    f05f953a-b51a-4e07-82f7-1580bea9350d: 'Internal Link' # Internal Link
-    fa196411-87a8-410a-9288-9036a802a194: Music # Music
 plugins:
   aws-s3:
     edition: standard
     enabled: true
     schemaVersion: '2.0'
+  ckeditor:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.0.0.0
   contact-form:
     edition: standard
     enabled: true
@@ -165,28 +179,341 @@ plugins:
     edition: lite
     enabled: true
     schemaVersion: 1.0.2
+  freeform:
+    edition: express
+    enabled: true
+    schemaVersion: 5.7.0
     settings:
-      duplicatePreventionEnabled: true
-      emailNotificationsDirectoryPath: null
-      enhancedUI: true
-      honeypotBehaviour: simulate_success
-      honeypotEnabled: true
-      honeypotInputName: form_handler
-      name: null
-      recaptchaEnabled: false
-      recaptchaLoadScript: true
-      recaptchaSecretKey: null
-      recaptchaSiteKey: null
-      recaptchaTheme: light
-      showErrorLogBanner: true
-  redactor:
-    edition: standard
-    enabled: true
-    schemaVersion: 2.3.0
-  sendgrid:
-    edition: standard
-    enabled: true
-    schemaVersion: 1.0.0
+      alertNotificationRecipients: null
+      allowBuilderTemplateCreation: true
+      allowDashesInFieldHandles: false
+      allowFileTemplateEdit: '1'
+      autoScroll: true
+      autoScrollToErrors: true
+      badgeType: all
+      blockedEmails: null
+      blockedEmailsError: 'Invalid Email Address'
+      blockedIpAddresses: null
+      blockedKeywords: null
+      blockedKeywordsError: 'Invalid Entry Data'
+      bypassSpamCheckOnLoggedInUsers: false
+      clientDigestFrequency: 1
+      clientDigestRecipients: null
+      csrfRefresh: none
+      defaultFromEmail: '{{ general.systemEmail }}'
+      defaultFromName: '{{ general.systemName }}'
+      defaultView: forms
+      defaults:
+        __assoc__:
+          -
+            - previewHtml
+            - true
+          -
+            - twigInHtml
+            - true
+          -
+            - twigIsolation
+            - true
+          -
+            - richTextFieldToolbarConfiguration
+            - 'blocks bold italic underline forecolor backcolor | align numlist bullist | link image table | removeformat code'
+          -
+            - includeSampleTemplates
+            - true
+          -
+            - notifications
+            -
+              __assoc__:
+                -
+                  - admin
+                  -
+                    __assoc__:
+                      -
+                        - template
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - ''
+                -
+                  - conditional
+                  -
+                    __assoc__:
+                      -
+                        - template
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - ''
+                -
+                  - userSelect
+                  -
+                    __assoc__:
+                      -
+                        - template
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - ''
+                -
+                  - emailField
+                  -
+                    __assoc__:
+                      -
+                        - template
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - ''
+          -
+            - settings
+            -
+              __assoc__:
+                -
+                  - general
+                  -
+                    __assoc__:
+                      -
+                        - formType
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - ''
+                      -
+                        - submissionTitle
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - '{{ dateCreated|date("Y-m-d H:i:s") }}'
+                      -
+                        - formattingTemplate
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - basic-light/index.twig
+                -
+                  - dataStorage
+                  -
+                    __assoc__:
+                      -
+                        - storeData
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - true
+                      -
+                        - defaultStatus
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - 2
+                      -
+                        - collectIp
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - true
+                -
+                  - processing
+                  -
+                    __assoc__:
+                      -
+                        - ajax
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - true
+                      -
+                        - showIndicator
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - true
+                      -
+                        - showText
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - true
+                      -
+                        - processingText
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - Processing...
+                -
+                  - successAndErrors
+                  -
+                    __assoc__:
+                      -
+                        - successBehavior
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - reload
+                      -
+                        - returnUrl
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - ''
+                      -
+                        - successTemplate
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - ''
+                      -
+                        - successMessage
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - 'Form has been submitted successfully!'
+                      -
+                        - errorMessage
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - 'Sorry, there was an error submitting the form. Please try again.'
+                -
+                  - limits
+                  -
+                    __assoc__:
+                      -
+                        - duplicateCheck
+                        -
+                          __assoc__:
+                            -
+                              - locked
+                              - false
+                            -
+                              - value
+                              - no_limit
+      digestFrequency: 1
+      digestOnlyOnProduction: false
+      digestRecipients: null
+      displayFeed: true
+      emailNotificationToolbarConfiguration: 'blocks bold italic underline forecolor backcolor | align numlist bullist | link image table | removeformat code'
+      emailTemplateDefault: database
+      emailTemplateDirectory: ''
+      emailTemplateMethod: form
+      emailTemplateStorageType: files_database
+      exportHandlesAsNames: false
+      exportLabels: false
+      fillWithGet: false
+      footerScripts: false
+      formFieldShowOnlyAllowedForms: false
+      formSubmitDisable: true
+      formSubmitExpiration: null
+      formTemplateDirectory: _freeform
+      formattingTemplate: basic-light/index.twig
+      loggingLevel: error
+      minimumSubmitTime: null
+      pluginName: null
+      purgableSpamAgeInDays: null
+      purgableSubmissionAgeInDays: null
+      purgableUnfinalizedAssetAgeInMinutes: 180
+      purgeAssets: true
+      queuePriority: null
+      rememberPageSubmitOrder: true
+      removeNewlines: false
+      renderFormHtmlInCpViews: true
+      saveFormSessionLimit: 10
+      saveFormTtl: 30
+      scriptInsertLocation: footer
+      scriptInsertType: files
+      sessionContext: payload
+      sessionContextCount: 100
+      sessionContextSecret: ''
+      sessionContextTimeToLiveMinutes: 180
+      sessionEntryMaxCount: 50
+      sessionEntryTTL: 10800
+      showErrorsForBlockedEmails: false
+      showErrorsForBlockedKeywords: false
+      sitesEnabled: false
+      spamFolderEnabled: true
+      spamProtectionBehavior: simulate_success
+      submissionThrottlingCount: null
+      submissionThrottlingTimeFrame: null
+      successTemplateDirectory: ''
+      updateSearchIndexes: true
+      useQueueForEmailNotifications: false
+      useQueueForIntegrations: false
   sprig:
     edition: standard
     enabled: true
@@ -217,15 +544,20 @@ plugins:
       spamLimit: 500
       spamRedirectBehavior: redirectAsNormal
       trackRemoteIp: false
+  vite:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
 system:
   edition: solo
   live: true
   name: 'Dave Guitar'
   retryDuration: null
-  schemaVersion: 4.15.0.0
+  schemaVersion: 5.8.0.3
   timeZone: America/Chicago
 users:
   allowPublicRegistration: false
+  deactivateByDefault: false
   defaultGroup: null
   photoSubpath: null
   photoVolumeUid: null

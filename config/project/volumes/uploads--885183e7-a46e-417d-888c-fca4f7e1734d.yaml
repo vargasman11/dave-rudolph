@@ -27,18 +27,18 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\assets\AssetTitleField
-            uid: 40a106b4-90f8-4d74-a708-6c5ed2b9a829
+            uid: 7f785c7c-edf8-4e00-aa03-2d266c20edbb
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 153a35c6-9bda-40ae-b59d-2118716950fc
+        uid: 0989bf7b-9ece-4630-83d6-361d28a7f58d
         userCondition: null
-fs: amazonS3
+fs: uploads
 handle: uploads
 name: Uploads
 sortOrder: 1
 titleTranslationKeyFormat: null
 titleTranslationMethod: site
-transformFs: amazonS3
+transformFs: null
 transformSubpath: ''

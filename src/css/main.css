@@ -1,0 +1,106 @@
+/*--breakpoint-sm: 40rem;*/
+/*--breakpoint-md: 48rem;*/
+/*--breakpoint-lg: 64rem;*/
+/*--breakpoint-xl: 80rem;*/
+/*--breakpoint-2xl: 96rem;*/
+
+@import "tailwindcss";
+
+@font-face {
+    font-family: "Russo One";
+    src: url("../fonts/russo_one.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "XBall";
+    src: url("../fonts/XBall_Italic.ttf") format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Roboto", sans-serif;
+    src: url("../fonts/Roboto-VariableFont_wdth,wght.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto", sans-serif;
+    src: url("../fonts/Roboto-Italic-VariableFont_wdth,wght") format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}
+
+
+@theme{
+    --color-primary: #68a79e;
+    --color-secondary: #2b5751;
+    --color-gray: #6c757d;
+    --font-russo: "Russo One";
+    --font-xball: "XBall";
+}
+/* Light mode (default) */
+body {
+    background: #ffffff;
+    color: #000000;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Dark mode overrides - changed from body.dark-mode to html.dark-mode */
+html.dark-mode body {
+    background: #121212;
+    color: #f5f5f5;
+}
+
+html.dark-mode .sub-menu {
+    background: #000000;
+}
+
+html.dark-mode #mobileNav {
+    background: rgba(0, 0, 0, 0.85);
+}
+
+html.dark-mode .icon-toggle {
+    color: var(--color-primary);
+}
+
+.contentArea {
+    font-family: "Roboto", sans-serif;
+}
+
+.contentArea > h1, h2, h3, h4, h5, h6, p, ul {
+    margin-bottom: 1rem;
+}
+
+.contentArea > p {
+    font-size: 1rem;
+    @media screen and (min-width: 40rem) {
+        font-size: 1.15rem;
+    }
+}
+.contentArea > figure > img {
+    max-height: 500px;
+    padding: 1rem;
+    margin: 0 auto;
+    @media screen and (min-width: 40rem) {
+        max-height: 800px;
+    }
+}
+.contentArea > figure > figcaption {
+    font-size:  0.75rem;
+    font-style: italic;
+    text-align: center;
+    @media screen and (min-width: 40rem) {
+        font-size: 0.875rem;
+    }
+}
+ .links-content iframe {
+    width: 100% !important;
+    min-height: 600px !important;
+    height: 70vh !important;
+    border: none !important;
+    display: block;
+}

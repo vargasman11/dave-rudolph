@@ -13,7 +13,7 @@ fieldLayouts:
             elementCondition: null
             id: null
             inputType: null
-            instructions: null
+            instructions: 'Use this as the venue location'
             label: null
             max: null
             min: null
@@ -27,7 +27,7 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
-            uid: 331c8561-793b-4fc7-98ad-15b1a1835c98
+            uid: 30eccecd-7aff-4882-98d6-c8be9f15dfe3
             userCondition: null
             warning: null
             width: 100
@@ -39,7 +39,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 622243fb-290e-4c5b-860f-7435d4d78f33
+            uid: f18341a0-c7fc-4169-9d90-9d4045361082
             userCondition: null
             warning: null
             width: 25
@@ -51,7 +51,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: c3f70724-4d39-496d-b25b-231c7b224e2c
+            uid: 36c5a89b-6941-497f-838a-315b61c6ce4b
             userCondition: null
             warning: null
             width: 25
@@ -63,7 +63,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 2719693d-3594-49cb-b27a-f1b8c57f3c9f
+            uid: 558f685d-0b64-4de1-ad23-53b5463c40aa
             userCondition: null
             warning: null
             width: 25
@@ -75,7 +75,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 12620ad9-3bf4-4ed5-952b-ce171c56cfb0
+            uid: bd43f3e3-5513-4edc-a1f4-7931df164483
             userCondition: null
             warning: null
             width: 25
@@ -87,17 +87,16 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 3a7aa01c-b3ba-46c6-b813-f35d24b1e146
+            uid: fde43275-44fa-4322-a6e0-4b4abf3d3bba
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 416985eb-34fc-4caa-a491-9873ffa80e07
+        uid: 7dedf6ba-9dcc-4a4f-be01-dd697f358783
         userCondition: null
 handle: tourDates
 hasTitleField: true
 name: 'Tour Dates'
-section: 4eb33154-2538-4037-9a27-198bbb7cfcfa # Tour Dates
 showStatusField: true
 slugTranslationKeyFormat: null
 slugTranslationMethod: site

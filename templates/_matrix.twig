@@ -1,0 +1,41 @@
+{% set homepage = entry.id == 2 %}
+{% extends '_layout.twig' %}
+
+{% block content %}
+    <!-- Hero Image -->
+    {% if homepage == false %}
+        {% include '_components/header.twig' with { params:{
+            image: entry.image.one(),
+            title: entry.title
+        }} %}
+    {% endif %}
+
+    <!-- page content -->
+    {% switch entry.pageType %}
+    {% case "tour" %}
+        {% include "_blocks/_tour.twig" %}
+    {% case "music" %}
+        {% include "_blocks/_music.twig" with { params:{
+            spotifyAlbumBlock: entry.spotifyAlbumBlock
+        }} %}
+    {% case "about" %}
+        {% include "_blocks/_about.twig" with { params:{
+            customContent: entry.customContent
+        }} %}
+    {% case "contact" %}
+        {% include "_blocks/_contact.twig" with { params:{
+            showForm: entry.lightswitch
+        }} %}
+    {% case "media" %}
+        {% include "_blocks/_media.twig" with { params:{
+            videos: entry.videos
+        }} %}
+    {% case "links" %}
+        {% include "_blocks/_links.twig" with { params:{
+            links: entry.listencta.all(),
+            content: entry.customContent2
+        }} %}
+    {% default %}
+    {% endswitch %}
+
+{% endblock %}

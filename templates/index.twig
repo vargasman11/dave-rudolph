@@ -1,51 +1,33 @@
+{# Asset Vars #}
 {% set headerImage = entry.headerImage.one() ?? null %}
+{% set transform = {
+    small:{ mode: 'crop', format: 'webp', width: 640  },
+    medium:{ mode: 'crop', format: 'webp', width: 768 },
+    large:{ mode: 'crop', format: 'webp', width: 1024 }
+} %}
+{# Date Vars #}
 {% set today = "now"|date("m/d/Y") %}
 {# Fetch entries with a selected date in the next month #}
 {% set start = now|atom %}
-{# {% set entries = craft.entries().date(['and', ">= #{start}"]).all() %} #}
-{% set entries = craft.entries().limit(5) %}
-{# {% set entries = entries|multisort('date', direction=SORT_ASC).limit(20) %} #}
-{# setting imag SRC sets #}
-{% set srcSet = ['576w','768w','992w','1200w','1400w'] %}
+{# {% set start = "01/01/2023" %} #}
+{% set end = now|atom %}
 
-
-{% extends "_layout" %}
+{% extends '_layout.twig' %}
 {% block content %}
-
-    <div class="container-xl homepage-image">
-        <div class="row">
-            <div class="col-sm-12">
-                {{ tag('img', {
-                    class:"img-fluid",
-                    src: headerImage.url,
-                    srcset: headerImage.getSrcset(srcSet),
-                    alt: headerImage.title,
-                }) }}
-            </div>
-        </div>
-    </div>
-
-    <div class="container-xl homepage-buttons">
-        <div class="row">
-            <div class="col-12 buttons">
-                {% set blocks = entry.listencta.all() %}
-                {% if blocks|length %}
-                    {% for block in blocks %}
-                        <a href="{{ block.platformUrl|raw }}" target="_blank"
-                           class="btn btn-lg btn-primary">{{ block.platformName }}</a>
-                    {% endfor %}
-                {% endif %}
-            </div>
-        </div>
-    </div>
-
-    <div class="container-xl container-shows">
-        {{ sprig('_components/pagination', {
-            'title':'Upcoming Dates',
-            'limit': 12,
-            'futureDates': true,
-            'order': 'date ASC'
-        }) }}
-    </div>
+    {% include '_components/headerHome.twig' with { params:{
+        headerImage: headerImage,
+    }} %}
+    {% include '_components/listenLinks.twig' with { params:{
+        listencta: entry.listencta.all(),
+    }} %}
+    {# Tour Dates #}
+    {{ sprig('_components/pagination', {
+        params:{
+            title:'Upcoming Dates',
+            section:'tourDates',
+            limit: 6,
+            dateRange: [ ">= #{today} "]
+        }
+    }) }}
 
 {% endblock %}

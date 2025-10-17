@@ -1,16 +1,18 @@
 columnSuffix: null
 contentColumnType: string
-fieldGroup: 9c72894b-5f1f-4387-8507-22e9af77722d # Page Fields
 handle: videos
 instructions: null
 name: Videos
 searchable: false
 settings:
-  contentTable: '{{%matrixcontent_videos}}'
-  maxBlocks: null
-  minBlocks: null
+  entryTypes:
+    -
+      uid: 5a99c46a-feb8-4904-a355-2715e51e048a
+  maxEntries: null
+  minEntries: null
   propagationKeyFormat: null
   propagationMethod: all
+  viewMode: blocks
 translationKeyFormat: null
 translationMethod: site
 type: craft\fields\Matrix

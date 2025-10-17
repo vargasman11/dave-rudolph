@@ -1,106 +1,97 @@
-{#- -- _components/pagination -- -#}
-{% set today = "now"|date("Y-m-d") %}
+{% set params = {
+    title: null,
+    limit: '',
+    section:'',
+    dateRange:''
+}|merge(params|default({})) %}
 
-{% if futureDates == 1 %}
-    {% set today = ">= #{today}" %}
-{% else %}
-    {% set today = "<= #{today}" %}
-{% endif %}
+{#- -- _components/pagination -- -#}
 
 {# Sets a default value if not defined by `s-val:*` on the clicked element #}
 {% set page = page ?? 1 %}
 {# Page will always be set to the previous value, or `1` if none was defined %} #}
 {{ hiddenInput('page', page ?? 1) }}
 
-{% set entryQuery = craft.entries().date(today).orderBy(order).limit(limit) %}
+{% set entryQuery = craft.entries.section(params.section).date(params.dateRange).limit(params.limit) %}
 
 {# Paginates the entry query given the current page #}
 {% set pageInfo = sprig.paginate(entryQuery, page) %}
 {% set entries = pageInfo.pageResults %}
+{# Style Classes #}
+{% set trClass = "border-t border-gray-200 text-xs sm:text-sm md:text-base" %}
+{% set tdClass = "text-left pr-2 sm:p-4 py-2 sm:py-4" %}
+{% set spanClass = "font-bold text-gray" %}
+{% set infoClass = "mx-auto text-white bg-primary hover:bg-secondary py-1 px-2 font-bold font-russo rounded-sm" %}
 
 {% if entries|length %}
-    <div class="container-xl mx-auto container-shows">
-        <div class="row">
-            <div class="col-12">
-                <h1>{{ title }}</h1>
-                <div class="shows">
-                    {% for entry in entries %}
-                        {% include "_components/_shows" with {
-                            title:entry.title,
-                            date:entry.date|date('n/j/y'),
-                            time:entry.time|time('short'),
-                            location: "#{entry.city}, #{entry.state}",
-                            infoUrl:entry.infoUrl
-                        } %}
+    <div class="container mx-auto p-4 lg:max-w-4xl">
+        <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-xball italic py-8">{{ params.title }}</h1>
+        <table class="w-full">
+            <tbody>
+            {% for entry in entries %}
+                <tr class="{{ trClass }}">
+                    <td class="{{ tdClass }}">
+                        <span class="{{ spanClass }}">{{ entry.date|date('medium') }}</span>
+                    </td>
+                    <td class="{{ tdClass }}">{{ entry.title }} &commat; {{ entry.time|time('short') }} </td>
+                    <td class="{{ tdClass }}">
+                        <span class="{{ spanClass }}">Location:</span> {{ entry.city }}, {{ entry.state }}
+                    </td>
+                    <td class="{{ tdClass }}">
+                        <a href="{{ entry.infoUrl }}" class="{{ infoClass }}" target="_blank">info</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {# Pagination #}
+        {% if entries %}
+            {% set totalPagesToShow = 2 %}
+            {% set halfTotalPagesToShow = (totalPagesToShow / 2)|round %}
+            {% set startPage = max(1, pageInfo.currentPage - halfTotalPagesToShow) %}
+            {% set endPage = min(pageInfo.totalPages, startPage + totalPagesToShow - 1) %}
+            {# Styles #}
+            {% set liClass = "p-2 text-sm md:text-base text-primary hover:bg-primary hover:text-white"  %}
+            {% set anchorClass = "hover:cursor-pointer" %}
+
+            <div class="flex mt-4 justify-center">
+            <nav aria-label="Pagination">
+                <ul class="flex border border-gray-200 divide-x divide-gray-200">
+                    <li class="{{ liClass}} {% if page == 1 %} disabled {% endif %}">
+                        <a class="{{ anchorClass }}" href="#" sprig s-val:page="{{ page - 1 }}">Previous</a>
+                    </li>
+                    {% if startPage > 1 %}
+                        <li class="{{ liClass }} hidden md:block">
+                            <a class="{{ anchorClass }}" sprig s-val:page="1">1</a>
+                        </li>
+                        {% if startPage > 2 %}
+                            <li class="{{ liClass}} hidden md:block disabled"><span class="{{ anchorClass }}">...</span></li>
+                        {% endif %}
+                    {% endif %}
+                    {% for i in startPage..endPage %}
+                        <li class="{{ liClass }} hidden md:block {% if i == page %} active {% endif %}">
+                            <a class="{{ anchorClass }}" sprig s-val:page="{{ i }}">{{ i }}</a>
+                        </li>
                     {% endfor %}
-                </div>
+                    {% if endPage < pageInfo.totalPages %}
+                        {% if endPage < pageInfo.totalPages - 1 %}
+                            <li class="{{ liClass }} hidden md:block disabled"><span class="{{ anchorClass }}">...</span></li>
+                        {% endif %}
+                        <li class="{{ liClass }} hidden md:block">
+                            <a class="{{ anchorClass }}" sprig s-val:page="{{ pageInfo.totalPages }}">{{ pageInfo.totalPages }}</a>
+                        </li>
+                    {% endif %}
+                    <li class="{{ liClass }} {% if page == pageInfo.totalPages %} disabled{% endif %}">
+                        <a class="{{ anchorClass }}" href="#" sprig s-val:page="{{ page + 1 }}">Next</a>
+                    </li>
+                </ul>
+            </nav>
             </div>
-        </div>
-        <div class="row mt-2 mb-4">
-            <div class="col-12 col-sm-10 col-md-9 col-lg-7 col-xl-6 ms-auto">
-                {# Pagination #}
-                {% if entries %}
-                    {% set totalPagesToShow = 3 %}
-                    {% set halfTotalPagesToShow = (totalPagesToShow / 2)|round %}
-                    {% set startPage = max(1, pageInfo.currentPage - halfTotalPagesToShow) %}
-                    {% set endPage = min(pageInfo.totalPages, startPage + totalPagesToShow - 1) %}
-                    <nav aria-label="Pagination" class="pagination-container">
-                        <ul class="pagination p-0">
-
-                                <li class="page-item{% if page == 1 %} disabled{% endif %}">
-                                    <a class="page-link " href="#" sprig s-val:page="{{ page - 1 }}"
-                                       s-push-url="?page={{ page - 1 }}">Previous</a>
-                                </li>
-
-                            {% if startPage > 1 %}
-                                <li class="page-item">
-                                    <a class="page-link " sprig s-val:page="1" s-push-url="?page=1">1</a>
-                                </li>
-                                {% if startPage > 2 %}
-                                    <li class="page-item disabled"><span class="page-link">...</span></li>
-                                {% endif %}
-                            {% endif %}
-
-                            {% for i in startPage..endPage %}
-                                <li class="page-item{% if i == page %} active{% endif %}">
-                                    <a class="page-link " sprig s-val:page="{{ i }}"
-                                       s-push-url="?page={{ i }}">{{ i }}</a>
-                                </li>
-                            {% endfor %}
-
-
-                            {% if endPage < pageInfo.totalPages %}
-                                {% if endPage < pageInfo.totalPages - 1 %}
-                                    <li class="page-item disabled"><span class="page-link">...</span></li>
-                                {% endif %}
-                                <li class="page-item">
-                                    <a class="page-link " sprig s-val:page="{{ pageInfo.totalPages }}"
-                                       s-push-url="?page={{ pageInfo.totalPages }}">{{ pageInfo.totalPages }}</a>
-                                </li>
-                            {% endif %}
-
-                                <li class="page-item{% if page == pageInfo.totalPages %} disabled{% endif %}">
-                                    <a class="page-link " href="#" sprig s-val:page="{{ page + 1 }}"
-                                       s-push-url="?page={{ page + 1 }}">Next</a>
-                                </li>
-                        </ul>
-                    </nav>
-
-                    <div class="pagination-info">
-                        <p>Showing {{ pageInfo.first }}-{{ pageInfo.last }} of {{ pageInfo.total }} Show Dates.</p>
-                        <p>{{ pageInfo.currentPage }} of {{ pageInfo.totalPages }} pages.</p>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
+        {% endif %}
     </div>
 {% else %}
-    <div class="container-xl mx-auto container-shows">
-        <div class="row">
-            <div class="col-12">
-                <h1>{{ title }}</h1>
-                <h2 class="text-center">Stay tuned for upcoming shows!</h2>
-            </div>
-        </div>
+    <div class="container mx-auto p-4 lg:max-w-4xl">
+        <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-xball italic py-8 text-center">Stay tuned for more dates</h1>
     </div>
 {% endif %}

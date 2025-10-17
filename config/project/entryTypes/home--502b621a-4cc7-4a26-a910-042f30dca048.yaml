@@ -27,7 +27,7 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
-            uid: b424f32d-51a6-4a2d-ab63-53f66bf164eb
+            uid: 4e702683-da9c-4176-be5a-d246b253c2a9
             userCondition: null
             warning: null
             width: 100
@@ -39,7 +39,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 1fd09847-a49b-4553-9a4b-05881b9068fb
+            uid: 99d86c54-a555-4bd5-b2e7-c0b80c829452
             userCondition: null
             warning: null
             width: 100
@@ -51,7 +51,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: be5fa556-b438-4fb6-b89c-661cd5b5ff68
+            uid: 88346f17-70f1-46da-aad5-301088b01d56
             userCondition: null
             warning: null
             width: 100
@@ -63,17 +63,16 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 75686c29-4b67-4066-a31f-41364161f0ae
+            uid: 4738f4db-3646-4130-aeb3-27aa90a60169
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 898a379a-1f6d-4421-8ad2-046e82f4bbfb
+        uid: 8fccdca2-2a59-42e2-a7dc-14a49429c91a
         userCondition: null
 handle: home
 hasTitleField: false
 name: Home
-section: c2111dd9-d621-4db5-9121-04eba429d67a # Home
 showStatusField: true
 slugTranslationKeyFormat: null
 slugTranslationMethod: site

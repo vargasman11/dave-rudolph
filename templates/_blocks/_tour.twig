@@ -1,0 +1,23 @@
+{% set today = "now"|date("m/d/Y") %}
+{# Fetch entries with a selected date in the next month #}
+{% set start = now|atom %}
+{# {% set start = "01/01/2023" %} #}
+{% set end = now|atom %}
+
+{{ sprig('_components/pagination', {
+    params:{
+        title:'Upcoming Dates',
+        section:'tourDates',
+        limit: 6,
+        dateRange: [ ">= #{today} "]
+    }
+}) }}
+
+{{ sprig('_components/pagination', {
+    params: {
+        title:'Past Dates',
+        section:'tourDates',
+        limit: 6,
+        dateRange: ["< #{today}"]
+    }
+}) }}
