@@ -7,3 +7,4 @@
 # Except config.yaml
 !.ddev/config.yaml
 /config/project
+/web/dist/
