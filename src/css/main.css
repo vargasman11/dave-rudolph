@@ -63,6 +63,10 @@ html.dark-mode #mobileNav {
     background: rgba(0, 0, 0, 0.85);
 }
 
+html.dark-mode #contact-form label{
+    color: #ffffff;
+}
+
 html.dark-mode .icon-toggle {
     color: var(--color-primary);
 }
