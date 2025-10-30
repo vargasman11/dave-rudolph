@@ -1,0 +1,123 @@
+color: null
+fieldLayouts:
+  2b94555b-b4a9-471a-ba92-1d2664dbc51c:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            fieldUid: a5f13344-7df6-4d61-bc56-ff72e9f7a0bf
+            handle: date
+            includeInCards: true
+            instructions: null
+            label: date
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e7bbe7c7-e8f2-46cd-a748-bbb525bd3813
+            userCondition: null
+            warning: null
+            width: 25
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            fieldUid: 1a2a94c2-a18f-4c14-ae13-bff389ad0c04
+            handle: time
+            includeInCards: false
+            instructions: null
+            label: time
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 493c1601-2212-47c6-bca8-529645004c7a
+            userCondition: null
+            warning: null
+            width: 25
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            fieldUid: a6368d7b-66bc-481d-bdc7-8115ac30626f
+            handle: state
+            includeInCards: false
+            instructions: null
+            label: State
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f62e7ae1-f3cf-4f12-91b2-7225a8048fd7
+            userCondition: null
+            warning: null
+            width: 25
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            fieldUid: 458c94f6-44fb-497c-bf73-59e053894675
+            handle: city
+            includeInCards: false
+            instructions: null
+            label: City
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 8b8e5855-92fd-415e-9d11-f63b40585ddc
+            userCondition: null
+            warning: null
+            width: 25
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            fieldUid: dd1af556-4340-4c92-91ad-228e54780c45
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: 'Venue '
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 81969ca6-6061-4c63-9a2b-4b3d42f4dbaf
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            fieldUid: 61168750-51cd-4179-aedb-4efc42146742
+            handle: infoUrl
+            includeInCards: false
+            instructions: null
+            label: 'info url'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 65d731e3-184b-4390-be1b-73a20f23b19c
+            userCondition: null
+            warning: null
+            width: 50
+        name: Content
+        uid: 4ec81d41-4f4d-4a4f-b88d-64ec32248a10
+        userCondition: null
+handle: dates
+hasTitleField: false
+icon: null
+name: Dates
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

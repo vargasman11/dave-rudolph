@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: venue
+instructions: "The name  of the venue and time\r\ne.g. Golden Nugget Lake Charles Hotel & casino "
+name: 'Tour Dates - Dates - Venue '
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

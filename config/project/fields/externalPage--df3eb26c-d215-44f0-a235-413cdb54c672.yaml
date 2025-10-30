@@ -1,0 +1,13 @@
+columnSuffix: qkquswsw
+contentColumnType: string(255)
+handle: externalPage
+instructions: null
+name: 'External Page'
+searchable: true
+settings:
+  maxLength: 255
+  types:
+    - url
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Url

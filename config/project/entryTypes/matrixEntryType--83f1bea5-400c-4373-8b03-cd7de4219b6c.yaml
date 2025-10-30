@@ -1,0 +1,327 @@
+color: null
+description: null
+fieldLayouts:
+  6021f0cc-4fb9-4fa4-9f6f-cf066cdbb6ab:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2025-09-29T20:12:09+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 642b4abc-24ba-46e1-b1e8-a42df1f12a30
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-09-30T18:18:33+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: e3406de7-2a12-435b-9899-630c47926027 # Page Type
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 32c39e82-a038-49f7-8774-ee86f70fc1fa
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: '2025-10-03T00:32:07+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 510624a0-5eb7-469d-80ad-f0fd8770b0c6 # Image
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: 'Header Image'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: fc74136d-4d3f-46f2-aa4b-581ae0d788c5
+            userCondition: null
+            warning: null
+            width: 50
+        name: Content
+        uid: b98c979c-4ea6-4811-aa0f-0533c3167fbc
+        userCondition: null
+      -
+        elementCondition:
+          class: craft\elements\conditions\entries\EntryCondition
+          conditionRules:
+            -
+              class: craft\fields\conditions\OptionsFieldConditionRule
+              fieldUid: e3406de7-2a12-435b-9899-630c47926027 # Page Type
+              layoutElementUid: 32c39e82-a038-49f7-8774-ee86f70fc1fa
+              operator: in
+              uid: 88865a07-9583-4d73-83f7-78f31408afc4
+              values:
+                - tour
+          elementType: craft\elements\Entry
+          fieldContext: global
+        elements:
+          -
+            dateAdded: '2025-09-30T18:07:15+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 75d85378-d455-4ff4-bda0-9a51e95d30f9 # Lightswitch
+            handle: lightswitch2
+            includeInCards: false
+            instructions: 'Enabling this will show past and upcoming tour dates. Tour dates can be added or removed in the "Tour Dates" section of "Channels"'
+            label: 'Show Tour Dates'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a62f0786-b757-4924-aeab-20e971913e44
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Tour Dates'
+        uid: 9ea8084a-9b57-4e2b-9372-0fc16c628a30
+        userCondition: null
+      -
+        elementCondition:
+          class: craft\elements\conditions\entries\EntryCondition
+          conditionRules:
+            -
+              class: craft\fields\conditions\OptionsFieldConditionRule
+              fieldUid: e3406de7-2a12-435b-9899-630c47926027 # Page Type
+              layoutElementUid: 32c39e82-a038-49f7-8774-ee86f70fc1fa
+              operator: in
+              uid: 328d6bb4-d40c-4526-939d-ce3c8ce6a33c
+              values:
+                - music
+          elementType: craft\elements\Entry
+          fieldContext: global
+        elements:
+          -
+            dateAdded: '2025-09-29T21:27:08+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 429c85c0-0ce1-4713-a254-7b8a2e585e95 # Spotify Album Block
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ce175a67-118b-4a16-964e-ee710a3b7ddd
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Music Tab'
+        uid: ee55f8bf-50ad-42e9-81c8-ba7d816248ce
+        userCondition: null
+      -
+        elementCondition:
+          class: craft\elements\conditions\entries\EntryCondition
+          conditionRules:
+            -
+              class: craft\fields\conditions\OptionsFieldConditionRule
+              fieldUid: e3406de7-2a12-435b-9899-630c47926027 # Page Type
+              layoutElementUid: 32c39e82-a038-49f7-8774-ee86f70fc1fa
+              operator: in
+              uid: 30a57f68-fc8c-4f2a-aec0-dfe893d65fed
+              values:
+                - media
+          elementType: craft\elements\Entry
+          fieldContext: global
+        elements:
+          -
+            dateAdded: '2025-09-29T20:52:11+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 0faa9768-b53e-4216-a53d-7812596fdc94 # Videos
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2e9c70a9-1fe8-4bc6-80a7-9c8398fc9e7f
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Media Tab'
+        uid: 98fc3338-b3fd-471b-a2ac-b778ea22b315
+        userCondition: null
+      -
+        elementCondition:
+          class: craft\elements\conditions\entries\EntryCondition
+          conditionRules:
+            -
+              class: craft\fields\conditions\OptionsFieldConditionRule
+              fieldUid: e3406de7-2a12-435b-9899-630c47926027 # Page Type
+              layoutElementUid: 32c39e82-a038-49f7-8774-ee86f70fc1fa
+              operator: in
+              uid: 8594bfac-f4b3-4769-96de-4666999364a7
+              values:
+                - contact
+          elementType: craft\elements\Entry
+          fieldContext: global
+        elements:
+          -
+            dateAdded: '2025-09-29T21:24:44+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 75d85378-d455-4ff4-bda0-9a51e95d30f9 # Lightswitch
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: ShowForm
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 9000e051-27a9-4016-8e3a-3a1b95463332
+            userCondition: null
+            warning: null
+            width: 100
+        name: Contact
+        uid: 9a9fddbd-6448-483a-a3ab-20097d058ddd
+        userCondition: null
+      -
+        elementCondition:
+          class: craft\elements\conditions\entries\EntryCondition
+          conditionRules:
+            -
+              class: craft\fields\conditions\OptionsFieldConditionRule
+              fieldUid: e3406de7-2a12-435b-9899-630c47926027 # Page Type
+              layoutElementUid: 32c39e82-a038-49f7-8774-ee86f70fc1fa
+              operator: in
+              uid: 573a2c91-2fc9-43d9-88e5-a40e83a90dfb
+              values:
+                - about
+          elementType: craft\elements\Entry
+          fieldContext: global
+        elements:
+          -
+            dateAdded: '2025-10-02T00:09:51+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 8972e6e4-7db5-4a0a-85b9-11be3f170a55 # Custom Content
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e10bc65f-e2bf-4282-ac87-cc4ece686c5d
+            userCondition: null
+            warning: null
+            width: 100
+        name: About
+        uid: 12ce34db-f6af-441b-87fc-1ad93aabe469
+        userCondition: null
+      -
+        elementCondition:
+          class: craft\elements\conditions\entries\EntryCondition
+          conditionRules:
+            -
+              class: craft\fields\conditions\OptionsFieldConditionRule
+              fieldUid: e3406de7-2a12-435b-9899-630c47926027 # Page Type
+              layoutElementUid: 32c39e82-a038-49f7-8774-ee86f70fc1fa
+              operator: in
+              uid: 083789ee-a253-4c5b-9628-c4e7df0be7ab
+              values:
+                - links
+          elementType: craft\elements\Entry
+          fieldContext: global
+        elements:
+          -
+            dateAdded: '2025-10-07T04:03:18+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 1e7716dd-da4e-4a82-9a4a-f4eb04970454 # ListenCTA
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 48015481-3787-4fac-b409-b8c94299c161
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-10-07T04:07:07+00:00'
+            elementCondition: null
+            type: craft\fieldlayoutelements\HorizontalRule
+            uid: 556cc492-4872-467f-86d3-dd5387031d3c
+            userCondition: null
+          -
+            dateAdded: '2025-10-07T04:07:07+00:00'
+            elementCondition: null
+            heading: 'Custom Content'
+            type: craft\fieldlayoutelements\Heading
+            uid: fbf8d9d7-604e-4939-9647-5979ab0bafba
+            userCondition: null
+          -
+            dateAdded: '2025-10-07T04:07:07+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 8972e6e4-7db5-4a0a-85b9-11be3f170a55 # Custom Content
+            handle: customContent2
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: efc44e54-c1df-41be-9060-a7c5c696fdb1
+            userCondition: null
+            warning: null
+            width: 100
+        name: Links
+        uid: 44e21e2f-727d-4f99-a23c-78653ace5a9b
+        userCondition: null
+handle: matrixEntryType
+hasTitleField: true
+icon: null
+name: 'Matrix Entry Type'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

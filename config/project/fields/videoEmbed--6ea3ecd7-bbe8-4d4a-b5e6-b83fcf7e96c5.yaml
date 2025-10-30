@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: videoEmbed
+instructions: "This is the iframe tag that your will get from vimeo or youtube to embed you video... you iframe tag should look like this...\"<iframe src=\"https://www.youtube.com/embed/HEHxBa9zLkw\" frameborder=\"0\"\r\nallow=\"accelerometer; autoplay; clipboard-write; encrypted-media;gyroscope; picture-in-picture\"\r\n                    allowfullscreen></iframe>\""
+name: 'Videos - Video - Video embed'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

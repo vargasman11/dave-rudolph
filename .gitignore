@@ -6,8 +6,3 @@
 .ddev/*
 # Except config.yaml
 !.ddev/config.yaml
-/config/project
-
-# Server-specific files
-.htaccess
-config/db.php

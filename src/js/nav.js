@@ -60,34 +60,35 @@ function mobileNav() {
   }
 
   // Initialize theme on page load
-  const currentTheme = getTheme();
+  let currentTheme = getTheme();  // ← Change from const to let
   const toggleBtn = document.getElementById('darkModeToggle');
+  const toggleBtnMobile = document.getElementById('darkModeToggleMobile');
 
-  // Update button text based on current theme
-  if (toggleBtn) {
-    toggleBtn.textContent = currentTheme === 'dark' ? "☀️ Light Mode" : "🌙 Dark Mode";
-
-    // Toggle theme on button click
-    toggleBtn.addEventListener('click', () => {
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      applyTheme(newTheme);
-      toggleBtn.textContent = newTheme === 'dark' ? "☀️ Light Mode" : "🌙 Dark Mode";
-
-      // Update currentTheme for next toggle
-      let currentTheme = getTheme();
-    });
+// Function to update button text
+  function updateButtonText(theme) {
+    const text = theme === 'dark' ? "☀️ Light Mode" : "🌙 Dark Mode";
+    if (toggleBtn) toggleBtn.textContent = text;
+    if (toggleBtnMobile) toggleBtnMobile.textContent = text;
   }
 
-  // Watch for system theme changes (optional but nice UX)
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    // Only auto-update if user hasn't set a preference
-    if (!localStorage.getItem('theme')) {
-      applyTheme(e.matches ? 'dark' : 'light');
-      if (toggleBtn) {
-        toggleBtn.textContent = e.matches ? "☀️ Light Mode" : "🌙 Dark Mode";
-      }
-    }
-  });
+// Initialize button text
+  updateButtonText(currentTheme);
+
+// Function to toggle theme
+  function toggleTheme() {
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(newTheme);
+    updateButtonText(newTheme);
+    currentTheme = newTheme;
+  }
+
+// Add click listeners to both buttons
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', toggleTheme);
+  }
+  if (toggleBtnMobile) {
+    toggleBtnMobile.addEventListener('click', toggleTheme);
+  }
 }
 
 export default mobileNav();

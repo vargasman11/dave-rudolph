@@ -1,0 +1,13 @@
+columnSuffix: ynycfaxi
+contentColumnType: boolean
+handle: openInNewTab
+instructions: null
+name: 'Open In new Tab'
+searchable: true
+settings:
+  default: false
+  offLabel: 'No'
+  onLabel: 'Yes'
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

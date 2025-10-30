@@ -1,0 +1,18 @@
+columnSuffix: null
+contentColumnType: string
+handle: navItem
+instructions: "This is the nav item where you will set the page link, and link title in your website's menu"
+name: 'Nav Item'
+searchable: false
+settings:
+  entryTypes:
+    -
+      uid: 023b0d58-4838-416e-b816-2b62b1461f32
+  maxEntries: null
+  minEntries: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  viewMode: blocks
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

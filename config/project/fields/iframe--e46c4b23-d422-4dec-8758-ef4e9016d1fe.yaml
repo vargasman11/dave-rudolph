@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: iframe
+instructions: "This will be the sharing link that your will get from spotify share button.  The share link will look like the following...\" <li class=\"mt-5\"><iframe src=\"https://open.spotify.com/embed/track/2sZstZY9sBDz5DCMpl4JBO\" width=\"300\" height=\"100\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe></li>\"\r\nYou will need to paste in on the src link from that i frame..."
+name: 'spotifyIframes - spotifyIframe - iframe'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

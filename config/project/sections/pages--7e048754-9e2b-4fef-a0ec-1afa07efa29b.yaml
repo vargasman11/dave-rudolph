@@ -1,0 +1,28 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: 83f1bea5-400c-4373-8b03-cd7de4219b6c # Matrix Entry Type
+handle: pages
+maxAuthors: 1
+name: Pages
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  56361854-6cef-42f0-b788-03399c9f683b: # Dave Guitar
+    enabledByDefault: true
+    hasUrls: true
+    template: _matrix.twig
+    uriFormat: '{slug}'
+type: channel

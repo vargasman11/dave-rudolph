@@ -1,0 +1,16 @@
+columnSuffix: pejafvoa
+handle: socialUrl
+instructions: 'Please paste the URL of the social Media you would like users to redirect to'
+name: 'Footer Links - Footer Link - Social URL'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText
