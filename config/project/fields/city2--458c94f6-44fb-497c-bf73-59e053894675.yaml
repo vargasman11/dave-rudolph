@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: city2
+instructions: 'city of the Show... e.g. Canton , Cleavland, akron Alabama North'
+name: 'Tour Dates - Dates - City'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

@@ -1,0 +1,55 @@
+color: null
+fieldLayouts:
+  23ebb95a-0aad-4b20-ad2b-8a026fde36d3:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            fieldUid: ed10aba0-702e-4601-b1ef-a5e289b7ac04
+            handle: null
+            includeInCards: true
+            instructions: null
+            label: 'Platform Name'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 071ec8e9-c2e3-4226-ac51-0075cd74e398
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            fieldUid: 5432599a-25c2-480c-92ba-3dcbf18b1d20
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: 'Platform Url'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 8d1fd639-b62f-438a-9152-2a1a531afc8a
+            userCondition: null
+            warning: null
+            width: 50
+        name: Content
+        uid: fe32bbca-a3d8-4002-80c7-430db094c7d2
+        userCondition: null
+handle: platformtitle
+hasTitleField: false
+icon: null
+name: Platform
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

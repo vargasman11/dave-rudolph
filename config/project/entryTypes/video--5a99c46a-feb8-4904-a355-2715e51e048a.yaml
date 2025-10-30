@@ -1,0 +1,55 @@
+color: null
+fieldLayouts:
+  04496278-f029-4eaa-a0d2-038bfa7a2220:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            fieldUid: 00776b8b-b9b2-49e0-b7d9-26ec3aaef7c1
+            handle: null
+            includeInCards: true
+            instructions: null
+            label: 'Video Title'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 947990e2-e3eb-4698-84ef-3ea12d55a508
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            fieldUid: 6ea3ecd7-bbe8-4d4a-b5e6-b83fcf7e96c5
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: 'Video embed'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 38d3463d-b8fa-4cae-84e1-ee183a8745e4
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: c86cb3ad-ba64-4b70-81fb-88bdd7db202a
+        userCondition: null
+handle: video
+hasTitleField: false
+icon: null
+name: Video
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

@@ -1,0 +1,15 @@
+columnSuffix: null
+handle: date2
+instructions: 'Show Date e.g. feb 12 2021'
+name: 'Tour Dates - Dates - date'
+searchable: false
+settings:
+  max: null
+  min: null
+  minuteIncrement: 30
+  showDate: true
+  showTime: false
+  showTimeZone: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Date

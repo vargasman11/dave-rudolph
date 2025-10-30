@@ -1,0 +1,55 @@
+color: null
+fieldLayouts:
+  d4fbb790-2f5b-4f3e-831d-0ec39f425177:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            fieldUid: cc9e1d44-ae7d-4964-a1ae-0d975ad7c4d0
+            handle: null
+            includeInCards: true
+            instructions: null
+            label: 'Social URL'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2ab5fa8f-9ff5-4aa3-8de4-9a388af9e6b8
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            fieldUid: a82b3d53-a056-44a7-a39c-690a787847bb
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: 'Social Icon'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: afb2f565-980d-4c55-ae0a-3bdbf999e35d
+            userCondition: null
+            warning: null
+            width: 25
+        name: Content
+        uid: f5567da0-532e-4e9b-88f1-af4848d5e28d
+        userCondition: null
+handle: footerLink
+hasTitleField: false
+icon: null
+name: 'Footer Link'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

@@ -1,0 +1,18 @@
+columnSuffix: null
+contentColumnType: string
+handle: footerLink
+instructions: null
+name: 'Footer Links'
+searchable: false
+settings:
+  entryTypes:
+    -
+      uid: 1e92d7ca-8270-41cf-aa77-85f7de45a55f
+  maxEntries: null
+  minEntries: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  viewMode: blocks
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

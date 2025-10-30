@@ -1,0 +1,111 @@
+columnSuffix: null
+handle: spotifyAlbumBlock
+instructions: null
+name: 'Spotify Album Block'
+searchable: false
+settings:
+  fieldLayouts:
+    __assoc__:
+      -
+        - 46454727-a108-495b-a485-5b24e6945cc0
+        -
+          __assoc__:
+            0:
+              - tabs
+              -
+                -
+                  __assoc__:
+                    0:
+                      - name
+                      - Content
+                    1:
+                      - uid
+                      - 88da63dc-be4a-4450-b101-7902d3e01a2e
+                    4:
+                      - elements
+                      -
+                        -
+                          __assoc__:
+                            0:
+                              - type
+                              - craft\fieldlayoutelements\CustomField
+                            6:
+                              - required
+                              - false
+                            7:
+                              - providesThumbs
+                              - false
+                            8:
+                              - includeInCards
+                              - false
+                            9:
+                              - width
+                              - 75
+                            10:
+                              - dateAdded
+                              - '2025-10-01T23:57:48+00:00'
+                            11:
+                              - uid
+                              - eb410e33-d47a-4aba-af4f-12fb8e6bd4b1
+                            14:
+                              - fieldUid
+                              - 024543db-feed-428a-922b-5c42d8374aaa # Album CTA
+                        -
+                          __assoc__:
+                            0:
+                              - type
+                              - craft\fieldlayoutelements\CustomField
+                            6:
+                              - required
+                              - false
+                            7:
+                              - providesThumbs
+                              - false
+                            8:
+                              - includeInCards
+                              - false
+                            9:
+                              - width
+                              - 25
+                            10:
+                              - dateAdded
+                              - '2025-09-29T21:26:48+00:00'
+                            11:
+                              - uid
+                              - b58db45d-ee98-4f00-b66f-ca3d13f02ee4
+                            14:
+                              - fieldUid
+                              - 569d7efe-e957-4fa0-a49a-c4b1b8fba23b # Album Cover
+                        -
+                          __assoc__:
+                            0:
+                              - type
+                              - craft\fieldlayoutelements\CustomField
+                            6:
+                              - required
+                              - false
+                            7:
+                              - providesThumbs
+                              - false
+                            8:
+                              - includeInCards
+                              - false
+                            9:
+                              - width
+                              - 100
+                            10:
+                              - dateAdded
+                              - '2025-09-29T21:26:48+00:00'
+                            11:
+                              - uid
+                              - 23e4837f-48d1-480d-a774-1cfb04253f10
+                            14:
+                              - fieldUid
+                              - 66bdc090-1029-4da8-a10f-8e0bc54176bb # spotifyIframes
+            3:
+              - cardThumbAlignment
+              - end
+  viewMode: grouped
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\ContentBlock

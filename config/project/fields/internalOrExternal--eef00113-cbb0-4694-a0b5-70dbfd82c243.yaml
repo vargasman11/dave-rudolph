@@ -1,0 +1,13 @@
+columnSuffix: olxequpi
+contentColumnType: boolean
+handle: internalOrExternal
+instructions: "Internal page: A page on the same website.\r\nExternal page: A page on another website.\r\nAlways enter the full URL."
+name: 'Internal or External'
+searchable: true
+settings:
+  default: false
+  offLabel: 'Internal Page'
+  onLabel: 'External Page'
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

@@ -1,0 +1,110 @@
+columnSuffix: ffbhjhrc
+handle: socialIcon
+instructions: 'Please select the Icon of the social media outlet'
+name: 'Footer Links - Footer Link - Social Icon'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - Twitter
+        -
+          - value
+          - 'fab fa-twitter'
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Youtube
+        -
+          - value
+          - 'fab fa-youtube'
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Facebook
+        -
+          - value
+          - 'fab fa-facebook-f'
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Instagram
+        -
+          - value
+          - 'fab fa-instagram'
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - iTunes
+        -
+          - value
+          - 'fab fa-itunes-note'
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Tik Tok'
+        -
+          - value
+          - 'fab fa-tiktok'
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Amazon
+        -
+          - value
+          - 'fab fa-amazon'
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Bandcamp
+        -
+          - value
+          - 'fab fa-bandcamp'
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Deezer
+        -
+          - value
+          - 'fab fa-deezer'
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

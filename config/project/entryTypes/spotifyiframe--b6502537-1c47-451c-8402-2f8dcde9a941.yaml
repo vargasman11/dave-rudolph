@@ -1,0 +1,40 @@
+color: null
+description: null
+fieldLayouts:
+  788144f7-b73f-40b3-a8dc-2ca5607cde73:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2025-09-29T20:56:39+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: e46c4b23-d422-4dec-8758-ef4e9016d1fe
+            handle: null
+            includeInCards: true
+            instructions: null
+            label: iframe
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0caa8bb7-6077-423b-9839-0c0913383243
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: f43eef0e-796d-4600-9cb3-4c4578276a1e
+        userCondition: null
+handle: spotifyiframe
+hasTitleField: false
+icon: null
+name: spotifyIframe
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

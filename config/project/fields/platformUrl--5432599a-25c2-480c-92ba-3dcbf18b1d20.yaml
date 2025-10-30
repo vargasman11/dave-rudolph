@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: platformUrl
+instructions: 'In order for the url link to work on the page....You MUST PASTE in the entire link like this...."https://www.spotify.com/us/"  it cannot just be "shopify.com" -> this will lead the user to a 404 page'
+name: 'ListenCTA - Platform - Platform Url'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

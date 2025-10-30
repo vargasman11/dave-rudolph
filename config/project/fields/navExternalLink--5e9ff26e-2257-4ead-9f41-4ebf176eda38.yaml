@@ -1,0 +1,16 @@
+columnSuffix: vaukocah
+handle: navExternalLink
+instructions: 'Add your URL / Link here if this is an external link. e.g. (bandcamp link etc etc..).Internal Page links will take precedence over external pages. Please choose one or the other. Please note that external links will open in a new tab.'
+name: 'Nav Item - Nav Item - Nav External Link'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

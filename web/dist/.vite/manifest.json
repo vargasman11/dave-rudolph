@@ -1,0 +1,28 @@
+{
+  "src/app.js": {
+    "file": "assets/app-hltoJVEI.js",
+    "name": "app",
+    "src": "src/app.js",
+    "isEntry": true,
+    "css": [
+      "assets/app-CfXDSwvb.css"
+    ],
+    "assets": [
+      "assets/russo_one-DJD9Ik8H.ttf",
+      "assets/XBall_Italic-fnPohLnK.ttf",
+      "assets/Roboto-VariableFont_wdth_wght-WOy3sDCz.ttf"
+    ]
+  },
+  "src/fonts/Roboto-VariableFont_wdth,wght.ttf": {
+    "file": "assets/Roboto-VariableFont_wdth_wght-WOy3sDCz.ttf",
+    "src": "src/fonts/Roboto-VariableFont_wdth,wght.ttf"
+  },
+  "src/fonts/XBall_Italic.ttf": {
+    "file": "assets/XBall_Italic-fnPohLnK.ttf",
+    "src": "src/fonts/XBall_Italic.ttf"
+  },
+  "src/fonts/russo_one.ttf": {
+    "file": "assets/russo_one-DJD9Ik8H.ttf",
+    "src": "src/fonts/russo_one.ttf"
+  }
+}
