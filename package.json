@@ -5,7 +5,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "up": "npm install && ddev config --project-type=craftcms && ddev start && ddev composer install && ddev auth ssh && npm run webpack-dev"
+    "up": "npm install && ddev config --project-type=craftcms && ddev start && ddev composer install && ddev auth ssh && npm run dev"
   },
   "devDependencies": {
     "vite": "^6.3.5",
