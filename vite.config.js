@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig(({command}) => ({
     base: command === 'serve' ? '' : '/dist/',
     build: {
-        manifest: true,
+        manifest: 'manifest.json',
         outDir: 'web/dist',
         rollupOptions: {
             input: {
