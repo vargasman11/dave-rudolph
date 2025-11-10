@@ -1,17 +1,22 @@
 {
   "src/app.js": {
-    "file": "assets/app-hltoJVEI.js",
+    "file": "assets/app-CgLgU6VU.js",
     "name": "app",
     "src": "src/app.js",
     "isEntry": true,
     "css": [
-      "assets/app-CfXDSwvb.css"
+      "assets/app-DC0JqUC3.css"
     ],
     "assets": [
       "assets/russo_one-DJD9Ik8H.ttf",
       "assets/XBall_Italic-fnPohLnK.ttf",
-      "assets/Roboto-VariableFont_wdth_wght-WOy3sDCz.ttf"
+      "assets/Roboto-VariableFont_wdth_wght-WOy3sDCz.ttf",
+      "assets/Roboto-Italic-VariableFont_wdth_wght-CtZJC3o8.ttf"
     ]
+  },
+  "src/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf": {
+    "file": "assets/Roboto-Italic-VariableFont_wdth_wght-CtZJC3o8.ttf",
+    "src": "src/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf"
   },
   "src/fonts/Roboto-VariableFont_wdth,wght.ttf": {
     "file": "assets/Roboto-VariableFont_wdth_wght-WOy3sDCz.ttf",
