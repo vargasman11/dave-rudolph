@@ -1,4 +1,4 @@
-dateModified: 1761795404
+dateModified: 1762925510
 elementSources:
   craft\elements\Entry:
     -
@@ -179,6 +179,10 @@ plugins:
     edition: lite
     enabled: true
     schemaVersion: 1.0.2
+  feed-me:
+    edition: standard
+    enabled: true
+    schemaVersion: 5.14.0
   freeform:
     edition: express
     enabled: true
