@@ -1,4 +1,4 @@
-dateModified: 1762925510
+dateModified: 1763003974
 elementSources:
   craft\elements\Entry:
     -
@@ -186,7 +186,7 @@ plugins:
   freeform:
     edition: express
     enabled: true
-    schemaVersion: 5.7.0
+    schemaVersion: 5.8.0
     settings:
       alertNotificationRecipients: null
       allowBuilderTemplateCreation: true
